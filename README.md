@@ -1,2 +1,1 @@
-# NeoChronoCorp-Tengai
-Tengai Game
+# NeoChronoCorp Tengai
