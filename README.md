@@ -18,6 +18,7 @@ Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 
 * **Twitter: [@NeoChronoCorp](https://twitter.com/NeoChronoCorp)**
 * **Instagram: [neo_chrono_corp](https://www.instagram.com/neo_chrono_corp/?hl=es)**
 * **Facebook: [NeoChrono_Crop](https://www.facebook.com/neochrono.corp.9)**
+
 **_Management_**: Ricardo Castro
 * GitHub: [RicardoCV2](https://github.com/RicardoCV2)
 
