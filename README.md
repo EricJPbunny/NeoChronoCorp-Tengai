@@ -4,7 +4,7 @@ This project is a tribute to the game **Tengai** also known as Sengoku Blade, re
 ## Description
 Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 1996 by Psikyo as a sequel to Sengoku Ace (1993). Later, it was ported to the Sega Saturn at the end of the same year. It was ported to PlayStation in 2004 and it was released for Android and iOS mobiles ten years later. The game is set in a futuristic version of feudal Japan that features traditional ninjas and steam-driven weapons. There are five playable characters (and two hidden ones).
 
-**Plot:** Long time ago, started the story of the east. There, the culture of the natives, advanced technique force and ancient magic existed at once and kept peace in the world of Taiping for a long time. However, at one point, the religious group 'Shinrano' had as objective to overthrow the world with the resurrection of the evil spirits, and kidnapped the Shogun's daughter as a sacrifice!
+**Plot:** Long time ago, peace reigned over the Eastern Lands. The Villain kidnapped East Princess and Futsuhime. Kuzuhime knows about all the conspiration, and before being kidnapped, she sends a message to our heroes in order to prevent evil from destroying the world. The only have one night and one day before the beginning of the end. 
 
 [![Video Image](http://img.youtube.com/vi/jCQH_34d5r0/maxresdefault.jpg)](https://www.youtube.com/watch?v=jCQH_34d5r0&t=152s)
 
