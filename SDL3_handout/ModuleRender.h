@@ -6,6 +6,7 @@
 struct SDL_Renderer;
 struct SDL_Texture;
 struct SDL_Rect;
+typedef struct _Mix_Music Mix_Music;
 
 class ModuleRender : public Module
 {
@@ -22,7 +23,8 @@ public:
 
 public:
 	SDL_Renderer* renderer = nullptr;
-	SDL_Texture* tex;
+	SDL_Texture* tex = nullptr;
+	Mix_Music* mus = nullptr;
 };
 
 #endif //__ModuleRenderer_H__

@@ -6,7 +6,7 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
-ModuleAudio::ModuleAudio() {
+ModuleAudio::ModuleAudio() : Module() {
 
 }
 
@@ -73,8 +73,6 @@ Mix_Music* const ModuleAudio::LoadMusic(const char* path) {
 
 	music[num] = mus;
 
-	Mix_FreeMusic(mus);
-
 	return music[num];
 }
 
@@ -98,7 +96,6 @@ Mix_Chunk* const ModuleAudio::LoadChunk(const char* path) {
 
 	fx[num] = effect;
 
-	Mix_FreeChunk(effect);
 
 	return fx[num];
 }

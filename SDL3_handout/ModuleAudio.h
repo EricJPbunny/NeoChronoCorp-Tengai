@@ -21,8 +21,6 @@ public:
 	Mix_Music* const LoadMusic(const char* path);
 	Mix_Chunk* const LoadChunk(const char* path);
 
-
-
 public:
 	Mix_Music* music[MAX_MUSIC] = {nullptr};
 	Mix_Chunk* fx[MAX_FX] = {nullptr};

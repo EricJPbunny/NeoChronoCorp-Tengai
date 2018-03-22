@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -35,6 +36,7 @@ bool ModuleRender::Init()
 	// TODO 9: load a texture "test.png" to test is everything works well
 
 	tex = App->textures->Load("background.png");
+	mus = App->audios->LoadMusic("08_Tall_cedar.ogg");
 
 
 	return ret;
