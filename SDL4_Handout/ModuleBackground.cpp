@@ -57,21 +57,24 @@ update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
 	int aux = 0, aux2 = 810, aux3 = 0;
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; i++) 
+	{
 		App->render->Blit(graphics, aux, 0, &trees, 0.60f);
 		aux += 320;
 	}
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) 
+	{
 		App->render->Blit(graphics, aux3, 56, &backtrees, 0.65f);
 		App->render->Blit(graphics, aux3, 80, &fisrttrees, 0.70f);
 		aux3 += 320;
 	}
-		App->render->Blit(graphics, 0, 0, &ground, 0.75f);
-		App->render->Blit(graphics, 115, 0, &Templesgate, 0.75f);
-		for (int i = 0; i < 5; i++) {
-			App->render->Blit(graphics, aux2, 203, &rockground, 0.75f);
-			aux2 += 160;
-		}
+	App->render->Blit(graphics, 0, 0, &ground, 0.75f);
+	App->render->Blit(graphics, 115, 0, &Templesgate, 0.75f);
+	for (int i = 0; i < 5; i++) 
+	{
+		App->render->Blit(graphics, aux2, 203, &rockground, 0.75f);
+		aux2 += 160;
+	}
 
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)

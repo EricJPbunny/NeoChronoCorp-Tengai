@@ -21,12 +21,23 @@ bool ModuleAudio::Init() {
 	// load support for the AUDIO format
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
-	Mix_OpenAudio(22055, MIX_DEFAULT_FORMAT, 2, 2048);
+	Mix_OpenAudio(22055, MIX_DEFAULT_FORMAT, 2, 4096);
 
 	if ((init & flags) != flags)
 	{
 		LOG("Could not initialize Mixer lib. MIX_Init: %s", Mix_GetError());
 		ret = false;
+	}
+
+	music[0] = ModuleAudio::LoadMusic("01_Gem_of_hope.ogg");
+	fx[0] = ModuleAudio::LoadChunk("tengai-133 effect 6.wav");
+	for (int i = 0; i < MAX_MUSIC; ++i) {
+		if (music[i] != nullptr) {
+			Mix_PlayMusic(music[0], 1);
+		}
+		if (fx[i] != nullptr) {
+			Mix_PlayChannel(-1, fx[0], 0);
+		}
 	}
 
 	return ret;
@@ -99,3 +110,4 @@ Mix_Chunk* const ModuleAudio::LoadChunk(const char* path) {
 
 	return fx[num];
 }
+
