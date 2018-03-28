@@ -9,10 +9,10 @@
 ModuleBackground::ModuleBackground()
 {
 	// Background / sky
-	ground.x = 15;
-	ground.y = 367;
-	ground.w = 810;
-	ground.h = 224;
+	groundandtrees.x = 15;
+	groundandtrees.y = 367;
+	groundandtrees.w = 810;
+	groundandtrees.h = 224;
 
 	Templesgate.x = 2;
 	Templesgate.y = 3;
@@ -33,11 +33,33 @@ ModuleBackground::ModuleBackground()
 	rockground.y = 570;
 	rockground.w = 160;
 	rockground.h = 21;
-	
+
 	trees.x = 1495;
 	trees.y = 140;
 	trees.w = 320;
 	trees.h = 224;
+
+	ground.x = 510;
+	ground.y = 210;
+	ground.w = 64;
+	ground.h = 32;
+
+	groundgrass.x = 990;
+	groundgrass.y = 552;
+	groundgrass.w = 165;
+	groundgrass.h = 39;
+
+	grasstrees2.x = 1158;
+	grasstrees2.y = 367;
+	grasstrees2.w = 256;
+	grasstrees2.h = 224;
+
+	grasstrees4.x = 1417;
+	grasstrees4.y = 367;
+	grasstrees4.w = 672;
+	grasstrees4.h = 224;
+
+
 }
 
 ModuleBackground::~ModuleBackground()
@@ -56,30 +78,40 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	int aux = 0, aux2 = 810, aux3 = 0;
-	for (int i = 0; i < 2; i++) 
-	{
+	int aux = 0, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031;
+	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux, 0, &trees, 0.60f);
+		App->render->Blit(graphics, aux, 58, &backtrees, 0.65f);
+		App->render->Blit(graphics, aux, 82, &fisrttrees, 0.70f);
 		aux += 320;
 	}
-	for (int i = 0; i < 3; i++) 
-	{
-		App->render->Blit(graphics, aux3, 56, &backtrees, 0.65f);
-		App->render->Blit(graphics, aux3, 80, &fisrttrees, 0.70f);
-		aux3 += 320;
+	/*for (int i = 0; i < 5; i++) {
+	App->render->Blit(graphics, aux3, 58, &backtrees, 0.65f);
+	App->render->Blit(graphics, aux3, 82, &fisrttrees, 0.70f);
+	aux3 += 320;
+	}*/
+	for (int i = 0; i < 15; i++) {
+		App->render->Blit(graphics, aux4, 193, &ground, 0.75f);
+		aux4 += 64;
 	}
-	App->render->Blit(graphics, 0, 0, &ground, 0.75f);
+	App->render->Blit(graphics, 0, 0, &groundandtrees, 0.75f);
+	App->render->Blit(graphics, 1610, 185, &groundgrass, 0.75f);
 	App->render->Blit(graphics, 115, 0, &Templesgate, 0.75f);
-	for (int i = 0; i < 5; i++) 
-	{
+	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux2, 203, &rockground, 0.75f);
 		aux2 += 160;
+	}
+	App->render->Blit(graphics, 1775, 0, &grasstrees2, 0.75f);
+	for (int i = 0; i<5; i++) {
+		App->render->Blit(graphics, aux5, 0, &grasstrees4, 0.75f);
+
+		aux5 += 672;
 	}
 
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)
-	
-	
+
+
 
 	return UPDATE_CONTINUE;
 }
