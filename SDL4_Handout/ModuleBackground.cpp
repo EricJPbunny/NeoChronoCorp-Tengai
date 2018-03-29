@@ -60,6 +60,35 @@ ModuleBackground::ModuleBackground()
 	grasstrees4.h = 224;
 
 
+	//Temple llarg
+	Temple.x = 22;
+	Temple.y = 232;
+	Temple.w = 348;
+	Temple.h = 61;
+
+	//Temple gran
+	Temple2.x = 153;
+	Temple2.y = 109;
+	Temple2.w = 155;
+	Temple2.h = 109;
+
+	//Arbre sorlitari que es va repetint el mateix
+	lonelytree.x = 384;
+	lonelytree.y = 85;
+	lonelytree.w = 25;
+	lonelytree.h = 280;
+
+	//Backgrond abans del scroll en diagonal
+	backfinal.x = 826;
+	backfinal.y = 140;
+	backfinal.w = 320;
+	backfinal.h = 224;
+
+	//Les tres puntes dels arbres
+	toptrees.x = 154;
+	toptrees.y = 68;
+	toptrees.w = 115;
+	toptrees.h = 33;
 }
 
 ModuleBackground::~ModuleBackground()
@@ -78,11 +107,13 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	int aux = 0, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031;
+	int aux = 0, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6=2350;
 	for (int i = 0; i < 5; i++) {
-		App->render->Blit(graphics, aux, 0, &trees, 0.60f);
-		App->render->Blit(graphics, aux, 58, &backtrees, 0.65f);
-		App->render->Blit(graphics, aux, 82, &fisrttrees, 0.70f);
+		App->render->Blit(graphics, aux, 0, &trees, 0.55f);
+		App->render->Blit(graphics, aux, 58, &backtrees, 0.60f);
+		App->render->Blit(graphics, aux +170, 25, &toptrees, 0.60f);
+		App->render->Blit(graphics, aux, 82, &fisrttrees, 0.65f);
+	
 		aux += 320;
 	}
 	/*for (int i = 0; i < 5; i++) {
@@ -94,20 +125,34 @@ update_status ModuleBackground::Update()
 		App->render->Blit(graphics, aux4, 193, &ground, 0.75f);
 		aux4 += 64;
 	}
+	App->render->Blit(graphics, 1650, 0, &lonelytree, 0.73f);
+	App->render->Blit(graphics, 1790, 0, &lonelytree, 0.73f);
+	App->render->Blit(graphics, 1860, 0, &lonelytree, 0.73f);
 	App->render->Blit(graphics, 0, 0, &groundandtrees, 0.75f);
 	App->render->Blit(graphics, 1610, 185, &groundgrass, 0.75f);
 	App->render->Blit(graphics, 115, 0, &Templesgate, 0.75f);
+	App->render->Blit(graphics, 938, 132, &Temple, 0.75f);
+	App->render->Blit(graphics, 1400, 92, &Temple2, 0.75f);
+
+	for (int i = 0; i < 9; i++) {
+		App->render->Blit(graphics, aux6, 0, &backfinal, 0.65f);
+		aux6 += 320;
+	}
+	
 	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux2, 203, &rockground, 0.75f);
 		aux2 += 160;
 	}
-	App->render->Blit(graphics, 1775, 0, &grasstrees2, 0.75f);
+	App->render->Blit(graphics, aux3, 0, &grasstrees2, 0.75f);
 	for (int i = 0; i<5; i++) {
 		App->render->Blit(graphics, aux5, 0, &grasstrees4, 0.75f);
 
 		aux5 += 672;
 	}
-
+		
+		
+		
+	
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)
 

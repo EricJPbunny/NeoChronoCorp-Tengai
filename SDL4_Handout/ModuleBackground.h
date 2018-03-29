@@ -19,7 +19,7 @@ public:
 public:
 	
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect groundandtrees, Templesgate, fisrttrees, backtrees, rockground, trees, ground, groundgrass, grasstrees2, grasstrees4;
+	SDL_Rect groundandtrees, Templesgate, fisrttrees, backtrees, rockground, trees, ground, groundgrass, grasstrees2, grasstrees4, Temple, Temple2, lonelytree, toptrees, backfinal;
 	
 
 };
