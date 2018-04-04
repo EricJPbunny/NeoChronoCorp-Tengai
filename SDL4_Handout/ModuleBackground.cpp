@@ -163,11 +163,7 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-<<<<<<< HEAD
 	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7408;
-=======
-	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 7470, aux9 = aux8, aux10 = aux8, aux11 = aux8;
->>>>>>> e888767bf8fc123f6bd43c1b3d8a2acfe7b487c6
 	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux, 0, &trees, 0.55f);
 		App->render->Blit(graphics, aux + 42, 45, &toptree, 0.60f);
@@ -229,35 +225,20 @@ update_status ModuleBackground::Update()
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
 		
 	for (int i = 0; i < 9; i++) {
-<<<<<<< HEAD
 		App->render->Blit(graphics, aux8, 0, &sky, 0.50f);
-=======
-		App->render->Blit(graphics, aux8, 0, &sky, 0.75f);
->>>>>>> e888767bf8fc123f6bd43c1b3d8a2acfe7b487c6
 		aux8 += sky.w;
 	}
 
 	for (int i = 0; i < 11; i++) {
-<<<<<<< HEAD
 		App->render->Blit(graphics, aux9, SCREEN_HEIGHT - mountain.h, &mountain, 0.65f);
-=======
-		App->render->Blit(graphics, aux9, SCREEN_HEIGHT-mountain.h, &mountain, 0.75f);
->>>>>>> e888767bf8fc123f6bd43c1b3d8a2acfe7b487c6
 		aux9 += mountain.w;
 	}
 
 	for (int i = 0; i < 22; i++) {
-<<<<<<< HEAD
 		App->render->Blit(graphics, aux10, SCREEN_HEIGHT - bambuback.h, &bambuback, 0.70f);
 		aux10 += bambuback.w;
 	}
 
-=======
-		App->render->Blit(graphics, aux10, SCREEN_HEIGHT - bambuback.h, &bambuback, 0.75f);
-		aux10 += bambuback.w;
-	}
-	
->>>>>>> e888767bf8fc123f6bd43c1b3d8a2acfe7b487c6
 	for (int i = 0; i < 29; i++) {
 		App->render->Blit(graphics, aux11, SCREEN_HEIGHT - bambu.h, &bambu, 0.75f);
 		aux11 += bambu.w;

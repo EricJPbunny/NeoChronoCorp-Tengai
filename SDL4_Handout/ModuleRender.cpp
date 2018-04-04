@@ -49,7 +49,6 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-<<<<<<< HEAD
 	if (App->render->rect.x >= 0 && App->render->rect.x < 2200) {
 		speed = 5;
 
@@ -59,9 +58,6 @@ update_status ModuleRender::Update()
 
 	}
 	camera.x -= speed;
-=======
-	int speed = 100;
->>>>>>> e888767bf8fc123f6bd43c1b3d8a2acfe7b487c6
 
 
 
