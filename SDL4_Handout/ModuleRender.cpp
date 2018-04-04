@@ -49,19 +49,30 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-	int speed = 11;
+	if (App->render->rect.x >= 0 && App->render->rect.x < 2200) {
+		speed = 5;
 
-	if(App->input->keyboard[SDL_SCANCODE_UP] == 1)
-		camera.y += speed;
+	}
+	if (App->render->rect.x > 2200); {
+		speed = 15;
+
+	}
+	camera.x -= speed;
+
+
+
+
+	/*if(App->input->keyboard[SDL_SCANCODE_UP] == 1)
+	camera.y += speed;
 
 	if(App->input->keyboard[SDL_SCANCODE_DOWN] == 1)
-		camera.y -= speed;
+	camera.y -= speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1)
-		camera.x -= speed;
+	camera.x -= speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1)
-		camera.x += speed;
+	camera.x += speed;*/
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -90,7 +101,7 @@ bool ModuleRender::CleanUp()
 bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
 {
 	bool ret = true;
-	SDL_Rect rect;
+	
 	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
 	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
 
