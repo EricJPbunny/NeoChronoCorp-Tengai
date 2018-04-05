@@ -21,7 +21,9 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* laterals = nullptr;
 	SDL_Rect groundandtrees, Templesgate, fisrttrees, backtrees, rockground, trees, ground, groundgrass, grasstrees2, grasstrees4, grasstree, onlygrass, Temple, Temple2, lonelytree,toptree, toptrees, backfinal, sky, mountain, bambu, bambuback, lateral;
+	float posx = 7000, posy = -480, grassy = 185;
 	
+	int alpha = 255;
 
 };
 

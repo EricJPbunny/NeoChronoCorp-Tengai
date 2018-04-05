@@ -25,7 +25,8 @@ public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
 	SDL_Rect rect;
-	int speed;
+	float speed;
+	int aux;
 };
 
 #endif //__ModuleRenderer_H__

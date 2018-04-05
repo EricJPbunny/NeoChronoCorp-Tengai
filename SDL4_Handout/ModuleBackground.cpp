@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleBackground.h"
+#include "SDL\include\SDL_render.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -163,7 +164,16 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7408;
+	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 5990, aux9 = 7440, aux10 = 7930, aux11 = 8408;
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 0);
+	/*if (graphics) {
+			SDL_SetTextureAlphaMod(graphics, alpha);
+		}
+		if (alpha > SDL_ALPHA_TRANSPARENT) {
+			alpha -= 5;
+		}
+		*/
+
 	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux, 0, &trees, 0.55f);
 		App->render->Blit(graphics, aux + 42, 45, &toptree, 0.60f);
@@ -203,7 +213,7 @@ update_status ModuleBackground::Update()
 	App->render->Blit(graphics, 938, 132, &Temple, 0.75f);
 	App->render->Blit(graphics, 1400, 92, &Temple2, 0.75f);
 
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 14; i++) {
 		App->render->Blit(graphics, aux6, 0, &backfinal, 0.65f);
 		aux6 += backfinal.w;
 	}
@@ -217,13 +227,13 @@ update_status ModuleBackground::Update()
 		App->render->Blit(graphics, aux5, 0, &grasstrees4, 0.75f);
 		aux5 += grasstrees4.w;
 	}
-	for (int i = 0; i < 16; i++) {
-		App->render->Blit(graphics, aux7, 185, &onlygrass, 0.75f);
+	for (int i = 0; i < 22; i++) {
+		App->render->Blit(graphics, aux7, grassy, &onlygrass, 0.75f);
 		aux7 += onlygrass.w;
 	}
 	
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
-		
+	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 	for (int i = 0; i < 9; i++) {
 		App->render->Blit(graphics, aux8, 0, &sky, 0.50f);
 		aux8 += sky.w;
@@ -243,6 +253,8 @@ update_status ModuleBackground::Update()
 		App->render->Blit(graphics, aux11, SCREEN_HEIGHT - bambu.h, &bambu, 0.75f);
 		aux11 += bambu.w;
 	}
+
+	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 
 
 	//App->render->Blit(laterals, 6671, -370, &lateral, 0.75f);
