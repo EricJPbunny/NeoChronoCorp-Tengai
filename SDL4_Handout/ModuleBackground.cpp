@@ -9,6 +9,13 @@
 
 ModuleBackground::ModuleBackground()
 {
+
+	//Fader (in and out)
+	fader.x = 2516;
+	fader.y = 370;
+	fader.w = SCREEN_WIDTH;
+	fader.h = SCREEN_HEIGHT;
+
 	// Background / sky
 	groundandtrees.x = 15;
 	groundandtrees.y = 367;
@@ -157,6 +164,7 @@ bool ModuleBackground::Start()
 	bool ret = true;
 	graphics = App->textures->Load("Background_spritesheet.png");
 	laterals = App->textures->Load("Lateral.png");
+	fade = App->textures->Load("Background_spritesheet.png");
 	return ret;
 }
 
@@ -165,6 +173,9 @@ update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
 	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7758;
+	
+	
+
 	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux, 0, &trees, 0.55f);
 		App->render->Blit(graphics, aux + 42, 45, &toptree, 0.60f);
@@ -175,6 +186,29 @@ update_status ModuleBackground::Update()
 		aux += 320;
 	}
 
+	//fader---------------------------------------------
+	if (!fade1&& App->render->camera.x < -5000) {
+		App->render->Blit(fade, 0, 0, &fader, 0.00f);
+		if (alpha < 150) 
+		{
+			if (alpha < 0) {
+				alpha = 0;
+			}
+			alpha += 1.00f;
+		}
+		else 
+		{
+			alpha = 150;
+		}
+	}
+	else
+	{
+		alpha -= 1.00f;
+		if (alpha == 0.00f)
+		{
+			fade1 = false;
+		}
+	}
 	for (int i = 0; i < 15; i++) {
 		App->render->Blit(graphics, aux4, 193, &ground, 0.75f);
 		aux4 += ground.w;
@@ -240,6 +274,15 @@ update_status ModuleBackground::Update()
 	}
 
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
-
+	
+	//fader
+		SDL_SetTextureAlphaMod(fade, alpha);
+		//fade in
+		if (fade1)
+		{
+			App->render->Blit(fade, 0, 0, &fader, 0.00f);
+		}
+		//end fade in
+	
 	return UPDATE_CONTINUE;
 }

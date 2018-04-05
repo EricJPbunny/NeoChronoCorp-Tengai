@@ -21,7 +21,7 @@ bool ModuleAudio::Init() {
 	// load support for the AUDIO format
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
-	Mix_OpenAudio(22055, MIX_DEFAULT_FORMAT, 2, 4096);
+	Mix_OpenAudio(22055, AUDIO_S8, 2, 4096);
 
 	if ((init & flags) != flags)
 	{
@@ -29,7 +29,7 @@ bool ModuleAudio::Init() {
 		ret = false;
 	}
 
-	//music[0] = ModuleAudio::LoadMusic("08_Tall_cedar.ogg");
+	music[0] = ModuleAudio::LoadMusic("08_Tall_cedar.ogg");
 	//fx[0] = ModuleAudio::LoadChunk("tengai-133 effect 6.wav");
 	for (int i = 0; i < MAX_MUSIC; ++i) {
 		if (music[i] != nullptr) {
