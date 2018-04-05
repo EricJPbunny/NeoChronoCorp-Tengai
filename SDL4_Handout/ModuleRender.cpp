@@ -68,7 +68,7 @@ update_status ModuleRender::Update()
 	else if(App->render->rect.x < -11000 && App->render->rect.x > -12820) {
 		speed = 2;
 	}
-	else if (App->render->rect.x < -12820 && App->render->rect.x > -25820 ) {
+	else if (App->render->rect.x < -12820 && App->render->rect.x > -26000 ) {
 		if (aux < 135) {
 			speed = 0;
 			aux++;
@@ -78,15 +78,15 @@ update_status ModuleRender::Update()
 		}
 	}
 	
-	else if (App->render->rect.x < -27200 && App->render->rect.x > -36000 ) {
-		App->background->posx -= 1.55;
-		App->background->posy += 1.25;
+	else if (App->render->rect.x < -27000 && App->render->rect.x > -30100 ) {
+		App->background->posx -= 1.75;
+		App->background->posy += 1.20;
 		speed = 6.75;
 	}
 	else if (App->render->rect.x < -31000 ) {
 		speed = 10;
 	}
-	if(App->render->rect.x < -24820) {
+	if(App->render->rect.x < -24820 && App->render->rect.x > -26000) {
 		App->background->grassy += 0.5;
 	}
 

@@ -164,16 +164,7 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 5990, aux9 = 7440, aux10 = 7930, aux11 = 8408;
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 0);
-	/*if (graphics) {
-			SDL_SetTextureAlphaMod(graphics, alpha);
-		}
-		if (alpha > SDL_ALPHA_TRANSPARENT) {
-			alpha -= 5;
-		}
-		*/
-
+	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 2350, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7758;
 	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux, 0, &trees, 0.55f);
 		App->render->Blit(graphics, aux + 42, 45, &toptree, 0.60f);
@@ -183,11 +174,7 @@ update_status ModuleBackground::Update()
 	
 		aux += 320;
 	}
-	/*for (int i = 0; i < 5; i++) {
-	App->render->Blit(graphics, aux3, 58, &backtrees, 0.65f);
-	App->render->Blit(graphics, aux3, 82, &fisrttrees, 0.70f);
-	aux3 += 320;
-	}*/
+
 	for (int i = 0; i < 15; i++) {
 		App->render->Blit(graphics, aux4, 193, &ground, 0.75f);
 		aux4 += ground.w;
@@ -204,8 +191,6 @@ update_status ModuleBackground::Update()
 	App->render->Blit(graphics, 2320, 0, &lonelytree, 0.73f);
 	App->render->Blit(graphics, 2390, 0, &lonelytree, 0.71f);
 	App->render->Blit(graphics, 2475, 0, &lonelytree, 0.72f);
-	
-	/*App->render->Blit(graphics, 1650, 0, &lonelytree, 0.73f);*/
 
 	App->render->Blit(graphics, 0, 0, &groundandtrees, 0.75f);
 	App->render->Blit(graphics, 1610, 185, &groundgrass, 0.75f);
@@ -233,7 +218,7 @@ update_status ModuleBackground::Update()
 	}
 	
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
-	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
+
 	for (int i = 0; i < 9; i++) {
 		App->render->Blit(graphics, aux8, 0, &sky, 0.50f);
 		aux8 += sky.w;
@@ -255,9 +240,6 @@ update_status ModuleBackground::Update()
 	}
 
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
-
-
-	//App->render->Blit(laterals, 6671, -370, &lateral, 0.75f);
 
 	return UPDATE_CONTINUE;
 }
