@@ -83,15 +83,20 @@ update_status ModuleRender::Update()
 		App->background->posy += 1.20;
 		speed = 6.75;
 	}
-	else if (App->render->rect.x < -31000 ) {
-		speed = 10;
+	else if (App->render->rect.x < -30100) {
+		speed = 40;
 	}
+
 	if(App->render->rect.x < -24820 && App->render->rect.x > -26000) {
 		App->background->grassy += 0.5;
 	}
 
+	if (App->render->rect.x < -63820 && App->render->rect.x > -65000) {
+		App->background->end = true;
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_TAB] == 1) {
-		speed = 80;
+		speed = 15;
 	}
 	
 	camera.x -= speed;
