@@ -10,15 +10,9 @@
 ModuleBackground::ModuleBackground()
 {
 
-	//Fader (in and out)
-	fader.x = 2825;
-	fader.y = 140;
-	fader.w = SCREEN_WIDTH;
-	fader.h = SCREEN_HEIGHT;
-
 	//Mid Fade
-	fademid.x = 2825;
-	fademid.y = 370;
+	fademid.x = 0;
+	fademid.y = 0;
 	fademid.w = SCREEN_WIDTH;
 	fademid.h = SCREEN_HEIGHT;
 
@@ -91,12 +85,6 @@ ModuleBackground::ModuleBackground()
 	lonelytree.y = 85;
 	lonelytree.w = 25;
 	lonelytree.h = 280;
-
-	//Provaconjunta darbres solitaris
-	/*lonelytree1.x = 1874;
-	lonelytree1.y = 24;
-	lonelytree1.w = 912;
-	lonelytree1.h = 208;*/
 
 	//Backgronund before Scroll Lateral
 	backfinal.x = 826;
@@ -171,11 +159,9 @@ bool ModuleBackground::Start()
 	graphics = App->textures->Load("Background_spritesheet.png");
 	graphics1 = App->textures->Load("Background_spritesheet.png");
 	graphics2 = App->textures->Load("Background_spritesheet.png");
-	graphics3 = App->textures->Load("Background_spritesheet.png");
 	laterals = App->textures->Load("Lateral.png");
-	fade = App->textures->Load("Background_spritesheet.png");
-	mid = App->textures->Load("Background_spritesheet.png");
-	mid1 = App->textures->Load("Background_spritesheet.png");
+	mid = App->textures->Load("mid_fade.png");
+	mid1 = App->textures->Load("mid_fade.png");
 	return ret;
 }
 
@@ -183,49 +169,52 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	int aux = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1710, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7758;
+	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7758;
 
 	for (int i = 0; i < 6; i++) {
 		App->render->Blit(graphics2, aux, 0, &trees, 0.55f);
 		App->render->Blit(graphics2, aux + 42, 45, &toptree, 0.60f);
 		App->render->Blit(graphics2, aux, 58, &backtrees, 0.60f);
 		App->render->Blit(graphics2, aux +170, 25, &toptrees, 0.60f);
-		App->render->Blit(graphics2, aux, 82, &fisrttrees, 0.65f);
+		App->render->Blit(graphics2, auxtree, 82, &fisrttrees, 0.65f);
 	
 		aux += 320;
+		auxtree += 319;
 	}
 
 	for (int i = 0; i < 15; i++) {
 		App->render->Blit(graphics, aux4, 193, &ground, 0.75f);
 		aux4 += ground.w;
 	}
+	
+	App->render->Blit(mid, 0, 0, &fademid, 0.00f);
 
-	//fader---------------------------------------------
-	if (App->render->rect.x < 235 && App->render->rect.x > -1200 && fade_mid==true) {
-		App->render->Blit(mid, 0, 0, &fademid, 0.00f);
+	if (App->render->currentTime > 14000 && App->render->currentTime < 18000 && fade == true) {
 		if (alpha_mid >= SDL_ALPHA_OPAQUE) {
-			alpha_mid = 255.00f;
-			fade_mid = false;
+			alpha_mid = 0;
 			alpha_graph2 = 0;
+			alpha_graph1 = 255;
+			fade = false;
 		}
 		else {
-			alpha_mid += 2.55f;
-		
+			alpha_mid+=2.55;
 		}
 	}
 
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 17; i++) {
 		App->render->Blit(graphics1, aux6, 0, &backfinal, 0.65f);
 		aux6 += backfinal.w;
 	}	
-	
-	if (fade_mid == false) {
-		App->render->Blit(mid1, 0, 0, &fademid, 0.00f);
-		alpha_mid1--;
-		alpha_graph1 = 255;
-		if (alpha_mid1 <= SDL_ALPHA_TRANSPARENT) {
-			alpha_mid1 = 0;
+
+	if (App->render->currentTime > 14000 && App->render->currentTime < 29000 && fade == false) {
+		if (alpha_mid1 > SDL_ALPHA_TRANSPARENT) {
+			App->render->Blit(mid1, 0, 0, &fademid, 0.00f);
+			alpha_mid1 -= 2.55;
 		}
+		else {
+			alpha_mid = 0;
+		}
+
 	}
 
 	App->render->Blit(graphics, 1650, 0, &lonelytree, 0.73f);
@@ -245,11 +234,14 @@ update_status ModuleBackground::Update()
 	App->render->Blit(graphics, 115, 0, &Templesgate, 0.75f);
 	App->render->Blit(graphics, 938, 132, &Temple, 0.75f);
 	App->render->Blit(graphics, 1400, 92, &Temple2, 0.75f);
+
 	for (int i = 0; i < 5; i++) {
 		App->render->Blit(graphics, aux2, 203, &rockground, 0.75f);
 		aux2 += rockground.w;
 	}
+
 	App->render->Blit(graphics, aux3, 0, &grasstrees2, 0.75f);
+
 	for (int i = 0; i < 4; i++) {
 		App->render->Blit(graphics, aux5, 0, &grasstrees4, 0.75f);
 		aux5 += grasstrees4.w;
@@ -262,50 +254,32 @@ update_status ModuleBackground::Update()
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
 
 	for (int i = 0; i < 9; i++) {
-		App->render->Blit(graphics3, aux8, 0, &sky, 0.50f);
+		App->render->Blit(graphics, aux8, 0, &sky, 0.50f);
 		aux8 += sky.w;
 	}
 
 	for (int i = 0; i < 11; i++) {
-		App->render->Blit(graphics3, aux9, SCREEN_HEIGHT - mountain.h, &mountain, 0.65f);
+		App->render->Blit(graphics, aux9, SCREEN_HEIGHT - mountain.h, &mountain, 0.65f);
 		aux9 += mountain.w;
 	}
 
 	for (int i = 0; i < 22; i++) {
-		App->render->Blit(graphics3, aux10, SCREEN_HEIGHT - bambuback.h, &bambuback, 0.70f);
+		App->render->Blit(graphics, aux10, SCREEN_HEIGHT - bambuback.h, &bambuback, 0.70f);
 		aux10 += bambuback.w;
 	}
 
 	for (int i = 0; i < 29; i++) {
-		App->render->Blit(graphics3, aux11, SCREEN_HEIGHT - bambu.h, &bambu, 0.75f);
+		App->render->Blit(graphics, aux11, SCREEN_HEIGHT - bambu.h, &bambu, 0.75f);
 		aux11 += bambu.w;
 	}
 
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 	
 	//fader
-	SDL_SetTextureAlphaMod(fade, alpha);
-	SDL_SetTextureAlphaMod(mid, alpha_mid);
-	SDL_SetTextureAlphaMod(mid1, alpha_mid1);
 	SDL_SetTextureAlphaMod(graphics2, alpha_graph2);
 	SDL_SetTextureAlphaMod(graphics1, alpha_graph1);
-	SDL_SetTextureAlphaMod(graphics3, alpha_graph3);
-
-	if (fade1) {
-		App->render->Blit(fade, 0, 0, &fader, 0.00f);
-		alpha -= 2.55f;
-		if (alpha <= SDL_ALPHA_TRANSPARENT) {
-			fade1 = false;
-		}
-	}
-	if (end) {
-		App->render->Blit(fade, 0, 0, &fader, 0.00f);
-		alpha += 2.55f;
-		if (alpha >= SDL_ALPHA_OPAQUE) {
-			end = false;
-		}
-	}
-		//end fade in
+	SDL_SetTextureAlphaMod(mid, alpha_mid);
+	SDL_SetTextureAlphaMod(mid1, alpha_mid1);
 	
 	return UPDATE_CONTINUE;
 }

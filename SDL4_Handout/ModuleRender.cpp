@@ -44,38 +44,36 @@ bool ModuleRender::Init()
 update_status ModuleRender::PreUpdate()
 {
 	SDL_RenderClear(renderer);
+	currentTime = SDL_GetTicks();
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::Update()	
 {
-	if (App->render->rect.x == 0) {
+
+	if (currentTime < 3500) {
 		speed = 10.25;
 	}
 	
-	else if (App->render->rect.x < -1700 && App->render->rect.x > -5400) {
+	else if (currentTime > 3500 && currentTime < 14000) {
 		speed = 6.75;
 	}
 
-	else if (App->render->rect.x < -5400 && App->render->rect.x > -10600) {
+	else if (currentTime > 14000 && currentTime<18000) {
 		speed = 13;
 	}
 
-	else if (App->render->rect.x < -10600 && App->render->rect.x > -11000) {
+	else if (currentTime > 18000 && currentTime<18500) {
 		speed -= 0.17;
 	}
-	else if(App->render->rect.x < -11000 && App->render->rect.x > -12820) {
-		speed = 2;
+
+	else if (currentTime > 18500 && currentTime < 20000) {
+		speed = 0;
 	}
-	else if (App->render->rect.x < -12820 && App->render->rect.x > -26000 ) {
-		if (aux < 135) {
-			speed = 0;
-			aux++;
-		}
-		else{
-			speed = 6.75;
-		}
+
+	else if (currentTime > 20000 && currentTime<38000) {
+		speed = 6.75;
 	}
 	
 	else if (App->render->rect.x < -27000 && App->render->rect.x > -30100 ) {
@@ -84,21 +82,13 @@ update_status ModuleRender::Update()
 		speed = 6.75;
 	}
 	else if (App->render->rect.x < -30100) {
-		speed = 40;
+		speed = 9;
 	}
 
 	if(App->render->rect.x < -24820 && App->render->rect.x > -26000) {
 		App->background->grassy += 0.5;
 	}
 
-	if (App->render->rect.x < -63820 && App->render->rect.x > -65000) {
-		App->background->end = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_TAB] == 1) {
-		speed = 15;
-	}
-	
 	camera.x -= speed;
 
 
