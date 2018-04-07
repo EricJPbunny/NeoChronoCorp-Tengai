@@ -27,13 +27,13 @@ ModuleBackground::ModuleBackground()
 	Templesgate.w = 150;
 	Templesgate.h = 224;
 
-	backtrees.x = 1221;
-	backtrees.y = 2;
+	backtrees.x = 6;
+	backtrees.y = 12;
 	backtrees.w = 320;
 	backtrees.h = 136;
 
 	fisrttrees.x = 154;
-	fisrttrees.y = 2;
+	fisrttrees.y = 394;
 	fisrttrees.w = 319;
 	fisrttrees.h = 64;
 
@@ -42,13 +42,13 @@ ModuleBackground::ModuleBackground()
 	rockground.w = 160;
 	rockground.h = 21;
 
-	trees.x = 1495;
-	trees.y = 140;
+	trees.x = 6;
+	trees.y = 154;
 	trees.w = 320;
 	trees.h = 224;
 
-	ground.x = 510;
-	ground.y = 210;
+	ground.x = 352;
+	ground.y = 49;
 	ground.w = 64;
 	ground.h = 32;
 
@@ -69,39 +69,39 @@ ModuleBackground::ModuleBackground()
 
 
 	//Long Temple
-	Temple.x = 22;
-	Temple.y = 232;
+	Temple.x = 174;
+	Temple.y = 166;
 	Temple.w = 348;
 	Temple.h = 61;
 
 	//Big Temple
-	Temple2.x = 153;
-	Temple2.y = 109;
+	Temple2.x = 176;
+	Temple2.y = 3;
 	Temple2.w = 155;
 	Temple2.h = 109;
 
 	//lonely tree
-	lonelytree.x = 384;
-	lonelytree.y = 85;
+	lonelytree.x = 612;
+	lonelytree.y = 25;
 	lonelytree.w = 25;
 	lonelytree.h = 280;
 
 	//Backgronund before Scroll Lateral
-	backfinal.x = 826;
-	backfinal.y = 140;
+	backfinal.x = 0;
+	backfinal.y = 0;
 	backfinal.w = 320;
 	backfinal.h = 224;
 
 	//Tree's Top
-	toptree.x = 478;
-	toptree.y = 52;
+	toptree.x = 8;
+	toptree.y = 445;
 	toptree.w = 15;
 	toptree.h = 14;
 
 
 	//Three Tree's Top
-	toptrees.x = 154;
-	toptrees.y = 68;
+	toptrees.x = 13;
+	toptrees.y = 398;
 	toptrees.w = 115;
 	toptrees.h = 33;
 
@@ -118,26 +118,26 @@ ModuleBackground::ModuleBackground()
 	onlygrass.h = 39;
 
 	//Sky
-	sky.x = 1874;
-	sky.y = 240;
+	sky.x = 8;
+	sky.y = 271;
 	sky.w = 708;
 	sky.h = 121;
 
 	//Mountain
-	mountain.x = 705;
-	mountain.y = 2;
+	mountain.x = 10;
+	mountain.y = 71;
 	mountain.w = 512;
 	mountain.h = 131;
 
 	//Bambu Tree
-	bambu.x = 2196;
-	bambu.y = 493;
+	bambu.x = 740;
+	bambu.y = 293;
 	bambu.w = 317;
 	bambu.h = 98;
 
 	//Bambu Tree Back
-	bambuback.x = 1149;
-	bambuback.y = 267;
+	bambuback.x = 572;
+	bambuback.y = 105;
 	bambuback.w = 320;
 	bambuback.h = 97;
 
@@ -156,10 +156,10 @@ bool ModuleBackground::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("Background_spritesheet.png");
-	graphics1 = App->textures->Load("Background_spritesheet.png");
-	graphics2 = App->textures->Load("Background_spritesheet.png");
-	end = App->textures->Load("Background_spritesheet.png");
+	graphics = App->textures->Load("firstspritesheet.png");
+	graphics1 = App->textures->Load("treespritesheet.png");
+	graphics2 = App->textures->Load("fadespritesheet.png");
+	end = App->textures->Load("secondfasespritesheet.png");
 	laterals = App->textures->Load("Lateral.png");
 	mid = App->textures->Load("mid_fade.png");
 	mid1 = App->textures->Load("mid_fade.png");
