@@ -24,11 +24,12 @@ public:
 	SDL_Texture* laterals = nullptr;
 	SDL_Texture* mid = nullptr;
 	SDL_Texture* mid1 = nullptr;
+	SDL_Texture* end = nullptr;
 	SDL_Rect groundandtrees, Templesgate, fisrttrees, backtrees, rockground, trees, ground, groundgrass, grasstrees2, grasstrees4, grasstree, onlygrass, Temple, Temple2, lonelytree,toptree, toptrees, backfinal, sky, mountain, bambu, bambuback, lateral;
 	SDL_Rect fader, fademid;
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;
-	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0;
+	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
 
 };
 

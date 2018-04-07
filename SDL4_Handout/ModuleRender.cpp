@@ -60,32 +60,32 @@ update_status ModuleRender::Update()
 		speed = 6.75;
 	}
 
-	else if (currentTime > 14000 && currentTime<18000) {
+	else if (currentTime > 14000 && currentTime < 18000) {
 		speed = 13;
 	}
 
-	else if (currentTime > 18000 && currentTime<18500) {
-		speed -= 0.17;
+	else if (currentTime > 18000 && currentTime < 18500) {
+		speed -= 0.30;
+	}
+	else if (currentTime > 18500 && currentTime < 39200) {
+		speed = 2;
 	}
 
-	else if (currentTime > 18500 && currentTime < 20000) {
+	else if (currentTime > 39200 && currentTime < 41800) {
 		speed = 0;
 	}
 
-	else if (currentTime > 20000 && currentTime<38000) {
+	else if (currentTime > 41800 && currentTime<103000) {
 		speed = 6.75;
 	}
 	
-	else if (App->render->rect.x < -27000 && App->render->rect.x > -30100 ) {
+	if (currentTime > 85000 && currentTime<95000) {
 		App->background->posx -= 1.75;
-		App->background->posy += 1.20;
+		App->background->posy += 1.10;
 		speed = 6.75;
 	}
-	else if (App->render->rect.x < -30100) {
-		speed = 9;
-	}
 
-	if(App->render->rect.x < -24820 && App->render->rect.x > -26000) {
+	if(currentTime > 82000 && currentTime<85000) {
 		App->background->grassy += 0.5;
 	}
 

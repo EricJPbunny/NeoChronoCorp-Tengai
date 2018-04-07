@@ -159,6 +159,7 @@ bool ModuleBackground::Start()
 	graphics = App->textures->Load("Background_spritesheet.png");
 	graphics1 = App->textures->Load("Background_spritesheet.png");
 	graphics2 = App->textures->Load("Background_spritesheet.png");
+	end = App->textures->Load("Background_spritesheet.png");
 	laterals = App->textures->Load("Lateral.png");
 	mid = App->textures->Load("mid_fade.png");
 	mid1 = App->textures->Load("mid_fade.png");
@@ -169,7 +170,7 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4990, aux9 = 6440, aux10 = 6930, aux11 = 7758;
+	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7458;
 
 	for (int i = 0; i < 6; i++) {
 		App->render->Blit(graphics2, aux, 0, &trees, 0.55f);
@@ -183,7 +184,7 @@ update_status ModuleBackground::Update()
 	}
 
 	for (int i = 0; i < 15; i++) {
-		App->render->Blit(graphics, aux4, 193, &ground, 0.75f);
+		App->render->Blit(graphics2, aux4, 193, &ground, 0.75f);
 		aux4 += ground.w;
 	}
 	
@@ -197,11 +198,11 @@ update_status ModuleBackground::Update()
 			fade = false;
 		}
 		else {
-			alpha_mid+=2.55;
+			alpha_mid+=1.5;
 		}
 	}
 
-	for (int i = 0; i < 17; i++) {
+	for (int i = 0; i < 18; i++) {
 		App->render->Blit(graphics1, aux6, 0, &backfinal, 0.65f);
 		aux6 += backfinal.w;
 	}	
@@ -209,7 +210,7 @@ update_status ModuleBackground::Update()
 	if (App->render->currentTime > 14000 && App->render->currentTime < 29000 && fade == false) {
 		if (alpha_mid1 > SDL_ALPHA_TRANSPARENT) {
 			App->render->Blit(mid1, 0, 0, &fademid, 0.00f);
-			alpha_mid1 -= 2.55;
+			alpha_mid1 -= 1.5;
 		}
 		else {
 			alpha_mid = 0;
@@ -253,23 +254,28 @@ update_status ModuleBackground::Update()
 	
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
 
+	if (App->render->currentTime > 89000) {
+		alpha_end = 255;
+		alpha_graph1 = 0;
+	}
+
 	for (int i = 0; i < 9; i++) {
-		App->render->Blit(graphics, aux8, 0, &sky, 0.50f);
+		App->render->Blit(end, aux8, 0, &sky, 0.50f);
 		aux8 += sky.w;
 	}
 
 	for (int i = 0; i < 11; i++) {
-		App->render->Blit(graphics, aux9, SCREEN_HEIGHT - mountain.h, &mountain, 0.65f);
+		App->render->Blit(end, aux9, SCREEN_HEIGHT - mountain.h, &mountain, 0.65f);
 		aux9 += mountain.w;
 	}
 
 	for (int i = 0; i < 22; i++) {
-		App->render->Blit(graphics, aux10, SCREEN_HEIGHT - bambuback.h, &bambuback, 0.70f);
+		App->render->Blit(end, aux10, SCREEN_HEIGHT - bambuback.h, &bambuback, 0.70f);
 		aux10 += bambuback.w;
 	}
 
 	for (int i = 0; i < 29; i++) {
-		App->render->Blit(graphics, aux11, SCREEN_HEIGHT - bambu.h, &bambu, 0.75f);
+		App->render->Blit(end, aux11, SCREEN_HEIGHT - bambu.h, &bambu, 0.75f);
 		aux11 += bambu.w;
 	}
 
@@ -280,6 +286,7 @@ update_status ModuleBackground::Update()
 	SDL_SetTextureAlphaMod(graphics1, alpha_graph1);
 	SDL_SetTextureAlphaMod(mid, alpha_mid);
 	SDL_SetTextureAlphaMod(mid1, alpha_mid1);
+	SDL_SetTextureAlphaMod(end, alpha_end);
 	
 	return UPDATE_CONTINUE;
 }
