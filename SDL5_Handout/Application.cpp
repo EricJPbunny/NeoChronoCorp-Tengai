@@ -9,6 +9,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleLevel2.h"
+#include "ModuleScore.h"
 
 Application::Application()
 {
@@ -16,12 +17,13 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = level2 = new ModuleLevel2;
-	modules[5] = background = new Background();
-	modules[6] = intro = new ModuleIntro();
-	modules[7] = player = new ModulePlayer();
-	modules[8] = fade = new ModuleFadeToBlack();
-	modules[9] = audio = new ModuleAudio();
+	modules[4] = scores = new ModuleScore();
+	modules[5] = level2 = new ModuleLevel2;
+	modules[6] = background = new Background();
+	modules[7] = intro = new ModuleIntro();
+	modules[8] = player = new ModulePlayer();
+	modules[9] = fade = new ModuleFadeToBlack();
+	modules[10] = audio = new ModuleAudio();
 }	
 
 Application::~Application()
@@ -39,6 +41,7 @@ bool Application::Init()
 	// Disable the map that you do not start with
 	background->Disable();
 	level2->Disable();
+	scores->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

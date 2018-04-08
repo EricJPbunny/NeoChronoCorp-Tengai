@@ -88,9 +88,11 @@ update_status ModuleRender::Update()
 		if (App->background->currentTime > 82000 && App->background->currentTime < 85000) {
 			App->background->grassy += 0.5;
 		}
+
 		if (App->background->movement == true) {
 			camera.x -= speed;
 		}
+
 	}
 
 	return update_status::UPDATE_CONTINUE;

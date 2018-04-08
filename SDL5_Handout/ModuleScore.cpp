@@ -1,8 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleBackground.h"
 #include "ModuleScore.h"
-#include "ModuleLevel2.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
@@ -10,38 +8,37 @@
 #include "SDL\include\SDL_render.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleIntro.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
-ModuleLevel2::ModuleLevel2()
+ModuleScore::ModuleScore()
 {
 	//2nd Level
-	lev2.x = 0;
-	lev2.y = 0;
-	lev2.w = SCREEN_WIDTH;
-	lev2.h = SCREEN_HEIGHT;
+	score.x = 0;
+	score.y = 0;
+	score.w = SCREEN_WIDTH;
+	score.h = SCREEN_HEIGHT;
 }
 
-ModuleLevel2::~ModuleLevel2()
+ModuleScore::~ModuleScore()
 {}
 
 // Load assets
-bool ModuleLevel2::Start()
+bool ModuleScore::Start()
 {
-	LOG("Loading Level 2");
+	LOG("Loading Score");
 	bool ret = true;
-	graphics = App->textures->Load("2ndlevel.png");
-
-	Mix_PlayMusic(mus, -1);
+	graphics = App->textures->Load("Score.png");
 
 	App->player->Enable();
 	return ret;
 }
 
 // Load assets
-bool ModuleLevel2::CleanUp()
+bool ModuleScore::CleanUp()
 {
-	LOG("Unloading Level 2");
+	LOG("Unloading Score");
 
 	App->player->Disable();
 	App->textures->Unload(graphics);
@@ -49,14 +46,14 @@ bool ModuleLevel2::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleLevel2::Update()
+update_status ModuleScore::Update()
 {
 	// Draw everything --------------------------------------	
 	
-	App->render->Blit(graphics, 0, 0, &lev2, 0.00f);
+	App->render->Blit(graphics, 0, 0, &score, 0.00f);
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		App->fade->FadeToBlack(App->level2, App->scores, 0.60f);
+		App->fade->FadeToBlack(App->scores, App->intro, 0.60f);
 	}
 
 	return UPDATE_CONTINUE;
