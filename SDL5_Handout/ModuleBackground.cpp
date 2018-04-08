@@ -290,7 +290,7 @@ update_status Background::Update()
 
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
 
-	if (currentTime > 89000) {
+	if (App->render->camera.x < -19300) {
 		alpha_end = 255;
 		alpha_graph1 = 0;
 	}
