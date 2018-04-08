@@ -31,11 +31,17 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
+	SDL_PollEvent(&events);
 
 	keyboard = SDL_GetKeyboardState(NULL);
 
-	if(keyboard[SDL_SCANCODE_ESCAPE])
+	if (keyboard[SDL_SCANCODE_ESCAPE]) {
 		return update_status::UPDATE_STOP;
+	}
+
+	if (events.type == SDL_QUIT) {
+		return update_status::UPDATE_STOP;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
