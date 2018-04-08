@@ -44,13 +44,13 @@ bool ModuleAudio::Init() {
 bool ModuleAudio::CleanUp() {
 	LOG("Freeing audios and Mixer library");
 
-	for (int i = 0; i < MAX_MUSIC; ++i) {
+	for (uint i = 0; i < MAX_MUSIC; ++i) {
 		if (music[i] != nullptr) {
 			Mix_FreeMusic(music[i]);
 		}
 	}
 
-	for (int i = 0; i < MAX_FX; ++i) {
+	for (uint i = 0; i < MAX_FX; ++i) {
 		if (fx[i] != nullptr) {
 			Mix_FreeChunk(fx[i]);
 		}

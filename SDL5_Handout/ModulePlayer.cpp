@@ -104,12 +104,21 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
+bool ModulePlayer::CleanUp()
+{
+	LOG("Unloading Player");
+	App->textures->Unload(graphics);
+	App->textures->Unload(player_death);
+	
+	return true;
+}
+
 // Update: draw background
 update_status ModulePlayer::Update()
 {
 	Animation* current_animation = &idle;
 
-	float speed = (App->render->speed)/2;
+	float speed = 2.5;
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 	{
@@ -160,7 +169,7 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->background->movement == true) {
-		position.x += speed;
+	
 	}
 
 	// Draw everything --------------------------------------
@@ -173,7 +182,7 @@ update_status ModulePlayer::Update()
 		position.y = SCREEN_HEIGHT;
 	}
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
 
 	return UPDATE_CONTINUE;
 }

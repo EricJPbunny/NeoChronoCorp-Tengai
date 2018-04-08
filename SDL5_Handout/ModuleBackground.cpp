@@ -10,6 +10,7 @@
 #include "SDL\include\SDL_timer.h"	
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleLevel2.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -173,7 +174,7 @@ bool Background::Start()
 
 	mus = App->audio->LoadMusic("08_Tall_cedar.ogg");
 
-
+	Mix_PlayMusic(mus, -1);
 
 	App->player->Enable();
 	return ret;
@@ -204,8 +205,6 @@ update_status Background::Update()
 {
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7458;
-
-	currentTime = SDL_GetTicks();
 
 	for (int i = 0; i < 6; i++) {
 		App->render->Blit(graphics2, aux, 0, &trees, 0.55f);
@@ -325,7 +324,7 @@ update_status Background::Update()
 
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		App->fade->FadeToBlack(App->background, App->intro, 0.60f);
+		App->fade->FadeToBlack(App->background, App->level2, 0.60f);
 	}
 
 	return UPDATE_CONTINUE;

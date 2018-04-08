@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "SDL\include\SDL_render.h"
 #include "SDL\include\SDL_timer.h"
 
@@ -28,7 +29,7 @@ ModuleIntro::~ModuleIntro()
 // Load assets
 bool ModuleIntro::Start()
 {
-	LOG("Loading ken scene");
+	LOG("Loading Intro");
 	
 	graphics = App->textures->Load("Psikyo.png");
 
@@ -38,7 +39,7 @@ bool ModuleIntro::Start()
 // UnLoad assets
 bool ModuleIntro::CleanUp()
 {
-	LOG("Unloading ken scene");
+	LOG("Unloading Intro");
 	App->textures->Unload(graphics);
 	return true;
 }
