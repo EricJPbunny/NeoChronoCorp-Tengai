@@ -185,10 +185,7 @@ bool Background::CleanUp()
 {
 	LOG("Unloading Background");
 	movement = false;
-
-	App->player->Disable();
-
-	
+	alpha_graph2 = 255;
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);

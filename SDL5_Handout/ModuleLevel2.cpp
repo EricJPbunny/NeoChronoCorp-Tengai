@@ -32,6 +32,8 @@ bool ModuleLevel2::Start()
 	bool ret = true;
 	graphics = App->textures->Load("2ndlevel.png");
 
+	mus = App->audio->LoadMusic("03_Sky_dance.ogg");
+
 	Mix_PlayMusic(mus, -1);
 
 	App->player->Enable();

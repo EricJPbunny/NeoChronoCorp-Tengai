@@ -14,20 +14,20 @@ ModulePlayer::ModulePlayer()
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 68, 53, 32, 28 });
-	idle.PushBack({ 108, 54, 32, 27 });
-	idle.PushBack({ 148, 54, 32, 27 });
+	idle.PushBack({ 108, 54, 32, 28 });
+	idle.PushBack({ 148, 54, 32, 28 });
 	idle.speed = 0.20f;
 
 	// walk backward animation (arcade sprite sheet)
 	backward.PushBack({ 192, 53, 27, 29 });
-	backward.PushBack({ 232, 54, 28, 28 });
-	backward.PushBack({ 272, 54, 27, 28 });
+	backward.PushBack({ 232, 54, 28, 29 });
+	backward.PushBack({ 272, 54, 27, 29 });
 	backward.speed = 0.15f;
 
 	//Intermediate
 	intermediate.PushBack({ 187,95,27,29 });
-	intermediate.PushBack({ 230,95,24,28 });
-	intermediate.PushBack({ 270,95,26,28 });
+	intermediate.PushBack({ 230,95,24,29 });
+	intermediate.PushBack({ 270,95,26,29 });
 	intermediate.speed = 0.05f;
 
 	//Walk
@@ -181,7 +181,12 @@ update_status ModulePlayer::Update()
 	if (position.y > SCREEN_HEIGHT) {
 		position.y = SCREEN_HEIGHT;
 	}
-
+	if (position.x > SCREEN_WIDTH-r.w) {
+		position.x = SCREEN_WIDTH-r.w;
+	}
+	if (position.y < r.h) {
+		position.y = r.h;
+	}
 	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
 
 	return UPDATE_CONTINUE;

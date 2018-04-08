@@ -31,6 +31,10 @@ bool ModuleScore::Start()
 	bool ret = true;
 	graphics = App->textures->Load("Score.png");
 
+	mus = App->audio->LoadMusic("20_The_king_is_evil_too.ogg");
+
+	Mix_PlayMusic(mus, -1);
+
 	App->player->Enable();
 	return ret;
 }
