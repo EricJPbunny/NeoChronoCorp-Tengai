@@ -24,14 +24,14 @@ bool ModuleRender::Init()
 	bool ret = true;
 	Uint32 flags = 0;
 
-	if(REN_VSYNC == true)
+	if (REN_VSYNC == true)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 	}
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
-	
-	if(renderer == NULL)
+
+	if (renderer == NULL)
 	{
 		LOG("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
@@ -48,10 +48,14 @@ update_status ModuleRender::PreUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::Update()	
+update_status ModuleRender::Update()
 {
-	if (App->background->movement==true) {
-		if (camera.x > -1100) {
+	if (App->background->movement == true) {
+
+		if (App->input->keyboard[SDL_SCANCODE_TAB] == 1) {
+			speed = 30;
+		}
+		else if (camera.x > -1100) {
 			speed = 10.25;
 		}
 
@@ -67,33 +71,39 @@ update_status ModuleRender::Update()
 			speed -= 0.10;
 		}
 
-		else if (camera.x < -8400 && camera.x > -20000) {
-			speed = 2;
-		}
-
-		else if (App->background->currentTime > 39200 && App->background->currentTime < 41800) {
-			speed = 0;
-		}
-
-		else if (App->background->currentTime > 41800 && App->background->currentTime < 103000) {
+		else if (camera.x < -8400 && camera.x > -9400) {
 			speed = 6.75;
 		}
 
-		if (App->background->currentTime > 85000 && App->background->currentTime < 95000) {
+		else if (camera.x < -9400 && camera.x > -17700) {
+			if (aux < 270)
+			{
+				speed = 0;
+				aux++;
+			}
+			else
+			{
+				speed = 6.75;
+			}
+
+		}
+		else if (camera.x < -17900 && camera.x > -21100) {
 			App->background->posx -= 1.75;
 			App->background->posy += 1.10;
 			speed = 6.75;
 		}
 
-		if (App->background->currentTime > 82000 && App->background->currentTime < 85000) {
+		if (camera.x < -17000 && camera.x > -800000000) {
 			App->background->grassy += 0.5;
+			speed = 6.75;
 		}
-
 		if (App->background->movement == true) {
 			camera.x -= speed;
 		}
-
 	}
+
+
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -110,7 +120,7 @@ bool ModuleRender::CleanUp()
 	LOG("Destroying renderer");
 
 	//Destroy window
-	if(renderer != NULL)
+	if (renderer != NULL)
 	{
 		SDL_DestroyRenderer(renderer);
 	}
@@ -126,7 +136,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
 	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
 
-	if(section != NULL)
+	if (section != NULL)
 	{
 		rect.w = section->w;
 		rect.h = section->h;
@@ -139,7 +149,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
 
-	if(SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

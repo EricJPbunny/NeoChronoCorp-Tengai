@@ -188,7 +188,7 @@ bool Background::CleanUp()
 
 	App->player->Disable();
 
-	App->audio->UnloadMusic(mus);
+	
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);

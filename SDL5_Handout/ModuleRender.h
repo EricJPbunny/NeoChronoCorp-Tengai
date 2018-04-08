@@ -22,6 +22,7 @@ public:
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);
 
 public:
+	int aux = 0;
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
 	float speed;
