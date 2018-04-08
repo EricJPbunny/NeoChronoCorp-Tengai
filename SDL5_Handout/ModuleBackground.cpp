@@ -30,8 +30,13 @@ Background::Background()
 
 	Templesgate.x = 2;
 	Templesgate.y = 3;
-	Templesgate.w = 150;
+	Templesgate.w = 87;
 	Templesgate.h = 224;
+
+	Templesgate2.x = 89;
+	Templesgate2.y = 3;
+	Templesgate2.w = 63;
+	Templesgate2.h = 224;
 
 	backtrees.x = 6;
 	backtrees.y = 12;

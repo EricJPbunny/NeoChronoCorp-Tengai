@@ -14,19 +14,19 @@ ModulePlayer::ModulePlayer()
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 68, 53, 32, 28 });
-	idle.PushBack({ 108, 54, 32, 28 });
-	idle.PushBack({ 148, 54, 32, 28 });
+	idle.PushBack({ 108, 54, 32, 27 });
+	idle.PushBack({ 148, 54, 32, 27 });
 	idle.speed = 0.20f;
 
 	// walk backward animation (arcade sprite sheet)
 	backward.PushBack({ 192, 53, 27, 29 });
-	backward.PushBack({ 232, 54, 28, 29 });
-	backward.PushBack({ 272, 54, 27, 29 });
+	backward.PushBack({ 232, 54, 28, 28 });
+	backward.PushBack({ 272, 54, 27, 28 });
 	backward.speed = 0.15f;
 
 	//Intermediate
 	intermediate.PushBack({ 187,95,27,29 });
-	intermediate.PushBack({ 230,95,24,29 });
+	intermediate.PushBack({ 230,95,24,28 });
 	intermediate.PushBack({ 270,95,26,29 });
 	intermediate.speed = 0.05f;
 
@@ -188,6 +188,7 @@ update_status ModulePlayer::Update()
 		position.y = r.h;
 	}
 	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
+	App->render->Blit(App->background->graphics, 202, 0, &App->background->Templesgate2, 0.75f);
 
 	return UPDATE_CONTINUE;
 }
