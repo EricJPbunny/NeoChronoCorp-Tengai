@@ -33,9 +33,7 @@ bool ModuleScore::Start()
 
 	mus = App->audio->LoadMusic("20_The_king_is_evil_too.ogg");
 
-	Mix_PlayMusic(mus, -1);
 
-	App->player->Enable();
 	return ret;
 }
 
@@ -44,7 +42,6 @@ bool ModuleScore::CleanUp()
 {
 	LOG("Unloading Score");
 
-	App->player->Disable();
 	App->textures->Unload(graphics);
 	return true;
 }

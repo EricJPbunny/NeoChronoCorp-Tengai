@@ -179,7 +179,7 @@ bool Background::Start()
 
 	mus = App->audio->LoadMusic("08_Tall_cedar.ogg");
 
-	Mix_PlayMusic(mus, -1);
+	App->audio->PlayMusic(mus);
 
 	App->player->Enable();
 	return ret;
@@ -192,6 +192,7 @@ bool Background::CleanUp()
 	movement = false;
 	alpha_graph2 = 255;
 
+	App->player->Disable();
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);
 	App->textures->Unload(graphics2);

@@ -36,7 +36,7 @@ bool ModuleLevel2::Start()
 
 	Mix_PlayMusic(mus, -1);
 
-	App->player->Enable();
+ 	App->player->Enable();
 	return ret;
 }
 

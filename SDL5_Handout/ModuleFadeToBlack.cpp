@@ -38,8 +38,8 @@ update_status ModuleFadeToBlack::Update()
 			if(now >= total_time)
 			{
 				// TODO 3: enable / disable the modules received when FadeToBlacks() gets called
-				moduleon1->Enable();
 				moduleoff1->Disable();
+				moduleon1->Enable();
 				// ---
 				total_time += total_time;
 				start_time = SDL_GetTicks();

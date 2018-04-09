@@ -19,13 +19,22 @@ public:
 	bool CleanUp();
 
 	Mix_Music* const LoadMusic(const char* path);
-	Mix_Chunk* const LoadChunk(const char* path);
-	bool UnloadMusic(Mix_Music* music_audio);
-	bool UnloadChunk(Mix_Chunk* chunk);
+	Mix_Chunk* const LoadEffect(const char* path);
+
+	void PlayMusic(Mix_Music* mus_to_play, int reps = -1);
+	void PlaySoundEffects(Mix_Chunk* fx_to_play);
+	void UnloadMusic(Mix_Music* mus);
+	void UnloadFx(Mix_Chunk* fx);
 
 public:
-	Mix_Music* music[MAX_MUSIC] = {nullptr};
-	Mix_Chunk* fx[MAX_FX] = {nullptr};
+	
+	uint last_song=0;
+	uint last_fx = 0;
+
+	Mix_Music* mus[MAX_MUSIC];
+
+	Mix_Chunk* sound_fx[MAX_FX];
+
 };
 
 #endif

@@ -17,13 +17,14 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scores = new ModuleScore();
-	modules[5] = level2 = new ModuleLevel2;
-	modules[6] = background = new Background();
-	modules[7] = intro = new ModuleIntro();
-	modules[8] = player = new ModulePlayer();
-	modules[9] = fade = new ModuleFadeToBlack();
-	modules[10] = audio = new ModuleAudio();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = fade = new ModuleFadeToBlack();
+	modules[6] = intro = new ModuleIntro();
+	modules[7] = background = new Background();
+	modules[8] = level2 = new ModuleLevel2();
+	modules[9] = scores = new ModuleScore();
+	modules[10] = player = new ModulePlayer();
+	
 }	
 
 Application::~Application()

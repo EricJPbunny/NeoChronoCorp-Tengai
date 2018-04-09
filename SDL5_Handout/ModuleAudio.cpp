@@ -6,53 +6,55 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
-ModuleAudio::ModuleAudio() : Module() {
 
-}
-
-ModuleAudio::~ModuleAudio() {
-
-}
-
-bool ModuleAudio::Init() {
-	LOG("Init Mixer library");
-	bool ret = true;
-
-	// load support for the AUDIO format
-	int flags = MIX_INIT_OGG;
-	int init = Mix_Init(flags);
-	Mix_OpenAudio(22050, AUDIO_S8, 2, 4096);
-
-	if ((init & flags) != flags)
+ModuleAudio::ModuleAudio() 
+{
+	for (uint i = 0; i < MAX_MUSIC;++i) 
 	{
-		LOG("Could not initialize Mixer lib. MIX_Init: %s", Mix_GetError());
+		mus[i] = nullptr;
+	}
+	for (uint i = 0; i < MAX_FX;++i)
+	{
+		sound_fx[i] = nullptr;
+	}
+};
+ModuleAudio::~ModuleAudio() {};
+
+
+bool ModuleAudio::Init() 
+{
+	
+	bool ret = true;
+	LOG("Audio module init");
+	if (Mix_Init(MIX_INIT_OGG)<0)
+	{
+		LOG("Audio module can't be initialitzated");
 		ret = false;
 	}
-
-	for (int i = 0; i < MAX_MUSIC; ++i) {
-		if (music[i] != nullptr) {
-			Mix_PlayMusic(music[0], 1);
-		}
-		if (fx[i] != nullptr) {
-			Mix_PlayChannel(-1, fx[0], 0);
+	else
+	{
+		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024)<0) 
+		{
+			LOG("Audio module can't open %s",Mix_GetError());
+			ret = false;
 		}
 	}
-
 	return ret;
 }
-
-bool ModuleAudio::CleanUp() {
-	LOG("Freeing audios and Mixer library");
-
-	for (uint i = 0; i < MAX_MUSIC; ++i) {
-		if (music[i] != nullptr) {
-			Mix_FreeMusic(music[i]);
+bool ModuleAudio::CleanUp() 
+{
+	for (int i = 0; i < MAX_MUSIC; ++i) 
+	{
+		if (mus[i] != nullptr)
+		{
+			Mix_FreeMusic(mus[i]);
 		}
 	}
-
-	for (uint i = 0; i < MAX_FX; ++i) {
-		if (fx[i] != nullptr) {
-			Mix_FreeChunk(fx[i]);
+	for (uint i = 0; i < MAX_MUSIC; ++i)
+	{
+		if (sound_fx[i] != nullptr)
+		{
+			Mix_FreeChunk(sound_fx[i]);
 		}
 	}
 
@@ -62,91 +64,70 @@ bool ModuleAudio::CleanUp() {
 	return true;
 }
 
-Mix_Music* const ModuleAudio::LoadMusic(const char* path) {
-	int num = 0;
-
-	Mix_Music* mus = nullptr;
-
-	mus = Mix_LoadMUS(path);
-	if(!mus){
-		LOG("Mix Error:", Mix_GetError());
-		return nullptr;
-	}
-
-	for (int i = 0; i < MAX_MUSIC; ++i) {
-		if (music[i] == nullptr) {
-			num = i;
-			i = MAX_MUSIC;
-		}
-	}
-
-	music[num] = mus;
-
-	return music[num];
-}
-
-Mix_Chunk* const ModuleAudio::LoadChunk(const char* path) {
-	int num = 0;
-
-	Mix_Chunk* effect = nullptr;
-
-	effect = Mix_LoadWAV(path);
-	if (!effect) {
-		LOG("Mix Error:", Mix_GetError());
-		return nullptr;
-	}
-
-	for (int i = 0; i < MAX_FX; ++i) {
-		if (fx[i] == nullptr) {
-			num = i;
-			i = MAX_FX;
-		}
-	}
-
-	fx[num] = effect;
-
-
-	return fx[num];
-}
-
-bool ModuleAudio::UnloadMusic(Mix_Music* music_audio)
+void ModuleAudio::PlayMusic(Mix_Music* mus_to_play,int reps) 
 {
-	bool ret = false;
-
-	if (music_audio != nullptr)
+	Mix_PlayMusic(mus_to_play,reps);
+	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
+}
+void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play)
+{
+	Mix_PlayChannel (-1,fx_to_play,0);
+	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME/ 3);
+}
+void ModuleAudio::UnloadMusic(Mix_Music * mus)
+{
+	for (uint i = 0; i < last_song; ++i) 
 	{
-		for (int i = 0; i < MAX_MUSIC; ++i)
+		if (this->mus[i] == mus)
 		{
-			if (music[i] == music_audio)
-			{
-				music[i] = nullptr;
-				ret = true;
-				break;
-			}
+			Mix_FreeMusic(mus);
 		}
-		Mix_FreeMusic(music_audio);
 	}
-
-	return ret;
+}
+void ModuleAudio::UnloadFx(Mix_Chunk * fx)
+{
+	for (uint i = 0; i < last_fx; ++i)
+	{
+		if (sound_fx[i] == fx)
+		{
+			Mix_FreeChunk(fx);
+		}
+	}
 }
 
-bool ModuleAudio::UnloadChunk(Mix_Chunk* chunk)
+Mix_Music* const ModuleAudio::LoadMusic(const char* path)
 {
-	bool ret = false;
-
-	if (chunk != nullptr)
+	Mix_Music* music = nullptr;
+	if (last_song < MAX_MUSIC)
 	{
-		for (int i = 0; i < MAX_MUSIC; ++i)
-		{
-			if (fx[i] == chunk)
-			{
-				fx[i] = nullptr;
-				ret = true;
-				break;
-			}
-		}
-		Mix_FreeChunk(chunk);
-	}
+		music = Mix_LoadMUS(path);
 
-	return ret;
+		if (mus == nullptr)
+		{
+			LOG("Could not load sound with path %s Error: %s", path, Mix_GetError());
+		}
+		else
+		{
+			mus[last_song++] = music;
+		}
+	}
+	return music;
+}
+Mix_Chunk* const ModuleAudio::LoadEffect(const char* path)
+{
+	Mix_Chunk* fx = nullptr;
+	if (last_fx < MAX_FX)
+	{
+		fx = Mix_LoadWAV(path);
+
+		if (fx == nullptr)
+		{
+			LOG("Could not load effect with path %s Error: %s", path, Mix_GetError());
+		}
+		else
+		{
+			sound_fx[last_fx++] = fx;
+		}
+	}
+	return fx;
 }
