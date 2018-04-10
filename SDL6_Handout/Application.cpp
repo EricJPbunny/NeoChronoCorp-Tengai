@@ -22,8 +22,9 @@ Application::Application()
 	modules[5] = intro = new ModuleIntro();
 	modules[6] = background = new ModuleBackground();
 	modules[7] = scores = new ModuleScore();
-	modules[8] = player = new ModulePlayer();
-	modules[9] = fade = new ModuleFadeToBlack();
+	modules[8] = particles = new ModuleParticles();
+	modules[9] = player = new ModulePlayer();
+	modules[10] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()

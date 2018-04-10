@@ -20,7 +20,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("rtype/particles.png");
+	graphics = App->textures->Load("assets/particles.png");
 
 	// Explosion particle
 	explosion.anim.PushBack({274, 296, 33, 30});
@@ -37,8 +37,8 @@ bool ModuleParticles::Start()
 	bullet.anim.PushBack({ 233, 120, 32, 12 });
 	bullet.anim.loop = true;
 	bullet.anim.speed = 0.1f;
-	bullet.life = 1400;
-	bullet.speed.x = 2.00f;
+	bullet.life = 4000;
+	bullet.speed.x = 6.00f;
 
 
 	return true;

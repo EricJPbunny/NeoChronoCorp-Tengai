@@ -30,7 +30,11 @@ bool ModuleIntro::Start()
 {
 	LOG("Loading Intro");
 	
-	graphics = App->textures->Load("Psikyo.png");
+	graphics = App->textures->Load("assets/sprite/Psikyo.png");
+
+	mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
+
+	App->audio->PlayMusic(mus,1);
 
 	return true;
 }

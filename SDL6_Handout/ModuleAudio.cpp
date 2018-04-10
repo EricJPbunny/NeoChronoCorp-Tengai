@@ -33,7 +33,7 @@ bool ModuleAudio::Init()
 	}
 	else
 	{
-		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096)<0) 
+		if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096)<0) 
 		{
 			LOG("Audio module can't open %s", Mix_GetError());
 			ret = false;
@@ -66,7 +66,7 @@ bool ModuleAudio::CleanUp()
 
 void ModuleAudio::PlayMusic(Mix_Music* mus_to_play,int reps) 
 {
-	Mix_PlayMusic(mus_to_play,reps);
+	Mix_FadeInMusic(mus_to_play, reps, 3000);
 	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
 }
 void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play)
@@ -74,13 +74,13 @@ void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play)
 	Mix_PlayChannel (-1,fx_to_play,0);
 	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME/ 3);
 }
-void ModuleAudio::UnloadMusic(Mix_Music * mus)
+void ModuleAudio::UnloadMusic(Mix_Music * music)
 {
 	for (uint i = 0; i < last_song; ++i) 
 	{
-		if (this->mus[i] == mus)
+		if (mus[i] == music)
 		{
-			Mix_FreeMusic(mus);
+			Mix_FreeMusic(music);
 		}
 	}
 }

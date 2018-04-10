@@ -28,7 +28,7 @@ public:
 
 public:
 	
-	uint last_song=0;
+	uint last_song = 0;
 	uint last_fx = 0;
 
 	Mix_Music* mus[MAX_MUSIC];

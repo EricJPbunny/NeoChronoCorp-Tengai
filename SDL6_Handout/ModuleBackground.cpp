@@ -168,16 +168,20 @@ bool ModuleBackground::Start()
 	App->render->camera.x = 0;
 	alpha_graph1 = 0;
 	bool ret = true;
-	graphics = App->textures->Load("firstspritesheet.png");
-	graphics1 = App->textures->Load("treespritesheet.png");
-	graphics2 = App->textures->Load("fadespritesheet.png");
-	end = App->textures->Load("secondfasespritesheet.png");
-	laterals = App->textures->Load("Lateral.png");
-	mid = App->textures->Load("mid_fade.png");
-	mid1 = App->textures->Load("mid_fade.png");
+	graphics = App->textures->Load("assets/sprite/firstspritesheet.png");
+	graphics1 = App->textures->Load("assets/sprite/treespritesheet.png");
+	graphics2 = App->textures->Load("assets/sprite/fadespritesheet.png");
+	end = App->textures->Load("assets/sprite/secondfasespritesheet.png");
+	laterals = App->textures->Load("assets/sprite/Lateral.png");
+	mid = App->textures->Load("assets/sprite/mid_fade.png");
+	mid1 = App->textures->Load("assets/sprite/mid_fade.png");
 
+	//mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
+
+	App->audio->PlayMusic(mus);
 
 	App->player->Enable();
+
 	return ret;
 }
 
@@ -189,6 +193,8 @@ bool ModuleBackground::CleanUp()
 	fade = true;
 
 	App->player->Disable();
+
+	//App->audio->UnloadMusic(mus);
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);

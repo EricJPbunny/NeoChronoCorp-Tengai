@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleBackground.h"
+#include "ModuleParticles.h"
 
 
 ModulePlayer::ModulePlayer()
@@ -102,8 +103,8 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphics = App->textures->Load("miko.png"); // arcade version
-	player_death = App->textures->Load("Death_Player.png");
+	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
+	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 	return ret;
 }
 
@@ -175,6 +176,8 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 	}
 
+	
+
 
 
 	// Draw everything --------------------------------------
@@ -194,6 +197,10 @@ update_status ModulePlayer::Update()
 	}
 	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
 	App->render->Blit(App->background->graphics, 202, 0, &App->background->Templesgate2, 0.75f);
+
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
+		App->particles->AddParticle(App->particles->bullet, 300, 300);
+	}
 
 	return UPDATE_CONTINUE;
 }

@@ -29,7 +29,7 @@ bool ModuleScore::Start()
 {
 	LOG("Loading Score");
 	bool ret = true;
-	graphics = App->textures->Load("Score.png");
+	graphics = App->textures->Load("assets/sprite/Score.png");
 
 	App->player->Enable();
 	return ret;
