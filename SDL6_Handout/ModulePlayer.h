@@ -32,6 +32,7 @@ public:
 	Animation spin;
 	Animation spin_circle;
 	Animation death_circle;
+	Animation intermediatereturn;
 	SDL_Rect death;
 	iPoint position;
 

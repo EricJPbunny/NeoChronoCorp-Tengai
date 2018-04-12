@@ -34,6 +34,12 @@ ModulePlayer::ModulePlayer()
 	intermediate.PushBack({ 270,95,26,29 });
 	intermediate.speed = 0.05f;
 
+	//Intermediate return
+	intermediatereturn.PushBack({ 270,95,26,29 });
+	intermediatereturn.PushBack({ 230,95,24,28 });
+	intermediatereturn.PushBack({ 187,95,27,29 });
+	intermediatereturn.speed = 0.05f;
+
 	//Walk
 	walk.PushBack({ 74,12,27,27 });
 	walk.PushBack({ 114,13,27,27 });
@@ -125,7 +131,11 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
-		if (current_animation != &backward)
+		if (aux < 30) {
+			current_animation = &intermediate;
+			aux++;
+		}
+		else if (current_animation != &backward)
 		{
 			backward.Reset();
 			current_animation = &backward;
@@ -139,6 +149,9 @@ update_status ModulePlayer::Update()
 		if (position.y == SCREEN_HEIGHT) {
 			current_animation = &walk;
 		}
+		else {
+				current_animation = &idle;
+			}
 		position.x += speed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
@@ -151,7 +164,9 @@ update_status ModulePlayer::Update()
 		}
 		position.y -= speed;
 	}
+	
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
+		current_animation = &idle;
 		position.y += speed;
 	}
 
@@ -175,6 +190,10 @@ update_status ModulePlayer::Update()
 		&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE) {
 		current_animation = &idle;
 	}
+	
+	
+		
+
 
 	
 
