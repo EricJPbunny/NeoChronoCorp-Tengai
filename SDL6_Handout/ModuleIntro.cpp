@@ -32,9 +32,9 @@ bool ModuleIntro::Start()
 	
 	graphics = App->textures->Load("assets/sprite/Psikyo.png");
 
-	mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
+	//mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
 
-	App->audio->PlayMusic(mus,1);
+	//App->audio->PlayMusic(mus,1);
 
 	return true;
 }

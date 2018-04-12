@@ -199,8 +199,9 @@ update_status ModulePlayer::Update()
 	App->render->Blit(App->background->graphics, 202, 0, &App->background->Templesgate2, 0.75f);
 
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
-		App->particles->AddParticle(App->particles->bullet, 300, 300);
+		App->particles->AddParticle(App->particles->bullet, position.x, position.y-20);
 	}
+
 
 	return UPDATE_CONTINUE;
 }
