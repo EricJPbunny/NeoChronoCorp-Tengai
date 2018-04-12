@@ -176,7 +176,7 @@ bool ModuleBackground::Start()
 	mid = App->textures->Load("assets/sprite/mid_fade.png");
 	mid1 = App->textures->Load("assets/sprite/mid_fade.png");
 
-	//mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
+	mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
 
 	App->audio->PlayMusic(mus);
 
