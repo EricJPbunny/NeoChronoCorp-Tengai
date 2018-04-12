@@ -38,7 +38,7 @@ bool ModuleParticles::Start()
 	bullet.anim.PushBack({ 24, 135, 15, 15 });
 	bullet.anim.loop = true;
 	bullet.life = 1400;
-	bullet.speed.x = 6;
+	bullet.speed.x = 12;
 
 	return true;
 }

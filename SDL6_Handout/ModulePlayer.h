@@ -34,7 +34,7 @@ public:
 	Animation death_circle;
 	Animation intermediatereturn;
 	SDL_Rect death;
-	iPoint position;
+	fPoint position;
 
 };
 

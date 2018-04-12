@@ -126,6 +126,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	position.x -= ((App->background->camera_speed+0.50)/3);
 
 	float speed = 2.5;
 
@@ -191,18 +192,12 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 	}
 	
-	
-		
-
-
-	
-
 
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	if (position.x < 0) {
+	/*if (position.x < 0) {
 		position.x = 0;
 	}
 	if (position.y > SCREEN_HEIGHT) {
@@ -213,8 +208,8 @@ update_status ModulePlayer::Update()
 	}
 	if (position.y < r.h) {
 		position.y = r.h;
-	}
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
+	}*/
+	App->render->Blit(graphics, position.x, position.y - r.h, &r, 1.00f);
 	App->render->Blit(App->background->graphics, 202, 0, &App->background->Templesgate2, 0.75f);
 
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {

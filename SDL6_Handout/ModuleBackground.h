@@ -31,7 +31,7 @@ public:
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
-	float speed;
+	float camera_speed = 0.00f;
 };
 
 #endif // __MODULESCENEHONDA_H__

@@ -182,6 +182,10 @@ bool ModuleBackground::Start()
 
 	App->player->Enable();
 
+	App->render->speed = -6.50f;
+
+	camera_speed = (App->render->speed)*3;
+
 	return ret;
 }
 
@@ -209,6 +213,7 @@ bool ModuleBackground::CleanUp()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
+
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7458;
 
@@ -238,7 +243,7 @@ update_status ModuleBackground::Update()
 			fade = false;
 		}
 		else {
-			alpha_mid += 0.10*speed;
+			alpha_mid += 0.10*App->render->speed;
 		}
 	}
 
@@ -250,7 +255,7 @@ update_status ModuleBackground::Update()
 	if (App->render->camera.x < -5300 && fade == false) {
 		if (alpha_mid1 > SDL_ALPHA_TRANSPARENT) {
 			App->render->Blit(mid1, 0, 0, &fademid, 0.00f);
-			alpha_mid1 -= 0.10*speed;
+			alpha_mid1 -= 0.10*App->render->speed;
 		}
 		else {
 			alpha_mid = 0;
@@ -330,14 +335,18 @@ update_status ModuleBackground::Update()
 
 	//Background Movement
 
-		if (App->input->keyboard[SDL_SCANCODE_TAB] == KEY_STATE::KEY_REPEAT) {
-			speed = 30;
+
+
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) {
+		LOG("Debug");
 		}
-		else if (App->render->camera.x > -1700) {
-			speed = 10.25;
+		
+		 if (App->render->camera.x < -5230) {
+			App->render->speed = -10.25f;
+			camera_speed = (App->render->speed)*3;
 		}
 
-		else if (App->render->camera.x < -1700 && App->render->camera.x > -5300) {
+	/*	else if (App->render->camera.x < -1700 && App->render->camera.x > -5300) {
 			speed = 6.75;
 		}
 
@@ -375,9 +384,10 @@ update_status ModuleBackground::Update()
 			App->background->grassy += 0.5;
 			speed = 6.75;
 		}
-		App->render->camera.x -= speed;
+		App->render->camera.x -= speed;*/
 
 	//Blit To Screen
+		 App->render->camera.x += camera_speed;
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->background, App->scores, 0.60f);
