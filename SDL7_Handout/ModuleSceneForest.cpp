@@ -1,19 +1,18 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleIntro.h"
+#include "ModuleSceneIntro.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL\include\SDL_render.h"
 #include "ModuleInput.h"
-#include "ModuleScore.h"
-#include "ModuleBackground.h"
+#include "ModuleSceneForest.h"
 #include "ModuleAudio.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
-ModuleBackground::ModuleBackground()
+ModuleSceneForest::ModuleSceneForest()
 {
 	//Mid Fade
 	fademid.x = 0;
@@ -158,11 +157,11 @@ ModuleBackground::ModuleBackground()
 	lateral.h = 704;
 }
 
-ModuleBackground::~ModuleBackground()
+ModuleSceneForest::~ModuleSceneForest()
 {}
 
 // Load assets
-bool ModuleBackground::Start()
+bool ModuleSceneForest::Start()
 {
 	LOG("Loading background assets");
 	App->render->camera.x = 0;
@@ -190,7 +189,7 @@ bool ModuleBackground::Start()
 }
 
 // Load assets
-bool ModuleBackground::CleanUp()
+bool ModuleSceneForest::CleanUp()
 {
 	LOG("Unloading Background");
 	alpha_graph2 = 255;
@@ -198,7 +197,7 @@ bool ModuleBackground::CleanUp()
 
 	App->player->Disable();
 
-	//App->audio->UnloadMusic(mus);
+	App->audio->UnloadMusic(mus);
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);
@@ -211,7 +210,7 @@ bool ModuleBackground::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleBackground::Update()
+update_status ModuleSceneForest::Update()
 {
 
 	// Draw everything --------------------------------------	
@@ -334,63 +333,15 @@ update_status ModuleBackground::Update()
 	SDL_SetTextureAlphaMod(end, alpha_end);
 
 	//Background Movement
-
-
-
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) {
-		LOG("Debug");
-		}
-		
-		 if (App->render->camera.x < -5230) {
-			App->render->speed = -10.25f;
-			camera_speed = (App->render->speed)*3;
-		}
-
-	/*	else if (App->render->camera.x < -1700 && App->render->camera.x > -5300) {
-			speed = 6.75;
-		}
-
-		else if (App->render->camera.x < -5300 && App->render->camera.x > -8000) {
-			speed = 13;
-		}
-
-		else if (App->render->camera.x < -8000 && App->render->camera.x > -8400) {
-			speed -= 0.10;
-		}
-
-		else if (App->render->camera.x < -8400 && App->render->camera.x > -9400) {
-			speed = 6.75;
-		}
-
-		else if (App->render->camera.x < -9400 && App->render->camera.x > -17700) {
-			if (aux < 270)
-			{
-				speed = 0;
-				aux++;
-			}
-			else
-			{
-				speed = 6.75;
-			}
-
-		}
-		else if (App->render->camera.x < -17900 && App->render->camera.x > -21100) {
-			App->background->posx -= 1.75;
-			App->background->posy += 1.10;
-			speed = 6.75;
-		}
-
-		if (App->render->camera.x < -17000 && App->render->camera.x > -800000000) {
-			App->background->grassy += 0.5;
-			speed = 6.75;
-		}
-		App->render->camera.x -= speed;*/
+	if (App->render->camera.x == 0) {
+		App->render->speed = 10.75f;
+	}
+	App->render->camera.x -= App->render->speed;
 
 	//Blit To Screen
-		 App->render->camera.x += camera_speed;
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->background, App->scores, 0.60f);
+		App->fade->FadeToBlack(App->scene_forest, App->scene_intro, 0.60f);
 	}
 
 	return UPDATE_CONTINUE;

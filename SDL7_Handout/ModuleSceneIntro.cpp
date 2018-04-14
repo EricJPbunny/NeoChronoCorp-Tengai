@@ -1,18 +1,17 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleBackground.h"
 #include "ModuleTextures.h"
-#include "ModuleIntro.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleSceneForest.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
-#include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "SDL\include\SDL_render.h"
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleIntro::ModuleIntro()
+ModuleSceneIntro::ModuleSceneIntro()
 {
 	// Psikyo
 	Psikyo.x = 0;
@@ -22,14 +21,14 @@ ModuleIntro::ModuleIntro()
 
 }
 
-ModuleIntro::~ModuleIntro()
+ModuleSceneIntro::~ModuleSceneIntro()
 {}
 
 // Load assets
-bool ModuleIntro::Start()
+bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro");
-	
+
 	graphics = App->textures->Load("assets/sprite/Psikyo.png");
 
 	//mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
@@ -40,7 +39,7 @@ bool ModuleIntro::Start()
 }
 
 // UnLoad assets
-bool ModuleIntro::CleanUp()
+bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro");
 	App->textures->Unload(graphics);
@@ -48,16 +47,16 @@ bool ModuleIntro::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleIntro::Update()
+update_status ModuleSceneIntro::Update()
 {
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &Psikyo, 0.00f);
 
-	// TODO 2: make so pressing SPACE the HONDA stage is loaded
+	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->intro, App->background, 0.60f);
+		App->fade->FadeToBlack(App->scene_intro, App->scene_forest, 0.60f);
 	}
-	
+
 	return UPDATE_CONTINUE;
 }

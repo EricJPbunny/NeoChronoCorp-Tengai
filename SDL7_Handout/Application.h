@@ -8,16 +8,15 @@
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
-class ModuleRender;
 class ModuleAudio;
+class ModuleRender;
 class ModuleParticles;
+class ModuleSceneForest;
+class ModuleSceneIntro;
 class ModulePlayer;
 class ModuleFadeToBlack;
+class ModuleCollision;
 class Module;
-class ModuleBackground;
-class ModuleIntro;
-class ModuleScore;
-
 
 class Application
 {
@@ -28,13 +27,13 @@ public:
 	ModuleRender* render;
 	ModuleInput* input;
 	ModuleTextures* textures;
+	ModuleAudio* audio;
+	ModuleSceneForest* scene_forest;
+	ModuleSceneIntro* scene_intro;
+	ModuleCollision* collision;
 	ModulePlayer* player;
 	ModuleFadeToBlack* fade;
 	ModuleParticles* particles;
-	ModuleIntro* intro;
-	ModuleAudio* audio;
-	ModuleScore* scores;
-	ModuleBackground* background;
 
 public:
 

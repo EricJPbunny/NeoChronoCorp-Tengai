@@ -1,5 +1,5 @@
-#ifndef __MODULEBACKGROUND_H__
-#define __MODULEBACKGROUND_H__
+#ifndef __MODULESCENEFOREST_H__
+#define __MODULESCENEFOREST_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -7,11 +7,11 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 struct SDL_Texture;
 
-class ModuleBackground : public Module
+class ModuleSceneForest : public Module
 {
 public:
-	ModuleBackground();
-	~ModuleBackground();
+	ModuleSceneForest();
+	~ModuleSceneForest();
 
 	bool Start();
 	update_status Update();
@@ -34,4 +34,4 @@ public:
 	float camera_speed = 0.00f;
 };
 
-#endif // __MODULESCENEHONDA_H__
+#endif // __MODULESCENEFOREST_H__

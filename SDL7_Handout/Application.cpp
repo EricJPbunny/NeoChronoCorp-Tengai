@@ -3,28 +3,28 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleSceneForest.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleCollision.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
-#include "ModuleBackground.h"
-#include "ModuleScore.h"
-#include "ModuleIntro.h"
 #include "ModuleAudio.h"
-
 
 Application::Application()
 {
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
-	modules[5] = intro = new ModuleIntro();
-	modules[6] = background = new ModuleBackground();
-	modules[7] = scores = new ModuleScore();
-	modules[8] = particles = new ModuleParticles();
-	modules[9] = player = new ModulePlayer();
-	modules[10] = fade = new ModuleFadeToBlack();
+	int i = 0;
+	modules[i++] = window = new ModuleWindow();
+	modules[i++] = render = new ModuleRender();
+	modules[i++] = input = new ModuleInput();
+	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = audio = new ModuleAudio();
+	modules[i++] = scene_intro = new ModuleSceneIntro();
+	modules[i++] = scene_forest = new ModuleSceneForest();
+	modules[i++] = player = new ModulePlayer();
+	modules[i++] = particles = new ModuleParticles();
+	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
@@ -37,11 +37,12 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	// Disable all stopped modules here
+	// Deactivate modules here ----
+	scene_forest->Disable();
 	player->Disable();
-	// ---
-	background->Disable();
-	scores->Disable();
+	collision->Disable();
+	// ----------------------------
+
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 

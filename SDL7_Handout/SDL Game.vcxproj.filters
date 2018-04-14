@@ -53,16 +53,16 @@
     <ClInclude Include="ModuleParticles.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleIntro.h">
+    <ClInclude Include="ModuleCollision.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleBackground.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScore.h">
+    <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleAudio.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneForest.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,16 +97,16 @@
     <ClCompile Include="ModuleParticles.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleIntro.cpp">
+    <ClCompile Include="ModuleCollision.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleBackground.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScore.cpp">
+    <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneForest.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

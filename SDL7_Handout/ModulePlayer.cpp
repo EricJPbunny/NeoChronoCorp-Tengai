@@ -2,10 +2,10 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
-#include "ModuleBackground.h"
-#include "ModuleParticles.h"
+#include "ModuleSceneForest.h"
 
 
 ModulePlayer::ModulePlayer()
@@ -118,15 +118,14 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading Player");
 	App->textures->Unload(graphics);
- 	App->textures->Unload(player_death);
-	
+	App->textures->Unload(player_death);
+
 	return true;
 }
 
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	position.x -= ((App->background->camera_speed+0.50)/3);
 
 	float speed = 2.5;
 
@@ -151,8 +150,8 @@ update_status ModulePlayer::Update()
 			current_animation = &walk;
 		}
 		else {
-				current_animation = &idle;
-			}
+			current_animation = &idle;
+		}
 		position.x += speed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
@@ -165,7 +164,7 @@ update_status ModulePlayer::Update()
 		}
 		position.y -= speed;
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
 		current_animation = &idle;
 		position.y += speed;
@@ -191,30 +190,15 @@ update_status ModulePlayer::Update()
 		&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE) {
 		current_animation = &idle;
 	}
-	
+
 
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	/*if (position.x < 0) {
-		position.x = 0;
-	}
-	if (position.y > SCREEN_HEIGHT) {
-		position.y = SCREEN_HEIGHT;
-	}
-	if (position.x > SCREEN_WIDTH-r.w) {
-		position.x = SCREEN_WIDTH-r.w;
-	}
-	if (position.y < r.h) {
-		position.y = r.h;
-	}*/
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, 1.00f);
-	App->render->Blit(App->background->graphics, 202, 0, &App->background->Templesgate2, 0.75f);
+	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
+	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
-	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
-		App->particles->AddParticle(App->particles->bullet, position.x, position.y-20);
-	}
 
 
 	return UPDATE_CONTINUE;
