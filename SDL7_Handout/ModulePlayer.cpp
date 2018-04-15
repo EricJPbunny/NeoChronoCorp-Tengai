@@ -139,11 +139,14 @@ update_status ModulePlayer::Update()
 		{
 			backward.Reset();
 			current_animation = &backward;
+			intermediate.Reset();
 		}
 		position.x -= speed;
 	}
+
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE) {
 		aux = 0;
+		aux1 = 0;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
 		if (position.y == SCREEN_HEIGHT) {
@@ -154,13 +157,17 @@ update_status ModulePlayer::Update()
 		}
 		position.x += speed;
 	}
+
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
 		if (aux < 30) {
 			current_animation = &intermediate;
 			aux++;
 		}
-		else {
+		else if (current_animation != &backward)
+		{
+			backward.Reset();
 			current_animation = &backward;
+			intermediate.Reset();
 		}
 		position.y -= speed;
 	}
@@ -184,7 +191,14 @@ update_status ModulePlayer::Update()
 		App->render->Blit(graphics, position.x, position.y - death.h, &death);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) {
+		if (aux1 < 30) {
+			current_animation = &intermediatereturn;
+			aux1++;
+		}
+	}
+
+	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE) {
