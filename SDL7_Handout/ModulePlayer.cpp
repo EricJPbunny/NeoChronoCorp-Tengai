@@ -67,7 +67,7 @@ ModulePlayer::ModulePlayer()
 	spin_circle.PushBack({ 423,161,32,32 });
 	spin_circle.PushBack({ 457,161,32,32 });
 	spin_circle.PushBack({ 356,196,32,32 });
-	spin_circle.speed = 0.40;
+	spin_circle.speed = 0.40f;
 
 	//Death
 	death_circle.PushBack({ 153,0, 130, 130 });
@@ -92,7 +92,7 @@ ModulePlayer::ModulePlayer()
 	death_circle.PushBack({ 300,153, 130, 130 });
 	death_circle.PushBack({});
 	death_circle.PushBack({ 2,292, 130, 130 });
-	death_circle.speed = 0.8;
+	death_circle.speed = 0.8f;
 
 	//Death Player
 	death.x = 308;
@@ -111,6 +111,11 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
+	
+	destroyed = false;
+	position.x = 150;
+	position.y = 120;
+	col = App->collision->AddCollider({ 0, 0, 32, 16 }, COLLIDER_PLAYER );
 	return ret;
 }
 
@@ -205,6 +210,8 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 	}
 
+	col->SetPos(position.x, position.y);
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -239,4 +246,17 @@ update_status ModulePlayer::Update()
 
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
+{
+
+	App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 150);
+	App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, COLLIDER_NONE, 220);
+	App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, COLLIDER_NONE, 670);
+	App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, COLLIDER_NONE, 480);
+	App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, COLLIDER_NONE, 350);
+
+	destroyed = true;
+
 }

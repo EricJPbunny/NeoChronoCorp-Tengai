@@ -82,7 +82,7 @@ ModuleSceneStart::~ModuleSceneStart()
 bool ModuleSceneStart::Start()
 {
 	LOG("Loading Start Screen");
-
+	App->render->camera.x = 0;
 	graphics = App->textures->Load("assets/sprite/start_screen.png");
 
 	return true;
