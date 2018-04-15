@@ -25,6 +25,12 @@ ModuleSceneStart::ModuleSceneStart()
 	title.w = 320;
 	title.h = 224;
 
+	//Press Start
+	start.x = 0;
+	start.y = 0;
+	start.w = 320;
+	start.h = 224;
+
 	//Cloud 0
 	cloud.x = 0;
 	cloud.y = 224;
@@ -84,6 +90,7 @@ bool ModuleSceneStart::Start()
 	LOG("Loading Start Screen");
 	App->render->camera.x = 0;
 	graphics = App->textures->Load("assets/sprite/start_screen.png");
+	start_screen = App->textures->Load("assets/sprite/start.png");
 
 	return true;
 }
@@ -93,6 +100,7 @@ bool ModuleSceneStart::CleanUp()
 {
 	LOG("Unloading Start Screen");
 	App->textures->Unload(graphics);
+	App->textures->Unload(start_screen);
 	return true;
 }
 
@@ -215,7 +223,27 @@ update_status ModuleSceneStart::Update()
 	
 	App->render->Blit(graphics, 0, 0, &title);
 
+	App->render->Blit(start_screen, 0, 0, &start);
 
+	//Fader
+	SDL_SetTextureAlphaMod(start_screen, alpha_start);
+
+	if (alpha_start > SDL_ALPHA_TRANSPARENT && fade==true) {
+		alpha_start -= 5;
+	}
+	else if(fade==true){
+		alpha_start = 0;
+		fade = false;
+	}
+
+	if (alpha_start < SDL_ALPHA_OPAQUE && fade==false) {
+		alpha_start += 5;
+	}
+	else if(fade==false){
+		alpha_start = 255;
+		fade = true;
+	}
+	
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_start, App->scene_forest, 0.60f);
