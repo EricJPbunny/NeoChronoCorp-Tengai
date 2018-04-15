@@ -41,7 +41,6 @@ public:
 	Animation intermediatereturn;
 	SDL_Rect death;
 	fPoint position;
-	Collider* col=nullptr;
 	bool destroyed = false;
 };
 

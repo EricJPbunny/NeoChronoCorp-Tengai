@@ -115,7 +115,6 @@ bool ModulePlayer::Start()
 	destroyed = false;
 	position.x = 150;
 	position.y = 120;
-	col = App->collision->AddCollider({ 0, 0, 32, 16 }, COLLIDER_PLAYER );
 	return ret;
 }
 
@@ -210,7 +209,7 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 	}
 
-	col->SetPos(position.x, position.y);
+
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
