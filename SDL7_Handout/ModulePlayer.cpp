@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 #include "ModuleSceneForest.h"
 
 
@@ -13,8 +14,8 @@ ModulePlayer::ModulePlayer()
 	graphics = NULL;
 	current_animation = NULL;
 
-	position.x = 100;
-	position.y = 220;
+	position.x = 300;
+	position.y = 300;
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 68, 53, 32, 28 });
@@ -112,7 +113,9 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 	
-	coll = App->collision->AddCollider({ 0, 0, 32, 32 }, COLLIDER_PLAYER);
+	coll = App->collision->AddCollider({ 300, 300, 32, 32 }, COLLIDER_PLAYER);
+	LOG("Loading FX ");
+	
 
 	destroyed = false;
 	position.x = 150;
@@ -125,7 +128,7 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading Player");
 	App->textures->Unload(graphics);
 	App->textures->Unload(player_death);
-
+	
 	return true;
 }
 
@@ -220,7 +223,7 @@ update_status ModulePlayer::Update()
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
 
-	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 
 
 		switch (aux1) {
@@ -241,12 +244,25 @@ update_status ModulePlayer::Update()
 			aux1 = 0;
 			break;
 		}
-
+		
 		aux1++;
 	}
 
 	//Update Collider Position
 	coll->SetPos(position.x, position.y - 32);
+	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
+		position.x=-App->render->camera.x/3;
+	}
+	if (coll->CheckCollision(App->scene_forest->coll_right->rect)) {
+		position.x = (SCREEN_WIDTH - App->render->camera.x / 3)-33;
+	}
+	if (coll->CheckCollision(App->scene_forest->coll_up->rect)) {
+		position.y = 32;
+	}
+	if (coll->CheckCollision(App->scene_forest->coll_down->rect)) {
+		position.y = SCREEN_HEIGHT;
+	}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -254,12 +270,7 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	
-	App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 150);
-	App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, COLLIDER_NONE, 220);
-	App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, COLLIDER_NONE, 670);
-	App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, COLLIDER_NONE, 480);
-	App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, COLLIDER_NONE, 350);
-
-	destroyed = true;
+	
+	
 
 }

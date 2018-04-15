@@ -183,10 +183,10 @@ bool ModuleSceneForest::Start()
 
 	App->collision->Enable();
 
-	App->collision->AddCollider({ 0, -10, 99000, 10 }, COLLIDER_WALL);
-	App->collision->AddCollider({ 0,SCREEN_HEIGHT + 10, 990000, -10 }, COLLIDER_WALL);
-	coll = App->collision->AddCollider({ 0,0,-10,SCREEN_HEIGHT }, COLLIDER_WALL);
-	coll1 = App->collision->AddCollider({ SCREEN_WIDTH,0, 10,SCREEN_HEIGHT }, COLLIDER_WALL);
+	coll_up =App->collision->AddCollider({ 0, 0, 99000, 0 }, COLLIDER_WALL);
+	coll_down =App->collision->AddCollider({ 0,SCREEN_HEIGHT , 990000, 0 }, COLLIDER_WALL);
+	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
+	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
 
 	App->audio->PlayMusic(mus);
 
@@ -220,8 +220,8 @@ bool ModuleSceneForest::CleanUp()
 update_status ModuleSceneForest::Update()
 {
 	//Update Collision
-	coll->SetPos(-App->render->camera.x / 3, 0);
-	coll1->SetPos(SCREEN_WIDTH-App->render->camera.x / 3, 0);
+	coll_left->SetPos(-App->render->camera.x / 3, 0);
+	coll_right->SetPos(SCREEN_WIDTH-App->render->camera.x / 3, 0);
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
 
@@ -391,7 +391,7 @@ update_status ModuleSceneForest::Update()
 
 	//Blit To Screen
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_forest, App->scene_intro, 0.60f);
 	}
 

@@ -4,10 +4,8 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
-#include "Module.h"
-#include "Animation.h"
 #include "Globals.h"
-#include "p2Point.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -42,6 +40,7 @@ public:
 	Animation intermediatereturn;
 	SDL_Rect death;
 	fPoint position;
+	Mix_Chunk* shoot = nullptr;
 	bool destroyed = false;
 };
 

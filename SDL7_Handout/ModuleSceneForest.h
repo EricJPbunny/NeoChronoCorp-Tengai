@@ -19,8 +19,10 @@ public:
 
 public:
 	Mix_Music* mus = nullptr;
-	Collider* coll = nullptr;
-	Collider* coll1 = nullptr;
+	Collider* coll_left = nullptr;
+	Collider* coll_right = nullptr;
+	Collider* coll_up = nullptr;
+	Collider* coll_down = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics1 = nullptr;
 	SDL_Texture* graphics2 = nullptr;
