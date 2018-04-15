@@ -211,8 +211,30 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
+
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
-		App->particles->AddParticle(App->particles->bullet, position.x, position.y-20);
+
+
+		switch (aux1) {
+		case 0:
+			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20);
+			break;
+		case 1:
+			App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20);
+			break;
+		case 2:
+			App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20);
+			break;
+		case 3:
+			App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20);
+			break;
+		case 4:
+			App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20);
+			aux1 = 0;
+			break;
+		}
+
+		aux1++;
 	}
 
 

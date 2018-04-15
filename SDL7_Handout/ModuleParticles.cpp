@@ -35,12 +35,30 @@ bool ModuleParticles::Start()
 	explosion.anim.speed = 0.3f;
 
 	//Koyori Bullets
-	bullet.anim.PushBack({ 24, 135, 15, 15 });
-	bullet.anim.PushBack({ 24, 135, 15, 15 });
-	bullet.anim.PushBack({ 24, 135, 15, 15 });
+	bullet.anim.PushBack({ 24, 136, 13, 13 });
 	bullet.anim.loop = true;
 	bullet.life = 1400;
 	bullet.speed.x = 12;
+
+	bullet2.anim.PushBack({ 48, 136, 13, 13 });
+	bullet2.anim.loop = true;
+	bullet2.life = 1400;
+	bullet2.speed.x = 12;
+
+	bullet3.anim.PushBack({ 72, 136, 13, 13 });
+	bullet3.anim.loop = true;
+	bullet3.life = 1400;
+	bullet3.speed.x = 12;
+
+	bullet4.anim.PushBack({ 97, 136, 13, 13 });
+	bullet4.anim.loop = true;
+	bullet4.life = 1400;
+	bullet4.speed.x = 12;
+
+	bullet5.anim.PushBack({ 120, 136, 13, 13 });
+	bullet5.anim.loop = true;
+	bullet5.life = 1400;
+	bullet5.speed.x = 12;
 
 	return true;
 }

@@ -23,7 +23,8 @@ public:
 
 public:
 
-	int aux = 0, aux1 = 0;
+	int aux = 0;
+    int aux1 = 0;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr;
 	Animation* current_animation = nullptr;
