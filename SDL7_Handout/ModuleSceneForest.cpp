@@ -177,7 +177,11 @@ bool ModuleSceneForest::Start()
 	mid = App->textures->Load("assets/sprite/mid_fade.png");
 	mid1 = App->textures->Load("assets/sprite/mid_fade.png");
 
+	mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
+
 	App->player->Enable();
+
+	App->audio->PlayMusic(mus);
 
 	return ret;
 }
@@ -188,6 +192,8 @@ bool ModuleSceneForest::CleanUp()
 	LOG("Unloading Background");
 	alpha_graph2 = 255;
 	fade = true;
+
+	App->audio->UnloadMusic(mus);
 
 	App->player->Disable();
 

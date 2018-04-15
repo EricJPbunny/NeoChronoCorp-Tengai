@@ -48,7 +48,6 @@ bool ModuleAudio::CleanUp()
 		if (mus[i] != nullptr)
 		{
 			Mix_FreeMusic(mus[i]);
-			break;
 		}
 	}
 	for (uint i = 0; i < MAX_MUSIC; ++i)
@@ -56,7 +55,6 @@ bool ModuleAudio::CleanUp()
 		if (sound_fx[i] != nullptr)
 		{
 			Mix_FreeChunk(sound_fx[i]);
-			break;
 		}
 	}
 

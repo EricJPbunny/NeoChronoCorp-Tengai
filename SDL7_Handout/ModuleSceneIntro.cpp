@@ -3,7 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneIntro.h"
-#include "ModuleSceneForest.h"
+#include "ModuleSceneStart.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
@@ -31,9 +31,9 @@ bool ModuleSceneIntro::Start()
 
 	graphics = App->textures->Load("assets/sprite/Psikyo.png");
 
-	//mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
+	mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
 
-	//App->audio->PlayMusic(mus,1);
+	App->audio->PlayMusic(mus,1);
 
 	return true;
 }
@@ -42,6 +42,8 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro");
+
+	App->audio->UnloadMusic(mus);
 	App->textures->Unload(graphics);
 	return true;
 }
@@ -55,7 +57,7 @@ update_status ModuleSceneIntro::Update()
 
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->scene_intro, App->scene_forest, 0.60f);
+		App->fade->FadeToBlack(App->scene_intro, App->scene_start, 0.60f);
 	}
 
 	return UPDATE_CONTINUE;

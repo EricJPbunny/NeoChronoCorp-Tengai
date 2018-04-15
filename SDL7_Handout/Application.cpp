@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleSceneForest.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneStart.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
@@ -20,6 +21,7 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = audio = new ModuleAudio();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
+	modules[i++] = scene_start = new ModuleSceneStart();
 	modules[i++] = scene_forest = new ModuleSceneForest();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = particles = new ModuleParticles();
@@ -38,6 +40,7 @@ bool Application::Init()
 	bool ret = true;
 
 	// Deactivate modules here ----
+	scene_start->Disable();
 	scene_forest->Disable();
 	player->Disable();
 	collision->Disable();
