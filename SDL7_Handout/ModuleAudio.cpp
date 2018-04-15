@@ -83,7 +83,6 @@ void ModuleAudio::UnloadMusic(Mix_Music * music)
 		if (mus[i] == music)
 		{
 			Mix_FreeMusic(music);
-			break;
 		}
 	}
 }
@@ -94,7 +93,6 @@ void ModuleAudio::UnloadFx(Mix_Chunk * fx)
 		if (sound_fx[i] == fx)
 		{
 			Mix_FreeChunk(fx);
-			break;
 		}
 	}
 }

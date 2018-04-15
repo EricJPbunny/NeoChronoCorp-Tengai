@@ -24,7 +24,6 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
-	float speed = 0.00f;
 };
 
 #endif //__ModuleRenderer_H__

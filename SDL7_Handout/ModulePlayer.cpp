@@ -191,14 +191,15 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 	}
 
-
-
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, 0.00f);
+	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
+		App->particles->AddParticle(App->particles->bullet, position.x, position.y-20);
+	}
 
 
 	return UPDATE_CONTINUE;

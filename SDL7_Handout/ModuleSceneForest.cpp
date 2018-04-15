@@ -9,6 +9,7 @@
 #include "ModuleInput.h"
 #include "ModuleSceneForest.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -153,7 +154,7 @@ ModuleSceneForest::ModuleSceneForest()
 	//Lateral
 	lateral.x = 5;
 	lateral.y = 5;
-	lateral.w = 1665;
+	lateral.w = 1841;
 	lateral.h = 704;
 }
 
@@ -165,6 +166,7 @@ bool ModuleSceneForest::Start()
 {
 	LOG("Loading background assets");
 	App->render->camera.x = 0;
+	App->player->position.x = 0;
 	alpha_graph1 = 0;
 	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/firstspritesheet.png");
@@ -175,15 +177,7 @@ bool ModuleSceneForest::Start()
 	mid = App->textures->Load("assets/sprite/mid_fade.png");
 	mid1 = App->textures->Load("assets/sprite/mid_fade.png");
 
-	mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
-
-	App->audio->PlayMusic(mus);
-
 	App->player->Enable();
-
-	App->render->speed = -6.50f;
-
-	camera_speed = (App->render->speed)*3;
 
 	return ret;
 }
@@ -196,8 +190,6 @@ bool ModuleSceneForest::CleanUp()
 	fade = true;
 
 	App->player->Disable();
-
-	App->audio->UnloadMusic(mus);
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);
@@ -214,7 +206,7 @@ update_status ModuleSceneForest::Update()
 {
 
 	// Draw everything --------------------------------------	
-	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7458;
+	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
 
 	for (int i = 0; i < 6; i++) {
 		App->render->Blit(graphics2, aux, 0, &trees, 0.55f);
@@ -242,7 +234,7 @@ update_status ModuleSceneForest::Update()
 			fade = false;
 		}
 		else {
-			alpha_mid += 0.10*App->render->speed;
+			alpha_mid += 0.10*speed;
 		}
 	}
 
@@ -254,7 +246,7 @@ update_status ModuleSceneForest::Update()
 	if (App->render->camera.x < -5300 && fade == false) {
 		if (alpha_mid1 > SDL_ALPHA_TRANSPARENT) {
 			App->render->Blit(mid1, 0, 0, &fademid, 0.00f);
-			alpha_mid1 -= 0.10*App->render->speed;
+			alpha_mid1 -= 0.10*speed;
 		}
 		else {
 			alpha_mid = 0;
@@ -298,7 +290,7 @@ update_status ModuleSceneForest::Update()
 
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
 
-	if (App->render->camera.x < -19300) {
+	if (App->render->camera.x < -28780 && App->render->camera.x > -28880) {
 		alpha_end = 255;
 		alpha_graph1 = 0;
 	}
@@ -325,6 +317,50 @@ update_status ModuleSceneForest::Update()
 
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 
+	//Set Velocities
+	if (App->render->camera.x > -1700) {
+		speed = 12;
+	}
+	else if (App->render->camera.x < -1700 && App->render->camera.x > -5300) {
+		speed = 9;
+	}
+	else if (App->render->camera.x < -5300 && App->render->camera.x > -8000) {
+		speed = 12;
+	}
+	else if (App->render->camera.x < -8000 && App->render->camera.x > -10000) {
+		speed -= 0.03;
+	}
+	else if (App->render->camera.x < -10000 && App->render->camera.x > -13100) {
+		speed = 3;
+	}
+	else if (App->render->camera.x < -13100 && App->render->camera.x > -27340) {
+		if (aux_time < 270)
+		{
+			speed = 0;
+			aux_time++;
+		}
+		else
+		{
+			speed = 6;
+		}
+
+	}
+	else if (App->render->camera.x < -27340 && App->render->camera.x > -30205) {
+		posx -= 0.33*speed;
+		posy += 0.21*speed;
+		speed = 6;
+	}
+	else if (App->render->camera.x < -30205) {
+		speed = 6;
+	}
+
+	if (App->render->camera.x < -26000 && App->render->camera.x > -27000) {
+		grassy += 0.15*speed;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_TAB] == KEY_STATE::KEY_REPEAT) {
+		speed = 24;
+	}
 	//fader
 	SDL_SetTextureAlphaMod(graphics2, alpha_graph2);
 	SDL_SetTextureAlphaMod(graphics1, alpha_graph1);
@@ -333,13 +369,11 @@ update_status ModuleSceneForest::Update()
 	SDL_SetTextureAlphaMod(end, alpha_end);
 
 	//Background Movement
-	if (App->render->camera.x == 0) {
-		App->render->speed = 10.75f;
-	}
-	App->render->camera.x -= App->render->speed;
+	App->player->position.x += speed/3;
+	App->render->camera.x -= speed;
 
 	//Blit To Screen
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_forest, App->scene_intro, 0.60f);
 	}

@@ -21,23 +21,26 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("rtype/particles.png");
+	graphics = App->textures->Load("assets/sprite/miko.png");
 
 	// Explosion particle
-	explosion.anim.PushBack({274, 296, 33, 30});
-	explosion.anim.PushBack({313, 296, 33, 30});
-	explosion.anim.PushBack({346, 296, 33, 30});
-	explosion.anim.PushBack({382, 296, 33, 30});
-	explosion.anim.PushBack({419, 296, 33, 30});
-	explosion.anim.PushBack({457, 296, 33, 30});
+	// Explosion particle
+	explosion.anim.PushBack({ 274, 296, 33, 30 });
+	explosion.anim.PushBack({ 313, 296, 33, 30 });
+	explosion.anim.PushBack({ 346, 296, 33, 30 });
+	explosion.anim.PushBack({ 382, 296, 33, 30 });
+	explosion.anim.PushBack({ 419, 296, 33, 30 });
+	explosion.anim.PushBack({ 457, 296, 33, 30 });
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
-	laser.anim.PushBack({232, 103, 16, 12});
-	laser.anim.PushBack({249, 103, 16, 12});
-	laser.anim.speed = 0.2f;
-	laser.speed.x = 5;
-	laser.life = 3000;
+	//Koyori Bullets
+	bullet.anim.PushBack({ 24, 135, 15, 15 });
+	bullet.anim.PushBack({ 24, 135, 15, 15 });
+	bullet.anim.PushBack({ 24, 135, 15, 15 });
+	bullet.anim.loop = true;
+	bullet.life = 1400;
+	bullet.speed.x = 12;
 
 	return true;
 }
