@@ -112,6 +112,8 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 	
+	coll = App->collision->AddCollider({ 0, 0, 32, 32 }, COLLIDER_PLAYER);
+
 	destroyed = false;
 	position.x = 150;
 	position.y = 120;
@@ -243,13 +245,15 @@ update_status ModulePlayer::Update()
 		aux1++;
 	}
 
+	//Update Collider Position
+	coll->SetPos(position.x, position.y - 32);
 
 	return UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-
+	
 	App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 150);
 	App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, COLLIDER_NONE, 220);
 	App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, COLLIDER_NONE, 670);

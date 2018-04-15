@@ -9,6 +9,7 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "SDL\include\SDL_render.h"
+#include "SDL/include/SDL_timer.h"
 
 
 ModuleSceneIntro::ModuleSceneIntro()
@@ -35,6 +36,8 @@ bool ModuleSceneIntro::Start()
 
 	App->audio->PlayMusic(mus,1);
 
+	time_on_entry = SDL_GetTicks();
+
 	return true;
 }
 
@@ -51,12 +54,13 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-
+	//Timer
+	current_time = SDL_GetTicks() - time_on_entry;
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &Psikyo, 0.00f);
 
 	// If pressed, change scene
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+	if (current_time>8000) {
 		App->fade->FadeToBlack(App->scene_intro, App->scene_start, 0.60f);
 	}
 

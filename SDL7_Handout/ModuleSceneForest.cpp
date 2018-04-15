@@ -181,6 +181,13 @@ bool ModuleSceneForest::Start()
 
 	App->player->Enable();
 
+	App->collision->Enable();
+
+	App->collision->AddCollider({ 0, -10, 99000, 10 }, COLLIDER_WALL);
+	App->collision->AddCollider({ 0,SCREEN_HEIGHT + 10, 990000, -10 }, COLLIDER_WALL);
+	coll = App->collision->AddCollider({ 0,0,-10,SCREEN_HEIGHT }, COLLIDER_WALL);
+	coll1 = App->collision->AddCollider({ SCREEN_WIDTH,0, 10,SCREEN_HEIGHT }, COLLIDER_WALL);
+
 	App->audio->PlayMusic(mus);
 
 	return ret;
@@ -194,6 +201,8 @@ bool ModuleSceneForest::CleanUp()
 	fade = true;
 
 	App->audio->UnloadMusic(mus);
+
+	App->collision->Disable();
 
 	App->player->Disable();
 
@@ -210,7 +219,9 @@ bool ModuleSceneForest::CleanUp()
 // Update: draw background
 update_status ModuleSceneForest::Update()
 {
-
+	//Update Collision
+	coll->SetPos(-App->render->camera.x / 3, 0);
+	coll1->SetPos(SCREEN_WIDTH-App->render->camera.x / 3, 0);
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
 

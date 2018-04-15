@@ -27,6 +27,7 @@ public:
 
 	int aux = 0;
     int aux1 = 0;
+	Collider* coll = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr;
 	Animation* current_animation = nullptr;

@@ -23,6 +23,9 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect Psikyo;
 
+	int time_on_entry = 0;
+	int current_time = 0;
+
 	Mix_Music* mus = nullptr;
 
 };
