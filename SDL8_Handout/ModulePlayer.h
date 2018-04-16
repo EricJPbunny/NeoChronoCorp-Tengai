@@ -9,6 +9,13 @@
 struct SDL_Texture;
 struct Collider;
 
+enum player_state {
+	IDLE,
+	BACKWARD,
+	GO_IDLE,
+	BACK_IDLE,
+	WALK,
+};
 class ModulePlayer : public Module
 {
 public:
@@ -19,6 +26,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
+private:
+	void CheckState();
+	void PerformActions();
 
 public:
 
@@ -41,6 +51,7 @@ public:
 	fPoint position;
 	Mix_Chunk* shoot = nullptr;
 	bool destroyed = false;
+	player_state state = IDLE;
 };
 
 #endif

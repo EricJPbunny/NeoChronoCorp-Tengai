@@ -35,13 +35,13 @@ ModulePlayer::ModulePlayer()
 	intermediate.PushBack({ 187,95,27,29 });
 	intermediate.PushBack({ 230,95,24,28 });
 	intermediate.PushBack({ 270,95,26,29 });
-	intermediate.speed = 0.05f;
+	intermediate.speed = 0.10f;
 
 	//Intermediate return
 	intermediatereturn.PushBack({ 270,95,26,29 });
 	intermediatereturn.PushBack({ 230,95,24,28 });
 	intermediatereturn.PushBack({ 187,95,27,29 });
-	intermediatereturn.speed = 0.05f;
+	intermediatereturn.speed = 0.10f;
 
 	//Walk
 	walk.PushBack({ 74,12,27,27 });
@@ -142,80 +142,23 @@ update_status ModulePlayer::Update()
 {
 	float speed = 2.5;
 
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-	{
-		if (aux < 30) {
-			current_animation = &intermediate;
-			aux++;
-		}
-		else if (current_animation != &backward)
-		{
-			backward.Reset();
-			current_animation = &backward;
-			intermediate.Reset();
-		}
+	//check state
+	CheckState();
+
+	//state actions
+	PerformActions();
+
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
 		position.x -= speed;
 	}
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE) {
-		aux = 0;
-		aux1 = 0;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
-		if (position.y == SCREEN_HEIGHT) {
-			current_animation = &walk;
-		}
-		else {
-			current_animation = &idle;
-		}
-		position.x += speed;
-	}
-
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
-		if (aux < 30) {
-			current_animation = &intermediate;
-			aux++;
-		}
-		else if (current_animation != &backward)
-		{
-			backward.Reset();
-			current_animation = &backward;
-			intermediate.Reset();
-		}
 		position.y -= speed;
 	}
-
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
+		position.x += speed;
+	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
-		current_animation = &idle;
 		position.y += speed;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_Z] == KEY_STATE::KEY_DOWN) {
-		current_animation = &spin;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN) {
-		current_animation = &spin_circle;
-	}
-	//Only use when App->render->Blit(player_death,...)
-	/*if (App->input->keyboard[SDL_SCANCODE_C] == 1) {
-	current_animation = &death_circle;
-	}*/
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN) {
-		App->render->Blit(graphics, position.x, position.y - death.h, &death);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) {
-		if (aux1 < 30) {
-			current_animation = &intermediatereturn;
-			aux1++;
-		}
-	}
-
-	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE) {
-		current_animation = &idle;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
@@ -247,6 +190,8 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+
+	//temple
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
 	coll->SetPos(position.x, position.y - 32);
@@ -270,4 +215,90 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	
+}
+
+void ModulePlayer::CheckState()
+{
+	switch (state)
+	{
+	case IDLE:
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN) {
+			state = GO_IDLE;
+			LOG("combio patras");
+		}
+
+		break;
+
+	case GO_IDLE:
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
+			state = BACK_IDLE;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) {
+			state = BACK_IDLE;
+		}
+		if (current_animation->Finished()) {
+			intermediate.Reset();
+			state = BACKWARD;
+			LOG("combio ara esta atras");
+		}
+		break;
+
+	case BACKWARD:
+
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
+			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE) {
+				state = BACK_IDLE;
+			}
+		}
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) {
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE) {
+				state = BACK_IDLE;
+			}
+		}
+		break;
+
+	case BACK_IDLE:
+
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
+			state = BACK_IDLE;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
+			state = BACK_IDLE;
+		}
+		if (current_animation->Finished()) {
+			intermediate.Reset();
+			intermediate.pingpong = false;
+			state = IDLE;
+		}
+		break;
+	}
+}
+
+void ModulePlayer::PerformActions()
+{
+	switch (state) {
+	case IDLE:
+		current_animation = &idle;
+		break;
+
+	case GO_IDLE:
+		if (intermediate.Finished())
+		{
+			intermediate.Reset();
+		}
+		current_animation = &intermediate;
+		break;
+
+	case BACKWARD:
+		if (backward.Finished())
+			backward.Reset();
+		current_animation = &backward;
+		break;
+
+	case BACK_IDLE:
+		if (intermediatereturn.Finished())
+			intermediatereturn.Reset();
+		current_animation = &intermediatereturn;
+		break;
+	}
 }
