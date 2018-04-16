@@ -10,6 +10,7 @@
 #include "ModuleSceneForest.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "ModuleEnemies.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -188,6 +189,11 @@ bool ModuleSceneForest::Start()
 	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
 
+	//Enemies Ovni
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1070, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1100, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1130, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 1160, 50);
 	App->audio->PlayMusic(mus);
 
 	return ret;

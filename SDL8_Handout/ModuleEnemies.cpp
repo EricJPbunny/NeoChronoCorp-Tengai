@@ -6,6 +6,8 @@
 #include "ModuleTextures.h"
 #include "Enemy.h"
 #include "Enemy_RedBird.h"
+#include "Enemy_GreenOvni.h"
+#include "Enemy_RedOvni.h"
 
 #define SPAWN_MARGIN 50
 
@@ -23,7 +25,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
-	sprites = App->textures->Load("rtype/enemies.png");
+	sprites = App->textures->Load("rtype/Enemies_.png");
 
 	return true;
 }
@@ -129,6 +131,12 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::REDBIRD:
 			enemies[i] = new Enemy_RedBird(info.x,info.y);
 			break;
+			case ENEMY_TYPES::GREENOVNI:
+				enemies[i] = new Enemy_GreenOvni(info.x, info.y);
+				break;
+			case ENEMY_TYPES::REDOVNI:
+				enemies[i] = new Enemy_RedOvni(info.x, info.y);
+				break;
 		}
 	}
 }

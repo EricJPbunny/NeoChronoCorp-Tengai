@@ -73,7 +73,9 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_GreenOvni.h" />
     <ClInclude Include="Enemy_RedBird.h" />
+    <ClInclude Include="Enemy_RedOvni.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
@@ -96,7 +98,9 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy_GreenOvni.cpp" />
     <ClCompile Include="Enemy_RedBird.cpp" />
+    <ClCompile Include="Enemy_RedOvni.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
