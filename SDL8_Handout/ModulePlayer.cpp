@@ -222,19 +222,19 @@ update_status ModulePlayer::Update()
 
 		switch (aux1) {
 		case 0:
-			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20);
+			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
 			break;
 		case 1:
-			App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20);
+			App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
 			break;
 		case 2:
-			App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20);
+			App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
 			break;
 		case 3:
-			App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20);
+			App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
 			break;
 		case 4:
-			App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20);
+			App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
 			aux1 = 0;
 			break;
 		}
