@@ -4,10 +4,12 @@
 #include "ModuleInput.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
-#include "ModuleAudio.h"
+#include "ModuleCollision.h"
+#include "ModuleFadeToBlack.h"
 #include "ModuleSceneForest.h"
+#include "ModulePlayer.h"
 
+// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()
 {
@@ -109,33 +111,35 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
-	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
-	
+
 	coll = App->collision->AddCollider({ 300, 300, 32, 32 }, COLLIDER_PLAYER);
+
 	LOG("Loading FX ");
-	
 
 	destroyed = false;
 	position.x = 150;
 	position.y = 120;
-	return ret;
+	return true;
 }
 
+// Unload assets
 bool ModulePlayer::CleanUp()
 {
-	LOG("Unloading Player");
+	LOG("Unloading player");
+
 	App->textures->Unload(graphics);
 	App->textures->Unload(player_death);
-	
+	if (coll != nullptr)
+		coll->to_delete = true;
+
 	return true;
 }
 
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-
 	float speed = 2.5;
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
@@ -214,17 +218,7 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 	}
 
-
-
-	// Draw everything --------------------------------------
-	SDL_Rect r = current_animation->GetCurrentFrame();
-
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
-	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
-
-
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-
 
 		switch (aux1) {
 		case 0:
@@ -244,17 +238,23 @@ update_status ModulePlayer::Update()
 			aux1 = 0;
 			break;
 		}
-		
+
 		aux1++;
 	}
 
-	//Update Collider Position
+
+	// Draw everything --------------------------------------
+	SDL_Rect r = current_animation->GetCurrentFrame();
+
+	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
+
 	coll->SetPos(position.x, position.y - 32);
 	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
-		position.x=-App->render->camera.x/3;
+		position.x = App->render->camera.x / 3;
 	}
 	if (coll->CheckCollision(App->scene_forest->coll_right->rect)) {
-		position.x = (SCREEN_WIDTH - App->render->camera.x / 3)-33;
+		position.x = (SCREEN_WIDTH + App->render->camera.x / 3) - 33;
 	}
 	if (coll->CheckCollision(App->scene_forest->coll_up->rect)) {
 		position.y = 32;
@@ -263,14 +263,11 @@ update_status ModulePlayer::Update()
 		position.y = SCREEN_HEIGHT;
 	}
 
-
 	return UPDATE_CONTINUE;
 }
+
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	
-	
-	
-
 }

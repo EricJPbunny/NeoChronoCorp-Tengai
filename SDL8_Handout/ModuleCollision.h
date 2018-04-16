@@ -46,18 +46,17 @@ public:
 	ModuleCollision();
 	~ModuleCollision();
 
-	update_status PreUpdate() override;
-	update_status Update() override;
-	bool CleanUp() override;
+	update_status PreUpdate();
+	update_status Update();
+	bool CleanUp();
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module* callback = nullptr);
-	void DebugDraw();
 
 private:
 
-	Collider* colliders[MAX_COLLIDERS];
+	Collider * colliders[MAX_COLLIDERS] = { nullptr };
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
-	bool debug = true;
+	bool debug = false;
 };
 
 #endif // __ModuleCollision_H__

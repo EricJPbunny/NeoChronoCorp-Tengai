@@ -4,8 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
-#include "Globals.h"
-#include "ModuleAudio.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -24,7 +23,7 @@ public:
 public:
 
 	int aux = 0;
-    int aux1 = 0;
+	int aux1 = 0;
 	Collider* coll = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr;

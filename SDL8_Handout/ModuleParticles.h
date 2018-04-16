@@ -50,7 +50,6 @@ private:
 
 public:
 
-	Particle explosion;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5;
 };
 

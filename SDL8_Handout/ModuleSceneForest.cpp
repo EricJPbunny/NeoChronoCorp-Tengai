@@ -220,8 +220,8 @@ bool ModuleSceneForest::CleanUp()
 update_status ModuleSceneForest::Update()
 {
 	//Update Collision
-	coll_left->SetPos(-App->render->camera.x / 3, 0);
-	coll_right->SetPos(SCREEN_WIDTH-App->render->camera.x / 3, 0);
+	coll_left->SetPos(App->render->camera.x / 3, 0);
+	coll_right->SetPos(SCREEN_WIDTH + App->render->camera.x / 3, 0);
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
 
@@ -243,7 +243,7 @@ update_status ModuleSceneForest::Update()
 
 	App->render->Blit(mid, 0, 0, &fademid, 0.00f);
 
-	if (App->render->camera.x < -5300 && fade == true) {
+	if (App->render->camera.x > 5300 && fade == true) {
 		if (alpha_mid >= SDL_ALPHA_OPAQUE) {
 			alpha_mid = 0;
 			alpha_graph2 = 0;
@@ -260,7 +260,7 @@ update_status ModuleSceneForest::Update()
 		aux6 += backfinal.w;
 	}
 
-	if (App->render->camera.x < -5300 && fade == false) {
+	if (App->render->camera.x > 5300 && fade == false) {
 		if (alpha_mid1 > SDL_ALPHA_TRANSPARENT) {
 			App->render->Blit(mid1, 0, 0, &fademid, 0.00f);
 			alpha_mid1 -= 0.10*speed;
@@ -307,7 +307,7 @@ update_status ModuleSceneForest::Update()
 
 	App->render->Blit(graphics, 4719, 0, &grasstree, 0.75f);
 
-	if (App->render->camera.x < -28780 && App->render->camera.x > -28880) {
+	if (App->render->camera.x > 28780 && App->render->camera.x > -28880) {
 		alpha_end = 255;
 		alpha_graph1 = 0;
 	}
@@ -335,22 +335,22 @@ update_status ModuleSceneForest::Update()
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 
 	//Set Velocities
-	if (App->render->camera.x > -1700) {
+	if (App->render->camera.x < 1700) {
 		speed = 12;
 	}
-	else if (App->render->camera.x < -1700 && App->render->camera.x > -5300) {
+	else if (App->render->camera.x > 1700 && App->render->camera.x < 5300) {
 		speed = 9;
 	}
-	else if (App->render->camera.x < -5300 && App->render->camera.x > -8000) {
+	else if (App->render->camera.x > 5300 && App->render->camera.x < 8000) {
 		speed = 12;
 	}
-	else if (App->render->camera.x < -8000 && App->render->camera.x > -10000) {
+	else if (App->render->camera.x > 8000 && App->render->camera.x < 10000) {
 		speed -= 0.03;
 	}
-	else if (App->render->camera.x < -10000 && App->render->camera.x > -13100) {
+	else if (App->render->camera.x > 10000 && App->render->camera.x < 13100) {
 		speed = 3;
 	}
-	else if (App->render->camera.x < -13100 && App->render->camera.x > -27340) {
+	else if (App->render->camera.x > 13100 && App->render->camera.x < 27340) {
 		if (aux_time < 270)
 		{
 			speed = 0;
@@ -362,16 +362,16 @@ update_status ModuleSceneForest::Update()
 		}
 
 	}
-	else if (App->render->camera.x < -27340 && App->render->camera.x > -30205) {
+	else if (App->render->camera.x > 27340 && App->render->camera.x < 30205) {
 		posx -= 0.33*speed;
 		posy += 0.21*speed;
 		speed = 6;
 	}
-	else if (App->render->camera.x < -30205) {
+	else if (App->render->camera.x > 30205) {
 		speed = 6;
 	}
 
-	if (App->render->camera.x < -26000 && App->render->camera.x > -27000) {
+	if (App->render->camera.x > 26000 && App->render->camera.x < 27000) {
 		grassy += 0.15*speed;
 	}
 
@@ -386,8 +386,8 @@ update_status ModuleSceneForest::Update()
 	SDL_SetTextureAlphaMod(end, alpha_end);
 
 	//Background Movement
-	App->player->position.x += speed/3;
-	App->render->camera.x -= speed;
+	App->player->position.x += speed/SCREEN_SIZE;
+	App->render->camera.x += speed;
 
 	//Blit To Screen
 

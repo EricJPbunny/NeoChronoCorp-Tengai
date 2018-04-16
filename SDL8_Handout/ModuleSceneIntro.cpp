@@ -60,7 +60,7 @@ update_status ModuleSceneIntro::Update()
 	App->render->Blit(graphics, 0, 0, &Psikyo, 0.00f);
 
 	// If pressed, change scene
-	if (current_time>8000) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN]==KEY_STATE::KEY_DOWN || current_time>8000) {
 		App->fade->FadeToBlack(App->scene_intro, App->scene_start, 0.60f);
 	}
 

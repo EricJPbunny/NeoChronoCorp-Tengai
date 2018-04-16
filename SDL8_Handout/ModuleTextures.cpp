@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
+#include <string.h>
 
 #include "SDL/include/SDL.h"
 #include "SDL_image/include/SDL_image.h"
@@ -42,8 +43,10 @@ bool ModuleTextures::CleanUp()
 	LOG("Freeing textures and Image library");
 
 	for(uint i = 0; i < MAX_TEXTURES; ++i)
+	{
 		if(textures[i] != nullptr)
 			SDL_DestroyTexture(textures[i]);
+	}
 
 	IMG_Quit();
 	return true;
@@ -52,10 +55,12 @@ bool ModuleTextures::CleanUp()
 // Load new texture from file path
 SDL_Texture* const ModuleTextures::Load(const char* path)
 {
-	SDL_Texture* texture = NULL;
+	SDL_Texture* texture = nullptr;
+
+	// It is a new texture, let's load it !
 	SDL_Surface* surface = IMG_Load(path);
 
-	if(surface == NULL)
+	if(surface == nullptr)
 	{
 		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
 	}
@@ -63,7 +68,7 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	{
 		texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
 
-		if(texture == NULL)
+		if(texture == nullptr)
 		{
 			LOG("Unable to create texture from surface! SDL Error: %s\n", SDL_GetError());
 		}

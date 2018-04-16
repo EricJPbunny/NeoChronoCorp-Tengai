@@ -35,10 +35,6 @@ update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
 
-	SDL_Event events;
-
-	SDL_PollEvent(&events);
-
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
 	for(int i = 0; i < MAX_KEYS; ++i)
@@ -61,10 +57,6 @@ update_status ModuleInput::PreUpdate()
 
 	if(keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
-
-	if (events.type == SDL_QUIT) {
-		return update_status::UPDATE_STOP;
-	}
 
 	return update_status::UPDATE_CONTINUE;
 }

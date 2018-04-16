@@ -5,12 +5,9 @@
 
 ModuleCollision::ModuleCollision()
 {
-	for(uint i = 0; i < MAX_COLLIDERS; ++i)
-		colliders[i] = nullptr;
-
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_SHOT] = true;
 	matrix[COLLIDER_WALL][COLLIDER_ENEMY_SHOT] = true;
 
@@ -20,7 +17,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SHOT] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT] = true;
 
-	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_SHOT] = true;
@@ -55,7 +52,7 @@ update_status ModuleCollision::PreUpdate()
 		}
 	}
 
-	// Calculate collisions
+	// Collision detection and callbacks 
 	Collider* c1;
 	Collider* c2;
 
@@ -87,25 +84,18 @@ update_status ModuleCollision::PreUpdate()
 		}
 	}
 
+
 	return UPDATE_CONTINUE;
 }
 
 // Called before render is available
 update_status ModuleCollision::Update()
 {
-
-	DebugDraw();
-
-	return UPDATE_CONTINUE;
-}
-
-void ModuleCollision::DebugDraw()
-{
 	if(App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN)
 		debug = !debug;
 
 	if(debug == false)
-		return;
+		return UPDATE_CONTINUE;
 
 	Uint8 alpha = 80;
 	for(uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -135,6 +125,8 @@ void ModuleCollision::DebugDraw()
 			break;
 		}
 	}
+
+	return UPDATE_CONTINUE;
 }
 
 // Called before quitting
@@ -174,11 +166,8 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
-	bool ret=false;
-	if (r.x + r.w >= this->rect.x&&r.y + r.h >= this->rect.y) {
-		if (this->rect.x + this->rect.w >= r.x&& this->rect.y + this->rect.h >= r.y) {
-			ret = true;
-		}
-	}
-	return ret;
+	return (rect.x < r.x + r.w &&
+			rect.x + rect.w > r.x &&
+			rect.y < r.y + r.h &&
+			rect.h + rect.y > r.y);
 }

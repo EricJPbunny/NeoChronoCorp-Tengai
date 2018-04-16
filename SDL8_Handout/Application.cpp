@@ -4,12 +4,13 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleSceneForest.h"
-#include "ModuleSceneIntro.h"
 #include "ModuleSceneStart.h"
+#include "ModuleSceneIntro.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
+#include "ModuleEnemies.h"
 #include "ModuleAudio.h"
 
 Application::Application()
@@ -23,6 +24,7 @@ Application::Application()
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_start = new ModuleSceneStart();
 	modules[i++] = scene_forest = new ModuleSceneForest();
+	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
@@ -44,6 +46,7 @@ bool Application::Init()
 	scene_forest->Disable();
 	player->Disable();
 	collision->Disable();
+	enemies->Disable();
 	// ----------------------------
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
@@ -76,7 +79,7 @@ bool Application::CleanUp()
 	bool ret = true;
 
 	for(int i = NUM_MODULES - 1; i >= 0 && ret == true; --i)
-		ret = modules[i]->CleanUp();
+		ret = modules[i]->IsEnabled() ? modules[i]->CleanUp() : true;
 
 	return ret;
 }
