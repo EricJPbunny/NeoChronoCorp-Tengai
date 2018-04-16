@@ -183,6 +183,7 @@ bool ModuleSceneForest::Start()
 	App->player->Enable();
 
 	App->collision->Enable();
+	App->enemies->Enable();
 
 	coll_up =App->collision->AddCollider({ 0, 0, 99000, 0 }, COLLIDER_WALL);
 	coll_down =App->collision->AddCollider({ 0,SCREEN_HEIGHT , 990000, 0 }, COLLIDER_WALL);
@@ -209,8 +210,8 @@ bool ModuleSceneForest::CleanUp()
 	App->audio->UnloadMusic(mus);
 
 	App->collision->Disable();
-
 	App->player->Disable();
+	App->enemies->Disable();
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics1);
