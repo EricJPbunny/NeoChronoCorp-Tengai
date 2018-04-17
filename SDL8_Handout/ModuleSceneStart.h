@@ -28,6 +28,7 @@ public:
 	int alpha_start = 255;
 	int speed = 1;
 	bool fade = true;
+	Mix_Chunk* intro = nullptr;
 
 	Mix_Music* mus = nullptr;
 };

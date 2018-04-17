@@ -197,7 +197,7 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 960, 80);
 
 	//Enemies Ninja
-	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 930, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 300, 0);
 
 	App->audio->PlayMusic(mus);
 
@@ -347,10 +347,10 @@ update_status ModuleSceneForest::Update()
 
 	//Set Velocities
 	if (App->render->camera.x < 1700) {
-		speed = 12;
+		speed = 9;
 	}
 	else if (App->render->camera.x > 1700 && App->render->camera.x < 5300) {
-		speed = 9;
+		speed = 6;
 	}
 	else if (App->render->camera.x > 5300 && App->render->camera.x < 8000) {
 		speed = 12;

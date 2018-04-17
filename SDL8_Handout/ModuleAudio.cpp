@@ -52,7 +52,7 @@ bool ModuleAudio::CleanUp()
 			break;
 		}
 	}
-	for (uint i = 0; i < MAX_MUSIC; ++i)
+	for (uint i = 0; i < MAX_FX; ++i)
 	{
 		if (sound_fx[i] != nullptr)
 		{
@@ -76,7 +76,7 @@ void ModuleAudio::PlayMusic(Mix_Music* mus_to_play,int reps)
 void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play)
 {
 	Mix_PlayChannel (-1,fx_to_play,0);
-	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME/ 3);
+	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME);
 }
 void ModuleAudio::UnloadMusic(Mix_Music * music)
 {

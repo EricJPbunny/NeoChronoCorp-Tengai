@@ -12,8 +12,9 @@ private:
 	iPoint originalposition;
 	
 	Animation fly;
-	Animation stop;
+	Animation lift;
 	Animation run;
+	Animation up;
 	Path movement;
 public:
 

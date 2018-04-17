@@ -33,6 +33,7 @@ bool ModuleSceneIntro::Start()
 	graphics = App->textures->Load("assets/sprite/Psikyo.png");
 
 	mus = App->audio->LoadMusic("assets/audio/Psikyo_intro.ogg");
+	//start = App->audio->LoadEffect("assets/audio/Intro.wav");
 
 	App->audio->PlayMusic(mus,1);
 
@@ -48,6 +49,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	App->audio->UnloadMusic(mus);
 	App->textures->Unload(graphics);
+	//App->audio->UnloadFx(start);
 	return true;
 }
 
@@ -61,7 +63,8 @@ update_status ModuleSceneIntro::Update()
 
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN]==KEY_STATE::KEY_DOWN || current_time>8000) {
-		App->fade->FadeToBlack(App->scene_intro, App->scene_start, 0.60f);
+		//App->audio->PlaySoundEffects(start);
+		App->fade->FadeToBlack(App->scene_intro, App->scene_start, 0.50f);
 	}
 
 	return UPDATE_CONTINUE;

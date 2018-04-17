@@ -91,6 +91,7 @@ bool ModuleSceneStart::Start()
 	App->render->camera.x = 0;
 	graphics = App->textures->Load("assets/sprite/start_screen.png");
 	start_screen = App->textures->Load("assets/sprite/start.png");
+	intro = App->audio->LoadEffect("assets/audio/Intro.wav");
 
 	return true;
 }
@@ -101,6 +102,7 @@ bool ModuleSceneStart::CleanUp()
 	LOG("Unloading Start Screen");
 	App->textures->Unload(graphics);
 	App->textures->Unload(start_screen);
+	App->audio->UnloadFx(intro);
 	return true;
 }
 
@@ -246,7 +248,8 @@ update_status ModuleSceneStart::Update()
 	
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->scene_start, App->scene_forest, 0.60f);
+		App->audio->PlaySoundEffects(intro);
+		App->fade->FadeToBlack(App->scene_start, App->scene_forest, 1.50f);
 	}
 
 	return UPDATE_CONTINUE;

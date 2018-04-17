@@ -5,15 +5,31 @@
 
 Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 {
-	fly.PushBack({ 19,117,28,37 });
-	fly.speed = 0.2f;
-	movement.PushBack({ 1.75f, 2.5f }, 80, &fly);
+	fly.PushBack({ 18,113,30,42 });
 
-	stop.PushBack({ 66,127,28,28 });
-	stop.PushBack({ 113,124,28,31 });
-	stop.PushBack({ 158,113,30,42 });
-	stop.speed = 0.2f;
-	movement.PushBack({ 0.0f, 0.0f }, 40, &stop);
+	lift.PushBack({ 158,113,30,42 });
+	lift.PushBack({ 65,113,30,42 });
+	lift.PushBack({ 112,113,30,42 });
+	lift.PushBack({ 158,113,30,42 });
+	lift.speed = 0.20f;
+
+	run.PushBack({206,14,43,34});
+	run.PushBack({ 253,14,48,34 });
+	run.PushBack({ 312,14,27,34 });
+	run.PushBack({ 362,14,36,34 });
+	run.PushBack({ 414,8,37,39 });
+	run.PushBack({ 206,66,43,34 });
+	run.PushBack({ 253,66,27,35 });
+	run.PushBack({ 312,67,43,34 });
+	run.PushBack({ 253,66,27,35 });
+	run.speed = 0.20f;
+
+	up.PushBack({ 362,68,27,33 });
+
+	movement.PushBack({ 1.75f, 3.0f }, 58, &fly);
+	movement.PushBack({ 1.0f, 0.0f }, 20, &lift);
+	movement.PushBack({ -1.5f, 0.0f }, 40, &run);
+	movement.PushBack({ 3.00f,-3.00f }, 80, &up);
 
 	animation = &fly;
 	

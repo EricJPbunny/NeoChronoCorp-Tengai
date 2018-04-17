@@ -27,6 +27,7 @@ public:
 	int current_time = 0;
 
 	Mix_Music* mus = nullptr;
+	Mix_Chunk* start = nullptr;
 
 };
 
