@@ -38,10 +38,10 @@ ModulePlayer::ModulePlayer()
 	intermediate.speed = 0.10f;
 
 	//Intermediate return
-	intermediatereturn.PushBack({ 270,95,26,29 });
-	intermediatereturn.PushBack({ 230,95,24,28 });
-	intermediatereturn.PushBack({ 187,95,27,29 });
-	intermediatereturn.speed = 0.10f;
+	intermediate_return.PushBack({ 270,95,26,29 });
+	intermediate_return.PushBack({ 230,95,24,28 });
+	intermediate_return.PushBack({ 187,95,27,29 });
+	intermediate_return.speed = 0.10f;
 
 	//Walk
 	walk.PushBack({ 74,12,27,27 });
@@ -223,13 +223,17 @@ void ModulePlayer::CheckState()
 	{
 	case IDLE:
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN) {
-			state = GO_IDLE;
-			LOG("combio patras");
+			state = GO_BACKWARD;
+			LOG("cambio para atras");
+		}
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT) {
+			state = WALK;
+			LOG("camina");
 		}
 
 		break;
 
-	case GO_IDLE:
+	case GO_BACKWARD:
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
 			state = BACK_IDLE;
 		}
@@ -268,7 +272,25 @@ void ModulePlayer::CheckState()
 		if (current_animation->Finished()) {
 			intermediate.Reset();
 			intermediate.pingpong = false;
-			state = IDLE;
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT) {
+				state = WALK;
+			}
+			else {
+				state = IDLE;
+			}
+		}
+		break;
+
+	case WALK:
+		
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP) {
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
+				state = GO_BACKWARD;
+			}
+			else {
+				state = IDLE;
+			}
+			
 		}
 		break;
 	}
@@ -278,10 +300,10 @@ void ModulePlayer::PerformActions()
 {
 	switch (state) {
 	case IDLE:
-		current_animation = &idle;
+			current_animation = &idle;
 		break;
 
-	case GO_IDLE:
+	case GO_BACKWARD:
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -296,9 +318,17 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case BACK_IDLE:
-		if (intermediatereturn.Finished())
-			intermediatereturn.Reset();
-		current_animation = &intermediatereturn;
+		if (intermediate_return.Finished())
+			intermediate_return.Reset();
+		current_animation = &intermediate_return;
+		break;
+
+	case WALK:
+		if (walk.Finished())
+			walk.Reset();
+		current_animation = &walk;
 		break;
 	}
+
+	
 }

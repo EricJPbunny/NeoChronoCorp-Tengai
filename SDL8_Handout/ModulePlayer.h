@@ -12,7 +12,7 @@ struct Collider;
 enum player_state {
 	IDLE,
 	BACKWARD,
-	GO_IDLE,
+	GO_BACKWARD,
 	BACK_IDLE,
 	WALK,
 };
@@ -46,7 +46,7 @@ public:
 	Animation spin;
 	Animation spin_circle;
 	Animation death_circle;
-	Animation intermediatereturn;
+	Animation intermediate_return;
 	SDL_Rect death;
 	fPoint position;
 	Mix_Chunk* shoot = nullptr;
