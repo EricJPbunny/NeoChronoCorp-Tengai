@@ -191,10 +191,14 @@ bool ModuleSceneForest::Start()
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
 
 	//Enemies Ovni
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1070, 50);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1100, 50);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1130, 50);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 1160, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 830, 170);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 870, 140);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 910, 110);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 960, 80);
+
+	//Enemies Ninja
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 930, 0);
+
 	App->audio->PlayMusic(mus);
 
 	return ret;

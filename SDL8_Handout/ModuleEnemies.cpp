@@ -5,7 +5,6 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
 
@@ -128,16 +127,15 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch(info.type)
 		{
-			case ENEMY_TYPES::REDBIRD:
-			enemies[i] = new Enemy_RedBird(info.x,info.y);
-			break;
-
 			case ENEMY_TYPES::GREENOVNI:
 				enemies[i] = new Enemy_GreenOvni(info.x, info.y);
 				break;
 
 			case ENEMY_TYPES::REDOVNI:
 				enemies[i] = new Enemy_RedOvni(info.x, info.y);
+				break;
+			case ENEMY_TYPES::NINJA:
+				enemies[i] = new Enemy_Ninja(info.x, info.y);
 				break;
 		}
 	}
