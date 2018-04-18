@@ -8,6 +8,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneForest.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -111,6 +112,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
+	App->ui->Enable();
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
@@ -129,6 +131,7 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
 
+	App->ui->Disable();
 	App->textures->Unload(graphics);
 	App->textures->Unload(player_death);
 	if (coll != nullptr)

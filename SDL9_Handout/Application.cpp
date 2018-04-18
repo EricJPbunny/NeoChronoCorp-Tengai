@@ -27,8 +27,8 @@ Application::Application()
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_start = new ModuleSceneStart();
-	modules[i++] = ui = new ModuleUI();
 	modules[i++] = scene_forest = new ModuleSceneForest();
+	modules[i++] = ui = new ModuleUI();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayerTwo();
@@ -48,6 +48,7 @@ bool Application::Init()
 	bool ret = true;
 
 	// Deactivate modules here ----
+	App->ui->Disable();
 	scene_start->Disable();
 	scene_forest->Disable();
 	player->Disable();

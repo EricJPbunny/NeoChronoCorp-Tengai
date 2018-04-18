@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleSceneForest.h"
+#include "ModuleFonts.h"
 #include "ModuleUI.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
@@ -24,7 +24,7 @@ ModuleUI::~ModuleUI()
 bool ModuleUI::Start()
 {
 	LOG("Loading UI");
-
+	font_score = App->fonts->Load("fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 	return true;
 }
 
@@ -39,6 +39,6 @@ bool ModuleUI::CleanUp()
 // Update: draw background
 update_status ModuleUI::Update()
 {
-
+	App->fonts->BlitText(34, 34, font_score, "risas");
 	return UPDATE_CONTINUE;
 }

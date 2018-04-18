@@ -19,7 +19,7 @@ public:
 	bool CleanUp();
 
 public:
-
+	int font_score = -1;
 };
 
 #endif // __MODULESCENESTART_H__
