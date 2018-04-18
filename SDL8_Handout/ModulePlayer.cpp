@@ -234,6 +234,7 @@ void ModulePlayer::CheckState()
 		break;
 
 	case GO_BACKWARD:
+		
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
 			state = BACK_IDLE;
 		}
@@ -248,7 +249,7 @@ void ModulePlayer::CheckState()
 		break;
 
 	case BACKWARD:
-
+		
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
 			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE) {
 				state = BACK_IDLE;
@@ -271,7 +272,6 @@ void ModulePlayer::CheckState()
 		}
 		if (current_animation->Finished()) {
 			intermediate.Reset();
-			intermediate.pingpong = false;
 			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT) {
 				state = WALK;
 			}
@@ -282,7 +282,6 @@ void ModulePlayer::CheckState()
 		break;
 
 	case WALK:
-		
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP) {
 			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
 				state = GO_BACKWARD;
