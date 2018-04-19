@@ -16,49 +16,51 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 68, 53, 32, 28 });
-	idle.PushBack({ 108, 54, 32, 27 });
-	idle.PushBack({ 148, 54, 32, 27 });
+	idle.PushBack({ 36,8,30,28 });
+	idle.PushBack({ 110,9,30,28 });
+	idle.PushBack({ 73,9,30,27 });
 	idle.speed = 0.20f;
 
 	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 192, 53, 27, 29 });
-	backward.PushBack({ 232, 54, 28, 28 });
-	backward.PushBack({ 272, 54, 27, 28 });
+	backward.PushBack({ 148,8,24,28 });
+	backward.PushBack({ 280,9,24,28 });
+	backward.PushBack({ 265,54,24,28 });
 	backward.speed = 0.15f;
 
 	//Intermediate
-	intermediate.PushBack({ 187,95,27,29 });
-	intermediate.PushBack({ 230,95,24,28 });
-	intermediate.PushBack({ 270,95,26,29 });
+	intermediate.PushBack({ 213,9,24,27 });
+	intermediate.PushBack({ 181,8,23,28 });
+	intermediate.PushBack({ 265,54,24,28 });
 	intermediate.speed = 0.10f;
 
 	//Intermediate return
-	intermediate_return.PushBack({ 270,95,26,29 });
-	intermediate_return.PushBack({ 230,95,24,28 });
-	intermediate_return.PushBack({ 187,95,27,29 });
+	intermediate_return.PushBack({ 265,54,24,28 });
+	intermediate_return.PushBack({ 181,8,23,28 });
+	intermediate_return.PushBack({ 213,9,24,27 });
 	intermediate_return.speed = 0.10f;
 
 	//Walk
-	walk.PushBack({ 74,12,27,27 });
-	walk.PushBack({ 114,13,27,27 });
-	walk.PushBack({ 153,11,27,29 });
-	walk.PushBack({ 194,8,27,31 });
-	walk.PushBack({ 234,9,27,26 });
-	walk.PushBack({ 274,12,28,28 });
-	walk.PushBack({ 313,15,30,25 });
+	walk.PushBack({ 244,11,27,24 });
+	walk.PushBack({ 222,55,30,27 });
+	walk.PushBack({ 311,10,32,25 });
+	walk.PushBack({ 8,56,30,25 });
+	walk.PushBack({ 46,57,27,24 });
+	walk.PushBack({ 79,55,28,26 });
+	walk.PushBack({ 112,57,32,25 });
+	walk.PushBack({ 149,57,31,25 });
+	walk.PushBack({ 187,58,27,24 });
 	walk.speed = 0.2f;
 
 	//Spin
-	spin.PushBack({ 22,95,33,29 });
-	spin.PushBack({ 62,95,26,29 });
-	spin.PushBack({ 102,95,30,29 });
-	spin.PushBack({ 142,95,28,29 });
+	spin.PushBack({ 415,10,19,28 });
+	spin.PushBack({ 445,10,16,28 });
+	spin.PushBack({ 350,8,22,28 });
+	spin.PushBack({ 384,10,18,28 });
 	spin.speed = 0.15f;
 
 	//Spin Circle
-	spin_circle.PushBack({ 211, 161, 32, 32 });
-	spin_circle.PushBack({ 248,161,32,32 });
+	spin_circle.PushBack({ 216,166,32,32 });
+	spin_circle.PushBack({ 249,162,32,32 });
 	spin_circle.PushBack({ 289,161,32,32 });
 	spin_circle.PushBack({ 322,161,32,32 });
 	spin_circle.PushBack({ 355,161,32,32 });
@@ -94,10 +96,10 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	death_circle.speed = 0.8f;
 
 	//Death Player
-	death.x = 308;
-	death.y = 54;
-	death.w = 30;
-	death.h = 25;
+	death.x = 323;
+	death.y = 56;
+	death.w = 27;
+	death.h = 26;
 	
 }
 

@@ -5,7 +5,7 @@
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
 #include "ModuleSceneForest.h"
-#include "ModuleSceneStart.h"
+#include "ModuleSceneScore.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
@@ -66,8 +66,8 @@ bool ModuleUI::Start()
 	time = 9;
 	graphics = App->textures->Load("assets/sprite/UI.png");
 	black = App->textures->Load("assets/sprite/black.png");
-	font_score = App->fonts->Load("assets/sprite/score_fonts.png", "0123456789", 1);
-	font_time = App->fonts->Load("assets/sprite/time_fonts.png", "0123456789", 1);
+	font_score = App->fonts->Load("fonts/score_fonts.png", "0123456789", 1);
+	font_time = App->fonts->Load("fonts/time_fonts.png", "0123456789", 1);
 	return true;
 }
 
@@ -86,8 +86,8 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::Update()
 {
 	//Draw UI Score
-	sprintf_s(player1_score, 10, "%3d", score);
-	sprintf_s(player2_score, 10, "%3d", score);
+	sprintf_s(player1_score, 10, "%3d", score_koyori);
+	sprintf_s(player2_score, 10, "%3d", score_sho);
 
 	sprintf_s(time_text, 2, "%1d", time);
 	
@@ -102,7 +102,7 @@ update_status ModuleUI::Update()
 
 		//Life Koyori
 		for (int i = 1; i <= num_life_koyori - 1; i++) {
-			App->render->Blit(graphics, 74 + life_koyori.w*i, 1, &life_koyori, 0.00f);
+			App->render->Blit(graphics, 76 + life_koyori.w*i, 1, &life_koyori, 0.00f);
 		}
 	}
 	else {
@@ -116,7 +116,7 @@ update_status ModuleUI::Update()
 
 		//Life Sho
 		for (int i = 1; i <= num_life_sho - 1; i++) {
-			App->render->Blit(graphics, 234 + life_sho.w*i, 1, &life_sho, 0.00f);
+			App->render->Blit(graphics, 236 + life_sho.w*i, 1, &life_sho, 0.00f);
 		}
 	}
 	else {
@@ -148,7 +148,7 @@ update_status ModuleUI::Update()
 		App->fonts->BlitText(180, 115, font_time, time_text);
 		App->render->Blit(black, 0, 0, &screen, 0.00f);
 		if (time == 0) {
-			App->fade->FadeToBlack(App->scene_forest, App->scene_start);
+			App->fade->FadeToBlack(App->scene_forest, App->scene_score);
 		}
 	}
 

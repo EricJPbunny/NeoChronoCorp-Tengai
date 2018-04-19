@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleSceneScore.h"
 #include "ModuleSceneForest.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneStart.h"
@@ -29,6 +30,7 @@ Application::Application()
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_start = new ModuleSceneStart();
 	modules[i++] = scene_forest = new ModuleSceneForest();
+	modules[i++] = scene_score = new ModuleScore();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayerTwo();
@@ -51,6 +53,7 @@ bool Application::Init()
 
 	// Deactivate modules here ----
 	App->ui->Disable();
+	scene_score->Disable();
 	scene_start->Disable();
 	scene_forest->Disable();
 	player->Disable();

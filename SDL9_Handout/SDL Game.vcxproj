@@ -94,6 +94,7 @@
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleSceneForest.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
+    <ClInclude Include="ModuleSceneScore.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneForest.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
+    <ClCompile Include="ModuleSceneScore.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
