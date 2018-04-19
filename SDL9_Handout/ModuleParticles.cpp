@@ -56,7 +56,16 @@ ModuleParticles::ModuleParticles()
 	explosion.anim.speed = 0.10f;
 	explosion.life = 700;
 
+	//Bullet sparks
 
+	spark.anim.PushBack({32,35,45,19});
+	spark.anim.PushBack({ 84,35,45,19 });
+	spark.anim.PushBack({ 141,35,45,19 });
+	spark.anim.PushBack({213,35,45,19 });
+	spark.anim.PushBack({ 267,35,45,19 });
+	spark.anim.PushBack({ 325,35,45,19 });
+	spark.anim.PushBack({ 391,35,45,19 });
+	spark.anim.PushBack({ 457,35,45,19 });
 }
 
 ModuleParticles::~ModuleParticles()
