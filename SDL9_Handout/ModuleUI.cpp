@@ -4,6 +4,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
+#include "ModuleSceneForest.h"
+#include "ModuleSceneStart.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
@@ -42,7 +44,15 @@ ModuleUI::ModuleUI()
 	screen.w = SCREEN_WIDTH;
 	screen.h = SCREEN_HEIGHT;
 
+	life_koyori.x = 4;
+	life_koyori.y = 173;
+	life_koyori.w = 16;
+	life_koyori.h = 14;
 
+	life_sho.x = 24;
+	life_sho.y = 174;
+	life_sho.w = 15;
+	life_sho.h = 13;
 }
 
 ModuleUI::~ModuleUI()
@@ -74,32 +84,47 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::Update()
 {
 	//Draw UI Score
-	sprintf_s(score_text, 10, "%3d", score);
+	sprintf_s(player1_score, 10, "%3d", score);
+	sprintf_s(player2_score, 10, "%3d", score);
 
 	sprintf_s(time_text, 2, "%1d", time);
 	
-	App->fonts->BlitText(17, 4, font_score, score_text);
 	//Draw Top UI Interface
 	current_animation = &start;
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
+	//Player1
 	if (App->player->IsEnabled()) {
-		App->render->Blit(graphics, 7, 5, &player1, 0.00);
+		App->render->Blit(graphics, 10, 6, &player1, 0.00);
+		App->fonts->BlitText(57, 5, font_score, player1_score);
+
+		//Life Koyori
+		for (int i = 1; i <= num_life_koyori - 1; i++) {
+			App->render->Blit(graphics, 74 + life_koyori.w*i, 1, &life_koyori, 0.00f);
+		}
 	}
 	else {
 		App->render->Blit(graphics, 0, 5, &r, 0.00f);
 	}
+
+	//Player2
 	if (App->player2->IsEnabled()) {
-		App->render->Blit(graphics, 200, 5, &player2, 0.00);
+		App->render->Blit(graphics, 170, 5, &player2, 0.00);
+		App->fonts->BlitText(217, 5, font_score, player2_score);
+
+		//Life Sho
+		for (int i = 1; i <= num_life_sho - 1; i++) {
+			App->render->Blit(graphics, 234 + life_sho.w*i, 1, &life_sho, 0.00f);
+		}
 	}
 	else {
 		App->render->Blit(graphics, 230, 10, &r, 0.00f);
 	}
-
+	
 	//Game over
 	SDL_SetTextureAlphaMod(black, alpha);
 
-	if (!App->player->IsEnabled() && !App->player2->IsEnabled() || App->input->keyboard[SDL_SCANCODE_F3]==KEY_STATE::KEY_REPEAT) {
+	if (!App->player2->IsEnabled()) {
 		//Time countdown
 		if (aux) {
 			time_on_entry = SDL_GetTicks();
@@ -117,8 +142,13 @@ update_status ModuleUI::Update()
 		App->fonts->BlitText(180, 115, font_time, time_text);
 		App->render->Blit(black, 0, 0, &screen, 0.00f);
 		if (time == 0) {
-			time = 9;
+			App->fade->FadeToBlack(App->scene_forest, App->scene_start);
 		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_REPEAT) {
+		App->player->Disable();
+		App->player2->Disable();
 	}
 	return UPDATE_CONTINUE;
 }
