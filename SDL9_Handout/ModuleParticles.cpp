@@ -41,53 +41,20 @@ ModuleParticles::ModuleParticles()
 
 	//Enemies Explosion
 
-	explosion.anim.PushBack({ 46, 44, 24, 212 });
-	explosion.anim.loop = true;
-	explosion.life = 1400;
-	
-	explosion2.anim.PushBack({ 48, 54, 81, 207 });
-	explosion2.anim.loop = true;
-	explosion2.life = 1400;
-	
-	explosion3.anim.PushBack({ 54, 61, 140, 206 });
-	explosion3.anim.loop = true;
-	explosion3.life = 1400;
-	
-	explosion4.anim.PushBack({ 50, 57, 202, 209 });
-	explosion4.anim.loop = true;
-	explosion4.life = 1400;
-	
-	explosion5.anim.PushBack({ 53, 60, 264, 207 });
-	explosion5.anim.loop = true;
-	explosion5.life = 1400;
-	
-	explosion6.anim.PushBack({ 52, 63, 326, 207 });
-	explosion6.anim.loop = true;
-	explosion6.life = 1400;
-
-	explosion7.anim.PushBack({ 53, 64, 387, 207 });
-	explosion7.anim.loop = true;
-	explosion7.life = 1400;
-
-	explosion8.anim.PushBack({ 53, 64, 387, 207 });
-	explosion8.anim.loop = true;
-	explosion8.life = 1400;
-
-	explosion9.anim.PushBack({ 56, 63, 23, 283 });
-	explosion9.anim.loop = true;
-	explosion9.life = 1400;
-
-	explosion10.anim.PushBack({ 56, 64, 90, 283 });
-	explosion10.anim.loop = true;
-	explosion10.life = 1400;
-
-	explosion11.anim.PushBack({ 53, 60, 157, 282 });
-	explosion11.anim.loop = true;
-	explosion11.life = 1400;
-
-	explosion12.anim.PushBack({ 51, 59, 223, 282 });
-	explosion12.anim.loop = true;
-	explosion12.life = 1400;
+	explosion.anim.PushBack({ 24, 206, 56, 65 });
+	explosion.anim.PushBack({ 81, 206, 56, 65 });
+	explosion.anim.PushBack({ 140, 206, 56, 65 });
+	explosion.anim.PushBack({ 202, 206, 56, 65 });
+	explosion.anim.PushBack({ 264, 206, 56, 65 });
+	explosion.anim.PushBack({ 326, 206, 56, 65 });
+	explosion.anim.PushBack({ 387, 206, 56, 65 });
+	explosion.anim.PushBack({ 454, 206, 56, 65 });
+	explosion.anim.PushBack({ 521, 206, 56, 65 });
+	explosion.anim.PushBack({ 588, 206, 56, 65 });
+	explosion.anim.PushBack({ 654, 206, 56, 65 });
+	explosion.anim.loop = false;
+	explosion.anim.speed = 0.10f;
+	explosion.life = 700;
 
 
 }

@@ -50,7 +50,7 @@ private:
 
 public:
 
-	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, explosion2, explosion3, explosion4, explosion5, explosion6, explosion7, explosion8, explosion9, explosion10, explosion11, explosion12;
+	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion;
 };
 
 #endif // __MODULEPARTICLES_H__
