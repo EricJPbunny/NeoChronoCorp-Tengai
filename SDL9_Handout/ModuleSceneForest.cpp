@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL\include\SDL_render.h"
 #include "ModuleInput.h"
@@ -397,6 +398,7 @@ update_status ModuleSceneForest::Update()
 	SDL_SetTextureAlphaMod(end, alpha_end);
 
 	//Background Movement
+	App->player2->position.x += speed / SCREEN_SIZE;
 	App->player->position.x += speed/SCREEN_SIZE;
 	App->render->camera.x += speed;
 
@@ -404,6 +406,10 @@ update_status ModuleSceneForest::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_forest, App->scene_intro, 0.60f);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {
+		App->player2->Enable();
 	}
 
 	return UPDATE_CONTINUE;

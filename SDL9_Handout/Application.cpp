@@ -29,12 +29,12 @@ Application::Application()
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_start = new ModuleSceneStart();
 	modules[i++] = scene_forest = new ModuleSceneForest();
-	modules[i++] = ui = new ModuleUI();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayerTwo();
 	modules[i++] = partner = new ModulePartner();
 	modules[i++] = particles = new ModuleParticles();
+	modules[i++] = ui = new ModuleUI();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();
 }	

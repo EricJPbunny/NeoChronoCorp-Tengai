@@ -19,6 +19,9 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+private:
+	void CheckState();
+	void PerformActions();
 
 public:
 
@@ -34,7 +37,7 @@ public:
 	Animation spin;
 	Animation spin_circle;
 	Animation death_circle;
-	Animation intermediatereturn;
+	Animation intermediate_return;
 	SDL_Rect death;
 	fPoint position;
 

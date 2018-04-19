@@ -16,29 +16,88 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 30, 2, 32, 32 });
-	idle.PushBack({ 64, 2, 32, 32 });
-	idle.PushBack({ 97, 2, 32, 32 });
+	idle.PushBack({ 68, 53, 32, 28 });
+	idle.PushBack({ 108, 54, 32, 27 });
+	idle.PushBack({ 148, 54, 32, 27 });
 	idle.speed = 0.20f;
 
-	backward.PushBack({ 122, 40, 32, 32 });
-	backward.PushBack({ 155, 39, 32, 32 });
-	backward.PushBack({ 187, 38, 32, 32 });
+	// walk backward animation (arcade sprite sheet)
+	backward.PushBack({ 192, 53, 27, 29 });
+	backward.PushBack({ 232, 54, 28, 28 });
+	backward.PushBack({ 272, 54, 27, 28 });
 	backward.speed = 0.15f;
 
-	intermediate.PushBack({ 5,40,32,32 });
-	intermediate.PushBack({ 55,41,32,32 });
-	intermediate.PushBack({ 90,40,32,32 });
-	intermediate.speed = 0.05f;
+	//Intermediate
+	intermediate.PushBack({ 187,95,27,29 });
+	intermediate.PushBack({ 230,95,24,28 });
+	intermediate.PushBack({ 270,95,26,29 });
+	intermediate.speed = 0.10f;
 
-	walk.PushBack({ 3,75,32,32 });
-	walk.PushBack({ 35,75,32,32 });
-	walk.PushBack({ 65,75,32,32 });
-	walk.PushBack({ 92,75,32,32 });
-	walk.PushBack({ 124,75,32,32 });
-	walk.PushBack({ 156,75,32,32 });
-	walk.PushBack({ 192,76,30,25 });
+	//Intermediate return
+	intermediate_return.PushBack({ 270,95,26,29 });
+	intermediate_return.PushBack({ 230,95,24,28 });
+	intermediate_return.PushBack({ 187,95,27,29 });
+	intermediate_return.speed = 0.10f;
+
+	//Walk
+	walk.PushBack({ 74,12,27,27 });
+	walk.PushBack({ 114,13,27,27 });
+	walk.PushBack({ 153,11,27,29 });
+	walk.PushBack({ 194,8,27,31 });
+	walk.PushBack({ 234,9,27,26 });
+	walk.PushBack({ 274,12,28,28 });
+	walk.PushBack({ 313,15,30,25 });
 	walk.speed = 0.2f;
+
+	//Spin
+	spin.PushBack({ 22,95,33,29 });
+	spin.PushBack({ 62,95,26,29 });
+	spin.PushBack({ 102,95,30,29 });
+	spin.PushBack({ 142,95,28,29 });
+	spin.speed = 0.15f;
+
+	//Spin Circle
+	spin_circle.PushBack({ 211, 161, 32, 32 });
+	spin_circle.PushBack({ 248,161,32,32 });
+	spin_circle.PushBack({ 289,161,32,32 });
+	spin_circle.PushBack({ 322,161,32,32 });
+	spin_circle.PushBack({ 355,161,32,32 });
+	spin_circle.PushBack({ 389,161,32,32 });
+	spin_circle.PushBack({ 423,161,32,32 });
+	spin_circle.PushBack({ 457,161,32,32 });
+	spin_circle.PushBack({ 356,196,32,32 });
+	spin_circle.speed = 0.40f;
+
+	//Death
+	death_circle.PushBack({ 153,0, 130, 130 });
+	death_circle.PushBack({ 298,0, 130, 130 });
+	death_circle.PushBack({ 153,0, 130, 130 });
+	death_circle.PushBack({ 298,0, 130, 130 });
+	death_circle.PushBack({ 153,0, 130, 130 });
+	death_circle.PushBack({ 298,0, 130, 130 });
+	death_circle.PushBack({ 153,0, 130, 130 });
+	death_circle.PushBack({ 1,0, 130, 130 });
+	death_circle.PushBack({});
+	death_circle.PushBack({ 1,0, 130, 130 });
+	death_circle.PushBack({ 1,0, 130, 130 });
+	death_circle.PushBack({ 153,0, 130, 130 });
+	death_circle.PushBack({});
+	death_circle.PushBack({ 2,153, 130, 130 });
+	death_circle.PushBack({});
+	death_circle.PushBack({ 143,153, 130, 130 });
+	death_circle.PushBack({});
+	death_circle.PushBack({ 143,153, 130, 130 });
+	death_circle.PushBack({});
+	death_circle.PushBack({ 300,153, 130, 130 });
+	death_circle.PushBack({});
+	death_circle.PushBack({ 2,292, 130, 130 });
+	death_circle.speed = 0.8f;
+
+	//Death Player
+	death.x = 308;
+	death.y = 54;
+	death.w = 30;
+	death.h = 25;
 	
 }
 
@@ -70,7 +129,7 @@ update_status ModulePlayerTwo::Update()
 
 	float speed = 2.5;
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		if (aux < 30) {
 			current_animation = &intermediate;
@@ -83,10 +142,10 @@ update_status ModulePlayerTwo::Update()
 		}
 		position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_IDLE) {
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE) {
 		aux = 0;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_REPEAT) {
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) {
 		if (position.y == SCREEN_HEIGHT) {
 			current_animation = &walk;
 		}
@@ -95,7 +154,7 @@ update_status ModulePlayerTwo::Update()
 		}
 		position.x += speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_REPEAT) {
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT) {
 		if (aux < 30) {
 			current_animation = &intermediate;
 			aux++;
@@ -106,7 +165,7 @@ update_status ModulePlayerTwo::Update()
 		position.y -= speed;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_REPEAT) {
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT) {
 		current_animation = &idle;
 		position.y += speed;
 	}
@@ -125,10 +184,10 @@ update_status ModulePlayerTwo::Update()
 		App->render->Blit(graphics, position.x, position.y - death.h, &death);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_IDLE) {
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE) {
 		current_animation = &idle;
 	}
 
@@ -141,7 +200,7 @@ update_status ModulePlayerTwo::Update()
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
 		App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20);
 	}
-
+	
 
 	return UPDATE_CONTINUE;
 }
