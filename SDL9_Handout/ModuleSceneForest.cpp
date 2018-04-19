@@ -12,6 +12,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
+#include "ModuleUI.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -168,7 +169,6 @@ bool ModuleSceneForest::Start()
 {
 	LOG("Loading background assets");
 	App->render->camera.x = 0;
-	App->player->position.x = 0;
 	alpha_graph1 = 0;
 	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/firstspritesheet.png");
@@ -182,7 +182,7 @@ bool ModuleSceneForest::Start()
 	mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
 
 	App->player->Enable();
-
+	App->ui->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
 
@@ -215,6 +215,12 @@ bool ModuleSceneForest::CleanUp()
 	App->audio->UnloadMusic(mus);
 
 	App->collision->Disable();
+
+	if (App->player2->IsEnabled()) {
+		App->player2->Disable();
+	}
+
+	App->ui->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
 
@@ -347,48 +353,52 @@ update_status ModuleSceneForest::Update()
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 
 	//Set Velocities
-	if (App->render->camera.x < 1700) {
-		speed = 9;
-	}
-	else if (App->render->camera.x > 1700 && App->render->camera.x < 5300) {
-		speed = 6;
-	}
-	else if (App->render->camera.x > 5300 && App->render->camera.x < 8000) {
-		speed = 12;
-	}
-	else if (App->render->camera.x > 8000 && App->render->camera.x < 10000) {
-		speed -= 0.03;
-	}
-	else if (App->render->camera.x > 10000 && App->render->camera.x < 13100) {
-		speed = 3;
-	}
-	else if (App->render->camera.x > 13100 && App->render->camera.x < 27340) {
-		if (aux_time < 270)
-		{
-			speed = 0;
-			aux_time++;
+	if (App->player->IsEnabled() || App->player2->IsEnabled()) {
+		App->ui->time = 9;
+		App->ui->enemies_movement = true;
+		if (App->render->camera.x < 1700) {
+			speed = 9;
 		}
-		else
-		{
+		else if (App->render->camera.x > 1700 && App->render->camera.x < 5300) {
+			speed = 6;
+		}
+		else if (App->render->camera.x > 5300 && App->render->camera.x < 8000) {
+			speed = 12;
+		}
+		else if (App->render->camera.x > 8000 && App->render->camera.x < 10000) {
+			speed -= 0.03;
+		}
+		else if (App->render->camera.x > 10000 && App->render->camera.x < 13100) {
+			speed = 3;
+		}
+		else if (App->render->camera.x > 13100 && App->render->camera.x < 27340) {
+			if (aux_time < 270)
+			{
+				speed = 0;
+				aux_time++;
+			}
+			else
+			{
+				speed = 6;
+			}
+
+		}
+		else if (App->render->camera.x > 27340 && App->render->camera.x < 30205) {
+			posx -= 0.33*speed;
+			posy += 0.21*speed;
+			speed = 6;
+		}
+		else if (App->render->camera.x > 30205) {
 			speed = 6;
 		}
 
-	}
-	else if (App->render->camera.x > 27340 && App->render->camera.x < 30205) {
-		posx -= 0.33*speed;
-		posy += 0.21*speed;
-		speed = 6;
-	}
-	else if (App->render->camera.x > 30205) {
-		speed = 6;
-	}
+		if (App->render->camera.x > 26000 && App->render->camera.x < 27000) {
+			grassy += 0.15*speed;
+		}
 
-	if (App->render->camera.x > 26000 && App->render->camera.x < 27000) {
-		grassy += 0.15*speed;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_TAB] == KEY_STATE::KEY_REPEAT) {
-		speed = 24;
+		if (App->input->keyboard[SDL_SCANCODE_TAB] == KEY_STATE::KEY_REPEAT) {
+			speed = 24;
+		}
 	}
 	//fader
 	SDL_SetTextureAlphaMod(graphics2, alpha_graph2);
@@ -405,7 +415,7 @@ update_status ModuleSceneForest::Update()
 	//Blit To Screen
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->scene_forest, App->scene_intro, 0.60f);
+		App->player->Enable();
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {

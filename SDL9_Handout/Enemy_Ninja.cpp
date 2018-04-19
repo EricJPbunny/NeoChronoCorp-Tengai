@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "Enemy_Ninja.h"
+#include "ModuleEnemies.h"
 #include "ModuleCollision.h"
+#include "ModuleUI.h"
 
 
 Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
@@ -11,7 +13,7 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 	lift.PushBack({ 65,113,30,42 });
 	lift.PushBack({ 112,113,30,42 });
 	lift.PushBack({ 158,113,30,42 });
-	lift.speed = 0.20f;
+	lift.speed = App->enemies->speed;
 
 	run.PushBack({206,14,43,34});
 	run.PushBack({ 253,14,48,34 });
@@ -22,7 +24,7 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 	run.PushBack({ 253,66,27,35 });
 	run.PushBack({ 312,67,43,34 });
 	run.PushBack({ 253,66,27,35 });
-	run.speed = 0.20f;
+	run.speed = App->enemies->speed;
 
 	up.PushBack({ 362,68,27,33 });
 
@@ -41,6 +43,8 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 
 void Enemy_Ninja::Move()
 {
+	if(App->ui->enemies_movement){
 	position = originalposition + movement.GetCurrentSpeed(&animation);
+	}
 	
 }

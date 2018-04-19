@@ -112,17 +112,16 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
-	App->ui->Enable();
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
 	coll = App->collision->AddCollider({ 300, 300, 32, 32 }, COLLIDER_PLAYER);
 
+	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
+	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
 	LOG("Loading FX ");
 
 	destroyed = false;
-	position.x = 150;
-	position.y = 120;
 	return true;
 }
 
@@ -131,7 +130,6 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
 
-	App->ui->Disable();
 	App->textures->Unload(graphics);
 	App->textures->Unload(player_death);
 	if (coll != nullptr)

@@ -11,6 +11,7 @@
 #include "ModulePlayer2.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleEnemies.h"
 #include "SDL\include\SDL_render.h"
 #include "SDL\include\SDL_timer.h"
 #include <string>
@@ -62,6 +63,7 @@ ModuleUI::~ModuleUI()
 bool ModuleUI::Start()
 {
 	LOG("Loading UI");
+	time = 9;
 	graphics = App->textures->Load("assets/sprite/UI.png");
 	black = App->textures->Load("assets/sprite/black.png");
 	font_score = App->fonts->Load("assets/sprite/score_fonts.png", "0123456789", 1);
@@ -104,7 +106,7 @@ update_status ModuleUI::Update()
 		}
 	}
 	else {
-		App->render->Blit(graphics, 0, 5, &r, 0.00f);
+		App->render->Blit(graphics, 35, 10, &r, 0.00f);
 	}
 
 	//Player2
@@ -118,14 +120,15 @@ update_status ModuleUI::Update()
 		}
 	}
 	else {
-		App->render->Blit(graphics, 230, 10, &r, 0.00f);
+		App->render->Blit(graphics, 210, 10, &r, 0.00f);
 	}
 	
 	//Game over
 	SDL_SetTextureAlphaMod(black, alpha);
 
-	if (!App->player2->IsEnabled()) {
+	if (!App->player2->IsEnabled() && !App->player->IsEnabled()) {
 		//Time countdown
+		App->scene_forest->speed = 0;
 		if (aux) {
 			time_on_entry = SDL_GetTicks();
 			aux = false;
@@ -135,6 +138,9 @@ update_status ModuleUI::Update()
 			time--;
 			aux = true;
 		}
+
+		//Disable
+		enemies_movement = false;
 		//Draw
 		alpha = 100;
 		App->render->Blit(black, 0, 0, &screen, 0.00f);

@@ -50,6 +50,8 @@ private:
 
 	void SpawnEnemy(const EnemyInfo& info);
 
+public:
+	float speed = 0.2f;
 private:
 
 	EnemyInfo queue[MAX_ENEMIES];
