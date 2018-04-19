@@ -1,5 +1,7 @@
 #include "Application.h"
 #include "Enemy_GreenOvni.h"
+#include "ModuleEnemies.h"
+#include "ModuleUI.h"
 #include "ModuleCollision.h"
 
 
@@ -9,7 +11,7 @@ Enemy_GreenOvni::Enemy_GreenOvni(int x, int y):Enemy(x,y)
 	fly.PushBack({ 61,16,30,30 });
 	fly.PushBack({ 107,16,30,30 });
 	fly.PushBack({ 152,16,30,30 });
-	fly.speed = 0.2f;
+	fly.speed = App->enemies->speed;
 
 	movement.PushBack({ -0.1f, 0.0f }, 80);
 	
@@ -23,5 +25,7 @@ Enemy_GreenOvni::Enemy_GreenOvni(int x, int y):Enemy(x,y)
 
 void Enemy_GreenOvni::Move()
 {
-	position = originalposition + movement.GetCurrentSpeed();
+	if (App->ui->enemies_movement) {
+		position = originalposition + movement.GetCurrentSpeed();
+	}
 }

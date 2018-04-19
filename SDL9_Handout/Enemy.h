@@ -15,6 +15,7 @@ protected:
 
 public:
 	iPoint position;
+	float speed = 0.2f;
 
 public:
 	Enemy(int x, int y);

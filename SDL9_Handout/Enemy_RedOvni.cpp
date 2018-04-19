@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "Enemy_RedOvni.h"
+#include "ModuleEnemies.h"
 #include "ModuleCollision.h"
+#include "ModuleUI.h"
 
 
 Enemy_RedOvni::Enemy_RedOvni(int x, int y) :Enemy(x, y)
@@ -10,7 +12,7 @@ Enemy_RedOvni::Enemy_RedOvni(int x, int y) :Enemy(x, y)
 	fly.PushBack({ 110,60,30,30 });
 	fly.PushBack({ 155,60,30,30 });
 
-	fly.speed = 0.2f;
+	fly.speed = App->enemies->speed;
 
 	movement.PushBack({ -0.1f, 0.0f }, 80);
 
@@ -23,5 +25,7 @@ Enemy_RedOvni::Enemy_RedOvni(int x, int y) :Enemy(x, y)
 
 void Enemy_RedOvni::Move()
 {
-	position = originalposition + movement.GetCurrentSpeed();
+	if (App->ui->enemies_movement) {
+		position = originalposition + movement.GetCurrentSpeed();
+	}
 }
