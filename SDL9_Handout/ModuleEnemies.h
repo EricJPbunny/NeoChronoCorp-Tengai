@@ -5,6 +5,7 @@
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
 #include "Enemy_Ninja.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 
 #define MAX_ENEMIES 100
 
@@ -54,6 +55,7 @@ public:
 	float speed = 0.2f;
 private:
 
+	Mix_Chunk* fx_death = nullptr;
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;

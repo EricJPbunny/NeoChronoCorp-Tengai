@@ -217,9 +217,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == coll && destroyed == false && App->fade->IsFading() == false)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 70);
-
-
+		if (c1->type==COLLIDER_TYPE::COLLIDER_PLAYER_SHOT && c2->type==COLLIDER_TYPE::COLLIDER_ENEMY) {
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 70);
+		}
 		destroyed = true;
 	}
 }
@@ -299,6 +299,11 @@ void ModulePlayer::CheckState()
 			
 		}
 		break;
+	case SPIN:
+		if (spin.Finished()) {
+			state = IDLE;
+		}
+		break;
 	}
 }
 
@@ -334,6 +339,10 @@ void ModulePlayer::PerformActions()
 			walk.Reset();
 		current_animation = &walk;
 		break;
+	case SPIN:
+		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
+		App->render->Blit(graphics, position.x, position.y-32, &spin_rect);
+		current_animation = &spin;
 	}
 
 	

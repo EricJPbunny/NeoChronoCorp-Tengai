@@ -4,6 +4,8 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "ModulePlayer.h"
+#include "ModuleAudio.h"
 #include "Enemy.h"
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
@@ -26,6 +28,8 @@ bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("assets/sprite/enemies.png");
+
+	fx_death = App->audio->LoadEffect("assets/audio/enemy_death.wav");
 
 	return true;
 }
@@ -85,6 +89,7 @@ bool ModuleEnemies::CleanUp()
 {
 	LOG("Freeing all enemies");
 
+	App->audio->UnloadFx(fx_death);
 	App->textures->Unload(sprites);
 
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
@@ -148,9 +153,15 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
-			delete enemies[i];
-			enemies[i] = nullptr;
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
+				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+				App->audio->PlaySoundEffects(fx_death);
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
+				App->player->state = SPIN;
+			}
 			break;
 		}
 	}

@@ -15,6 +15,7 @@ enum player_state {
 	GO_BACKWARD,
 	BACK_IDLE,
 	WALK,
+	SPIN,
 };
 class ModulePlayer : public Module
 {
