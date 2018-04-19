@@ -168,7 +168,6 @@ ModuleSceneForest::~ModuleSceneForest()
 bool ModuleSceneForest::Start()
 {
 	LOG("Loading background assets");
-	App->render->camera.x = 0;
 	alpha_graph1 = 0;
 	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/firstspritesheet.png");
@@ -211,6 +210,8 @@ bool ModuleSceneForest::CleanUp()
 	LOG("Unloading Background");
 	alpha_graph2 = 255;
 	fade = true;
+
+	App->render->camera.x = 0;
 
 	App->audio->UnloadMusic(mus);
 

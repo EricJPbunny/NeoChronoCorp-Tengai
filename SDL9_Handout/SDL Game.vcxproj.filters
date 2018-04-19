@@ -101,6 +101,9 @@
     <ClInclude Include="ModulePartner.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneScore.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -173,6 +176,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModulePartner.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneScore.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

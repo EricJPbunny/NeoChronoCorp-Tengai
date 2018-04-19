@@ -27,7 +27,7 @@ public:
 
 	int num_life_koyori = 4, num_life_sho = 4;
 	bool aux = true, enemies_movement = true;
-	uint score = 0, time = 9;
+	uint score_koyori = 0, score_sho = 0, time = 9;
 	char player1_score[10], player2_score[10], time_text[2];
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* black = nullptr;
