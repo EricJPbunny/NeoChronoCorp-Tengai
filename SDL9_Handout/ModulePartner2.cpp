@@ -5,10 +5,10 @@
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
+#include "ModulePartner2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneForest.h"
 #include "ModulePlayer2.h"
-#include "ModulePartner2.h"
 #include "ModuleUI.h"
 
 
@@ -92,9 +92,9 @@ update_status ModulePartner2::Update()
 	}
 	//Draw Partner
 	SDL_Rect r = current_animation->GetCurrentFrame();
-	if (exist) {
+	
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
-	}
+	
 	return UPDATE_CONTINUE;
 }
 

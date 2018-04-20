@@ -158,9 +158,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
 				App->audio->PlaySoundEffects(fx_death);
 				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
-				if (c2==App->particles->shoot.collider || c2 == App->particles->shoot1.collider || c2 == App->particles->shoot2.collider) {
-					App->ui->score_sho += 200;
-				}
+				App->ui->score_koyori += 200;
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
+			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT) {
+				App->audio->PlaySoundEffects(fx_death);
+				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+				App->ui->score_sho += 200;
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}

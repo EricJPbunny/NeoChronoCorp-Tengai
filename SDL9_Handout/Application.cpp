@@ -35,9 +35,9 @@ Application::Application()
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = partner2 = new ModulePartner2();
 	modules[i++] = partner = new ModulePartner();
+	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = player2 = new ModulePlayerTwo();
 	modules[i++] = player = new ModulePlayer();
-	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = ui = new ModuleUI();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();
