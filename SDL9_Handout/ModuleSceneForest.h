@@ -19,6 +19,8 @@ public:
 
 public:
 	Mix_Music* mus = nullptr;
+	Mix_Music* boss = nullptr;
+	Mix_Music* level_completed = nullptr;
 	Collider* coll_left = nullptr;
 	Collider* coll_right = nullptr;
 	Collider* coll_up = nullptr;

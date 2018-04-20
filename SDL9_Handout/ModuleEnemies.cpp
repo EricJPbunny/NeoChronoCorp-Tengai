@@ -5,7 +5,9 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleAudio.h"
+#include "ModuleUI.h"
 #include "Enemy.h"
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
@@ -153,14 +155,22 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
-				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
 				App->audio->PlaySoundEffects(fx_death);
+				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+				if (c2==App->particles->shoot.collider || c2 == App->particles->shoot1.collider || c2 == App->particles->shoot2.collider) {
+					App->ui->score_sho += 200;
+				}
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
-			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
-				App->player->state = SPIN;
+			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
+				if (c2 == App->player->coll) {
+					App->player->state = SPIN;
+				}
+				if (c2 == App->player2->coll) {
+					App->player2->state = SPIN_2;
+				}
 			}
 			break;
 		}

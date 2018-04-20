@@ -9,6 +9,7 @@
 #include "SDL\include\SDL_render.h"
 #include "ModuleInput.h"
 #include "ModuleSceneForest.h"
+#include "ModuleSceneScore.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
@@ -178,6 +179,8 @@ bool ModuleSceneForest::Start()
 	mid = App->textures->Load("assets/sprite/mid_fade.png");
 	mid1 = App->textures->Load("assets/sprite/mid_fade.png");
 
+	boss = App->audio->LoadMusic("assets/audio/Boss_Battle.ogg");
+	level_completed = App->audio->LoadMusic("assets/audio/Level_Completed.ogg");
 	mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
 
 	App->player->Enable();
@@ -213,7 +216,7 @@ bool ModuleSceneForest::CleanUp()
 
 	App->render->camera.x = 0;
 
-	App->audio->UnloadMusic(mus);
+	App->audio->UnloadMusic(level_completed);
 
 	App->collision->Disable();
 
@@ -413,7 +416,13 @@ update_status ModuleSceneForest::Update()
 	App->player->position.x += speed/SCREEN_SIZE;
 	App->render->camera.x += speed;
 
-	//Blit To Screen
+	//Music 
+	if (App->render->camera.x > 15000 && App->render->camera.x < 15100 ) {
+		App->audio->UnloadMusic(mus);
+		App->audio->PlayMusic(boss);
+	}
+
+	//Enable Players
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		App->player->Enable();
@@ -423,5 +432,23 @@ update_status ModuleSceneForest::Update()
 		App->player2->Enable();
 	}
 
+	//End level
+	if (App->render->camera.x > 51000 && App->render->camera.x < 51100) {
+		App->audio->UnloadMusic(boss);
+		App->audio->PlayMusic(level_completed, 1);
+	}
+	if (App->render->camera.x > 51200) {
+		App->player->position.x += 2;
+	}
+	if (App->render->camera.x > 52500) {
+		App->fade->FadeToBlack(App->scene_forest, App->scene_score, 1.00f);
+	}
+
+	//Debug
+	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) {
+		App->render->camera.x = 49000;
+		App->player->position.x = App->render->camera.x / 3;
+	}
+	
 	return UPDATE_CONTINUE;
 }

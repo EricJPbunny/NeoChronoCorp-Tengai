@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -39,6 +40,22 @@ ModuleParticles::ModuleParticles()
 	bullet5.life = 1400;
 	bullet5.speed.x = 12;
 
+	//Sho Bullets
+	shoot.anim.PushBack({ 26,107,26,2 });
+	shoot.anim.loop = true;
+	shoot.life = 1400;
+	shoot.speed.x = 12;
+
+	shoot1.anim.PushBack({ 26,111,26,2 });
+	shoot1.anim.loop = true;
+	shoot1.life = 1400;
+	shoot1.speed.x = 12;
+
+	shoot2.anim.PushBack({ 26,115,26,2 });
+	shoot2.anim.loop = true;
+	shoot2.life = 1400;
+	shoot2.speed.x = 12;
+
 	//Enemies Explosion
 
 	explosion.anim.PushBack({ 24, 206, 56, 65 });
@@ -57,7 +74,6 @@ ModuleParticles::ModuleParticles()
 	explosion.life = 700;
 
 	//Bullet sparks
-
 	spark.anim.PushBack({32,35,45,19});
 	spark.anim.PushBack({ 84,35,45,19 });
 	spark.anim.PushBack({ 141,35,45,19 });
@@ -66,6 +82,10 @@ ModuleParticles::ModuleParticles()
 	spark.anim.PushBack({ 325,35,45,19 });
 	spark.anim.PushBack({ 391,35,45,19 });
 	spark.anim.PushBack({ 457,35,45,19 });
+	spark.anim.loop = false;
+	spark.anim.speed = 0.10f;
+	spark.life = 1200;
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -77,6 +97,9 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/sprite/particles.png");
 
+	shoot_audio = App->audio->LoadEffect("assets/audio/Shot_Koyori.wav");
+	shoot_sho = App->audio->LoadEffect("assets/audio/Shot_Sho.wav");
+
 	return true;
 }
 
@@ -84,6 +107,10 @@ bool ModuleParticles::Start()
 bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
+
+	App->audio->UnloadFx(shoot_sho);
+	App->audio->UnloadFx(shoot_audio);
+
 	App->textures->Unload(graphics);
 
 	// Unload fx

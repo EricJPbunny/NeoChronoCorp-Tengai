@@ -7,6 +7,8 @@
 #include "p2Point.h"
 #include "ModuleCollision.h"
 
+struct Mix_Chunk;
+
 #define MAX_ACTIVE_PARTICLES 100
 
 struct SDL_Texture;
@@ -50,7 +52,10 @@ private:
 
 public:
 
+	Mix_Chunk* shoot_audio = nullptr;
+	Mix_Chunk* shoot_sho = nullptr;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, spark;
+	Particle shoot, shoot1, shoot2;
 };
 
 #endif // __MODULEPARTICLES_H__

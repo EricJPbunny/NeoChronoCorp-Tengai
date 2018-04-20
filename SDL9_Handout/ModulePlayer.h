@@ -16,6 +16,7 @@ enum player_state {
 	BACK_IDLE,
 	WALK,
 	SPIN,
+	DEATH,
 };
 class ModulePlayer : public Module
 {
@@ -50,7 +51,6 @@ public:
 	Animation intermediate_return;
 	SDL_Rect death;
 	fPoint position;
-	Mix_Chunk* shoot = nullptr;
 	bool destroyed = false;
 	player_state state = IDLE;
 };

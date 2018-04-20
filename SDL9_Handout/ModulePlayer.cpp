@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
@@ -48,11 +49,11 @@ ModulePlayer::ModulePlayer()
 	walk.PushBack({ 74,12,27,27 });
 	walk.PushBack({ 114,13,27,27 });
 	walk.PushBack({ 153,11,27,29 });
-	walk.PushBack({ 194,8,27,31 });
-	walk.PushBack({ 234,9,27,26 });
+	walk.PushBack({ 194,8,27,32 });
+	walk.PushBack({ 234,9,28,30 });
 	walk.PushBack({ 274,12,28,28 });
 	walk.PushBack({ 313,15,30,25 });
-	walk.speed = 0.2f;
+	walk.speed = 0.20f;
 
 	//Spin
 	spin.PushBack({ 22,95,33,29 });
@@ -71,7 +72,7 @@ ModulePlayer::ModulePlayer()
 	spin_circle.PushBack({ 423,161,32,32 });
 	spin_circle.PushBack({ 457,161,32,32 });
 	spin_circle.PushBack({ 356,196,32,32 });
-	spin_circle.speed = 0.40f;
+	spin_circle.speed = 0.040f;
 
 	//Death
 	death_circle.PushBack({ 153,0, 130, 130 });
@@ -119,7 +120,6 @@ bool ModulePlayer::Start()
 
 	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
-	LOG("Loading FX ");
 
 	destroyed = false;
 	return true;
@@ -163,7 +163,7 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-
+		aux1++;
 		switch (aux1) {
 		case 0:
 			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
@@ -183,7 +183,6 @@ update_status ModulePlayer::Update()
 			break;
 		}
 
-		aux1++;
 	}
 
 
@@ -195,7 +194,9 @@ update_status ModulePlayer::Update()
 	//temple
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
+	//Update Collider Position
 	coll->SetPos(position.x, position.y - 32);
+
 	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
 		position.x = App->render->camera.x / SCREEN_SIZE;
 	}
@@ -289,6 +290,9 @@ void ModulePlayer::CheckState()
 		break;
 
 	case WALK:
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A]) {
+			state = IDLE;
+		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP) {
 			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
 				state = GO_BACKWARD;
@@ -304,6 +308,8 @@ void ModulePlayer::CheckState()
 			state = IDLE;
 		}
 		break;
+	case DEATH:
+		state = IDLE;
 	}
 }
 
@@ -311,7 +317,8 @@ void ModulePlayer::PerformActions()
 {
 	switch (state) {
 	case IDLE:
-			current_animation = &idle;
+		spin.Reset();
+		current_animation = &idle;
 		break;
 
 	case GO_BACKWARD:
@@ -341,7 +348,7 @@ void ModulePlayer::PerformActions()
 		break;
 	case SPIN:
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
-		App->render->Blit(graphics, position.x, position.y-32, &spin_rect);
+		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
 		current_animation = &spin;
 	}
 
