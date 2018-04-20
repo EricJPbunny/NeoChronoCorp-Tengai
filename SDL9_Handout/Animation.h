@@ -48,6 +48,10 @@ public:
 		return loops > 0;
 	}
 
+	int GetCurrentLoop() const
+	{
+		return loops;
+	}
 	void Reset()
 	{
 		loops = 0;
