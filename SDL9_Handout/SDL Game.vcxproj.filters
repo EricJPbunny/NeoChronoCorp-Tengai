@@ -107,6 +107,9 @@
     <ClInclude Include="ModulePartner2.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModulePowerup.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -185,6 +188,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModulePartner2.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePowerup.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

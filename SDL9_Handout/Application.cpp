@@ -17,6 +17,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
+#include "ModulePowerup.h"
 #include "ModuleFonts.h"
 
 Application::Application()
@@ -33,6 +34,7 @@ Application::Application()
 	modules[i++] = scene_forest = new ModuleSceneForest();
 	modules[i++] = scene_score = new ModuleScore();
 	modules[i++] = enemies = new ModuleEnemies();
+	modules[i++] = pu = new ModulePowerup();
 	modules[i++] = partner2 = new ModulePartner2();
 	modules[i++] = partner = new ModulePartner();
 	modules[i++] = particles = new ModuleParticles();
