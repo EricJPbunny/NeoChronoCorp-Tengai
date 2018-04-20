@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModulePlayer2.h"
+#include "ModulePartner2.h"
 #include "ModuleSceneForest.h"
 #include "ModuleFadeToBlack.h"
 
@@ -115,6 +116,8 @@ bool ModulePlayerTwo::Start()
 	graphics = App->textures->Load("assets/sprite/Sho_Spritesheet.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
+	App->partner2->Enable();
+
 	coll = App->collision->AddCollider({20, 20, 32, 32}, COLLIDER_PLAYER);
 	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
@@ -129,6 +132,9 @@ bool ModulePlayerTwo::CleanUp()
 		coll->to_delete = true;
 	App->textures->Unload(graphics);
 	App->textures->Unload(player_death);
+
+	App->partner2->Disable();
+
 
 	return true;
 }

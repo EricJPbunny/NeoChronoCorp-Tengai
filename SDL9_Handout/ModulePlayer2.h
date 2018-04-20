@@ -52,6 +52,7 @@ public:
 	SDL_Rect death;
 	bool destroyed = false;
 	player_state_2 state = IDLE_2;
+	int power_up = 0;
 	fPoint position;
 
 };

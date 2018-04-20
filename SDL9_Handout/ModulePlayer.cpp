@@ -9,6 +9,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneForest.h"
 #include "ModulePlayer.h"
+#include "ModulePartner.h"
 #include "ModuleUI.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -121,6 +122,8 @@ bool ModulePlayer::Start()
 	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
 
+	App->partner->Enable();
+
 	destroyed = false;
 	return true;
 }
@@ -135,6 +138,7 @@ bool ModulePlayer::CleanUp()
 	if (coll != nullptr)
 		coll->to_delete = true;
 
+	App->partner->Disable();
 	return true;
 }
 
