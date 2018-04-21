@@ -11,22 +11,22 @@ struct SDL_Texture;
 
 enum partner_state_2 {
 	NOT_EXISTING_2,
-	SPAWN,
+	SPAWN_2,
 	DESPAWN,
 	LEVEL_ONE_2,
 	LEVEL_ONE_CHARGE_2,
-	SHOT,
+	SHOT_2,
 };
 
-class ModulePartner2 : public Module 
+class ModulePartner2 : public Module
 {
 public:
-		ModulePartner2();
-		~ModulePartner2();
+	ModulePartner2();
+	~ModulePartner2();
 
-		bool Start();
-		update_status Update();
-		bool CleanUp();
+	bool Start();
+	update_status Update();
+	bool CleanUp();
 private:
 	void CheckState();
 	void PerformActions();
@@ -58,7 +58,7 @@ public:
 
 	int num_bullet = 1;
 	int num_bullet_2 = 1;
-	
+
 };
 
 #endif

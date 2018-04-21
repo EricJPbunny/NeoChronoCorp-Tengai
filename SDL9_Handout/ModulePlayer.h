@@ -58,6 +58,7 @@ public:
 	bool destroyed = false;
 	bool check_death = false, check_spawn = true;
 	player_state state = IDLE;
+	int power_up = 0;
 
 	bool time = true;
 	bool blink = true;
