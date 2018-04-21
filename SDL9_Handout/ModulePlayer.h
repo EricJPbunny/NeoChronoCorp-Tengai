@@ -53,6 +53,7 @@ public:
 	fPoint position;
 	bool destroyed = false;
 	player_state state = IDLE;
+	
 };
 
 #endif

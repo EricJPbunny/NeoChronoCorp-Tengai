@@ -58,6 +58,10 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	spin.PushBack({ 445,10,16,28 });
 	spin.PushBack({ 350,8,22,28 });
 	spin.PushBack({ 384,10,18,28 });
+	spin.PushBack({ 415,10,19,28 });
+	spin.PushBack({ 445,10,16,28 });
+	spin.PushBack({ 350,8,22,28 });
+	spin.PushBack({ 384,10,18,28 });
 	spin.speed = 0.15f;
 
 	//Spin Circle
@@ -70,7 +74,7 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	spin_circle.PushBack({ 423,161,32,32 });
 	spin_circle.PushBack({ 457,161,32,32 });
 	spin_circle.PushBack({ 356,196,32,32 });
-	spin_circle.speed = 0.40f;
+	spin_circle.speed = 0.3f;
 
 	//Death
 	death_circle.PushBack({ 153,0, 130, 130 });
@@ -300,6 +304,8 @@ void ModulePlayerTwo::CheckState()
 		break;
 	case SPIN_2:
 		if (spin.Finished()) {
+			spin.Reset();
+			spin_circle.Reset();
 			state = IDLE_2;
 		}
 		break;

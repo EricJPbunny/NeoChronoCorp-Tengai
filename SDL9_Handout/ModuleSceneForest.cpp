@@ -454,6 +454,7 @@ update_status ModuleSceneForest::Update()
 	}
 	if (App->render->camera.x > 51200) {
 		App->player->position.x += 2;
+		App->player2->position.x += 2;
 	}
 	if (App->render->camera.x > 52500) {
 		App->fade->FadeToBlack(App->scene_forest, App->scene_score, 1.00f);
@@ -463,6 +464,8 @@ update_status ModuleSceneForest::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) {
 		App->render->camera.x = 49000;
 		App->player->position.x = App->render->camera.x / 3;
+		App->player2->position.x = App->render->camera.x / 3;
+		
 	}
 	
 	return UPDATE_CONTINUE;
