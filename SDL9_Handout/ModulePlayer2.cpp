@@ -164,18 +164,18 @@ update_status ModulePlayerTwo::Update()
 		position.y += speed;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
 
 		aux1++;
 		switch (aux1) {
 		case 0:
-			App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT);
+			App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT,PARTICLE_SHOT_2);
 			break;
 		case 1:
-			App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT);
+			App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
 			break;
 		case 2:
-			App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT);
+			App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
 			aux1 = 0;
 			break;
 		}
@@ -217,7 +217,7 @@ void ModulePlayerTwo::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == coll && destroyed == false && App->fade->IsFading() == false)
 	{
 		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 70);
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
 		}
 		destroyed = true;
 	}

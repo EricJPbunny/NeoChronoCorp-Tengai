@@ -170,19 +170,19 @@ update_status ModulePlayer::Update()
 		aux1++;
 		switch (aux1) {
 		case 0:
-			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT,PARTICLE_SHOT);
 			break;
 		case 1:
-			App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 			break;
 		case 2:
-			App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 			break;
 		case 3:
-			App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 			break;
 		case 4:
-			App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 			aux1 = 0;
 			break;
 		}
@@ -223,7 +223,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == coll && destroyed == false && App->fade->IsFading() == false)
 	{
 		if (c1->type==COLLIDER_TYPE::COLLIDER_PLAYER_SHOT && c2->type==COLLIDER_TYPE::COLLIDER_ENEMY) {
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 70);
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
 		}
 		destroyed = true;
 	}

@@ -156,7 +156,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, PARTICLE_TYPE particle_type, Uint32 delay)
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -170,6 +170,12 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
 			break;
+		}
+		if (particle_type == PARTICLE_SHOT) {
+   			App->audio->PlaySoundEffects(shoot_audio);
+		}
+		if (particle_type == PARTICLE_SHOT_2) {
+			App->audio->PlaySoundEffects(shoot_sho);
 		}
 	}
 }
