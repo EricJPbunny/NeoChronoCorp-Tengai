@@ -352,6 +352,15 @@ void ModulePlayer::CheckState()
 				state = IDLE;
 			}
 		}
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
+			current_animation = &walk;
+		}
+		else { current_animation = &idle; }
+		if (App->render->camera.x > 26000) {
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
+				current_animation = &idle;
+			}
+		}
 		break;
 	case SPIN:
 		if (spin.Finished()) {
@@ -426,10 +435,7 @@ void ModulePlayer::PerformActions()
 		
 		if (walk.Finished())
 			walk.Reset();
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
-			current_animation = &walk;
-		}
-		else { current_animation = &idle; }
+	
 		break;
 	case SPIN:
 		
