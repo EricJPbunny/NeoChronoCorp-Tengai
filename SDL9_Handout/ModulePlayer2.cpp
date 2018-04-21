@@ -69,15 +69,15 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	spin.speed = 0.15f;
 
 	//Spin Circle
-	spin_circle.PushBack({ 216,166,32,32 });
-	spin_circle.PushBack({ 249,162,32,32 });
-	spin_circle.PushBack({ 289,161,32,32 });
-	spin_circle.PushBack({ 322,161,32,32 });
-	spin_circle.PushBack({ 355,161,32,32 });
-	spin_circle.PushBack({ 389,161,32,32 });
-	spin_circle.PushBack({ 423,161,32,32 });
-	spin_circle.PushBack({ 457,161,32,32 });
-	spin_circle.PushBack({ 356,196,32,32 });
+	spin_circle.PushBack({ 212,161,32,32 });
+	spin_circle.PushBack({ 249,161,32,32 });
+	spin_circle.PushBack({ 290,161,32,32 });
+	spin_circle.PushBack({ 323,161,32,32 });
+	spin_circle.PushBack({ 356,161,32,32 });
+	spin_circle.PushBack({ 390,161,32,32 });
+	spin_circle.PushBack({ 424,161,32,32 });
+	spin_circle.PushBack({ 458,161,32,32 });
+	spin_circle.PushBack({ 214,192,32,32 });
 	spin_circle.speed = 0.3f;
 
 	//Death
@@ -224,6 +224,13 @@ update_status ModulePlayerTwo::Update()
 		state = DEATH_2;
 	}
 
+	//Set spin posotion
+	if (spin_pos) {
+		aux_spin.x = position.x;
+		aux_spin.y = position.y-32;
+		spin_pos = false;
+	}
+
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
@@ -285,11 +292,9 @@ void ModulePlayerTwo::CheckState()
 	case IDLE_2:
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN) {
 			state = GO_BACKWARD_2;
-			LOG("cambio para atras");
 		}
 		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
 			state = WALK_2;
-			LOG("camina");
 		}
 
 		break;
@@ -305,7 +310,6 @@ void ModulePlayerTwo::CheckState()
 		if (current_animation->Finished()) {
 			intermediate.Reset();
 			state = BACKWARD_2;
-			LOG("combio ara esta atras");
 		}
 		break;
 
@@ -400,7 +404,6 @@ void ModulePlayerTwo::PerformActions()
 		break;
 
 	case GO_BACKWARD_2:
-		input = true;
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -409,21 +412,18 @@ void ModulePlayerTwo::PerformActions()
 		break;
 
 	case BACKWARD_2:
-		input = true;
 		if (backward.Finished())
 			backward.Reset();
 		current_animation = &backward;
 		break;
 
 	case BACK_IDLE_2:
-		input = true;
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
 		break;
 
 	case WALK_2:
-		input = true;
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A]) {
 			state = IDLE_2;
 		}
@@ -432,9 +432,8 @@ void ModulePlayerTwo::PerformActions()
 		current_animation = &walk;
 		break;
 	case SPIN_2:
-		input = true;
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
-		App->render->Blit(graphics, position.x, position.y - 32, &spin_rect);
+		App->render->Blit(graphics, aux_spin.x, aux_spin.y, &spin_rect);
 		current_animation = &spin;
 		break;
 	case DEATH:
@@ -442,7 +441,6 @@ void ModulePlayerTwo::PerformActions()
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
-		input = true;
 		App->player2->Disable();
 		break;
 	}

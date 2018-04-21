@@ -60,6 +60,7 @@ public:
 	player_state_2 state = IDLE_2;
 	int power_up = 0;
 	fPoint position;
+	fPoint aux_spin;
 
 	bool time = true;
 	bool blink = true;
@@ -71,6 +72,7 @@ public:
 	int blink_time = 0;
 
 	bool input = true;
+	bool spin_pos = false;
 };
 
 
