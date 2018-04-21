@@ -441,10 +441,12 @@ update_status ModuleSceneForest::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		App->player->Enable();
+		App->ui->num_life_koyori = 4;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 		App->player2->Enable();
+		App->ui->num_life_koyori = 4;
 	}
 
 	//End level

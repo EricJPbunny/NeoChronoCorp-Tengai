@@ -17,6 +17,7 @@ enum player_state {
 	WALK,
 	SPIN,
 	DEATH,
+	POST_DEATH,
 };
 class ModulePlayer : public Module
 {
@@ -52,6 +53,7 @@ public:
 	SDL_Rect death;
 	fPoint position;
 	bool destroyed = false;
+	bool check_death = false;
 	player_state state = IDLE;
 	
 };

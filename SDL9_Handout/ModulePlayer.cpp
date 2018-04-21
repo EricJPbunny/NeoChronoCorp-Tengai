@@ -121,10 +121,12 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
-	coll = App->collision->AddCollider({ 300, 300, 32, 32 }, COLLIDER_PLAYER);
+	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
 
 	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
+
+	state = IDLE;
 
 	App->partner->Enable();
 
@@ -157,6 +159,7 @@ update_status ModulePlayer::Update()
 	//state actions
 	PerformActions();
 
+	//Inputs
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
 		position.x -= speed;
 	}
@@ -193,17 +196,29 @@ update_status ModulePlayer::Update()
 
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
+		App->ui->num_life_koyori = 0;
+	}
 
+	//Check Death
+	if (App->ui->num_life_koyori == 0) {
+		state = DEATH;
+	}
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
-
+	if (!check_death) {
+		App->render->Blit(graphics, position.x, position.y - r.h, &r);
+		//Update Collider Position
+		coll->SetPos(position.x, position.y - 32);
+	}
+	if (check_death) {
+		App->render->Blit(graphics, position.x, position.y - 32, &death);
+		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+		position.x -= 1;
+		position.y += 3;
+	}
 	//temple
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
-
-	//Update Collider Position
-	coll->SetPos(position.x, position.y - 32);
 
 	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
 		position.x = App->render->camera.x / SCREEN_SIZE;
@@ -308,7 +323,6 @@ void ModulePlayer::CheckState()
 			else {
 				state = IDLE;
 			}
-			
 		}
 		break;
 	case SPIN:
@@ -319,7 +333,10 @@ void ModulePlayer::CheckState()
 		}
 		break;
 	case DEATH:
-		state = IDLE;
+		if (position.y > SCREEN_HEIGHT+80) {
+			state = POST_DEATH;
+		}
+		break;
 	}
 }
 
@@ -327,6 +344,7 @@ void ModulePlayer::PerformActions()
 {
 	switch (state) {
 	case IDLE:
+		check_death = false;
 		spin.Reset();
 		current_animation = &idle;
 		break;
@@ -360,7 +378,15 @@ void ModulePlayer::PerformActions()
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
 		current_animation = &spin;
+		break;
+	case DEATH:
+		check_death = true;
+		break;
+	case POST_DEATH:
+		App->player->Disable();
+		break;
 	}
+	
 
 	
 }

@@ -96,7 +96,7 @@ update_status ModuleUI::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	//Player1
-	if (App->player->IsEnabled()) {
+	if (!App->player->check_death) {
 		App->render->Blit(graphics, 10, 6, &player1, 0.00);
 		App->fonts->BlitText(57, 5, font_score, player1_score);
 
@@ -126,7 +126,7 @@ update_status ModuleUI::Update()
 	//Game over
 	SDL_SetTextureAlphaMod(black, alpha);
 
-	if (!App->player2->IsEnabled() && !App->player->IsEnabled()) {
+	if (!App->player2->IsEnabled() && App->player->check_death) {
 		//Time countdown
 		App->scene_forest->speed = 0;
 		if (aux) {
@@ -153,8 +153,8 @@ update_status ModuleUI::Update()
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_REPEAT) {
-		App->player->Disable();
-		App->player2->Disable();
+		num_life_koyori = 0;
+		num_life_sho = 0;
 	}
 	return UPDATE_CONTINUE;
 }
