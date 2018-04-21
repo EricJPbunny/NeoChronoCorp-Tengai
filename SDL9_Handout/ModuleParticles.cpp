@@ -168,14 +168,16 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->position.y = y;
 			if(collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			if (particle_type == PARTICLE_SHOT) {
+				p->fx = 1;
+				App->audio->PlaySoundEffects(shoot_audio, p->fx);
+			}
+			if (particle_type == PARTICLE_SHOT_2) {
+				p->fx = 2;
+				App->audio->PlaySoundEffects(shoot_sho, p->fx);
+			}
 			active[i] = p;
 			break;
-		}
-		if (particle_type == PARTICLE_SHOT) {
-   			App->audio->PlaySoundEffects(shoot_audio);
-		}
-		if (particle_type == PARTICLE_SHOT_2) {
-			App->audio->PlaySoundEffects(shoot_sho);
 		}
 	}
 }

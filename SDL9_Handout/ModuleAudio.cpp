@@ -71,11 +71,11 @@ bool ModuleAudio::CleanUp()
 void ModuleAudio::PlayMusic(Mix_Music* mus_to_play,int reps) 
 {
 	Mix_FadeInMusic(mus_to_play, reps, 3000);
-	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
+	Mix_VolumeMusic(MIX_MAX_VOLUME/4);
 }
-void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play)
+void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play, int fx)
 {
-	Mix_PlayChannel (-1,fx_to_play,0);
+	Mix_PlayChannel (fx,fx_to_play,0);
 	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME);
 }
 void ModuleAudio::UnloadMusic(Mix_Music * music)
