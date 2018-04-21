@@ -80,7 +80,7 @@ ModulePlayer::ModulePlayer()
 	spin_circle.PushBack({ 423,161,32,32 });
 	spin_circle.PushBack({ 457,161,32,32 });
 	spin_circle.PushBack({ 356,196,32,32 });
-	spin_circle.speed = 0.3f;
+	spin_circle.speed = 0.70f;
 
 	//Death
 	death_circle.PushBack({ 153,0, 130, 130 });
@@ -213,6 +213,14 @@ update_status ModulePlayer::Update()
 	if (App->ui->num_life_koyori == 0) {
 		state = DEATH;
 	}
+
+	//Set spin posotion
+	if (spin_pos) {
+		aux_spin.x = position.x;
+		aux_spin.y = position.y - 32;
+		spin_pos = false;
+	}
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (!check_death) {
@@ -399,7 +407,6 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case GO_BACKWARD:
-		input = true;
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -415,22 +422,21 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case BACK_IDLE:
-		input = true;
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
 		break;
 
 	case WALK:
-		input = true;
 		if (walk.Finished())
 			walk.Reset();
 		current_animation = &walk;
 		break;
 	case SPIN:
-		input = true;
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
-		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
+		if (spin_circle.Finished()) {
+			App->render->Blit(graphics, aux_spin.x, aux_spin.y, &spin_rect);
+		}
 		current_animation = &spin;
 		break;
 	case DEATH:
@@ -439,7 +445,6 @@ void ModulePlayer::PerformActions()
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
-		input = true;
 		App->ui->game_over_koyori = true;
 		App->player->Disable();
 		break;
