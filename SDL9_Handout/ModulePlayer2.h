@@ -17,6 +17,8 @@ enum player_state_2 {
 	BACK_IDLE_2,
 	WALK_2,
 	SPIN_2,
+	DEATH_2,
+	POST_DEATH_2,
 };
 
 class ModulePlayerTwo : public Module
@@ -51,6 +53,7 @@ public:
 	Animation intermediate_return;
 	SDL_Rect death;
 	bool destroyed = false;
+	bool check_death = false;
 	player_state_2 state = IDLE_2;
 	int power_up = 0;
 	fPoint position;

@@ -144,6 +144,8 @@ bool ModulePlayer::CleanUp()
 	if (coll != nullptr)
 		coll->to_delete = true;
 
+	check_death = true;
+
 	App->partner->Disable();
 	return true;
 }
@@ -194,10 +196,6 @@ update_status ModulePlayer::Update()
 			break;
 		}
 
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
-		App->ui->num_life_koyori = 0;
 	}
 
 	//Check Death

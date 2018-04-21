@@ -101,6 +101,7 @@ bool ModuleTextures::Unload(SDL_Texture* texture)
 		{
 			SDL_DestroyTexture(textures[i]);
 			textures[i] = nullptr;
+			texture = nullptr;
 			ret = true;
 			break;
 		}

@@ -92,7 +92,7 @@ bool ModulePartner2::CleanUp()
 	App->textures->Unload(graphics);
 	if (graphics != nullptr) 
 	{
-		LOG("Could not unload partner textures")
+		LOG("Could not unload partner 2 textures")
 			return false;
 	}
 

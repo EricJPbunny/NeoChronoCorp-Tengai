@@ -372,7 +372,7 @@ update_status ModuleSceneForest::Update()
 	App->render->Blit(laterals, posx, posy, &lateral, 0.75f);
 
 	//Set Velocities
-	if (App->player->IsEnabled() || App->player2->IsEnabled()) {
+	if (!App->player->check_death || !App->player2->check_death) {
 		App->ui->time = 9;
 		App->ui->enemies_movement = true;
 		if (App->render->camera.x < 1700) {
@@ -446,7 +446,7 @@ update_status ModuleSceneForest::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 		App->player2->Enable();
-		App->ui->num_life_koyori = 4;
+		App->ui->num_life_sho = 4;
 	}
 
 	//End level
@@ -462,12 +462,20 @@ update_status ModuleSceneForest::Update()
 		App->fade->FadeToBlack(App->scene_forest, App->scene_score, 1.00f);
 	}
 
-	//Debug
+	//Debug Mode
+	//Kill Koyori
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
+		App->ui->num_life_koyori = 0;
+	}
+	//Kill Sho
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) {
+		App->ui->num_life_sho = 0;
+	}
+	//End Game
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) {
 		App->render->camera.x = 49000;
 		App->player->position.x = App->render->camera.x / 3;
 		App->player2->position.x = App->render->camera.x / 3;
-		
 	}
 	
 	return UPDATE_CONTINUE;

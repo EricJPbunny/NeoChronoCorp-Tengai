@@ -8,6 +8,7 @@
 #include "ModulePartner2.h"
 #include "ModuleSceneForest.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleUI.h"
 
 
 ModulePlayerTwo::ModulePlayerTwo() {
@@ -122,6 +123,8 @@ bool ModulePlayerTwo::Start()
 
 	App->partner2->Enable();
 
+	state = IDLE_2;
+
 	coll = App->collision->AddCollider({20, 20, 32, 32}, COLLIDER_PLAYER);
 	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
@@ -139,6 +142,7 @@ bool ModulePlayerTwo::CleanUp()
 
 	App->partner2->Disable();
 
+	check_death = true;
 
 	return true;
 }
@@ -187,7 +191,6 @@ update_status ModulePlayerTwo::Update()
 	}
 
 	//Update Collider Position
-	coll->SetPos(position.x, position.y - 32);
 
 	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
 		position.x = App->render->camera.x / SCREEN_SIZE;
@@ -202,10 +205,27 @@ update_status ModulePlayerTwo::Update()
 		position.y = SCREEN_HEIGHT;
 	}
 
+	//Check Death
+	if (App->ui->num_life_sho == 0) {
+		state = DEATH_2;
+	}
+
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
+	if (!check_death) {
+		App->render->Blit(graphics, position.x, position.y - r.h, &r);
+		//Update Collider Position
+		coll->SetPos(position.x, position.y - 32);
+	}
+	if (check_death) {
+		App->render->Blit(graphics, position.x, position.y - 32, &death);
+		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+		position.x -= 1;
+		position.y += 3;
+	}
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	//Temple
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
@@ -309,6 +329,11 @@ void ModulePlayerTwo::CheckState()
 			state = IDLE_2;
 		}
 		break;
+	case DEATH_2:
+		if (position.y > SCREEN_HEIGHT + 80) {
+			state = POST_DEATH_2;
+		}
+		break;
 	}
 }
 
@@ -316,6 +341,7 @@ void ModulePlayerTwo::PerformActions()
 {
 	switch (state) {
 	case IDLE_2:
+		check_death = false;
 		spin.Reset();
 		current_animation = &idle;
 		break;
@@ -352,6 +378,13 @@ void ModulePlayerTwo::PerformActions()
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, position.x, position.y - 32, &spin_rect);
 		current_animation = &spin;
+		break;
+	case DEATH:
+		check_death = true;
+		break;
+	case POST_DEATH:
+		App->player2->Disable();
+		break;
 	}
 
 

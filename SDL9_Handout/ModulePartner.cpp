@@ -66,6 +66,7 @@ bool ModulePartner::CleanUp()
 {
 	LOG("Unloading player");
 	App->textures->Unload(graphics);
+	graphics = nullptr;
 	if (graphics != nullptr) 
 	{
 		LOG("Could not unload partner textures")
