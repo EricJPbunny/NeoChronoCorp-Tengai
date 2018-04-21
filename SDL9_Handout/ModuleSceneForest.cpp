@@ -199,8 +199,23 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 910, 110);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 960, 80);
 
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1430, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1450, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1470, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 1490, 120);
+
 	//Enemies Ninja
-	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 300, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 790, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 840, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 890, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 940, 0);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1150, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1200, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1250, 0);
 
 	App->audio->PlayMusic(mus);
 

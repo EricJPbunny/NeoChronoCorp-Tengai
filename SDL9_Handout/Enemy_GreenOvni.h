@@ -11,6 +11,7 @@ private:
 	bool going_up = true;
 	iPoint originalposition;
 	Animation fly;
+	Animation back;
 	Path movement;
 public:
 

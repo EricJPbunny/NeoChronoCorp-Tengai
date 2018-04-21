@@ -15,6 +15,7 @@ private:
 	Animation lift;
 	Animation run;
 	Animation up;
+	Animation stay;
 	Path movement;
 public:
 
