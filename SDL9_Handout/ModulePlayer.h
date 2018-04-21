@@ -40,6 +40,7 @@ public:
 	int aux1 = 0;
 	int alpha_player = 255;
 	Collider* coll = nullptr;
+	Collider* hitbox = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr;
 	Animation* current_animation = nullptr;

@@ -125,6 +125,7 @@ bool ModulePlayer::Start()
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
+	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX);
 
 	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
 	position.y = (App->render->camera.y) / SCREEN_SIZE+100;
@@ -148,6 +149,10 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(player_death);
 	if (coll != nullptr)
 		coll->to_delete = true;
+
+	if (hitbox != nullptr)
+		hitbox->to_delete = true;
+
 
 	App->partner->Disable();
 	return true;
@@ -217,6 +222,7 @@ update_status ModulePlayer::Update()
 		}
 		else {
 			coll->SetPos(position.x, position.y - 32);
+			hitbox->SetPos(position.x+8, position.y-20);
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	}

@@ -130,6 +130,8 @@ bool ModulePlayerTwo::Start()
 	App->ui->num_life_sho = 4;
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
+	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX_2);
+
 	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 	return ret;
@@ -141,6 +143,10 @@ bool ModulePlayerTwo::CleanUp()
 
 	if (coll != nullptr)
 		coll->to_delete = true;
+
+	if (hitbox != nullptr)
+		hitbox->to_delete = true;
+
 	App->textures->Unload(graphics);
 	App->textures->Unload(player_death);
 
@@ -228,6 +234,7 @@ update_status ModulePlayerTwo::Update()
 		}
 		else {
 			coll->SetPos(position.x, position.y - 32);
+			hitbox->SetPos(position.x + 8, position.y - 20);
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	}
