@@ -440,13 +440,15 @@ update_status ModuleSceneForest::Update()
 	//Enable Players
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
-		App->player->Enable();
-		App->ui->num_life_koyori = 4;
+		if (!App->player->IsEnabled()) {
+			App->player->Enable();
+		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
-		App->player2->Enable();
-		App->ui->num_life_sho = 4;
+		if (!App->player2->IsEnabled()) {
+			App->player2->Enable();
+		}
 	}
 
 	//End level

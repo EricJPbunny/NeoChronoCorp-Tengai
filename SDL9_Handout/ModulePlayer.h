@@ -10,6 +10,7 @@ struct SDL_Texture;
 struct Collider;
 
 enum player_state {
+	SPAWN_PLAYER,
 	IDLE,
 	BACKWARD,
 	GO_BACKWARD,
@@ -37,6 +38,7 @@ public:
 
 	int aux = 0;
 	int aux1 = 0;
+	int alpha_player = 255;
 	Collider* coll = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr;
@@ -53,8 +55,17 @@ public:
 	SDL_Rect death;
 	fPoint position;
 	bool destroyed = false;
-	bool check_death = false;
+	bool check_death = false, check_spawn = true;
 	player_state state = IDLE;
+
+	bool time = true;
+	bool blink = true;
+
+	int time_on_entry = 0;
+	int current_time = 0;
+
+	int blink_on_entry = 0;
+	int blink_time = 0;
 	
 };
 

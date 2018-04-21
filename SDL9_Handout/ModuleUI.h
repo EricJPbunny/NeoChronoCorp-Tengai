@@ -25,8 +25,8 @@ public:
 	int time_on_entry = 0;
 	int current_time = 0;
 
-	int num_life_koyori = 4, num_life_sho = 4;
-	bool aux = true, enemies_movement = true;
+	int num_life_koyori, num_life_sho;
+	bool aux = true, enemies_movement = true, game_over_koyori = false, game_over_sho = false;
 	uint score_koyori = 0, score_sho = 0, time = 9;
 	char player1_score[10], player2_score[10], time_text[2];
 	SDL_Texture* graphics = nullptr;

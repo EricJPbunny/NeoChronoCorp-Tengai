@@ -11,6 +11,7 @@
 struct SDL_Texture;
 
 enum player_state_2 {
+	SPAWN_PLAYER_2,
 	IDLE_2,
 	BACKWARD_2,
 	GO_BACKWARD_2,
@@ -38,6 +39,7 @@ private:
 public:
 
 	int aux = 0, aux1 = 0;
+	int alpha_player = 255;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr; 
 	Collider* coll = nullptr;
@@ -53,10 +55,19 @@ public:
 	Animation intermediate_return;
 	SDL_Rect death;
 	bool destroyed = false;
-	bool check_death = false;
+	bool check_death = false, check_spawn = true;
 	player_state_2 state = IDLE_2;
 	int power_up = 0;
 	fPoint position;
+
+	bool time = true;
+	bool blink = true;
+
+	int time_on_entry = 0;
+	int current_time = 0;
+
+	int blink_on_entry = 0;
+	int blink_time = 0;
 
 };
 

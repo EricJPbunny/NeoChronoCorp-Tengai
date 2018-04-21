@@ -12,6 +12,9 @@
 #include "ModulePartner.h"
 #include "ModuleUI.h"
 
+#include "SDL\include\SDL_timer.h"
+#include "SDL\include\SDL_render.h"
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()
@@ -123,13 +126,15 @@ bool ModulePlayer::Start()
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
 
-	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
-	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
+	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
+	position.y = (App->render->camera.y) / SCREEN_SIZE+40;
 
-	state = IDLE;
+	state = SPAWN_PLAYER;
+	App->ui->num_life_koyori = 4;
 
 	App->partner->Enable();
 
+	time = true;
 	destroyed = false;
 	return true;
 }
@@ -143,8 +148,6 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(player_death);
 	if (coll != nullptr)
 		coll->to_delete = true;
-
-	check_death = true;
 
 	App->partner->Disable();
 	return true;
@@ -197,7 +200,8 @@ update_status ModulePlayer::Update()
 		}
 
 	}
-
+	//Fade
+	SDL_SetTextureAlphaMod(graphics, alpha_player);
 	//Check Death
 	if (App->ui->num_life_koyori == 0) {
 		state = DEATH;
@@ -205,11 +209,16 @@ update_status ModulePlayer::Update()
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (!check_death) {
+		if (check_spawn) {
+			position.x++;
+			coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+		}
+		else {
+			coll->SetPos(position.x, position.y - 32);
+		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
-		//Update Collider Position
-		coll->SetPos(position.x, position.y - 32);
 	}
-	if (check_death) {
+	else {
 		App->render->Blit(graphics, position.x, position.y - 32, &death);
 		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
 		position.x -= 1;
@@ -250,6 +259,17 @@ void ModulePlayer::CheckState()
 {
 	switch (state)
 	{
+	case SPAWN_PLAYER:
+		if (time) {
+			time_on_entry = SDL_GetTicks();
+			time = false;
+		}
+		current_time = SDL_GetTicks() - time_on_entry;
+		if (current_time > 2000) {
+			state = IDLE;
+		}
+		break;
+
 	case IDLE:
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN) {
 			state = GO_BACKWARD;
@@ -341,8 +361,28 @@ void ModulePlayer::CheckState()
 void ModulePlayer::PerformActions()
 {
 	switch (state) {
-	case IDLE:
+	case SPAWN_PLAYER:
+		App->ui->game_over_koyori = false;
+		check_spawn = true;
+		current_animation = &idle;
+		blink_time = SDL_GetTicks() - blink_on_entry;
+		if (blink_time > 10) {
+			blink_on_entry = SDL_GetTicks();
+			if (blink) {
+				alpha_player = 0;
+				blink = false;
+			}
+			else {
+				alpha_player = 255;
+				blink = true;
+			}
+		}
 		check_death = false;
+		break;
+
+	case IDLE:
+		check_spawn = false;
+		alpha_player = 255;
 		spin.Reset();
 		current_animation = &idle;
 		break;
@@ -379,12 +419,11 @@ void ModulePlayer::PerformActions()
 		break;
 	case DEATH:
 		check_death = true;
+		alpha_player = 255;
 		break;
 	case POST_DEATH:
+		App->ui->game_over_koyori = true;
 		App->player->Disable();
 		break;
-	}
-	
-
-	
+	}	
 }

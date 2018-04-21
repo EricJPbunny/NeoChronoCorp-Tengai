@@ -10,13 +10,16 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleUI.h"
 
+#include "SDL\include\SDL_timer.h"
+#include "SDL\include\SDL_render.h"
+
 
 ModulePlayerTwo::ModulePlayerTwo() {
 	graphics = NULL;
 	current_animation = NULL;
 
 	position.x = 100;
-	position.y = 220;
+	position.y = 180;
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 38,9,29,27 });
@@ -123,11 +126,12 @@ bool ModulePlayerTwo::Start()
 
 	App->partner2->Enable();
 
-	state = IDLE_2;
+	state = SPAWN_PLAYER_2;
+	App->ui->num_life_sho = 4;
 
-	coll = App->collision->AddCollider({20, 20, 32, 32}, COLLIDER_PLAYER);
-	position.x = (App->render->camera.x) / SCREEN_SIZE + 50;
-	position.y = (App->render->camera.y) / SCREEN_SIZE + 70;
+	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
+	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
+	position.y = (App->render->camera.y) / SCREEN_SIZE + 40;
 	return ret;
 }
 
@@ -142,6 +146,8 @@ bool ModulePlayerTwo::CleanUp()
 
 	App->partner2->Disable();
 
+	time = true;
+	App->ui->game_over_sho = true;
 	check_death = true;
 
 	return true;
@@ -189,7 +195,8 @@ update_status ModulePlayerTwo::Update()
 		}
 		
 	}
-
+	//Fade
+	SDL_SetTextureAlphaMod(graphics, alpha_player);
 	//Update Collider Position
 
 	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
@@ -214,9 +221,14 @@ update_status ModulePlayerTwo::Update()
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (!check_death) {
+		if (check_spawn) {
+			position.x++;
+			coll->SetPos(App->render->camera.x, App->render->camera.y - 100);
+		}
+		else {
+			coll->SetPos(position.x, position.y - 32);
+		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
-		//Update Collider Position
-		coll->SetPos(position.x, position.y - 32);
 	}
 	if (check_death) {
 		App->render->Blit(graphics, position.x, position.y - 32, &death);
@@ -251,6 +263,17 @@ void ModulePlayerTwo::CheckState()
 {
 	switch (state)
 	{
+	case SPAWN_PLAYER_2:
+		if (time) {
+			time_on_entry = SDL_GetTicks();
+			time = false;
+		}
+		current_time = SDL_GetTicks() - time_on_entry;
+		if (current_time > 2000) {
+			state = IDLE_2;
+		}
+		break;
+
 	case IDLE_2:
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN) {
 			state = GO_BACKWARD_2;
@@ -340,8 +363,27 @@ void ModulePlayerTwo::CheckState()
 void ModulePlayerTwo::PerformActions()
 {
 	switch (state) {
-	case IDLE_2:
+	case SPAWN_PLAYER_2:
+		App->ui->game_over_sho = false;
+		current_animation = &idle;
+		blink_time = SDL_GetTicks() - blink_on_entry;
+		if (blink_time > 10) {
+			blink_on_entry = SDL_GetTicks();
+			if (blink) {
+				alpha_player = 0;
+				blink = false;
+			}
+			else {
+				alpha_player = 255;
+				blink = true;
+			}
+		}
 		check_death = false;
+		break;
+
+	case IDLE_2:
+		check_spawn = false;
+		alpha_player = 255;
 		spin.Reset();
 		current_animation = &idle;
 		break;
@@ -381,6 +423,7 @@ void ModulePlayerTwo::PerformActions()
 		break;
 	case DEATH:
 		check_death = true;
+		alpha_player = 255;
 		break;
 	case POST_DEATH:
 		App->player2->Disable();

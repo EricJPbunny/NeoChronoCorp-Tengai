@@ -96,7 +96,7 @@ update_status ModuleUI::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	//Player1
-	if (!App->player->check_death) {
+	if (!game_over_koyori) {
 		App->render->Blit(graphics, 10, 6, &player1, 0.00);
 		App->fonts->BlitText(57, 5, font_score, player1_score);
 
@@ -110,7 +110,7 @@ update_status ModuleUI::Update()
 	}
 
 	//Player2
-	if (!App->player2->check_death && App->player2->IsEnabled()) {
+	if (!game_over_sho && App->player2->IsEnabled()) {
 		App->render->Blit(graphics, 170, 5, &player2, 0.00);
 		App->fonts->BlitText(217, 5, font_score, player2_score);
 
@@ -126,7 +126,7 @@ update_status ModuleUI::Update()
 	//Game over
 	SDL_SetTextureAlphaMod(black, alpha);
 
-	if (App->player2->check_death && App->player->check_death) {
+	if (game_over_koyori && game_over_sho) {
 		//Time countdown
 		App->scene_forest->speed = 0;
 		if (aux) {
