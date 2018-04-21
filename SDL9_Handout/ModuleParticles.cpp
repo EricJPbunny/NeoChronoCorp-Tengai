@@ -86,6 +86,12 @@ ModuleParticles::ModuleParticles()
 	spark.anim.speed = 0.10f;
 	spark.life = 1200;
 
+	//Mirror Bullets
+	mirror_shoot.anim.PushBack({ 26,79,23,13 });
+	mirror_shoot.anim.loop = true;
+	mirror_shoot.life = 3000;
+	mirror_shoot.speed.x = 12;
+
 }
 
 ModuleParticles::~ModuleParticles()

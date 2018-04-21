@@ -12,6 +12,7 @@ struct SDL_Texture;
 enum partner_state_2 {
 	NOT_EXISTING_2,
 	SPAWN,
+	DESPAWN,
 	LEVEL_ONE_2,
 	LEVEL_ONE_CHARGE_2,
 	SHOT,
@@ -40,7 +41,11 @@ public:
 	Animation charging, charging2;
 	fPoint position;
 	partner_state_2 state = NOT_EXISTING_2, state_2 = NOT_EXISTING_2;
-	bool exist = false, exist_2 = false, movement = true;
+	bool exist = false, exist_2 = false, movement = true, time_mirror = true, time_shoot = true, time_mirror_2 = true, time_shoot_2 = true;
+	int time_on_entry = 0;
+	int current_time = 0;
+	int time_on_entry_2 = 0;
+	int current_time_2 = 0;
 	
 };
 

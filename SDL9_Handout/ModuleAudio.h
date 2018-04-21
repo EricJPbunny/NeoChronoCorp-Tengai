@@ -22,7 +22,7 @@ public:
 	Mix_Chunk* const LoadEffect(const char* path);
 
 	void PlayMusic(Mix_Music* mus_to_play, int reps = -1);
-	void PlaySoundEffects(Mix_Chunk* fx_to_play, int fx);
+	void PlaySoundEffects(Mix_Chunk* fx_to_play, int fx=-1);
 	void UnloadMusic(Mix_Music* mus);
 	void UnloadFx(Mix_Chunk* fx);
 
