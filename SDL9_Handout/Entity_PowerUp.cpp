@@ -7,16 +7,31 @@
 
 EntityPowerUp::EntityPowerUp(int x, int y) :Enemy(x, y)
 {
-	iddle.PushBack({ 14,16,30,30 });
-	iddle.PushBack({ 61,16,30,30 });
-	iddle.PushBack({ 107,16,30,30 });
-	iddle.PushBack({ 152,16,30,30 });
+	iddle.PushBack({ 215,127,31,22 });
+	iddle.PushBack({ 246,127,31,22 });
+	iddle.PushBack({ 277,127,31,21 });
+	iddle.PushBack({ 308,127,31,20 });
+	iddle.PushBack({ 339,127,31,20 });
+
+	iddle.PushBack({ 215,149,31,20 });
+	iddle.PushBack({ 246,149,31,20 });
+	iddle.PushBack({ 277,149,31,20 });
+	iddle.PushBack({ 308,149,31,20 });
+	iddle.PushBack({ 339,149,31,20 });
+
+	iddle.PushBack({ 215,169,31,21 });
+	iddle.PushBack({ 246,169,31,21 });
+	iddle.PushBack({ 277,169,31,21 });
+	iddle.PushBack({ 308,169,31,21 });
+	iddle.PushBack({ 339,169,31,20 });
+
+	iddle.PushBack({ 215,190,31,21 });
 	iddle.speed = App->enemies->speed;
 
 
 
 	movement.PushBack({ -0.1f, 0.0f }, 80, &iddle);
-	//movement.PushBack({ 1.0f, 0.0f }, 160, &back);
+	movement.PushBack({ 1.0f, 0.0f }, 160, &iddle);
 
 	animation = &iddle;
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_POWER_UP, (Module*)App->enemies);

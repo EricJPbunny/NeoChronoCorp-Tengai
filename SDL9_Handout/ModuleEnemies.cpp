@@ -12,6 +12,7 @@
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
 #include "Enemy_Ninja.h"
+#include "Entity_PowerUp.h"
 
 #define SPAWN_MARGIN 50
 
@@ -30,6 +31,7 @@ bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("assets/sprite/enemies.png");
+	puSprites = App->textures->Load("assets/sprite/enemies.png");
 
 	fx_death = App->audio->LoadEffect("assets/audio/enemy_death.wav");
 
@@ -145,6 +147,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::NINJA:
 				enemies[i] = new Enemy_Ninja(info.x, info.y);
 				break;
+			case ENEMY_TYPES::POWERUP:
+				enemies[i] = new EntityPowerUp(info.x, info.y);
+				break;
 		}
 	}
 }
@@ -169,11 +174,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
-			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
-				if (c2 == App->player->coll) {
+			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) {
+				if (c2 == App->player->hitbox) {
 					App->player->state = SPIN;
 				}
-				if (c2 == App->player2->coll) {
+				if (c2 == App->player2->hitbox) {
 					App->player2->state = SPIN_2;
 				}
 			}

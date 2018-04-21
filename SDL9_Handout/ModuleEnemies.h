@@ -21,6 +21,7 @@ enum ENEMY_TYPES
 	GREENOVNI,
 	REDOVNI,
 	NINJA,
+	POWERUP,
 };
 
 class Enemy;
@@ -59,6 +60,7 @@ private:
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;
+	SDL_Texture* puSprites;
 };
 
 #endif // __ModuleEnemies_H__

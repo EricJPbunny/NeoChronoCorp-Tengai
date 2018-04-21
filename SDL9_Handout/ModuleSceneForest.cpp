@@ -421,6 +421,9 @@ update_status ModuleSceneForest::Update()
 		if (App->input->keyboard[SDL_SCANCODE_TAB] == KEY_STATE::KEY_REPEAT) {
 			speed = 24;
 		}
+		if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN) {
+			App->enemies->AddEnemy(POWERUP,App->player->position.x+30, App->player->position.y);
+		}
 	}
 	//fader
 	SDL_SetTextureAlphaMod(graphics2, alpha_graph2);
