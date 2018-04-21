@@ -21,6 +21,10 @@ public:
 public:
 	int font_score = -1, font_time = 0;
 	int alpha = 0;
+
+	int pos_score = 0;
+
+	bool update_score = false;
 	
 	int time_on_entry = 0;
 	int current_time = 0;

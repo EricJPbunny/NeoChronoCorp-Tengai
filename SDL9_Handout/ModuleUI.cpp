@@ -86,8 +86,8 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::Update()
 {
 	//Draw UI Score
-	sprintf_s(player1_score, 10, "%3d", score_koyori);
-	sprintf_s(player2_score, 10, "%3d", score_sho);
+	sprintf_s(player1_score, 10, "%7d", score_koyori);
+	sprintf_s(player2_score, 10, "%7d", score_sho);
 
 	sprintf_s(time_text, 2, "%1d", time);
 	
@@ -98,7 +98,7 @@ update_status ModuleUI::Update()
 	//Player1
 	if (!game_over_koyori) {
 		App->render->Blit(graphics, 10, 6, &player1, 0.00);
-		App->fonts->BlitText(57, 5, font_score, player1_score);
+		App->fonts->BlitText(18, 5, font_score, player1_score);
 
 		//Life Koyori
 		for (int i = 1; i <= num_life_koyori - 1; i++) {
@@ -112,7 +112,7 @@ update_status ModuleUI::Update()
 	//Player2
 	if (!game_over_sho && App->player2->IsEnabled()) {
 		App->render->Blit(graphics, 170, 5, &player2, 0.00);
-		App->fonts->BlitText(217, 5, font_score, player2_score);
+		App->fonts->BlitText(180, 5, font_score, player2_score);
 
 		//Life Sho
 		for (int i = 1; i <= num_life_sho - 1; i++) {

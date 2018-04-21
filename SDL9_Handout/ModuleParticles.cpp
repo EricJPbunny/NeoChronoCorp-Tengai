@@ -89,8 +89,23 @@ ModuleParticles::ModuleParticles()
 	//Mirror Bullets
 	mirror_shoot.anim.PushBack({ 26,79,23,13 });
 	mirror_shoot.anim.loop = true;
-	mirror_shoot.life = 3000;
+	mirror_shoot.life = 1400;
 	mirror_shoot.speed.x = 12;
+
+	c_mirror_green.anim.PushBack({ 55,63,32,13 });
+	c_mirror_green.anim.loop = true;
+	c_mirror_green.life = 1400;
+	c_mirror_green.speed.x = 12;
+
+	c_mirror_blue.anim.PushBack({ 55,79,32,13 });
+	c_mirror_blue.anim.loop = true;
+	c_mirror_blue.life = 1400;
+	c_mirror_blue.speed.x = 12;
+
+	c_mirror_cyan.anim.PushBack({ 55,95,32,13 });
+	c_mirror_cyan.anim.loop = true;
+	c_mirror_cyan.life = 1400;
+	c_mirror_cyan.speed.x = 12;
 
 }
 

@@ -123,9 +123,12 @@ update_status ModulePartner2::Update()
 		position.x = App->player2->position.x - 25;
 		position.y = App->player2->position.y - 10;
 	}
-	if (!movement) {
+	if (!movement && !charged_shoot) {
 		position.x = App->player2->position.x + 25;
 		position.y = App->player2->position.y - 20;
+	}
+	else if (charged_shoot) {
+		position.x += App->scene_forest->speed/SCREEN_SIZE;
 	}
 
 	//Draw Partner
@@ -134,7 +137,16 @@ update_status ModulePartner2::Update()
 	if (exist) {
 		if (movement) {
 			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
-				App->particles->AddParticle(App->particles->mirror_shoot, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
+				if (shot_delay) 
+				{
+					shot_entry = SDL_GetTicks();
+					shot_delay = false;
+				}
+				shot_current = SDL_GetTicks() - shot_entry;
+				if(shot_current > 300) {
+					App->particles->AddParticle(App->particles->mirror_shoot, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
+					shot_delay = true;
+				}		
 			}
 		}
 		App->render->Blit(graphics, position.x + 10, position.y - 10 - r.h, &r);
@@ -142,7 +154,16 @@ update_status ModulePartner2::Update()
 	if (exist_2) {
 		if (movement) {
 			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
-				App->particles->AddParticle(App->particles->mirror_shoot, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				if (shot_delay_2)
+				{
+					shot_entry_2 = SDL_GetTicks();
+					shot_delay_2 = false;
+				}
+				shot_current_2 = SDL_GetTicks() - shot_entry;
+				if (shot_current_2 > 300) {
+					App->particles->AddParticle(App->particles->mirror_shoot, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+					shot_delay_2 = true;
+				}
 			}
 		}
 		App->render->Blit(graphics, position.x+5, position.y+5 - r1.h, &r1);
@@ -182,7 +203,6 @@ void ModulePartner2::CheckState()
 			current_time = SDL_GetTicks() - time_on_entry;
 			if (current_time > 300) {
 				time_shoot = true;
-				LOG("Change to charged");
 				state = LEVEL_ONE_CHARGE_2;
 			}
 		}
@@ -195,6 +215,7 @@ void ModulePartner2::CheckState()
 		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
 			spawn.Reset();
 			spawn_reverse.Reset();
+			charged_shoot = true;
 			state = SHOT;
 		}
 		break;
@@ -216,6 +237,7 @@ void ModulePartner2::CheckState()
 	case DESPAWN:
 		if (spawn_reverse.Finished()) {
 			spawn_reverse.Reset();
+			charged_shoot = false;
 			movement = true;
 			time_mirror = true;
 			state = SPAWN;
@@ -329,6 +351,28 @@ void ModulePartner2::PerformActions()
 
 	case SHOT:
 		current_animation = &iddle;
+		if (shot_delay)
+		{
+			shot_entry = SDL_GetTicks();
+			shot_delay = false;
+		}
+		shot_current = SDL_GetTicks() - shot_entry;
+		if (shot_current > 200) {
+			switch (num_bullet) {
+			case 1:
+				App->particles->AddParticle(App->particles->c_mirror_green, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
+				break;
+			case 2:
+				App->particles->AddParticle(App->particles->c_mirror_blue, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
+				break;
+			case 3:
+				App->particles->AddParticle(App->particles->c_mirror_cyan, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
+				num_bullet = 0;
+				break;
+			}
+			num_bullet++;
+			shot_delay = true;
+		}
 		break;
 
 	}
@@ -368,9 +412,29 @@ void ModulePartner2::PerformActions()
 
 	case SHOT:
 		current_animation_2 = &iddle2;
+		if (shot_delay_2)
+		{
+			shot_entry_2 = SDL_GetTicks();
+			shot_delay_2 = false;
+		}
+		shot_current_2 = SDL_GetTicks() - shot_entry_2;
+		if (shot_current_2 > 200) {
+			switch (num_bullet_2) {
+			case 1:
+				App->particles->AddParticle(App->particles->c_mirror_green, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				break;
+			case 2:
+				App->particles->AddParticle(App->particles->c_mirror_blue, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				break;
+			case 3:
+				App->particles->AddParticle(App->particles->c_mirror_cyan, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				num_bullet_2 = 0;
+				break;
+			}
+			num_bullet_2++;
+			shot_delay_2 = true;
+		}
 		break;
-
-
 	}
 
 

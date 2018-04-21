@@ -42,10 +42,22 @@ public:
 	fPoint position;
 	partner_state_2 state = NOT_EXISTING_2, state_2 = NOT_EXISTING_2;
 	bool exist = false, exist_2 = false, movement = true, time_mirror = true, time_shoot = true, time_mirror_2 = true, time_shoot_2 = true;
+	bool charged_shoot = false;
 	int time_on_entry = 0;
 	int current_time = 0;
 	int time_on_entry_2 = 0;
 	int current_time_2 = 0;
+
+	bool shot_delay = true;
+	int shot_current = 0;
+	int shot_entry = 0;
+
+	bool shot_delay_2 = true;
+	int shot_current_2 = 0;
+	int shot_entry_2 = 0;
+
+	int num_bullet = 1;
+	int num_bullet_2 = 1;
 	
 };
 
