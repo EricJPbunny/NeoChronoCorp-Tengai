@@ -286,6 +286,7 @@ void ModulePlayer::CheckState()
 		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
 			state = WALK;
+			
 			LOG("camina");
 		}
 
@@ -399,7 +400,7 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case GO_BACKWARD:
-		input = true;
+		
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -408,27 +409,30 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case BACKWARD:
-		input = true;
+		
 		if (backward.Finished())
 			backward.Reset();
 		current_animation = &backward;
 		break;
 
 	case BACK_IDLE:
-		input = true;
+		
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
 		break;
 
 	case WALK:
-		input = true;
+		
 		if (walk.Finished())
 			walk.Reset();
-		current_animation = &walk;
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
+			current_animation = &walk;
+		}
+		else { current_animation = &idle; }
 		break;
 	case SPIN:
-		input = true;
+		
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
 		current_animation = &spin;
@@ -439,7 +443,7 @@ void ModulePlayer::PerformActions()
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
-		input = true;
+		
 		App->ui->game_over_koyori = true;
 		App->player->Disable();
 		break;
