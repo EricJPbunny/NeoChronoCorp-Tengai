@@ -12,20 +12,22 @@ struct SDL_Texture;
 enum partner_state {
 	NOT_EXISTING,
 	LEVEL_ONE,
-	LEVEL_TWO,
 	LEVEL_ONE_CHARGE,
-	LEVEL_TWO_CHARGE
+	SPAWN,
+	SHOT
 };
 
-class ModulePartner : public Module 
+class ModulePartner : public Module
 {
 public:
-		ModulePartner();
-		~ModulePartner();
-
-		bool Start();
-		update_status Update();
-		bool CleanUp();
+	ModulePartner();
+	~ModulePartner();
+	bool Start();
+	update_status Update();
+	bool CleanUp();
+private:
+	void CheckState();
+	void PerformActions();
 
 public:
 	SDL_Texture* graphics = nullptr;
@@ -38,7 +40,18 @@ public:
 	Animation charging2;
 	fPoint position;
 	partner_state state = NOT_EXISTING;
-	
+	int aux;
+	bool time_shoot = true, exist = false, time_cat = true;
+
+
+	bool shot_delay = true;
+	int shot_current = 0;
+	int shot_entry = 0;
+
+	int time_on_entry = 0;
+	int current_time = 0;
+
+	int num_bullet = 1;
 };
 
 #endif

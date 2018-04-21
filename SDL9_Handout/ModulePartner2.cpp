@@ -19,7 +19,7 @@ ModulePartner2::ModulePartner2()
 	graphics = nullptr;
 	current_animation = nullptr;
 
-	spawn.PushBack({6,146,10,11});
+	spawn.PushBack({ 6,146,10,11 });
 	spawn.PushBack({ 19,146,10,11 });
 	spawn.PushBack({ 31,146,10,11 });
 	spawn.PushBack({ 51,147,10,11 });
@@ -67,25 +67,25 @@ ModulePartner2::ModulePartner2()
 	charging2.PushBack({ 92,175,22,13 });
 	charging2.speed = 0.10f;
 
-	
+
 }
 
-ModulePartner2::~ModulePartner2() 
+ModulePartner2::~ModulePartner2()
 {
 	//destroyer
 }
 
-bool ModulePartner2::Start() 
+bool ModulePartner2::Start()
 {
 	LOG("Loading partner textures");
 	graphics = App->textures->Load("assets/sprite/Sho_Spritesheet.png");
-	if (graphics == nullptr) 
+	if (graphics == nullptr)
 	{
 		LOG("Could not load partner textures")
 			return false;
 	}
 	position.x = App->player2->position.x;
-	position.y = App->player2->position.y ;
+	position.y = App->player2->position.y;
 	return true;
 }
 
@@ -93,7 +93,7 @@ bool ModulePartner2::CleanUp()
 {
 	LOG("Unloading player");
 	App->textures->Unload(graphics);
-	if (graphics != nullptr) 
+	if (graphics != nullptr)
 	{
 		LOG("Could not unload partner 2 textures")
 			return false;
@@ -128,7 +128,7 @@ update_status ModulePartner2::Update()
 		position.y = App->player2->position.y - 20;
 	}
 	else if (charged_shoot) {
-		position.x += App->scene_forest->speed/SCREEN_SIZE;
+		position.x += App->scene_forest->speed / SCREEN_SIZE;
 	}
 
 	//Draw Partner
@@ -137,16 +137,16 @@ update_status ModulePartner2::Update()
 	if (exist) {
 		if (movement) {
 			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
-				if (shot_delay) 
+				if (shot_delay)
 				{
 					shot_entry = SDL_GetTicks();
 					shot_delay = false;
 				}
 				shot_current = SDL_GetTicks() - shot_entry;
-				if(shot_current > 300) {
+				if (shot_current > 300) {
 					App->particles->AddParticle(App->particles->mirror_shoot, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
 					shot_delay = true;
-				}		
+				}
 			}
 		}
 		App->render->Blit(graphics, position.x + 10, position.y - 10 - r.h, &r);
@@ -166,13 +166,13 @@ update_status ModulePartner2::Update()
 				}
 			}
 		}
-		App->render->Blit(graphics, position.x+5, position.y+5 - r1.h, &r1);
+		App->render->Blit(graphics, position.x + 5, position.y + 5 - r1.h, &r1);
 	}
-	
+
 	return UPDATE_CONTINUE;
 }
 
-void ModulePartner2::CheckState() 
+void ModulePartner2::CheckState()
 {
 	//Mirror 1
 	switch (state) {
@@ -180,11 +180,11 @@ void ModulePartner2::CheckState()
 		movement = true;
 		time_mirror = true;
 		if (App->player2->power_up == 1) {
-			state = SPAWN;
+			state = SPAWN_2;
 		}
 		break;
 
-	case SPAWN:
+	case SPAWN_2:
 		if (spawn.Finished()) {
 			spawn.Reset();
 			state = LEVEL_ONE_2;
@@ -210,17 +210,17 @@ void ModulePartner2::CheckState()
 			time_shoot = true;
 		}
 		break;
-		
+
 	case LEVEL_ONE_CHARGE_2:
 		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
 			spawn.Reset();
 			spawn_reverse.Reset();
 			charged_shoot = true;
-			state = SHOT;
+			state = SHOT_2;
 		}
 		break;
 
-	case SHOT:
+	case SHOT_2:
 		if (App->player2->power_up == 0) {
 			state = NOT_EXISTING_2;
 		}
@@ -240,7 +240,7 @@ void ModulePartner2::CheckState()
 			charged_shoot = false;
 			movement = true;
 			time_mirror = true;
-			state = SPAWN;
+			state = SPAWN_2;
 		}
 		break;
 	}
@@ -250,11 +250,11 @@ void ModulePartner2::CheckState()
 	case NOT_EXISTING_2:
 		time_mirror_2 = true;
 		if (App->player2->power_up == 2) {
-			state_2 = SPAWN;
+			state_2 = SPAWN_2;
 		}
 		break;
 
-	case SPAWN:
+	case SPAWN_2:
 		if (spawn2.Finished()) {
 			spawn2.Reset();
 			state_2 = LEVEL_ONE_2;
@@ -285,11 +285,11 @@ void ModulePartner2::CheckState()
 		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
 			spawn2.Reset();
 			spawn_reverse2.Reset();
-			state_2 = SHOT;
+			state_2 = SHOT_2;
 		}
 		break;
 
-	case SHOT:
+	case SHOT_2:
 		if (App->player2->power_up <= 1) {
 			state_2 = NOT_EXISTING_2;
 		}
@@ -307,7 +307,7 @@ void ModulePartner2::CheckState()
 		if (spawn_reverse2.Finished()) {
 			spawn_reverse2.Reset();
 			time_mirror_2 = true;
-			state_2 = SPAWN;
+			state_2 = SPAWN_2;
 		}
 		break;
 
@@ -322,7 +322,7 @@ void ModulePartner2::PerformActions()
 		exist = false;
 		break;
 
-	case SPAWN:
+	case SPAWN_2:
 		current_animation = &spawn;
 		exist = true;
 		break;
@@ -349,7 +349,7 @@ void ModulePartner2::PerformActions()
 		current_animation = &spawn_reverse;
 		break;
 
-	case SHOT:
+	case SHOT_2:
 		current_animation = &iddle;
 		if (shot_delay)
 		{
@@ -384,7 +384,7 @@ void ModulePartner2::PerformActions()
 		exist_2 = false;
 		break;
 
-	case SPAWN:
+	case SPAWN_2:
 		current_animation_2 = &spawn2;
 		exist_2 = true;
 		break;
@@ -410,7 +410,7 @@ void ModulePartner2::PerformActions()
 		current_animation_2 = &spawn_reverse2;
 		break;
 
-	case SHOT:
+	case SHOT_2:
 		current_animation_2 = &iddle2;
 		if (shot_delay_2)
 		{

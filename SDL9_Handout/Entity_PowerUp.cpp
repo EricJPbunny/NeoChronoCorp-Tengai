@@ -34,7 +34,7 @@ EntityPowerUp::EntityPowerUp(int x, int y) :Enemy(x, y)
 	movement.PushBack({ 1.0f, 0.0f }, 160, &iddle);
 
 	animation = &iddle;
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_POWER_UP, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 24, 20 }, COLLIDER_TYPE::COLLIDER_POWER_UP, (Module*)App->enemies);
 
 	originalposition.y = y;
 	originalposition.x = x;
