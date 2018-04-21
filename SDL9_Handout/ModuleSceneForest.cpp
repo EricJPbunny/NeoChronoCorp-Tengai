@@ -191,8 +191,8 @@ bool ModuleSceneForest::Start()
 	App->ui->score_koyori = 0;
 	App->ui->score_sho= 0;
 
-	coll_up =App->collision->AddCollider({ 0, 0, 99000, 0 }, COLLIDER_WALL);
-	coll_down =App->collision->AddCollider({ 0,SCREEN_HEIGHT , 990000, 0 }, COLLIDER_WALL);
+	coll_up =App->collision->AddCollider({ 0, 0, 99000, 20 }, COLLIDER_WALL);
+	coll_down =App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
 	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
 

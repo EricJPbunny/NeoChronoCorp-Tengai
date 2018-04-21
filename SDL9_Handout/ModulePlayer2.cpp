@@ -125,13 +125,13 @@ bool ModulePlayerTwo::Start()
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
 	App->partner2->Enable();
-
+	input = true;
 	state = SPAWN_PLAYER_2;
 	App->ui->num_life_sho = 4;
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
 	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
-	position.y = (App->render->camera.y) / SCREEN_SIZE + 40;
+	position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 	return ret;
 }
 
@@ -164,36 +164,37 @@ update_status ModulePlayerTwo::Update()
 
 	//state actions
 	PerformActions();
-
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
-		position.x -= speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT) {
-		position.y -= speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) {
-		position.x += speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT) {
-		position.y += speed;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
-
-		aux1++;
-		switch (aux1) {
-		case 0:
-			App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT,PARTICLE_SHOT_2);
-			break;
-		case 1:
-			App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
-			break;
-		case 2:
-			App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
-			aux1 = 0;
-			break;
+	if (input) {
+		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
+			position.x -= speed;
 		}
-		
+		if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT) {
+			position.y -= speed;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) {
+			position.x += speed;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT) {
+			position.y += speed;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+
+			aux1++;
+			switch (aux1) {
+			case 0:
+				App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				break;
+			case 1:
+				App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				break;
+			case 2:
+				App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				aux1 = 0;
+				break;
+			}
+
+		}
 	}
 	//Fade
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
@@ -206,10 +207,10 @@ update_status ModulePlayerTwo::Update()
 		position.x = (SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE) - 33;
 	}
 	if (coll->CheckCollision(App->scene_forest->coll_up->rect)) {
-		position.y = 32;
+		position.y = 52;
 	}
 	if (coll->CheckCollision(App->scene_forest->coll_down->rect)) {
-		position.y = SCREEN_HEIGHT;
+		position.y = SCREEN_HEIGHT-4;
 	}
 
 	//Check Death
@@ -269,7 +270,7 @@ void ModulePlayerTwo::CheckState()
 			time = false;
 		}
 		current_time = SDL_GetTicks() - time_on_entry;
-		if (current_time > 2000) {
+		if (current_time > 1500) {
 			state = IDLE_2;
 		}
 		break;
@@ -279,7 +280,7 @@ void ModulePlayerTwo::CheckState()
 			state = GO_BACKWARD_2;
 			LOG("cambio para atras");
 		}
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT) {
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
 			state = WALK_2;
 			LOG("camina");
 		}
@@ -325,7 +326,7 @@ void ModulePlayerTwo::CheckState()
 		}
 		if (current_animation->Finished()) {
 			intermediate.Reset();
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT) {
+			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT-4) {
 				state = WALK_2;
 			}
 			else {
@@ -365,6 +366,7 @@ void ModulePlayerTwo::PerformActions()
 	switch (state) {
 	case SPAWN_PLAYER_2:
 		App->ui->game_over_sho = false;
+		check_spawn = true;
 		current_animation = &idle;
 		blink_time = SDL_GetTicks() - blink_on_entry;
 		if (blink_time > 10) {
@@ -379,9 +381,11 @@ void ModulePlayerTwo::PerformActions()
 			}
 		}
 		check_death = false;
+		input = false;
 		break;
 
 	case IDLE_2:
+		input = true;
 		check_spawn = false;
 		alpha_player = 255;
 		spin.Reset();
@@ -389,6 +393,7 @@ void ModulePlayerTwo::PerformActions()
 		break;
 
 	case GO_BACKWARD_2:
+		input = true;
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -397,18 +402,21 @@ void ModulePlayerTwo::PerformActions()
 		break;
 
 	case BACKWARD_2:
+		input = true;
 		if (backward.Finished())
 			backward.Reset();
 		current_animation = &backward;
 		break;
 
 	case BACK_IDLE_2:
+		input = true;
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
 		break;
 
 	case WALK_2:
+		input = true;
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A]) {
 			state = IDLE_2;
 		}
@@ -417,6 +425,7 @@ void ModulePlayerTwo::PerformActions()
 		current_animation = &walk;
 		break;
 	case SPIN_2:
+		input = true;
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, position.x, position.y - 32, &spin_rect);
 		current_animation = &spin;
@@ -426,6 +435,7 @@ void ModulePlayerTwo::PerformActions()
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
+		input = true;
 		App->player2->Disable();
 		break;
 	}

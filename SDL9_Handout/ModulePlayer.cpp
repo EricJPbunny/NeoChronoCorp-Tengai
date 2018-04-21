@@ -127,13 +127,13 @@ bool ModulePlayer::Start()
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
 
 	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
-	position.y = (App->render->camera.y) / SCREEN_SIZE+40;
+	position.y = (App->render->camera.y) / SCREEN_SIZE+100;
 
 	state = SPAWN_PLAYER;
 	App->ui->num_life_koyori = 4;
 
 	App->partner->Enable();
-
+	input = true;
 	time = true;
 	destroyed = false;
 	return true;
@@ -165,40 +165,42 @@ update_status ModulePlayer::Update()
 	PerformActions();
 
 	//Inputs
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
-		position.x -= speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
-		position.y -= speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
-		position.x += speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
-		position.y += speed;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		aux1++;
-		switch (aux1) {
-		case 0:
-			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT,PARTICLE_SHOT);
-			break;
-		case 1:
-			App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
-			break;
-		case 2:
-			App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
-			break;
-		case 3:
-			App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
-			break;
-		case 4:
-			App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
-			aux1 = 0;
-			break;
+	if (input) {
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
+			position.x -= speed;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
+			position.y -= speed;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
+			position.x += speed;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
+			position.y += speed;
 		}
 
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+			aux1++;
+			switch (aux1) {
+			case 0:
+				App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				break;
+			case 1:
+				App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				break;
+			case 2:
+				App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				break;
+			case 3:
+				App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				break;
+			case 4:
+				App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				aux1 = 0;
+				break;
+			}
+
+		}
 	}
 	//Fade
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
@@ -234,10 +236,10 @@ update_status ModulePlayer::Update()
 		position.x = (SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE) - 33;
 	}
 	if (coll->CheckCollision(App->scene_forest->coll_up->rect)) {
-		position.y = 32;
+		position.y = 52;
 	}
 	if (coll->CheckCollision(App->scene_forest->coll_down->rect)) {
-		position.y = SCREEN_HEIGHT;
+		position.y = SCREEN_HEIGHT-4;
 	}
 
 	return UPDATE_CONTINUE;
@@ -265,9 +267,10 @@ void ModulePlayer::CheckState()
 			time = false;
 		}
 		current_time = SDL_GetTicks() - time_on_entry;
-		if (current_time > 2000) {
+		if (current_time > 1500) {
 			state = IDLE;
 		}
+		
 		break;
 
 	case IDLE:
@@ -275,7 +278,7 @@ void ModulePlayer::CheckState()
 			state = GO_BACKWARD;
 			LOG("cambio para atras");
 		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT) {
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
 			state = WALK;
 			LOG("camina");
 		}
@@ -321,7 +324,7 @@ void ModulePlayer::CheckState()
 		}
 		if (current_animation->Finished()) {
 			intermediate.Reset();
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT) {
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT-4) {
 				state = WALK;
 			}
 			else {
@@ -377,10 +380,12 @@ void ModulePlayer::PerformActions()
 				blink = true;
 			}
 		}
+		input = false;
 		check_death = false;
 		break;
 
 	case IDLE:
+		input = true;
 		check_spawn = false;
 		alpha_player = 255;
 		spin.Reset();
@@ -388,6 +393,7 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case GO_BACKWARD:
+		input = true;
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -396,32 +402,38 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case BACKWARD:
+		input = true;
 		if (backward.Finished())
 			backward.Reset();
 		current_animation = &backward;
 		break;
 
 	case BACK_IDLE:
+		input = true;
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
 		break;
 
 	case WALK:
+		input = true;
 		if (walk.Finished())
 			walk.Reset();
 		current_animation = &walk;
 		break;
 	case SPIN:
+		input = true;
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
 		current_animation = &spin;
 		break;
 	case DEATH:
+		input = false;
 		check_death = true;
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
+		input = true;
 		App->ui->game_over_koyori = true;
 		App->player->Disable();
 		break;

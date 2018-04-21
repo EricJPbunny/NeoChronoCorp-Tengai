@@ -66,6 +66,8 @@ public:
 
 	int blink_on_entry = 0;
 	int blink_time = 0;
+
+	bool input = true;
 	
 };
 
