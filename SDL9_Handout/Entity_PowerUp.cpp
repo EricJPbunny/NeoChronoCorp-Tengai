@@ -25,7 +25,7 @@ EntityPowerUp::EntityPowerUp(int x, int y) :Enemy(x, y)
 	originalposition.x = x;
 }
 
-void Enemy_GreenOvni::Move()
+void EntityPowerUp::Move()
 {
 	if (App->ui->enemies_movement) {
 		position = originalposition + movement.GetCurrentSpeed();
