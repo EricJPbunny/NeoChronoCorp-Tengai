@@ -356,6 +356,7 @@ void ModulePlayerTwo::CheckState()
 			}
 
 		}
+
 		break;
 	case SPIN_2:
 		if (spin.Finished()) {
@@ -424,12 +425,12 @@ void ModulePlayerTwo::PerformActions()
 		break;
 
 	case WALK_2:
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A]) {
-			state = IDLE_2;
-		}
 		if (walk.Finished())
 			walk.Reset();
-		current_animation = &walk;
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
+			current_animation = &walk;
+		}
+		else { current_animation = &idle; }
 		break;
 	case SPIN_2:
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
