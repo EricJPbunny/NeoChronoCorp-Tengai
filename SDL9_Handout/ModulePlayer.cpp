@@ -80,7 +80,7 @@ ModulePlayer::ModulePlayer()
 	spin_circle.PushBack({ 423,161,32,32 });
 	spin_circle.PushBack({ 457,161,32,32 });
 	spin_circle.PushBack({ 356,196,32,32 });
-	spin_circle.speed = 0.70f;
+	spin_circle.speed = 0.3f;
 
 	//Death
 	death_circle.PushBack({ 153,0, 130, 130 });
@@ -213,14 +213,6 @@ update_status ModulePlayer::Update()
 	if (App->ui->num_life_koyori == 0) {
 		state = DEATH;
 	}
-
-	//Set spin posotion
-	if (spin_pos) {
-		aux_spin.x = position.x;
-		aux_spin.y = position.y - 32;
-		spin_pos = false;
-	}
-
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (!check_death) {
@@ -294,6 +286,7 @@ void ModulePlayer::CheckState()
 		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
 			state = WALK;
+			
 			LOG("camina");
 		}
 
@@ -359,6 +352,15 @@ void ModulePlayer::CheckState()
 				state = IDLE;
 			}
 		}
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
+			current_animation = &walk;
+		}
+		else { current_animation = &idle; }
+		if (App->render->camera.x > 26000) {
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
+				current_animation = &idle;
+			}
+		}
 		break;
 	case SPIN:
 		if (spin.Finished()) {
@@ -407,6 +409,7 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case GO_BACKWARD:
+		
 		if (intermediate.Finished())
 		{
 			intermediate.Reset();
@@ -415,28 +418,29 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case BACKWARD:
-		input = true;
+		
 		if (backward.Finished())
 			backward.Reset();
 		current_animation = &backward;
 		break;
 
 	case BACK_IDLE:
+		
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
 		break;
 
 	case WALK:
+		
 		if (walk.Finished())
 			walk.Reset();
-		current_animation = &walk;
+	
 		break;
 	case SPIN:
+		
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
-		if (spin_circle.Finished()) {
-			App->render->Blit(graphics, aux_spin.x, aux_spin.y, &spin_rect);
-		}
+		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
 		current_animation = &spin;
 		break;
 	case DEATH:
@@ -445,6 +449,7 @@ void ModulePlayer::PerformActions()
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
+		
 		App->ui->game_over_koyori = true;
 		App->player->Disable();
 		break;

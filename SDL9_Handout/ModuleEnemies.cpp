@@ -176,11 +176,9 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2)&& c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
 				if (c2 == App->player->hitbox) {
-					App->player->spin_pos = true;
 					App->player->state = SPIN;
 				}
 				if (c2 == App->player2->hitbox) {
-					App->player2->spin_pos = true;
 					App->player2->state = SPIN_2;
 				}
 			}
