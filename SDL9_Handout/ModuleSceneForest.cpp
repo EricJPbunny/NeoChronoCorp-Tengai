@@ -200,7 +200,7 @@ bool ModuleSceneForest::Start()
 	coll_down =App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
 	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
-	coll_trigger = App->collision->AddCollider({100,0,120,40},COLLIDER_TRIGGER);
+	coll_trigger = App->collision->AddCollider({0,0,300,300},COLLIDER_TRIGGER);
 
 	//Enemies Ovni
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 830, 170);
@@ -209,10 +209,15 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 955, 80);
 	 
 
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1430, 30);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1450, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1470, 90);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 1490, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1230, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1250, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1270, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 1290, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3430, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3450, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 3490, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3470, 90);
 
 	//Enemies Ninja
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 790, 0);
@@ -273,7 +278,7 @@ update_status ModuleSceneForest::Update()
 	//Update Collision
 	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, 0);
 	coll_right->SetPos(SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE, 0);
-	coll_trigger->SetPos( 200+ (App->render->camera.x / SCREEN_SIZE),100);
+	coll_trigger->SetPos( 100+(App->render->camera.x / SCREEN_SIZE),0);
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
 
@@ -501,6 +506,16 @@ update_status ModuleSceneForest::Update()
 		App->render->camera.x = 49000;
 		App->player->position.x = App->render->camera.x / 3;
 		App->player2->position.x = App->render->camera.x / 3;
+	}
+	//Delete Colliders
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {
+		if (!god_mode) {
+			App->player->hitbox->SetPos(App->render->camera.x, App->render->camera.y);
+			god_mode = true;
+		}
+		else {
+			god_mode = false;
+		}
 	}
 	
 	return UPDATE_CONTINUE;

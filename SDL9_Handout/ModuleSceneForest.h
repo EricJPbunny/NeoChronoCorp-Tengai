@@ -42,6 +42,8 @@ public:
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
 	float speed = 10.5;
 	int aux_time = 0;
+
+	bool god_mode = false;
 };
 
 #endif // __MODULESCENEFOREST_H__
