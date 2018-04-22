@@ -128,6 +128,7 @@ bool ModulePlayerTwo::Start()
 	input = true;
 	state = SPAWN_PLAYER_2;
 	App->ui->num_life_sho = 4;
+	power_up = 0;
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
 	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX_2);
@@ -226,7 +227,7 @@ update_status ModulePlayerTwo::Update()
 
 	//Set spin posotion
 	if (spin_pos) {
-		aux_spin.x = position.x;
+		aux_spin.x = position.x + 5;
 		aux_spin.y = position.y-32;
 		spin_pos = false;
 	}
@@ -437,17 +438,19 @@ void ModulePlayerTwo::PerformActions()
 	case WALK_2:
 		if (walk.Finished())
 			walk.Reset();
-		
 		break;
+
 	case SPIN_2:
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, aux_spin.x, aux_spin.y, &spin_rect);
 		current_animation = &spin;
 		break;
+
 	case DEATH:
 		check_death = true;
 		alpha_player = 255;
 		break;
+
 	case POST_DEATH:
 		App->player2->Disable();
 		break;

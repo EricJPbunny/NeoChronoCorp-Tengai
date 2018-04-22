@@ -2,10 +2,10 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
-#include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
+#include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneForest.h"
 #include "ModulePlayer.h"
@@ -132,9 +132,11 @@ bool ModulePlayer::Start()
 
 	state = SPAWN_PLAYER;
 	App->ui->num_life_koyori = 4;
+	power_up = 0;
+
+	k_power_down = App->audio->LoadEffect("assets/audio/koyori_lvl_down.wav");
 
 	App->partner->Enable();
-	input = true;
 	time = true;
 	destroyed = false;
 	return true;
@@ -153,6 +155,9 @@ bool ModulePlayer::CleanUp()
 	if (hitbox != nullptr)
 		hitbox->to_delete = true;
 
+	App->ui->game_over_koyori = true;
+
+	App->audio->UnloadFx(k_power_down);
 
 	App->partner->Disable();
 	return true;
@@ -213,6 +218,14 @@ update_status ModulePlayer::Update()
 	if (App->ui->num_life_koyori == 0) {
 		state = DEATH;
 	}
+
+	//Set spin posotion
+	if (spin_pos) {
+		aux_spin.x = position.x + 5;
+		aux_spin.y = position.y - 32;
+		spin_pos = false;
+	}
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (!check_death) {
@@ -438,9 +451,8 @@ void ModulePlayer::PerformActions()
 	
 		break;
 	case SPIN:
-		
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
-		App->render->Blit(graphics, position.x+1, position.y-32, &spin_rect);
+		App->render->Blit(graphics, aux_spin.x, aux_spin.y, &spin_rect);
 		current_animation = &spin;
 		break;
 	case DEATH:
@@ -449,8 +461,6 @@ void ModulePlayer::PerformActions()
 		alpha_player = 255;
 		break;
 	case POST_DEATH:
-		
-		App->ui->game_over_koyori = true;
 		App->player->Disable();
 		break;
 	}	

@@ -183,6 +183,9 @@ bool ModuleSceneForest::Start()
 	level_completed = App->audio->LoadMusic("assets/audio/Level_Completed.ogg");
 	mus = App->audio->LoadMusic("assets/audio/08_Tall_cedar.ogg");
 
+	select_koyori = App->audio->LoadEffect("assets/audio/select_koyori.wav");
+	select_sho = App->audio->LoadEffect("assets/audio/select_sho.wav");
+
 	App->player->Enable();
 	App->ui->Enable();
 	App->collision->Enable();
@@ -190,6 +193,8 @@ bool ModuleSceneForest::Start()
 
 	App->ui->score_koyori = 0;
 	App->ui->score_sho= 0;
+
+	App->audio->PlaySoundEffects(select_koyori, 1);
 
 	coll_up =App->collision->AddCollider({ 0, 0, 99000, 20 }, COLLIDER_WALL);
 	coll_down =App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
@@ -234,6 +239,11 @@ bool ModuleSceneForest::CleanUp()
 
 	App->render->camera.x = 0;
 
+	App->audio->UnloadFx(select_sho);
+	App->audio->UnloadFx(select_koyori);
+
+	App->audio->UnloadMusic(mus);
+	App->audio->UnloadMusic(boss);
 	App->audio->UnloadMusic(level_completed);
 
 	App->collision->Disable();
@@ -439,7 +449,6 @@ update_status ModuleSceneForest::Update()
 
 	//Music 
 	if (App->render->camera.x > 15000 && App->render->camera.x < 15100 ) {
-		App->audio->UnloadMusic(mus);
 		App->audio->PlayMusic(boss);
 	}
 
@@ -447,19 +456,20 @@ update_status ModuleSceneForest::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		if (!App->player->IsEnabled()) {
+			App->audio->PlaySoundEffects(select_koyori,1);
 			App->player->Enable();
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 		if (!App->player2->IsEnabled()) {
+			App->audio->PlaySoundEffects(select_sho,2);
 			App->player2->Enable();
 		}
 	}
 
 	//End level
 	if (App->render->camera.x > 51000 && App->render->camera.x < 51100) {
-		App->audio->UnloadMusic(boss);
 		App->audio->PlayMusic(level_completed, 1);
 	}
 	if (App->render->camera.x > 51200) {

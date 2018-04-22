@@ -14,6 +14,8 @@
 #include "Enemy_Ninja.h"
 #include "Entity_PowerUp.h"
 
+#include "SDL\include\SDL_timer.h"
+
 #define SPAWN_MARGIN 50
 
 ModuleEnemies::ModuleEnemies()
@@ -34,6 +36,8 @@ bool ModuleEnemies::Start()
 	puSprites = App->textures->Load("assets/sprite/enemies.png");
 
 	fx_death = App->audio->LoadEffect("assets/audio/enemy_death.wav");
+	s_power_down = App->audio->LoadEffect("assets/audio/sho_lvl_down.wav");
+
 
 	return true;
 }
@@ -93,6 +97,7 @@ bool ModuleEnemies::CleanUp()
 {
 	LOG("Freeing all enemies");
 
+	App->audio->UnloadFx(s_power_down);
 	App->audio->UnloadFx(fx_death);
 	App->textures->Unload(sprites);
 
@@ -174,11 +179,33 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
-			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2)&& c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
+			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
 				if (c2 == App->player->hitbox) {
+					if (timer) {
+						time_on_entry = SDL_GetTicks();
+						timer = false;
+					}
+					current_time = SDL_GetTicks() - time_on_entry;
+					if (current_time > 600) {
+						App->player->power_up--;
+						timer = true;
+					}
+					App->audio->PlaySoundEffects(App->player->k_power_down, 3);
+					App->player->spin_pos = true;
 					App->player->state = SPIN;
 				}
 				if (c2 == App->player2->hitbox) {
+					if (timer_2) {
+						time_on_entry_2 = SDL_GetTicks();
+						timer_2 = false;
+					}
+					current_time_2 = SDL_GetTicks() - time_on_entry_2;
+					if (current_time_2 > 600) {
+						App->player2->power_up--;
+						timer_2 = true;
+					}
+					App->audio->PlaySoundEffects(s_power_down, 4);
+					App->player2->spin_pos = true;
 					App->player2->state = SPIN_2;
 				}
 			}

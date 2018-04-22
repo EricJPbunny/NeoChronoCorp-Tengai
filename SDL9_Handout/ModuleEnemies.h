@@ -57,7 +57,14 @@ public:
 	float speed = 0.2f;
 private:
 
+	bool timer = false;
+	int current_time = 700, time_on_entry = 0;
+
+	bool timer_2 = false;
+	int current_time_2 = 700, time_on_entry_2 = 0;
+
 	Mix_Chunk* fx_death = nullptr;
+	Mix_Chunk* s_power_down = nullptr;
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;

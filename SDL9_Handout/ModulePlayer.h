@@ -39,6 +39,7 @@ public:
 	int aux = 0;
 	int aux1 = 0;
 	int alpha_player = 255;
+	Mix_Chunk* k_power_down = nullptr;
 	Collider* coll = nullptr;
 	Collider* hitbox = nullptr;
 	SDL_Texture* graphics = nullptr;
@@ -55,6 +56,7 @@ public:
 	Animation intermediate_return;
 	SDL_Rect death;
 	fPoint position;
+	fPoint aux_spin;
 	bool destroyed = false;
 	bool check_death = false, check_spawn = true;
 	player_state state = IDLE;
@@ -70,6 +72,7 @@ public:
 	int blink_time = 0;
 
 	bool input = true;
+	bool spin_pos = false;
 	
 };
 
