@@ -184,7 +184,7 @@ void ModulePartner::CheckState() {
 		break;
 		
 	case LEVEL_FOUR:
-		if (App->player->power_up == 1) {
+		if (App->player->power_up <= 1) {
 			state = LEVEL_ONE;
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT) {
@@ -251,7 +251,7 @@ void ModulePartner::PerformActions()
 	case EGG_SHOT:
 		current_animation = &decharging;
 		if (create_bullet) {
-			App->particles->AddParticle(App->particles->egg_shoot, position.x, position.y-24, COLLIDER_PLAYER);
+			App->particles->AddParticle(App->particles->egg_shoot, position.x, position.y-24, COLLIDER_PLAYER_SHOT);
 			create_bullet = false;
 		}
 		break;
@@ -275,7 +275,7 @@ void ModulePartner::PerformActions()
 	case CAT_SHOT:
 		current_animation = &decharging;
 		if (create_bullet) {
-			App->particles->AddParticle(App->particles->cat_shoot, position.x, position.y - 26, COLLIDER_PLAYER);
+			App->particles->AddParticle(App->particles->cat_shoot, position.x, position.y - 26, COLLIDER_PLAYER_SHOT);
 			App->particles->cat_shoot.speed.x = App->enemies->speed+3;
 			create_bullet = false;
 		}

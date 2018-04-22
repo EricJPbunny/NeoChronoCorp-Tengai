@@ -180,6 +180,7 @@ update_status ModulePlayerTwo::Update()
 
 	//state actions
 	PerformActions();
+
 	if (input) {
 		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
 			position.x -= speed;
@@ -239,6 +240,12 @@ update_status ModulePlayerTwo::Update()
 		aux_spin.x = position.x + 5;
 		aux_spin.y = position.y-32;
 		spin_pos = false;
+	}
+
+	if (death_pos) {
+		aux_death.x = position.x - 40;
+		aux_death.y = position.y - 70;
+		death_pos = false;
 	}
 
 
@@ -382,6 +389,13 @@ void ModulePlayerTwo::CheckState()
 			state = POST_DEATH_2;
 		}
 		break;
+	case POST_DEATH_2:
+		if (App->ui->num_life_sho > 0) {
+			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
+			position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
+			time = true;
+			state = SPAWN_PLAYER_2;
+		}
 	}
 }
 
@@ -410,6 +424,7 @@ void ModulePlayerTwo::PerformActions()
 
 	case IDLE_2:
 		input = true;
+		death_pos = true;
 		check_spawn = false;
 		alpha_player = 255;
 		spin.Reset();
@@ -447,15 +462,25 @@ void ModulePlayerTwo::PerformActions()
 		current_animation = &spin;
 		break;
 
-	case DEATH:
+	case DEATH_2:
+		SDL_Rect death_rect = death_circle.GetCurrentFrame();
+		power_up = 0;
 		check_death = true;
+		input = false;
+		App->render->Blit(player_death, aux_death.x, aux_death.y, &death_rect, 1.0f);
 		alpha_player = 255;
 		break;
 
-	case POST_DEATH:
-		App->player2->Disable();
+	case POST_DEATH_2:
+		if (App->ui->num_life_sho == 0) {
+			if (App->ui->score_sho > 1000) {
+				App->ui->score_sho -= 1000;
+			}
+			App->player2->Disable();
+		}
+		else {
+			check_death = false;
+		}
 		break;
 	}
-
-
 }
