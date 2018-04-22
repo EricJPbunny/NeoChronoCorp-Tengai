@@ -10,6 +10,7 @@
 #include "ModulePlayer.h"
 #include "ModulePartner.h"
 #include "ModuleUI.h"
+#include "ModuleEnemies.h"
 
 #include "SDL\include\SDL_timer.h"
 
@@ -114,6 +115,10 @@ update_status ModulePartner::Update()
 			}
 			shot_current = SDL_GetTicks() - shot_entry;
 			if (shot_current > 300) {
+				if (App->player->power_up == 2) {
+					App->particles->AddParticle(App->particles->basaro_shot, position.x + 10, position.y - 13, COLLIDER_PLAYER_2_SHOT);
+					App->particles->basaro_shot.fx_played = 1;
+				}
 				App->particles->AddParticle(App->particles->basaro_shot, position.x + 10, position.y - 23, COLLIDER_PLAYER_2_SHOT);
 				shot_delay = true;
 			}
@@ -271,6 +276,7 @@ void ModulePartner::PerformActions()
 		current_animation = &decharging;
 		if (create_bullet) {
 			App->particles->AddParticle(App->particles->cat_shoot, position.x, position.y - 26, COLLIDER_PLAYER);
+			App->particles->cat_shoot.speed.x = App->enemies->speed+3;
 			create_bullet = false;
 		}
 		break;

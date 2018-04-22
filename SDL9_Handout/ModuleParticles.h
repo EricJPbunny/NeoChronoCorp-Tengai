@@ -71,6 +71,8 @@ public:
 	Mix_Chunk* shoot_sho = nullptr;
 	Mix_Chunk* power_up_koyori_fx = nullptr;
 	Mix_Chunk* power_up_sho_fx = nullptr;
+	Mix_Chunk* koyori_death = nullptr;
+	Mix_Chunk* sho_death = nullptr;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, spark;
 	Particle shoot, shoot1, shoot2;
 	Particle mirror_shoot;
@@ -78,6 +80,12 @@ public:
 	Particle cat_shoot, egg_shoot, basaro_shot;
 	Particle power_up, power_down;
 	Particle shuriken;
+
+	bool timer = false;
+	int current_time = 1200, time_on_entry = 0;
+
+	bool timer_2 = false;
+	int current_time_2 = 1200, time_on_entry_2 = 0;
 };
 
 #endif // __MODULEPARTICLES_H__

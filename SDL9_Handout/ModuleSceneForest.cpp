@@ -490,6 +490,7 @@ update_status ModuleSceneForest::Update()
 	//Kill Koyori
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
 		App->ui->num_life_koyori = 0;
+		App->player->state = DEATH;
 	}
 	//Kill Sho
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) {

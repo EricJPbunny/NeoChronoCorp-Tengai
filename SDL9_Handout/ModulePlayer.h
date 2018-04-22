@@ -40,7 +40,6 @@ public:
 	int aux1 = 0;
 	int alpha_player = 255;
 	Mix_Chunk* k_power_down = nullptr;
-	Mix_Chunk* death_fx = nullptr;
 	Collider* coll = nullptr;
 	Collider* hitbox = nullptr;
 	SDL_Texture* graphics = nullptr;

@@ -128,7 +128,7 @@ bool ModulePlayerTwo::Start()
 	App->partner2->Enable();
 	input = true;
 	state = SPAWN_PLAYER_2;
-	App->ui->num_life_sho = 4;
+	App->ui->num_life_sho = 3;
 	power_up = 0;
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
