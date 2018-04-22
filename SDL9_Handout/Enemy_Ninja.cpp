@@ -39,7 +39,7 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 	movement.PushBack({ 1.0f, 0.0f }, 20, &lift);
 	movement.PushBack({ -1.5f, 0.0f }, 40, &run);
 	movement.PushBack({ 5.50f,-4.00f }, 80, &up);
-	movement.PushBack({ 0.0f,0.0f }, 300, &stay);
+	movement.PushBack({ 0.0f,0.0f }, 10000, &stay);
 
 	animation = &fly;
 	
