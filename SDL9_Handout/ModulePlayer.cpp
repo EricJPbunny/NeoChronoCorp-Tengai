@@ -445,10 +445,8 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case WALK:
-		
 		if (walk.Finished())
 			walk.Reset();
-	
 		break;
 	case SPIN:
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
@@ -456,8 +454,10 @@ void ModulePlayer::PerformActions()
 		current_animation = &spin;
 		break;
 	case DEATH:
+		SDL_Rect death_rect = death_circle.GetCurrentFrame();
 		input = false;
 		check_death = true;
+		App->render->Blit(player_death, aux_death.x, aux_death.y, &death_rect);
 		alpha_player = 255;
 		break;
 	case POST_DEATH:

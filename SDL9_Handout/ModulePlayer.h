@@ -57,6 +57,7 @@ public:
 	SDL_Rect death;
 	fPoint position;
 	fPoint aux_spin;
+	fPoint aux_death;
 	bool destroyed = false;
 	bool check_death = false, check_spawn = true;
 	player_state state = IDLE;
@@ -74,6 +75,7 @@ public:
 
 	bool input = true;
 	bool spin_pos = false;
+	bool death_pos = false;
 	
 };
 

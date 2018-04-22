@@ -192,6 +192,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					}
 					current_time = SDL_GetTicks() - time_on_entry;
 					if (current_time > 600) {
+						if (App->player->power_up > 0) {
+							App->particles->power_down.speed.x = App->scene_forest->speed / SCREEN_SIZE;
+							App->particles->power_down.speed.y = -2;
+							App->particles->AddParticle(App->particles->power_down, App->player->position.x, App->player->position.y);
+						}
 						App->player->power_up--;
 						timer = true;
 					}
@@ -206,6 +211,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					}
 					current_time_2 = SDL_GetTicks() - time_on_entry_2;
 					if (current_time_2 > 600) {
+						if (App->player2->power_up > 0) {
+							App->particles->power_down.speed.x = App->scene_forest->speed / SCREEN_SIZE;
+							App->particles->power_down.speed.y = -2;
+							App->particles->AddParticle(App->particles->power_down, App->player2->position.x, App->player2->position.y);
+						}
 						App->player2->power_up--;
 						timer_2 = true;
 					}
