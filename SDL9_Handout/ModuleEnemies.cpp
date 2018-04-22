@@ -15,6 +15,8 @@
 #include "Enemy_Ninja.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
+#include "time.h"
+#include "stdlib.h"
 
 
 #include "SDL\include\SDL_timer.h"
@@ -182,15 +184,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
 				
 				num_ovni++;
-				if (num_ovni <3) {
+				if (num_ovni <4) {
 					App->audio->PlaySoundEffects(fx_death);
 					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 					App->ui->score_koyori += 200;
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
-				if (num_ovni >=
-					3) {
+				if (num_ovni >=4) {
 					App->audio->PlaySoundEffects(fx_death);
 					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 					AddEnemy(ENEMY_TYPES::COIN, enemies[i]->position.x, enemies[i]->position.y);
@@ -255,23 +256,130 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			//Coin
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
+				srand(time(NULL));
+
 				if (c2 == App->player->hitbox) {
 
-					App->particles->coin_100.speed.x = speed;
-					App->particles->coin_100.speed.y = -2;
-					App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-					App->ui->score_koyori += 100;
-					delete enemies[i];
-					enemies[i] = nullptr;
+					typeofcoin = rand() % 5 + 1;
+					switch (typeofcoin) {
+					case 0:
+						App->particles->coin_100.speed.x = speed;
+						App->particles->coin_100.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 100;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 1:
+						App->particles->coin_200.speed.x = speed;
+						App->particles->coin_200.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_200, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 200;
+
+						break;
+						delete enemies[i];
+						enemies[i] = nullptr;
+
+					case 2:
+						App->particles->coin_500.speed.x = speed;
+						App->particles->coin_500.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_500, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 500;
+
+						break;
+						delete enemies[i];
+						enemies[i] = nullptr;
+					case 3:
+						App->particles->coin_1000.speed.x = speed;
+						App->particles->coin_1000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_1000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 1000;
+
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 4:
+						App->particles->coin_2000.speed.x = speed;
+						App->particles->coin_2000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_2000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 2000;
+						App->ui->score_sho += 2000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 5:
+						App->particles->coin_4000.speed.x = speed;
+						App->particles->coin_4000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_4000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 4000;
+
+						delete enemies[i];
+						enemies[i] = nullptr;
+
+					}
 				}
 				if (c2 == App->player2->hitbox) {
-					App->particles->coin_100.speed.x = speed;
-					App->particles->coin_100.speed.y = -2;
-					App->particles->AddParticle(App->particles->coin_100, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-					App->ui->score_sho += 100;
-					delete enemies[i];
-					enemies[i] = nullptr;
+
+					typeofcoin = rand() % 5 + 1;
+					switch (typeofcoin) {
+					case 0:
+						App->particles->coin_100.speed.x = speed;
+						App->particles->coin_100.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_sho += 100;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 1:
+						App->particles->coin_200.speed.x = speed;
+						App->particles->coin_200.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_200, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_sho += 200;
+						break;
+						delete enemies[i];
+						enemies[i] = nullptr;
+
+					case 2:
+						App->particles->coin_500.speed.x = speed;
+						App->particles->coin_500.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_500, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_sho += 500;
+						break;
+						delete enemies[i];
+						enemies[i] = nullptr;
+					case 3:
+						App->particles->coin_1000.speed.x = speed;
+						App->particles->coin_1000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_1000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_sho += 1000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 4:
+						App->particles->coin_2000.speed.x = speed;
+						App->particles->coin_2000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_2000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_sho += 2000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 5:
+						App->particles->coin_4000.speed.x = speed;
+						App->particles->coin_4000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_4000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_sho += 4000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+
+					}
 				}
+
 			}
 
 			//Power Ups
