@@ -168,6 +168,11 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	float speed = App->scene_forest->speed / SCREEN_SIZE;
+
+	if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX&&c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
+	{
+		App->ui->num_life_koyori--;
+	}
 	
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -324,6 +329,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			
 			break;
 		}
+		
 		
 
 	}

@@ -6,6 +6,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleUI.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -126,7 +127,7 @@ ModuleParticles::ModuleParticles()
 	egg_shoot.anim.PushBack({ 62,11,13,13 });
 	egg_shoot.anim.speed = 0.10f;
 	egg_shoot.anim.loop = false;
-	egg_shoot.life = 1400;
+	egg_shoot.life = 2800;
 	egg_shoot.speed.x = 5;
 
 	cat_shoot.anim.PushBack({1,278,57,32});
@@ -150,7 +151,7 @@ ModuleParticles::ModuleParticles()
 	shuriken.anim.PushBack({ 71,175,10,10 });
 	shuriken.anim.PushBack({ 84,175,10,10 });
 	shuriken.anim.PushBack({ 98,176,8,8 });
-	shuriken.speed.x = -10;
+	shuriken.speed.x = -7;
 	shuriken.anim.loop = true;
 	shuriken.life = 1400;
 
@@ -265,11 +266,18 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
+
+	
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
+			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX&&c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
+			{
+				App->ui->num_life_koyori--;
+
+			}
 			//AddParticle(explosion, active[i]->position.x, active[i]->position.y);
 			delete active[i];
 			active[i] = nullptr;
