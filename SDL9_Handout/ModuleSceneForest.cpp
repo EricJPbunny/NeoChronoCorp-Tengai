@@ -521,6 +521,7 @@ update_status ModuleSceneForest::Update()
 		if (!god_mode)
 		{
 			App->player->hitbox->SetPos(-100, -100);
+			App->player2->hitbox->SetPos(-100, -100);
 			god_mode = true;
 		}
 		else god_mode = false;
