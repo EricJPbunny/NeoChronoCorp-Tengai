@@ -133,11 +133,10 @@ bool ModulePlayer::Start()
 	position.y = (App->render->camera.y) / SCREEN_SIZE+100;
 
 	state = SPAWN_PLAYER;
-	App->ui->num_life_koyori = 4;
+	App->ui->num_life_koyori = 3;
 	power_up = 0;
 
 	k_power_down = App->audio->LoadEffect("assets/audio/koyori_lvl_down.wav");
-	death_fx = App->audio->LoadEffect("assets/audio/death_koyori.wav");
 
 	App->partner->Enable();
 	time = true;
@@ -160,7 +159,6 @@ bool ModulePlayer::CleanUp()
 
 	App->ui->game_over_koyori = true;
 
-	App->audio->UnloadFx(death_fx);
 	App->audio->UnloadFx(k_power_down);
 
 	App->partner->Disable();
@@ -226,10 +224,6 @@ update_status ModulePlayer::Update()
 	}
 	//Fade
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
-	//Check Death
-	if (App->ui->num_life_koyori == 0) {
-		state = DEATH;
-	}
 
 	//Set spin posotion
 	if (spin_pos) {
@@ -399,6 +393,13 @@ void ModulePlayer::CheckState()
 			state = POST_DEATH;
 		}
 		break;
+	case POST_DEATH:
+		if (App->ui->num_life_koyori > 0) {
+			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
+			position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
+			time = true;
+			state = SPAWN_PLAYER;
+		}
 	}
 }
 
@@ -477,7 +478,17 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case POST_DEATH:
-		App->player->Disable();
+		if (App->ui->num_life_koyori == 0) {
+			if (App->ui->score_koyori > 1000) {
+				App->ui->score_koyori -= 1000;
+			}
+			App->player->Disable();
+		}
+		else {
+			check_death = false;
+		}
+		
+
 		break;
 	}	
 }

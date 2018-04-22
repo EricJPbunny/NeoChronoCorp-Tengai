@@ -128,7 +128,7 @@ bool ModulePlayerTwo::Start()
 	App->partner2->Enable();
 	input = true;
 	state = SPAWN_PLAYER_2;
-	App->ui->num_life_sho = 4;
+	App->ui->num_life_sho = 3;
 	power_up = 0;
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
@@ -265,9 +265,7 @@ update_status ModulePlayerTwo::Update()
 	//Temple
 	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
 
-	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
-		App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20);
-	}
+
 	
 
 	return UPDATE_CONTINUE;

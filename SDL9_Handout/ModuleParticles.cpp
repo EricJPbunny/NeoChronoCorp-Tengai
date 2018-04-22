@@ -5,7 +5,10 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleAudio.h"
+#include "ModuleUI.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -126,7 +129,7 @@ ModuleParticles::ModuleParticles()
 	egg_shoot.anim.PushBack({ 62,11,13,13 });
 	egg_shoot.anim.speed = 0.10f;
 	egg_shoot.anim.loop = false;
-	egg_shoot.life = 1400;
+	egg_shoot.life = 2800;
 	egg_shoot.speed.x = 5;
 
 	cat_shoot.anim.PushBack({1,278,57,32});
@@ -150,7 +153,7 @@ ModuleParticles::ModuleParticles()
 	shuriken.anim.PushBack({ 71,175,10,10 });
 	shuriken.anim.PushBack({ 84,175,10,10 });
 	shuriken.anim.PushBack({ 98,176,8,8 });
-	shuriken.speed.x = -10;
+	shuriken.speed.x = -7;
 	shuriken.anim.loop = true;
 	shuriken.life = 1400;
 
@@ -170,6 +173,8 @@ bool ModuleParticles::Start()
 	shoot_sho = App->audio->LoadEffect("assets/audio/Shot_Sho.wav");
 	power_up_koyori_fx = App->audio->LoadEffect("assets/audio/power_up_koyori.wav");
 	power_up_sho_fx = App->audio->LoadEffect("assets/audio/power_up_sho.wav");
+	koyori_death = App->audio->LoadEffect("assets/audio/death_koyori.wav");
+	sho_death = App->audio->LoadEffect("assets/audio/death_sho.wav");
 
 	return true;
 }
@@ -179,6 +184,8 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 
+	App->audio->UnloadFx(sho_death);
+	App->audio->UnloadFx(koyori_death);
 	App->audio->UnloadFx(power_up_sho_fx);
 	App->audio->UnloadFx(power_up_koyori_fx);
 	App->audio->UnloadFx(shoot_sho);
@@ -265,11 +272,42 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
+
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
+			//Enemy Shot collide Player
+			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
+			{
+				if (timer) {
+					time_on_entry = SDL_GetTicks();
+					timer = false;
+				}
+				current_time = SDL_GetTicks() - time_on_entry;
+				if (current_time > 1000) {
+					App->audio->PlaySoundEffects(koyori_death);
+					App->ui->num_life_koyori--;
+					timer = true;
+				}
+				App->player->state = DEATH;
+			}
+
+			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2 && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
+			{
+				if (timer_2) {
+					time_on_entry_2 = SDL_GetTicks();
+					timer_2 = false;
+				}
+				current_time_2 = SDL_GetTicks() - time_on_entry_2;
+				if (current_time_2 > 1000) {
+					App->audio->PlaySoundEffects(sho_death);
+					App->ui->num_life_sho--;
+					timer_2 = true;
+				}
+				App->player2->state = DEATH_2;
+			}
 			//AddParticle(explosion, active[i]->position.x, active[i]->position.y);
 			delete active[i];
 			active[i] = nullptr;
