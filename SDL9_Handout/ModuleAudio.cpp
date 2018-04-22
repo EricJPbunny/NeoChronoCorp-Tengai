@@ -76,7 +76,9 @@ void ModuleAudio::PlayMusic(Mix_Music* mus_to_play,int reps)
 void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play, int fx)
 {
 	Mix_PlayChannel (fx,fx_to_play,0);
-	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME);
+	if (fx_to_play != nullptr) {
+		Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME);
+	}
 }
 void ModuleAudio::UnloadMusic(Mix_Music * music)
 {
