@@ -430,7 +430,12 @@ void ModulePlayer::PerformActions()
 		break;
 
 	case IDLE:
-		input = true;
+		if (App->render->camera.x > 51200) {
+			input = false;
+		}
+		if (App->render->camera.x < 51200) {
+			input = true;
+		}
 		death_pos = true;
 		check_spawn = false;
 		alpha_player = 255;
