@@ -13,6 +13,7 @@
 #include "Enemy_RedOvni.h"
 #include "Enemy_Ninja.h"
 #include "Entity_PowerUp.h"
+#include "Enemy_Coin.h"
 
 #include "SDL\include\SDL_timer.h"
 
@@ -155,6 +156,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::POWERUP:
 				enemies[i] = new EntityPowerUp(info.x, info.y);
 				break;
+			case ENEMY_TYPES::COIN:
+				enemies[i] = new Enemy_Coin(info.x, info.y);
+				break;
 		}
 	}
 }
@@ -217,6 +221,18 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				if (c2 == App->player2->hitbox) {
 					App->player2->power_up++;
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+			}
+			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
+				if (c2 == App->player->hitbox) {
+					App->player->coin++;
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				if (c2 == App->player2->hitbox) {
+					App->player2->coin++;
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}

@@ -59,6 +59,7 @@ public:
 	bool check_death = false, check_spawn = true;
 	player_state_2 state = IDLE_2;
 	int power_up = 0;
+	int coin = 0;
 	fPoint position;
 	fPoint aux_spin;
 
