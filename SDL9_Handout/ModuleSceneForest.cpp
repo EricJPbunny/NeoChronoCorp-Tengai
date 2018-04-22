@@ -208,7 +208,6 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 915, 110);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 955, 80);
 	 
-
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1230, 30);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1250, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1270, 90);
@@ -219,17 +218,27 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 3490, 120);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3470, 90);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3430, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3450, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 3490, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 3470, 90);
+
+
 	//Enemies Ninja
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 790, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 840, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 890, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 940, 0);
 
-
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1100, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1150, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1200, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 1250, 0);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 2100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 2150, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 2200, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 2250, 0);
 
 	App->audio->PlayMusic(mus);
 
@@ -507,16 +516,7 @@ update_status ModuleSceneForest::Update()
 		App->player->position.x = App->render->camera.x / 3;
 		App->player2->position.x = App->render->camera.x / 3;
 	}
-	//Delete Colliders
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {
-		if (!god_mode) {
-			App->player->hitbox->SetPos(App->render->camera.x, App->render->camera.y);
-			god_mode = true;
-		}
-		else {
-			god_mode = false;
-		}
-	}
+	
 	
 	return UPDATE_CONTINUE;
 }
