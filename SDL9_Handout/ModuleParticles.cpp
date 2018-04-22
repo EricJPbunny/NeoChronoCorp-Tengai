@@ -182,7 +182,7 @@ ModuleParticles::ModuleParticles()
 	cat_shoot.anim.PushBack({ 122,278,57,32 });
 	cat_shoot.anim.speed = 0.10f;
 	cat_shoot.anim.loop = true;
-	cat_shoot.life = 1400;
+	cat_shoot.life = 8400;
 	cat_shoot.speed.x = 3;
 
 	basaro_shot.anim.PushBack({379,134,15,15});

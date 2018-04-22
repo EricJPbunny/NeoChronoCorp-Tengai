@@ -248,11 +248,71 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 9950, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 9970, 90);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 9090, 120);
+	
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 10500, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 10550, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 10500, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 10550, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 11500, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 11500, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 11500, 110);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 11500, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 11500, 190);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 12930, 30);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 12950, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 12970, 90);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 12090, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 12090, 60);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 12500, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 12550, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 12500, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 13500, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 13600, 70);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 13600, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 13500, 120);
+	
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14000, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14050, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14100, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 14150, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14500, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14520, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 14540, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14520, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 14500, 150);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15000, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15050, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15100, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 15150, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15250, 70);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15250, 70);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15300, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15300, 100);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15500, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15600, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15600, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 15500, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 16150, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 16150, 150);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 16600, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 16600, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 16600, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 16600, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 17000, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 17200, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 17200, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 17000, 120);
 
 	//Enemies Ninja
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 790, 0);
@@ -292,6 +352,10 @@ bool ModuleSceneForest::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 5000, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 5100, 0);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 6100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 6200, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 6300, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::NINJA, 6400, 0);
 
 
 	App->audio->PlayMusic(mus);
