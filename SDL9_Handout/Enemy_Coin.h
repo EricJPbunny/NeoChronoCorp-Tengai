@@ -12,7 +12,7 @@ private:
 	iPoint originalposition;
 
 	Animation up;
-	
+	Animation parabola;
 	Animation down;
 	Path movement;
 public:

@@ -14,7 +14,7 @@ Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
 	up.PushBack({ 97,415,16,16 });
 	up.PushBack({ 113,415,16,16 });
 	up.PushBack({ 132,415,16,16 });
-	up.PushBack({ 147,415,16,16 });
+	up.PushBack({ 148,415,16,16 });
 	up.PushBack({ 164,415,16,16 });
 	up.PushBack({ 182,415,16,16 });
 	up.PushBack({ 201,415,16,16 });
@@ -24,7 +24,23 @@ Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
 	up.PushBack({ 274,415,16,16 });
 	up.PushBack({ 295,415,16,16 });
 
-	
+	parabola.PushBack({ 20,415,16,16 });
+	parabola.PushBack({ 40,415,16,16 });
+	parabola.PushBack({ 60,415,16,16 });
+	parabola.PushBack({ 78,415,16,16 });
+	parabola.PushBack({ 97,415,16,16 });
+	parabola.PushBack({ 113,415,16,16 });
+	parabola.PushBack({ 132,415,16,16 });
+	parabola.PushBack({ 148,415,16,16 });
+	parabola.PushBack({ 164,415,16,16 });
+	parabola.PushBack({ 182,415,16,16 });
+	parabola.PushBack({ 201,415,16,16 });
+	parabola.PushBack({ 219,415,16,16 });
+	parabola.PushBack({ 236,415,16,16 });
+	parabola.PushBack({ 255,415,16,16 });
+	parabola.PushBack({ 274,415,16,16 });
+	parabola.PushBack({ 295,415,16,16 });
+
 	down.PushBack({ 20,415,16,16 });
 	down.PushBack({ 40,415,16,16 });
 	down.PushBack({ 60,415,16,16 });
@@ -32,7 +48,7 @@ Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
 	down.PushBack({ 97,415,16,16 });
 	down.PushBack({ 113,415,16,16 });
 	down.PushBack({ 132,415,16,16 });
-	down.PushBack({ 147,415,16,16 });
+	down.PushBack({ 148,415,16,16 });
 	down.PushBack({ 164,415,16,16 });
 	down.PushBack({ 182,415,16,16 });
 	down.PushBack({ 201,415,16,16 });
@@ -44,8 +60,10 @@ Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
 	
 	up.speed = App->enemies->speed;
 
-	movement.PushBack({ 1.75f, -3.0f }, 58, &up);
-	movement.PushBack({ 1.75f, 3.0f }, 58, &down);
+	movement.PushBack({ 1.75f, -3.0f }, 28, &up);
+	movement.PushBack({ 1.0f,-2.0f },20, &parabola);
+
+	movement.PushBack({ 1.0f,2.0f }, 1008, &down);
 	animation = &up;
 
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_COIN, (Module*)App->enemies);

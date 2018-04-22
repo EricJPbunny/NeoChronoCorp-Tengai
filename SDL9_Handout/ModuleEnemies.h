@@ -72,6 +72,8 @@ private:
 	SDL_Texture* puSprites;
 
 	int ninja_life = 0;
+	int num_ovni = 0;
+	int typeofcoin;
 };
 
 #endif // __ModuleEnemies_H__

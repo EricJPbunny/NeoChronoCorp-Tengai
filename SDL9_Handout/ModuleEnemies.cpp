@@ -180,12 +180,28 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			//Kill Green Ovni
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
-				App->audio->PlaySoundEffects(fx_death);
-				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
-				AddEnemy(ENEMY_TYPES::COIN, enemies[i]->position.x, enemies[i]->position.y);
-				App->ui->score_koyori += 200;
-				delete enemies[i];
-				enemies[i] = nullptr;
+				
+				num_ovni++;
+				if (num_ovni <3) {
+					App->audio->PlaySoundEffects(fx_death);
+					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+					App->ui->score_koyori += 200;
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				if (num_ovni >=
+					3) {
+					App->audio->PlaySoundEffects(fx_death);
+					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+					AddEnemy(ENEMY_TYPES::COIN, enemies[i]->position.x, enemies[i]->position.y);
+					App->ui->score_sho += 200;
+					delete enemies[i];
+					enemies[i] = nullptr;
+					ninja_life = 0;
+					num_ovni = 0;
+				}
+				
+			
 			}
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT) {
 				App->audio->PlaySoundEffects(fx_death);
@@ -240,10 +256,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			//Coin
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
 				if (c2 == App->player->hitbox) {
+
 					App->particles->coin_100.speed.x = speed;
 					App->particles->coin_100.speed.y = -2;
 					App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-					App->player->power_up++;
+					App->ui->score_koyori += 100;
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
@@ -251,7 +268,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					App->particles->coin_100.speed.x = speed;
 					App->particles->coin_100.speed.y = -2;
 					App->particles->AddParticle(App->particles->coin_100, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-					App->player2->power_up++;
+					App->ui->score_sho += 100;
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
