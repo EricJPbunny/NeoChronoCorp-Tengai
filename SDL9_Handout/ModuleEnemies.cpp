@@ -303,7 +303,6 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						App->particles->coin_2000.speed.y = -2;
 						App->particles->AddParticle(App->particles->coin_2000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
 						App->ui->score_koyori += 2000;
-						App->ui->score_sho += 2000;
 						delete enemies[i];
 						enemies[i] = nullptr;
 						break;
@@ -325,7 +324,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					case 0:
 						App->particles->coin_100.speed.x = speed;
 						App->particles->coin_100.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->particles->AddParticle(App->particles->coin_100, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
 
 						App->ui->score_sho += 100;
 						delete enemies[i];
@@ -334,7 +333,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					case 1:
 						App->particles->coin_200.speed.x = speed;
 						App->particles->coin_200.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_200, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->particles->AddParticle(App->particles->coin_200, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
 
 						App->ui->score_sho += 200;
 						break;
@@ -344,7 +343,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					case 2:
 						App->particles->coin_500.speed.x = speed;
 						App->particles->coin_500.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_500, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->particles->AddParticle(App->particles->coin_500, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
 
 						App->ui->score_sho += 500;
 						break;
@@ -353,7 +352,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					case 3:
 						App->particles->coin_1000.speed.x = speed;
 						App->particles->coin_1000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_1000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->particles->AddParticle(App->particles->coin_1000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
 
 						App->ui->score_sho += 1000;
 						delete enemies[i];
@@ -362,7 +361,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					case 4:
 						App->particles->coin_2000.speed.x = speed;
 						App->particles->coin_2000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_2000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->particles->AddParticle(App->particles->coin_2000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
 
 						App->ui->score_sho += 2000;
 						delete enemies[i];
@@ -371,7 +370,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					case 5:
 						App->particles->coin_4000.speed.x = speed;
 						App->particles->coin_4000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_4000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->particles->AddParticle(App->particles->coin_4000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
 
 						App->ui->score_sho += 4000;
 						delete enemies[i];
@@ -385,18 +384,34 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			//Power Ups
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_PLAYER ) && c1->type == COLLIDER_TYPE::COLLIDER_POWER_UP) {
 				if (c2 == App->player->coll) {
-					App->particles->power_up.speed.x = speed;
-					App->particles->power_up.speed.y = -2;
-					App->particles->AddParticle(App->particles->power_up, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_KOYORI);
-					App->player->power_up++;
+					if (App->player->power_up < 2) {
+						App->particles->power_up.speed.x = speed;
+						App->particles->power_up.speed.y = -2;
+						App->particles->AddParticle(App->particles->power_up, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_KOYORI);
+						App->player->power_up++;
+					}
+					else {
+						App->particles->coin_2000.speed.x = speed;
+						App->particles->coin_2000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_2000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_koyori += 2000;
+					}
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
 				if (c2 == App->player2->coll) {
-					App->particles->power_up.speed.x = speed;
-					App->particles->power_up.speed.y = -2;
-					App->particles->AddParticle(App->particles->power_up, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_SHO);
-					App->player2->power_up++;
+					if (App->player2->power_up < 2) {
+						App->particles->power_up.speed.x = speed;
+						App->particles->power_up.speed.y = -2;
+						App->particles->AddParticle(App->particles->power_up, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_SHO);
+						App->player2->power_up++;
+					}
+					else {
+						App->particles->coin_2000.speed.x = speed;
+						App->particles->coin_2000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_2000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
+						App->ui->score_sho += 2000;
+					}
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
