@@ -167,6 +167,14 @@ update_status ModulePlayerTwo::Update()
 
 	float speed = 2.5;
 
+	//Power Up Limits
+	if (power_up < 0) {
+		power_up = 0;
+	}
+	if (power_up > 2) {
+		power_up = 2;
+	}
+
 	//check state
 	CheckState();
 

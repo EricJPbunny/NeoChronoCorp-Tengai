@@ -172,6 +172,14 @@ update_status ModulePlayer::Update()
 {
 	float speed = 2.5;
 
+	//Power Up Limits
+	if (power_up < 0) {
+		power_up = 0;
+	}
+	if (power_up > 2) {
+		power_up = 2;
+	}
+
 	//check state
 	CheckState();
 
@@ -277,32 +285,18 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	/*if () {
-		App->audio->PlaySoundEffects(death_fx, -1);
-}*/
-	{
-		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+	
+	if (c1 == coll && destroyed == false && App->fade->IsFading() == false) {
+		{
+			if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
+				App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+			}
+			if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_NINJA) {
+				App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+			}
+
+			destroyed = true;
 		}
-	   if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_NINJA) {
-		   App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
-		   
-		   /*int i = 0;
-		   do {
-App->particles->AddParticle(App->particles->spark, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
-i++;
-				
-		   } while (i < 2);
-		   App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
-		   */
-		   				
-			
-		}
-		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_REDOVNI) {
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
-			App->enemies->AddEnemy(ENEMY_TYPES::POWERUP, position.x, position.y);
-		}
-		destroyed = true;
 	}
 }
 

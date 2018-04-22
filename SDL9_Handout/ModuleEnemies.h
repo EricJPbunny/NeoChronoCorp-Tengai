@@ -70,6 +70,8 @@ private:
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;
 	SDL_Texture* puSprites;
+
+	int ninja_life = 0;
 };
 
 #endif // __ModuleEnemies_H__
