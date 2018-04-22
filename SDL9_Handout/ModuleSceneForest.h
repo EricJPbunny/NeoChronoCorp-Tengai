@@ -27,6 +27,7 @@ public:
 	Collider* coll_right = nullptr;
 	Collider* coll_up = nullptr;
 	Collider* coll_down = nullptr;
+	Collider* coll_trigger = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics1 = nullptr;
 	SDL_Texture* graphics2 = nullptr;

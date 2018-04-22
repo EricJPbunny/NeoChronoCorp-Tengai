@@ -143,6 +143,18 @@ ModuleParticles::ModuleParticles()
 	basaro_shot.life = 1400;
 	basaro_shot.speed.x = 12;
 
+	//Ninja shurikens
+
+	shuriken.anim.PushBack({ 46,176,8,8 });
+	shuriken.anim.PushBack({ 58,175,10,10 });
+	shuriken.anim.PushBack({ 71,175,10,10 });
+	shuriken.anim.PushBack({ 84,175,10,10 });
+	shuriken.anim.PushBack({ 98,176,8,8 });
+	shuriken.speed.x = -10;
+	shuriken.anim.loop = true;
+	shuriken.life = 1400;
+
+
 }
 
 ModuleParticles::~ModuleParticles()

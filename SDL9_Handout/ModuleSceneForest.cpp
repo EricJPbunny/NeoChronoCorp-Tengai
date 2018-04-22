@@ -200,6 +200,7 @@ bool ModuleSceneForest::Start()
 	coll_down =App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
 	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
+	coll_trigger = App->collision->AddCollider({100,0,120,40},COLLIDER_TRIGGER);
 
 	//Enemies Ovni
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 830, 170);
@@ -272,6 +273,7 @@ update_status ModuleSceneForest::Update()
 	//Update Collision
 	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, 0);
 	coll_right->SetPos(SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE, 0);
+	coll_trigger->SetPos( 200+ (App->render->camera.x / SCREEN_SIZE),100);
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
 

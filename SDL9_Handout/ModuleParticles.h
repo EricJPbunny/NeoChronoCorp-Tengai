@@ -24,6 +24,7 @@ enum PARTICLE_TYPE
 	PARTICLE_POWER_UP_KOYORI,
 	PARTICLE_POWER_UP_SHO,
 	PARTICLE_POWER_DOWN,
+	PARTICLE_SHURIKEN,
 
 };
 
@@ -74,6 +75,7 @@ public:
 	Particle c_mirror_green, c_mirror_blue, c_mirror_cyan;
 	Particle cat_shoot, egg_shoot, basaro_shot;
 	Particle power_up, power_down;
+	Particle shuriken;
 };
 
 #endif // __MODULEPARTICLES_H__

@@ -245,6 +245,13 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i] = nullptr;
 				}
 			}
+
+			//Shooting trigger
+
+			if (c2->type == COLLIDER_TYPE::COLLIDER_TRIGGER && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) 
+			{
+				App->particles->AddParticle(App->particles->shuriken,enemies[i]->position.x, enemies[i]->position.y,COLLIDER_ENEMY_SHOT,PARTICLE_SHURIKEN);
+			}
 			
 			break;
 		}
