@@ -16,6 +16,7 @@
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
 
+
 #include "SDL\include\SDL_timer.h"
 
 #define SPAWN_MARGIN 50
@@ -258,7 +259,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			//Shooting trigger
 
-			if (c2->type == COLLIDER_TYPE::COLLIDER_TRIGGER && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) 
+			if (c2->type == COLLIDER_TYPE::COLLIDER_TRIGGER && c1->type == COLLIDER_TYPE::COLLIDER_NINJA) 
 			{
 				bulletsize++;
 				if (bulletsize >= 10) 

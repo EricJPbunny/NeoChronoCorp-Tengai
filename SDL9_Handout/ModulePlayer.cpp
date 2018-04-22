@@ -11,6 +11,8 @@
 #include "ModulePlayer.h"
 #include "ModulePartner.h"
 #include "ModuleUI.h"
+#include "ModuleEnemies.h"
+
 
 #include "SDL\include\SDL_timer.h"
 #include "SDL\include\SDL_render.h"
@@ -278,6 +280,30 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	/*if () {
 		App->audio->PlaySoundEffects(death_fx, -1);
 }*/
+	{
+		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+		}
+	   if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_NINJA) {
+		   App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+		   
+		   /*int i = 0;
+		   do {
+App->particles->AddParticle(App->particles->spark, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+i++;
+				
+		   } while (i < 2);
+		   App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+		   */
+		   				
+			
+		}
+		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_REDOVNI) {
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+			App->enemies->AddEnemy(ENEMY_TYPES::POWERUP, position.x, position.y);
+		}
+		destroyed = true;
+	}
 }
 
 void ModulePlayer::CheckState()

@@ -64,6 +64,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_REDOVNI][COLLIDER_COIN] = false;
 	matrix[COLLIDER_REDOVNI][COLLIDER_TRIGGER] = true;
 
+	matrix[COLLIDER_NINJA][COLLIDER_WALL] = false;
 	matrix[COLLIDER_NINJA][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_NINJA][COLLIDER_ENEMY] = false;
 	matrix[COLLIDER_NINJA][COLLIDER_REDOVNI] = false;

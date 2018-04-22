@@ -273,6 +273,9 @@ void ModulePlayerTwo::OnCollision(Collider* c1, Collider* c2)
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
 		}
 		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_NINJA) {
+			for (int i = 0; i < 2; i++) {
+				App->particles->AddParticle(App->particles->spark, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+			}
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
 		}
 		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_REDOVNI) {
