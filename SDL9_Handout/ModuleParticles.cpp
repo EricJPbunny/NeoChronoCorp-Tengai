@@ -107,6 +107,31 @@ ModuleParticles::ModuleParticles()
 	c_mirror_cyan.life = 1400;
 	c_mirror_cyan.speed.x = 12;
 
+	//Basaro Bullet
+	egg_shoot.anim.PushBack({ 14,11,13,13 });
+	egg_shoot.anim.PushBack({ 38,11,13,13 });
+	egg_shoot.anim.PushBack({ 62,11,13,13 });
+	egg_shoot.anim.speed = 0.10f;
+	egg_shoot.anim.loop = false;
+	egg_shoot.life = 1400;
+	egg_shoot.speed.x = 5;
+
+	cat_shoot.anim.PushBack({1,278,57,32});
+	cat_shoot.anim.PushBack({ 61,278,57,32 });
+	cat_shoot.anim.PushBack({ 122,278,57,32 });
+	cat_shoot.anim.speed = 0.10f;
+	cat_shoot.anim.loop = true;
+	cat_shoot.life = 1400;
+	cat_shoot.speed.x = 3;
+
+	basaro_shot.anim.PushBack({379,134,15,15});
+	basaro_shot.anim.speed = 0.10f;
+	basaro_shot.anim.loop = true;
+	basaro_shot.life = 1400;
+	basaro_shot.speed.x = 12;
+
+
+
 }
 
 ModuleParticles::~ModuleParticles()

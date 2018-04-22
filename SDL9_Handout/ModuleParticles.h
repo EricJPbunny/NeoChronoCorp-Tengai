@@ -67,6 +67,7 @@ public:
 	Particle shoot, shoot1, shoot2;
 	Particle mirror_shoot;
 	Particle c_mirror_green, c_mirror_blue, c_mirror_cyan;
+	Particle cat_shoot, egg_shoot, basaro_shot;
 };
 
 #endif // __MODULEPARTICLES_H__
