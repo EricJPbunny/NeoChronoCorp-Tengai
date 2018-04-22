@@ -516,7 +516,15 @@ update_status ModuleSceneForest::Update()
 		App->player->position.x = App->render->camera.x / 3;
 		App->player2->position.x = App->render->camera.x / 3;
 	}
-	
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) 
+	{
+		if (!god_mode)
+		{
+			App->player->hitbox->SetPos(-100, -100);
+			god_mode = true;
+		}
+		else god_mode = false;
+	}
 	
 	return UPDATE_CONTINUE;
 }

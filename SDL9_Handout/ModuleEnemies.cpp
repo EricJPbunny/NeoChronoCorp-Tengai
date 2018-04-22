@@ -275,8 +275,8 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Power Ups
-			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_POWER_UP) {
-				if (c2 == App->player->hitbox) {
+			if ((c2->type == COLLIDER_TYPE::COLLIDER_PLAYER ) && c1->type == COLLIDER_TYPE::COLLIDER_POWER_UP) {
+				if (c2 == App->player->coll) {
 					App->particles->power_up.speed.x = speed;
 					App->particles->power_up.speed.y = -2;
 					App->particles->AddParticle(App->particles->power_up, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_KOYORI);
@@ -284,7 +284,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
-				if (c2 == App->player2->hitbox) {
+				if (c2 == App->player2->coll) {
 					App->particles->power_up.speed.x = speed;
 					App->particles->power_up.speed.y = -2;
 					App->particles->AddParticle(App->particles->power_up, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_SHO);
