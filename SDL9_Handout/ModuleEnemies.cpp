@@ -168,6 +168,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	float speed = App->scene_forest->speed / SCREEN_SIZE;
+	
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
@@ -280,6 +281,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
+			if (c1->type == COLLIDER_TYPE::COLLIDER_REDOVNI && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT) {
+				App->audio->PlaySoundEffects(fx_death);
+				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+				AddEnemy(ENEMY_TYPES::POWERUP, enemies[i]->position.x, enemies[i]->position.y);
+				App->ui->score_sho += 200;
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
 
 			//Kill ninja
 			if (c1->type == COLLIDER_TYPE::COLLIDER_NINJA && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
@@ -292,6 +301,21 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					App->audio->PlaySoundEffects(fx_death);
 					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 					App->ui->score_koyori += 200;
+					delete enemies[i];
+					enemies[i] = nullptr;
+					ninja_life = 0;
+				}
+			}
+			if (c1->type == COLLIDER_TYPE::COLLIDER_NINJA && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT) {
+				ninja_life++;
+				if (ninja_life == 1) {
+					App->particles->AddParticle(App->particles->spark, enemies[i]->position.x, enemies[i]->position.y);
+					App->particles->spark.speed.x = speed;
+				}
+				if (ninja_life == 2) {
+					App->audio->PlaySoundEffects(fx_death);
+					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+					App->ui->score_sho += 200;
 					delete enemies[i];
 					enemies[i] = nullptr;
 					ninja_life = 0;
