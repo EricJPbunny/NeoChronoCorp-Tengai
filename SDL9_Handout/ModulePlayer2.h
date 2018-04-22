@@ -62,6 +62,7 @@ public:
 	int coin = 0;
 	fPoint position;
 	fPoint aux_spin;
+	fPoint aux_death;
 
 	bool time = true;
 	bool blink = true;
@@ -74,6 +75,7 @@ public:
 
 	bool input = true;
 	bool spin_pos = false;
+	bool death_pos = false;
 };
 
 

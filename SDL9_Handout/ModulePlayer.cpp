@@ -471,6 +471,7 @@ void ModulePlayer::PerformActions()
 
 	case DEATH:
 		SDL_Rect death_rect = death_circle.GetCurrentFrame();
+		power_up = 0;
 		check_death = true;
 		input = false;
 		App->render->Blit(player_death, aux_death.x, aux_death.y, &death_rect,1.0f);
@@ -487,8 +488,6 @@ void ModulePlayer::PerformActions()
 		else {
 			check_death = false;
 		}
-		
-
 		break;
 	}	
 }
