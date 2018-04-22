@@ -203,10 +203,10 @@ bool ModuleSceneForest::Start()
 
 	//Enemies Ovni
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 830, 170);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 870, 140);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 910, 110);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 960, 80);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 875, 140);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 915, 110);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 955, 80);
+	 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1430, 30);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1450, 60);
