@@ -20,6 +20,7 @@ enum PARTICLE_TYPE
 	PARTICLE_NONE,
 	PARTICLE_SHOT,
 	PARTICLE_SHOT_2,
+	PARTICLE_COIN,
 	PLAYER_ENEMY,
 	PLAYER_REDOVNI,
 	PLAYER_NINJA,
@@ -73,12 +74,14 @@ public:
 	Mix_Chunk* power_up_sho_fx = nullptr;
 	Mix_Chunk* koyori_death = nullptr;
 	Mix_Chunk* sho_death = nullptr;
+	Mix_Chunk* coin_fx = nullptr;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, spark;
 	Particle shoot, shoot1, shoot2;
 	Particle mirror_shoot;
 	Particle c_mirror_green, c_mirror_blue, c_mirror_cyan;
 	Particle cat_shoot, egg_shoot, basaro_shot;
 	Particle power_up, power_down;
+	Particle coin_100, coin_200, coin_500, coin_1000, coin_2000, coin_4000;
 	Particle shuriken;
 
 	bool timer = false;

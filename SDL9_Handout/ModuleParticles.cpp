@@ -89,6 +89,50 @@ ModuleParticles::ModuleParticles()
 	power_down.anim.speed = 0.10f;
 	power_down.life = 2000;
 
+	//Coin Value
+
+	coin_100.anim.PushBack({ 77,333,9,7 });
+	coin_100.anim.PushBack({ 77,342,9,7 });
+	coin_100.anim.PushBack({ 77,351,9,7 });
+	coin_100.anim.loop = true;
+	coin_100.anim.speed = 0.20f;
+	coin_100.life = 1000;
+
+	coin_200.anim.PushBack({ 89,333,11,7 });
+	coin_200.anim.PushBack({ 89,342,11,7 });
+	coin_200.anim.PushBack({ 89,351,11,7 });
+	coin_200.anim.loop = true;
+	coin_200.anim.speed = 0.20f;
+	coin_200.life = 1000;
+
+	coin_500.anim.PushBack({ 103,333,11,7 });
+	coin_500.anim.PushBack({ 103,342,11,7 });
+	coin_500.anim.PushBack({ 103,351,11,7 });
+	coin_500.anim.loop = true;
+	coin_500.anim.speed = 0.20f;
+	coin_500.life = 1000;
+
+	coin_1000.anim.PushBack({ 117,333,13,7 });
+	coin_1000.anim.PushBack({ 117,342,13,7 });
+	coin_1000.anim.PushBack({ 117,351,13,7 });
+	coin_1000.anim.loop = true;
+	coin_1000.anim.speed = 0.20f;
+	coin_1000.life = 1000;
+
+	coin_2000.anim.PushBack({ 133,333,15,7 });
+	coin_2000.anim.PushBack({ 133,342,15,7 });
+	coin_2000.anim.PushBack({ 133,351,15,7 });
+	coin_2000.anim.loop = true;
+	coin_2000.anim.speed = 0.20f;
+	coin_2000.life = 1000;
+
+	coin_4000.anim.PushBack({ 151,333,15,7 });
+	coin_4000.anim.PushBack({ 151,342,15,7 });
+	coin_4000.anim.PushBack({ 151,351,15,7 });
+	coin_4000.anim.loop = true;
+	coin_4000.anim.speed = 0.20f;
+	coin_4000.life = 1000;
+
 	//Bullet sparks
 	spark.anim.PushBack({32,35,45,19});
 	spark.anim.PushBack({ 84,35,45,19 });
@@ -175,6 +219,7 @@ bool ModuleParticles::Start()
 	power_up_sho_fx = App->audio->LoadEffect("assets/audio/power_up_sho.wav");
 	koyori_death = App->audio->LoadEffect("assets/audio/death_koyori.wav");
 	sho_death = App->audio->LoadEffect("assets/audio/death_sho.wav");
+	coin_fx = App->audio->LoadEffect("assets/audio/catch_coin.wav");
 
 	return true;
 }
@@ -190,6 +235,7 @@ bool ModuleParticles::CleanUp()
 	App->audio->UnloadFx(power_up_koyori_fx);
 	App->audio->UnloadFx(shoot_sho);
 	App->audio->UnloadFx(shoot_audio);
+	App->audio -> UnloadFx(coin_fx);
 
 	App->textures->Unload(graphics);
 
@@ -263,6 +309,10 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if (particle_type == PARTICLE_POWER_UP_SHO) {
 				p->fx = 6;
 				App->audio->PlaySoundEffects(power_up_sho_fx, p->fx);
+			}
+			if (particle_type == PARTICLE_COIN) {
+				p->fx = 7;
+				App->audio->PlaySoundEffects(coin_fx, p->fx);
 			}
 			active[i] = p;
 			break;

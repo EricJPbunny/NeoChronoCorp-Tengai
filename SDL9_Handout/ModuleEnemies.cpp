@@ -182,6 +182,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
 				App->audio->PlaySoundEffects(fx_death);
 				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+				AddEnemy(ENEMY_TYPES::COIN, enemies[i]->position.x, enemies[i]->position.y);
 				App->ui->score_koyori += 200;
 				delete enemies[i];
 				enemies[i] = nullptr;
@@ -189,6 +190,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT) {
 				App->audio->PlaySoundEffects(fx_death);
  				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+				AddEnemy(ENEMY_TYPES::COIN, enemies[i]->position.x, enemies[i]->position.y);
 				App->ui->score_sho += 200;
 				delete enemies[i];
 				enemies[i] = nullptr;
@@ -234,6 +236,27 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					App->player2->state = SPIN_2;
 				}
 			}
+
+			//Coin
+			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
+				if (c2 == App->player->hitbox) {
+					App->particles->coin_100.speed.x = speed;
+					App->particles->coin_100.speed.y = -2;
+					App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+					App->player->power_up++;
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				if (c2 == App->player2->hitbox) {
+					App->particles->coin_100.speed.x = speed;
+					App->particles->coin_100.speed.y = -2;
+					App->particles->AddParticle(App->particles->coin_100, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
+					App->player2->power_up++;
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+			}
+
 			//Power Ups
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_POWER_UP) {
 				if (c2 == App->player->hitbox) {
