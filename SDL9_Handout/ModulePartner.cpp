@@ -25,9 +25,9 @@ ModulePartner::ModulePartner()
 	spawn.speed = 0.15f;
 
 	iddle.PushBack({ 170,204,25,15 });
-	iddle.PushBack({ 210,205,25,14 });
-	iddle.PushBack({ 250,205,25,15 });
-	iddle.PushBack({ 291,205,25,14 });
+	iddle.PushBack({ 210,204,25,15 });
+	iddle.PushBack({ 250,204,25,15 });
+	iddle.PushBack({ 290,204,25,15 });
 	iddle.speed = 0.15f;
 
 	charging.PushBack({ 12,242,26,18 });
@@ -39,13 +39,13 @@ ModulePartner::ModulePartner()
 	decharging.PushBack({ 291,237,29,23 });
 	decharging.PushBack({ 331,239,27,19 });
 	decharging.PushBack({ 373,240,26,18 });
-	decharging.speed = 0.20f;
+	decharging.speed = 0.25f;
 
 	charged.PushBack({ 130,238,31,24 });
 	charged.PushBack({ 170,238,31,24 });
-	charged.PushBack({ 211,238,30,24 });
+	charged.PushBack({ 210,238,31,24 });
 	charged.PushBack({ 170,238,31,24 });
-	charged.speed = 0.20f;
+	charged.speed = 0.15f;
 
 }
 

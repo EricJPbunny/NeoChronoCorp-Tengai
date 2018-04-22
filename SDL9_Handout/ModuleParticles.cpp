@@ -130,8 +130,6 @@ ModuleParticles::ModuleParticles()
 	basaro_shot.life = 1400;
 	basaro_shot.speed.x = 12;
 
-
-
 }
 
 ModuleParticles::~ModuleParticles()

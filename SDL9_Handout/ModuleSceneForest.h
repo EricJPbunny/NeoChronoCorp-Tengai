@@ -21,6 +21,8 @@ public:
 	Mix_Music* mus = nullptr;
 	Mix_Music* boss = nullptr;
 	Mix_Music* level_completed = nullptr;
+	Mix_Chunk* select_koyori = nullptr;
+	Mix_Chunk* select_sho = nullptr;
 	Collider* coll_left = nullptr;
 	Collider* coll_right = nullptr;
 	Collider* coll_up = nullptr;
