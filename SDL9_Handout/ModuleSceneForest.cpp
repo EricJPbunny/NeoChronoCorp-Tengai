@@ -473,8 +473,12 @@ update_status ModuleSceneForest::Update()
 		App->audio->PlayMusic(level_completed, 1);
 	}
 	if (App->render->camera.x > 51200) {
-		App->player->position.x += 2;
-		App->player2->position.x += 2;
+		App->player->state = IDLE;
+		App->player2->state = IDLE_2;
+		App->player->position.x += 3;
+		App->player2->position.x += 3;
+		App->player->input = false;
+		App->player2->input = false;
 	}
 	if (App->render->camera.x > 52500) {
 		App->fade->FadeToBlack(App->scene_forest, App->scene_score, 1.00f);
