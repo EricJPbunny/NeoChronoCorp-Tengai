@@ -22,6 +22,7 @@ enum ENEMY_TYPES
 	REDOVNI,
 	NINJA,
 	POWERUP,
+	COIN,
 };
 
 class Enemy;
