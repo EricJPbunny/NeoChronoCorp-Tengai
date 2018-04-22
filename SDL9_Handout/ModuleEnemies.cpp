@@ -260,7 +260,12 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			if (c2->type == COLLIDER_TYPE::COLLIDER_TRIGGER && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) 
 			{
-				App->particles->AddParticle(App->particles->shuriken,enemies[i]->position.x, enemies[i]->position.y,COLLIDER_ENEMY_SHOT,PARTICLE_SHURIKEN);
+				bulletsize++;
+				if (bulletsize >= 10) 
+				{
+					App->particles->AddParticle(App->particles->shuriken, enemies[i]->position.x, enemies[i]->position.y, COLLIDER_ENEMY_SHOT, PARTICLE_SHURIKEN);
+					bulletsize = 0;
+				}
 			}
 			
 			break;
