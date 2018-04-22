@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "Path.h"
 #include "ModulePlayer.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
@@ -13,8 +14,11 @@ enum partner_state {
 	NOT_EXISTING,
 	LEVEL_ONE,
 	LEVEL_ONE_CHARGE,
+	LEVEL_FOUR,
+	LEVEL_FOUR_CHARGE,
 	SPAWN,
-	SHOT
+	EGG_SHOT,
+	CAT_SHOT,
 };
 
 class ModulePartner : public Module
@@ -35,14 +39,14 @@ public:
 	Animation spawn;
 	Animation iddle;
 	Animation charging;
-	Animation spawn2;
-	Animation iddle2;
-	Animation charging2;
+	Animation decharging;
+	Animation charged;
+	Animation egg_shot;
 	fPoint position;
 	partner_state state = NOT_EXISTING;
+	Path shot_movement;
 	int aux;
 	bool time_shoot = true, exist = false, time_cat = true;
-
 
 	bool shot_delay = true;
 	int shot_current = 0;
@@ -51,7 +55,7 @@ public:
 	int time_on_entry = 0;
 	int current_time = 0;
 
-	int num_bullet = 1;
+	bool create_bullet = true, update_bullet = false;
 };
 
 #endif
