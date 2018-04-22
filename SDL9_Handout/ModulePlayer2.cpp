@@ -258,6 +258,8 @@ update_status ModulePlayerTwo::Update()
 		}
 		else {
 			coll->SetPos(position.x, position.y - 32);
+
+			if (!App->scene_forest->god_mode)
 			hitbox->SetPos(position.x + 8, position.y - 20);
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
