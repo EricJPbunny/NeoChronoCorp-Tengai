@@ -1,37 +1,56 @@
 #include "Application.h"
-#include "Enemy_Coin.h"
+#include "ModuleInput.h"
+#include "ModuleRender.h"
 #include "ModuleEnemies.h"
-#include "ModuleUI.h"
-#include "ModuleCollision.h"
+#include "ModuleParticles.h"
+#include "ModuleTextures.h"
+#include "ModulePlayer.h"
+#include "ModulePlayer2.h"
+#include "Enemy.h"
+#include "Enemy_GreenOvni.h"
+#include "ModuleCoin.h"
 
 
-Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
+ModuleCoin::ModuleCoin()
 {
-	fly.PushBack({ 14,16,30,30 });
-	fly.PushBack({ 61,16,30,30 });
-	fly.PushBack({ 107,16,30,30 });
-	fly.PushBack({ 152,16,30,30 });
-	fly.speed = App->enemies->speed;
-
-	back.PushBack({ 14,16,30,30 });
-	back.PushBack({ 61,16,30,30 });
-	back.PushBack({ 107,16,30,30 });
-	back.PushBack({ 152,16,30,30 });
-
-
-	movement.PushBack({ -0.1f, 0.0f }, 80, &fly);
-	//movement.PushBack({ 1.0f, 0.0f }, 160, &back);
-
-	animation = &fly;
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
-	originalposition.y = y;
-	originalposition.x = x;
+	for (uint i = 0; i < MAX_COIN; ++i)
+		coin[i] = nullptr;
 }
 
-void Enemy_Coin::Move()
+ModuleCoin::~ModuleCoin()
 {
-	if (App->ui->enemies_movement) {
-		position = originalposition + movement.GetCurrentSpeed();
-	}
+
+};
+
+bool ModuleCoin::Init()
+{
+	return true;
+}
+
+
+bool ModuleCoin::CleanUp()
+{
+	return true;
+};
+
+bool ModuleCoin::Start()
+{
+	graphics = App->textures->Load("assets/sprite/Coin.png");
+	return true;
+};
+
+update_status ModuleCoin::Update()
+{
+	for (uint i = 0; i < MAX_COIN; ++i)
+		if (coin[i] != nullptr)
+		{
+			coin[i]->draw(graphics);
+		}
+	return UPDATE_CONTINUE;
+};
+
+void Coin::draw(SDL_Texture* text)
+{
+	Animation* current_animation = &anim;
+	App->render->Blit(text, position.x, position.y, &(current_animation->GetCurrentFrame()));
 }
