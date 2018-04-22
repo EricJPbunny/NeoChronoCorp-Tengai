@@ -55,6 +55,7 @@ private:
 
 public:
 	float speed = 0.2f;
+	Mix_Chunk* fx_death = nullptr;
 private:
 
 	bool timer = false;
@@ -64,7 +65,6 @@ private:
 	int current_time_2 = 700, time_on_entry_2 = 0;
 	int bulletsize=0;
 
-	Mix_Chunk* fx_death = nullptr;
 	Mix_Chunk* s_power_down = nullptr;
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];

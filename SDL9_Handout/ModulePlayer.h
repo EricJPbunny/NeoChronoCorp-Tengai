@@ -76,6 +76,7 @@ public:
 	bool input = true;
 	bool spin_pos = false;
 	bool death_pos = false;
+	bool explosion = false;
 	
 };
 

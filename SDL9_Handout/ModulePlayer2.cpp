@@ -470,6 +470,10 @@ void ModulePlayerTwo::PerformActions()
 		check_death = true;
 		input = false;
 		App->render->Blit(player_death, aux_death.x, aux_death.y, &death_rect, 1.0f);
+		if (explosion) {
+			App->particles->AddParticle(App->particles->explosion, position.x-8, position.y-8);
+			explosion = false;
+		}
 		alpha_player = 255;
 		break;
 

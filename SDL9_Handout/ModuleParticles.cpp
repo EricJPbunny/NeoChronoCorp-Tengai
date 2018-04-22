@@ -9,6 +9,7 @@
 #include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleUI.h"
+#include "ModuleEnemies.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -337,6 +338,9 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 				}
 				current_time = SDL_GetTicks() - time_on_entry;
 				if (current_time > 1000) {
+					App->player->explosion = true;
+					App->audio->PlaySoundEffects(App->enemies->fx_death);
+					App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y);
 					App->audio->PlaySoundEffects(koyori_death);
 					App->ui->num_life_koyori--;
 					timer = true;
@@ -352,6 +356,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 				}
 				current_time_2 = SDL_GetTicks() - time_on_entry_2;
 				if (current_time_2 > 1000) {
+					App->player2->explosion = true;
+					App->audio->PlaySoundEffects(App->enemies->fx_death);
 					App->audio->PlaySoundEffects(sho_death);
 					App->ui->num_life_sho--;
 					timer_2 = true;
