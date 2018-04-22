@@ -247,6 +247,8 @@ update_status ModulePlayer::Update()
 		}
 		else {
 			coll->SetPos(position.x, position.y - 32);
+
+			if (!App->scene_forest->god_mode)
 			hitbox->SetPos(position.x+8, position.y-20);
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
@@ -254,6 +256,7 @@ update_status ModulePlayer::Update()
 	else {
 		App->render->Blit(graphics, position.x, position.y - 32, &death);
 		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+
 		position.x -= 1;
 		position.y += 3;
 	}
