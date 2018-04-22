@@ -9,6 +9,7 @@
 #include "ModuleSceneForest.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleUI.h"
+#include "ModuleEnemies.h"
 
 #include "SDL\include\SDL_timer.h"
 #include "SDL\include\SDL_render.h"
@@ -270,6 +271,13 @@ void ModulePlayerTwo::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+		}
+		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_NINJA) {
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+		}
+		if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER && c2->type == COLLIDER_TYPE::COLLIDER_REDOVNI) {
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
+			App->enemies->AddEnemy(ENEMY_TYPES::POWERUP, position.x, position.y );
 		}
 		destroyed = true;
 	}

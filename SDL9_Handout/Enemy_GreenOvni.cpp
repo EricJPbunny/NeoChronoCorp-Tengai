@@ -19,8 +19,8 @@ Enemy_GreenOvni::Enemy_GreenOvni(int x, int y):Enemy(x,y)
 	back.PushBack({ 152,16,30,30 });
 	
 
-	movement.PushBack({ -0.1f, 0.0f }, 80, &fly);
-	//movement.PushBack({ 1.0f, 0.0f }, 160, &back);
+	movement.PushBack({ -0.1f, 0.0f }, 90, &fly);
+	movement.PushBack({ 3.7f, 0.0f }, 1000, &back);
 
 	animation = &fly;
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);

@@ -7,29 +7,48 @@
 
 Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
 {
-	fly.PushBack({ 20,415,16,16 });
-	fly.PushBack({ 40,415,16,16 });
-	fly.PushBack({ 60,415,16,16 });
-	fly.PushBack({ 78,415,16,16 });
-	fly.PushBack({ 97,415,16,16 });
-	fly.PushBack({ 113,415,16,16 });
-	fly.PushBack({ 132,415,16,16 });
-	fly.PushBack({ 147,415,16,16 });
-	fly.PushBack({ 164,415,16,16 });
-	fly.PushBack({ 182,415,16,16 });
-	fly.PushBack({ 201,415,16,16 });
-	fly.PushBack({ 219,415,16,16 });
-	fly.PushBack({ 236,415,16,16 });
-	fly.PushBack({ 255,415,16,16 });
-	fly.PushBack({ 274,415,16,16 });
-	fly.PushBack({ 295,415,16,16 });
+	up.PushBack({ 20,415,16,16 });
+	up.PushBack({ 40,415,16,16 });
+	up.PushBack({ 60,415,16,16 });
+	up.PushBack({ 78,415,16,16 });
+	up.PushBack({ 97,415,16,16 });
+	up.PushBack({ 113,415,16,16 });
+	up.PushBack({ 132,415,16,16 });
+	up.PushBack({ 147,415,16,16 });
+	up.PushBack({ 164,415,16,16 });
+	up.PushBack({ 182,415,16,16 });
+	up.PushBack({ 201,415,16,16 });
+	up.PushBack({ 219,415,16,16 });
+	up.PushBack({ 236,415,16,16 });
+	up.PushBack({ 255,415,16,16 });
+	up.PushBack({ 274,415,16,16 });
+	up.PushBack({ 295,415,16,16 });
+
 	
-	fly.speed = App->enemies->speed;
+	down.PushBack({ 20,415,16,16 });
+	down.PushBack({ 40,415,16,16 });
+	down.PushBack({ 60,415,16,16 });
+	down.PushBack({ 78,415,16,16 });
+	down.PushBack({ 97,415,16,16 });
+	down.PushBack({ 113,415,16,16 });
+	down.PushBack({ 132,415,16,16 });
+	down.PushBack({ 147,415,16,16 });
+	down.PushBack({ 164,415,16,16 });
+	down.PushBack({ 182,415,16,16 });
+	down.PushBack({ 201,415,16,16 });
+	down.PushBack({ 219,415,16,16 });
+	down.PushBack({ 236,415,16,16 });
+	down.PushBack({ 255,415,16,16 });
+	down.PushBack({ 274,415,16,16 });
+	down.PushBack({ 295,415,16,16 });
+	
+	up.speed = App->enemies->speed;
 
-	movement.PushBack({ 1.75f, 3.0f }, 58, &fly);
-	animation = &fly;
+	movement.PushBack({ 1.75f, -3.0f }, 58, &up);
+	movement.PushBack({ 1.75f, 3.0f }, 58, &down);
+	animation = &up;
 
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_COIN, (Module*)App->enemies);
 
 	originalposition.y = y;
 	originalposition.x = x;

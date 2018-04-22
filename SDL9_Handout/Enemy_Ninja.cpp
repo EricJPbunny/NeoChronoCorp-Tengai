@@ -43,7 +43,7 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 
 	animation = &fly;
 	
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_NINJA, (Module*)App->enemies);
 
 	originalposition.y = y;
 	originalposition.x = x;
