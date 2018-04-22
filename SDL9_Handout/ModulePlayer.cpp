@@ -135,6 +135,7 @@ bool ModulePlayer::Start()
 	power_up = 0;
 
 	k_power_down = App->audio->LoadEffect("assets/audio/koyori_lvl_down.wav");
+	death_fx = App->audio->LoadEffect("assets/audio/death_koyori.wav");
 
 	App->partner->Enable();
 	time = true;
@@ -157,6 +158,7 @@ bool ModulePlayer::CleanUp()
 
 	App->ui->game_over_koyori = true;
 
+	App->audio->UnloadFx(death_fx);
 	App->audio->UnloadFx(k_power_down);
 
 	App->partner->Disable();
@@ -226,6 +228,12 @@ update_status ModulePlayer::Update()
 		spin_pos = false;
 	}
 
+	if (death_pos) {
+		aux_death.x = position.x - 40;
+		aux_death.y = position.y - 70;
+		death_pos = false;
+	}
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (!check_death) {
@@ -267,13 +275,9 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == coll && destroyed == false && App->fade->IsFading() == false)
-	{
-		if (c1->type==COLLIDER_TYPE::COLLIDER_PLAYER_SHOT && c2->type==COLLIDER_TYPE::COLLIDER_ENEMY) {
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, PARTICLE_NONE, 70);
-		}
-		destroyed = true;
-	}
+	/*if () {
+		App->audio->PlaySoundEffects(death_fx, -1);
+}*/
 }
 
 void ModulePlayer::CheckState()
@@ -415,6 +419,7 @@ void ModulePlayer::PerformActions()
 
 	case IDLE:
 		input = true;
+		death_pos = true;
 		check_spawn = false;
 		alpha_player = 255;
 		spin.Reset();
@@ -448,18 +453,21 @@ void ModulePlayer::PerformActions()
 		if (walk.Finished())
 			walk.Reset();
 		break;
+
 	case SPIN:
 		SDL_Rect spin_rect = spin_circle.GetCurrentFrame();
 		App->render->Blit(graphics, aux_spin.x, aux_spin.y, &spin_rect);
 		current_animation = &spin;
 		break;
+
 	case DEATH:
 		SDL_Rect death_rect = death_circle.GetCurrentFrame();
-		input = false;
 		check_death = true;
-		App->render->Blit(player_death, aux_death.x, aux_death.y, &death_rect);
+		input = false;
+		App->render->Blit(player_death, aux_death.x, aux_death.y, &death_rect,1.0f);
 		alpha_player = 255;
 		break;
+
 	case POST_DEATH:
 		App->player->Disable();
 		break;
