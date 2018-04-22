@@ -12,6 +12,8 @@ private:
 	iPoint originalposition;
 	
 	Animation fly;
+	Animation recharge;
+	Animation armed;
 	Animation lift;
 	Animation run;
 	Animation up;

@@ -9,6 +9,10 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 {
 	fly.PushBack({ 18,113,30,42 });
 
+	recharge.PushBack({414,65,22,34});
+
+	armed.PushBack({458,64,41,37});
+
 	lift.PushBack({ 158,113,30,42 });
 	lift.PushBack({ 65,113,30,42 });
 	lift.PushBack({ 112,113,30,42 });
@@ -29,7 +33,9 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 	up.PushBack({ 362,68,27,33 });
 	stay.PushBack({ 362,68,27,33 });
 
-	movement.PushBack({ 1.75f, 3.0f }, 58, &fly);
+	movement.PushBack({ 1.75f, 3.0f }, 8, &fly);
+	movement.PushBack({ 1.75f, 3.0f }, 10, &recharge);
+	movement.PushBack({ 1.75f, 3.0f }, 40, &armed);
 	movement.PushBack({ 1.0f, 0.0f }, 20, &lift);
 	movement.PushBack({ -1.5f, 0.0f }, 40, &run);
 	movement.PushBack({ 5.50f,-4.00f }, 80, &up);

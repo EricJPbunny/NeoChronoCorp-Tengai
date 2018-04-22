@@ -25,6 +25,8 @@ Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
 	fly.PushBack({ 295,415,16,16 });
 	
 	fly.speed = App->enemies->speed;
+
+	movement.PushBack({ 1.75f, 3.0f }, 58, &fly);
 	animation = &fly;
 
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
