@@ -21,6 +21,9 @@ enum PARTICLE_TYPE
 	PARTICLE_SHOT,
 	PARTICLE_SHOT_2,
 	PLAYER_ENEMY,
+	PARTICLE_POWER_UP_KOYORI,
+	PARTICLE_POWER_UP_SHO,
+	PARTICLE_POWER_DOWN,
 
 };
 
@@ -63,11 +66,14 @@ public:
 
 	Mix_Chunk* shoot_audio = nullptr;
 	Mix_Chunk* shoot_sho = nullptr;
+	Mix_Chunk* power_up_koyori_fx = nullptr;
+	Mix_Chunk* power_up_sho_fx = nullptr;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, spark;
 	Particle shoot, shoot1, shoot2;
 	Particle mirror_shoot;
 	Particle c_mirror_green, c_mirror_blue, c_mirror_cyan;
 	Particle cat_shoot, egg_shoot, basaro_shot;
+	Particle power_up, power_down;
 };
 
 #endif // __MODULEPARTICLES_H__

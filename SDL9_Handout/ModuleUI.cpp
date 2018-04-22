@@ -54,6 +54,7 @@ ModuleUI::ModuleUI()
 	life_sho.y = 174;
 	life_sho.w = 15;
 	life_sho.h = 13;
+
 }
 
 ModuleUI::~ModuleUI()

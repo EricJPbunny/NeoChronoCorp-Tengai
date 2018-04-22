@@ -8,6 +8,7 @@
 #include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleUI.h"
+#include "ModuleSceneForest.h"
 #include "Enemy.h"
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
@@ -213,13 +214,20 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					App->player2->state = SPIN_2;
 				}
 			}
+			//Power Ups
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_POWER_UP) {
 				if (c2 == App->player->hitbox) {
+					App->particles->power_up.speed.x = App->scene_forest->speed / SCREEN_SIZE;
+					App->particles->power_up.speed.y = -2;
+					App->particles->AddParticle(App->particles->power_up, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_KOYORI);
 					App->player->power_up++;
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
 				if (c2 == App->player2->hitbox) {
+					App->particles->power_up.speed.x = App->scene_forest->speed / SCREEN_SIZE;
+					App->particles->power_up.speed.y = -2;
+					App->particles->AddParticle(App->particles->power_up, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_SHO);
 					App->player2->power_up++;
 					delete enemies[i];
 					enemies[i] = nullptr;

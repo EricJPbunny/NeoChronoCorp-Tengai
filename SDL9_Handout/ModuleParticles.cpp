@@ -6,7 +6,6 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
-
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -72,6 +71,20 @@ ModuleParticles::ModuleParticles()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.10f;
 	explosion.life = 700;
+
+	//Power UP/DOWN
+	power_up.anim.PushBack({ 5,313,26,15 });
+	power_up.anim.PushBack({ 5,331,26,15 });
+	power_up.anim.PushBack({ 5,350,26,15 });
+	power_up.anim.loop = true;
+	power_up.anim.speed = 0.20f;
+	power_up.life = 1000;
+
+	power_down.anim.PushBack({ 36,331,26,15 });
+	power_down.anim.PushBack({ 36,350,26,15 });
+	power_down.anim.loop = true;
+	power_down.anim.speed = 0.10f;
+	power_down.life = 2000;
 
 	//Bullet sparks
 	spark.anim.PushBack({32,35,45,19});
@@ -143,6 +156,8 @@ bool ModuleParticles::Start()
 
 	shoot_audio = App->audio->LoadEffect("assets/audio/Shot_Koyori.wav");
 	shoot_sho = App->audio->LoadEffect("assets/audio/Shot_Sho.wav");
+	power_up_koyori_fx = App->audio->LoadEffect("assets/audio/power_up_koyori.wav");
+	power_up_sho_fx = App->audio->LoadEffect("assets/audio/power_up_sho.wav");
 
 	return true;
 }
@@ -152,6 +167,8 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 
+	App->audio->UnloadFx(power_up_sho_fx);
+	App->audio->UnloadFx(power_up_koyori_fx);
 	App->audio->UnloadFx(shoot_sho);
 	App->audio->UnloadFx(shoot_audio);
 
@@ -219,6 +236,14 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if (particle_type == PARTICLE_SHOT_2) {
 				p->fx = 2;
 				App->audio->PlaySoundEffects(shoot_sho, p->fx);
+			}
+			if (particle_type == PARTICLE_POWER_UP_KOYORI) {
+				p->fx = 5;
+				App->audio->PlaySoundEffects(power_up_koyori_fx, p->fx);
+			}
+			if (particle_type == PARTICLE_POWER_UP_SHO) {
+				p->fx = 6;
+				App->audio->PlaySoundEffects(power_up_sho_fx, p->fx);
 			}
 			active[i] = p;
 			break;

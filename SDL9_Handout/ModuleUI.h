@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "ModuleParticles.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
 struct SDL_Texture;
