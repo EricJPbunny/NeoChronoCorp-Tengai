@@ -9,8 +9,135 @@ Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 
 [![Video Image](http://img.youtube.com/vi/jCQH_34d5r0/maxresdefault.jpg)](https://www.youtube.com/watch?v=jCQH_34d5r0&t=152s)
 
 ## Installation
+> __Unzip the release folder and execute the Tengai.exe file__
+
 ## Game Controls
+
+__[ESC]__ = Exit
+
+__[ENTER]__ = Start game
+
+__[F1]__ = Show collisions
+
+__[F2]__ = Kill Player 1
+
+__[F3]__ = Kill Player 2
+
+__[F4]__ = Final stage
+
+__[F5]__ = God mode
+
+__[Q]__ = Spawn Power up
+
+
+
+### Player 1 Control
+
+__[RETURN]__ = Spawn
+
+__[W]__ = Up
+
+__[A]__ = Left
+
+__[S]__ = Down
+
+__[D]__ = Right
+
+__[SPACE]__ = Shoot
+
+__[O]__ = Power Up + 1
+
+__[I]__ = Power Up -1
+
+__[SPACE](KEY_REPEAT)__ = Charged shot 
+
+### Player 2 Control
+
+__[RCTRL]__ = Spawn
+
+__[UP]__ = Up
+
+__[LEFT]__ = Left
+
+__[DOWN]__ = Down
+
+__[RIGHT]__ = Right
+
+__[RSHIFT]__ = Shoot
+
+__[M]__ = Power Up + 1
+
+__[N]__ = Power Up -1
+
+__[RSHIFT](KEY_REPEAT)__ = Charged shot 
+
 ## Changelist
+
+### 0.1 Version(4/04/2018)
+
+-First map backgrounds
+-First map's music
+-Scroll
+-Map velocity
+-Screen Edges
+
+
+### 0.25 Version(9/4/2018)
+
+-Added playable character
+-Added character movement
+-Added three more scenes
+-Fade between scenes
+-Fixed music bug
+-Fixed some backgrounds errors
+
+### 0.3.1 Version(12/4/2018)
+
+-Added shooting bullets
+-Fixed animation bugs
+-Fixed background bugs
+
+### 0.3.2 Version(12/4/2018)
+
+-Started fixing camera movement
+-Added first fade
+-Fixed bullet bug
+-Fixed some minor animation bugs
+
+### 0.3.5 Version(16/4/2018)
+
+-Changed and fixed backgrounds
+-Added character bullets
+-Added collisions
+-Added start scene
+-Added borders
+
+
+### 0.4.2 Version(22/04/2018)
+
+-Added partners
+-Added partner shots
+-Added score
+-Added enemies
+-Added power ups
+-Added explosions and FX
+-Fixed characters movements
+
+
+### 0.4.3 Version(22/04/2018)
+
+-Added God mode
+-Added coins
+-Added enemies bullets
+-Added Power ups and Power downs
+-Fixed characters movements
+
+
+### 0.5 Version(22/04/2018)
+
+--Fixed FX bug
+--Added more enemies
+
 ## Credits
 * **[GitHub Project Page](https://github.com/EricJPbunny/NeoChronoCorp-Tengai)**
 * **[GitHub Wiki Page](https://github.com/EricJPbunny/NeoChronoCorp-Tengai/wiki)**
