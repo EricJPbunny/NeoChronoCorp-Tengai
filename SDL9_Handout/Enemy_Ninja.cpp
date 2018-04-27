@@ -52,7 +52,8 @@ Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
 void Enemy_Ninja::Move()
 {
 	if(App->ui->enemies_movement){
-	position = originalposition + movement.GetCurrentSpeed(&animation);
+	position.x = (originalposition.x + (movement.GetCurrentSpeed(&animation).x)/1.67);
+	position.y = (originalposition.y + (movement.GetCurrentSpeed(&animation).y) ) ;
 	}
 	
 }
