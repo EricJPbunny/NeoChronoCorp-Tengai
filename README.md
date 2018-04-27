@@ -13,6 +13,40 @@ Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 
 
 ## Game Controls
 
+## Gamepad
+
+__[START]__ = Start Game
+
+__[START]__ = Skip between scenes
+
+__[SELECT]__ = Insert Coin
+
+### Player 1 Control
+
+__Left joystick__ = Character movement 
+
+__[A]__ = Shot
+
+__[A](KEY_REPEAT)__ = Charged shot
+
+__[X]__ = Ulti 
+
+### Player 2 Control
+
+__[START]__ = Spawn
+
+__Left joystick__ = Character movement
+
+__[B]__ = Shot
+
+__[B](KEY_REPEAT)__ = Charged shot 
+
+__[Y]__ = Ulti 
+
+
+
+## Keyboard
+
 __[ESC]__ = Exit
 
 __[ENTER]__ = Start game
