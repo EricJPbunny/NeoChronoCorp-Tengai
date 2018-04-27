@@ -27,7 +27,7 @@ __Left joystick__ = Character movement
 
 __[A]__ = Shot
 
-__[A](KEY_REPEAT)__ = Charged shot
+__[A]"KEY_REPEAT"__ = Charged shot
 
 __[X]__ = Ulti 
 
@@ -39,7 +39,7 @@ __Left joystick__ = Character movement
 
 __[B]__ = Shot
 
-__[B](KEY_REPEAT)__ = Charged shot 
+__[B]"KEY_REPEAT"__ = Charged shot 
 
 __[Y]__ = Ulti 
 
@@ -83,7 +83,7 @@ __[O]__ = Power Up + 1
 
 __[I]__ = Power Up -1
 
-__[SPACE](KEY_REPEAT)__ = Charged shot 
+__[SPACE]"KEY_REPEAT"__ = Charged shot 
 
 ### Player 2 Control
 
@@ -103,7 +103,7 @@ __[M]__ = Power Up + 1
 
 __[N]__ = Power Up -1
 
-__[RSHIFT](KEY_REPEAT)__ = Charged shot 
+__[RSHIFT]"KEY_REPEAT"__ = Charged shot 
 
 ## Changelist
 
