@@ -16,7 +16,7 @@
 
 #include "SDL\include\SDL_timer.h"
 #include "SDL\include\SDL_render.h"
-#include "SDL\include\SDL_joystick.h"
+#include "SDL\include\SDL_gamecontroller.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -295,12 +295,7 @@ void ModulePlayer::CheckState()
 	switch (state)
 	{
 	case SPAWN_PLAYER:
-		if (time) {
-			time_on_entry = SDL_GetTicks();
-			time = false;
-		}
-		current_time = SDL_GetTicks() - time_on_entry;
-		if (current_time > 1500) {
+		if (timer(1500, &current_time, &time_on_entry)) {
 			state = IDLE;
 		}
 		
