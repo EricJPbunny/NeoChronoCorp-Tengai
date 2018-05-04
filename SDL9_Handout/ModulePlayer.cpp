@@ -16,6 +16,7 @@
 
 #include "SDL\include\SDL_timer.h"
 #include "SDL\include\SDL_render.h"
+#include "SDL\include\SDL_gamecontroller.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -195,8 +196,12 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
 			position.x += speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->gamepad, SDL_CONTROLLER_AXIS_LEFTY) == 1) {
 			position.y += speed;
+		}
+
+		if (SDL_GameControllerGetButton(App->input->gamepad, SDL_CONTROLLER_BUTTON_A) == 1) {
+			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
@@ -290,12 +295,7 @@ void ModulePlayer::CheckState()
 	switch (state)
 	{
 	case SPAWN_PLAYER:
-		if (time) {
-			time_on_entry = SDL_GetTicks();
-			time = false;
-		}
-		current_time = SDL_GetTicks() - time_on_entry;
-		if (current_time > 1500) {
+		if (timer(1500, &current_time, &time_on_entry)) {
 			state = IDLE;
 		}
 		
