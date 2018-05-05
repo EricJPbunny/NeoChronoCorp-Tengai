@@ -200,7 +200,6 @@ bool ModuleSceneForest::Start()
 	coll_down =App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
 	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
-	coll_trigger = App->collision->AddCollider({0,0,300,300},COLLIDER_TRIGGER);
 
 	//Enemies Ovni
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 830, 170);

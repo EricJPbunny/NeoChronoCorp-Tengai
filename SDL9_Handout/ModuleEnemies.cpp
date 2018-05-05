@@ -443,15 +443,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			//Shooting trigger
 
-			if (c2->type == COLLIDER_TYPE::COLLIDER_TRIGGER && c1->type == COLLIDER_TYPE::COLLIDER_NINJA) 
-			{
-				bulletsize++;
-				if (bulletsize >= 30) 
-				{
-					App->particles->AddParticle(App->particles->shuriken, enemies[i]->position.x, enemies[i]->position.y, COLLIDER_ENEMY_SHOT, PARTICLE_SHURIKEN);
-					bulletsize = 0;
-				}
-			}
+		
 			//Enemy Drop Power Up
 			if (c1->type == COLLIDER_TYPE::COLLIDER_REDOVNI && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
 				App->audio->PlaySoundEffects(fx_death);

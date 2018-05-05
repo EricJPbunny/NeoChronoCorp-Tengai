@@ -3,6 +3,8 @@
 #include "ModuleEnemies.h"
 #include "ModuleCollision.h"
 #include "ModuleUI.h"
+#include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 
 Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
@@ -56,4 +58,24 @@ void Enemy_Ninja::Move()
 	position.y = (originalposition.y + (movement.GetCurrentSpeed(&animation).y) ) ;
 	}
 	
+
+
+	shootTimer++;
+
+	if (shootTimer == 20) {
+		if (App->player->position.x < position.x && App->player->position.y < position.y)
+		{
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y, COLLIDER_ENEMY_SHOT);
+		}
+		else if (App->player->position.x < position.x && App->player->position.y > position.y) {
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y, COLLIDER_ENEMY_SHOT);
+		}
+		else if (App->player->position.x > position.x && App->player->position.y < position.y) {
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y, COLLIDER_ENEMY_SHOT);
+		}
+		else if (App->player->position.x > position.x && App->player->position.y > position.y) {
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y, COLLIDER_ENEMY_SHOT);
+		}
+		shootTimer = 0;
+	}
 }

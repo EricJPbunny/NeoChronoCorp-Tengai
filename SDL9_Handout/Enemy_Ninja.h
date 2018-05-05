@@ -19,6 +19,7 @@ private:
 	Animation up;
 	Animation stay;
 	Path movement;
+	int shootTimer = 0;
 public:
 
 	Enemy_Ninja(int x, int y);
