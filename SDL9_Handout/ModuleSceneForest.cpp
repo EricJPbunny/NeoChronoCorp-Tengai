@@ -404,7 +404,7 @@ update_status ModuleSceneForest::Update()
 {
 	//Update Collision
 	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, 0);
-	coll_right->SetPos((SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE), 0);
+	coll_right->SetPos(SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE, 0);
 	coll_trigger->SetPos( 100+(App->render->camera.x / SCREEN_SIZE),0);
 	// Draw everything --------------------------------------	
 	int aux = -10, auxtree = -10, aux2 = 810, aux3 = 1775, aux4 = 780, aux5 = 2031, aux6 = 1390, aux7 = 5119, aux8 = 4690, aux9 = 6140, aux10 = 6630, aux11 = 7880;
@@ -577,9 +577,9 @@ update_status ModuleSceneForest::Update()
 	SDL_SetTextureAlphaMod(end, alpha_end);
 
 	//Background Movement
-	App->player2->position.x += speed / SCREEN_SIZE/3;
-	App->player->position.x += speed/SCREEN_SIZE/3;
-	App->render->camera.x += speed/3;
+	App->player2->position.x += speed / SCREEN_SIZE;
+	App->player->position.x += speed/SCREEN_SIZE;
+	App->render->camera.x += speed;
 
 	//Music 
 	if (App->render->camera.x > 15000 && App->render->camera.x < 15100 ) {
