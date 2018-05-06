@@ -58,6 +58,7 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	walk.PushBack({ 187,58,27,24 });
 	walk.speed = 0.20f;
 
+
 	//Spin
 	spin.PushBack({ 415,10,19,28 });
 	spin.PushBack({ 445,10,16,28 });
@@ -105,6 +106,7 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	death_circle.PushBack({});
 	death_circle.PushBack({ 2,292, 130, 130 });
 	death_circle.speed = 0.8f;
+
 
 	//Death Player
 	death.x = 323;
