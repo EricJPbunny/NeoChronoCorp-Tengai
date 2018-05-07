@@ -49,7 +49,6 @@ bool ModuleAudio::CleanUp()
 		if (mus[i] != nullptr)
 		{	Mix_FreeMusic(mus[i]);
 			mus[i] = nullptr;
-			break;
 		}
 	}
 	for (uint i = 0; i < MAX_FX; ++i)
@@ -57,7 +56,6 @@ bool ModuleAudio::CleanUp()
 		if (sound_fx[i] != nullptr)
 		{	Mix_FreeChunk(sound_fx[i]);
 			sound_fx[i] = nullptr;
-			break;
 		}
 	}
 
@@ -72,9 +70,10 @@ void ModuleAudio::PlayMusic(Mix_Music* mus_to_play,int reps)
 	Mix_FadeInMusic(mus_to_play, reps, 3000);
 	Mix_VolumeMusic(MIX_MAX_VOLUME/4);
 }
-void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play, int fx)
+void ModuleAudio::PlaySoundEffects(Mix_Chunk* fx_to_play)
 {
-	Mix_PlayChannel (fx,fx_to_play,0);
+	int channel = Mix_PlayChannel (-1,fx_to_play,0);
+	LOG("%i", channel);
 	if (fx_to_play != nullptr) {	Mix_VolumeChunk(fx_to_play, MIX_MAX_VOLUME);
 	}
 }
@@ -124,17 +123,22 @@ Mix_Music* const ModuleAudio::LoadMusic(const char* path)
 Mix_Chunk* const ModuleAudio::LoadEffect(const char* path)
 {
 	Mix_Chunk* fx = nullptr;
-	if (last_fx < MAX_FX)
-	{
-		fx = Mix_LoadWAV(path);
 
-		if (fx == nullptr)
+	for (int m = 0; m < MAX_FX; ++m)
+	{
+		if(sound_fx[m] == nullptr)
 		{
-			LOG("Could not load effect with path %s Error: %s", path, Mix_GetError());
-		}
-		else
-		{
-			sound_fx[last_fx++] = fx;
+			fx = Mix_LoadWAV(path);
+
+			if (fx == nullptr)
+			{
+				LOG("Could not load effect with path %s Error: %s", path, Mix_GetError());
+			}
+			else
+			{
+				sound_fx[m] = fx;
+			}
+			break;
 		}
 	}
 	return fx;

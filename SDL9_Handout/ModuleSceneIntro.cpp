@@ -63,7 +63,7 @@ update_status ModuleSceneIntro::Update()
 
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN]==KEY_STATE::KEY_DOWN || current_time>8000) {
-		App->audio->PlaySoundEffects(start, -1);
+		App->audio->PlaySoundEffects(start);
 		App->fade->FadeToBlack(App->scene_intro, App->scene_start, 0.50f);
 	}
 
