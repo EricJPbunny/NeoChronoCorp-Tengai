@@ -1,8 +1,11 @@
 ROADMAP // TENGAI // NEOCHRONO
 
 -0.5.5// Rip Sprites (Background/Enemies())
+
 -0.5.6//Implement Gamepad contolers & Full screen
+
 -0.5.7// Fix code
+
 -----------------------------------------------------------
 -0.6// Print Background & Set velocities
 -0.6.5//Implement hitbox & colliders (Background)
@@ -16,6 +19,7 @@ ROADMAP // TENGAI // NEOCHRONO
 -0.9// Players Ulti 
 
 1.00// Tracking bullets & Fixing (player animations, audio, screen borders) & Choose Character Screen & one-player mode
+
 -----------------------------------------------------------
 1.10 // 2nd  Level & 3 Players
 
