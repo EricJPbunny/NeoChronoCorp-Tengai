@@ -58,6 +58,31 @@ bool ModuleSceneAir::Start()
 	SkyFour.h = 23;
 	SkyFour.w = 959;
 
+	FloorOne.x = 0;
+	FloorOne.y = 281;
+	FloorOne.h = 6;
+	FloorOne.w = 959;
+
+	FloorTwo.x = 0;
+	FloorTwo.y = 287;
+	FloorTwo.h = 8;
+	FloorTwo.w = 959;
+
+	FloorThree.x = 0;
+	FloorThree.y = 295;
+	FloorThree.h = 10;
+	FloorThree.w = 959;
+
+	FloorFour.x = 0;
+	FloorFour.y = 305;
+	FloorFour.h = 8;
+	FloorFour.w = 959;
+
+	FloorFive.x = 0;
+	FloorFive.y = 313;
+	FloorFive.h = 16;
+	FloorFive.w = 959;
+
 
 	//startup
 	App->player->Enable();
@@ -119,6 +144,11 @@ update_status ModuleSceneAir::Update()
 	App->render->Blit(graphics, 0, 45, &SkyTwo, 0.25f);
 	App->render->Blit(graphics, 0, 70, &SkyThree, 0.20f);
 	App->render->Blit(graphics, 0, 97, &SkyFour, 0.15f);
+	App->render->Blit(graphics, 0, 176, &FloorOne, 0.20f);
+	App->render->Blit(graphics, 0, 182, &FloorTwo, 0.30f);
+	App->render->Blit(graphics, 0, 190, &FloorThree, 0.40f);
+	App->render->Blit(graphics, 0, 200, &FloorFour, 0.50f);
+	App->render->Blit(graphics, 0, 208, &FloorFive, 0.60f);
 
 	//Enable Players
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
