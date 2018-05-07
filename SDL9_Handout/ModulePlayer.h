@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "ModuleInput.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
 struct SDL_Texture;
@@ -78,6 +79,8 @@ public:
 	bool death_pos = false;
 	bool explosion = false;
 	
+	
+
 };
 
 #endif

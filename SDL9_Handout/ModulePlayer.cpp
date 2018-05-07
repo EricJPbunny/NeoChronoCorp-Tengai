@@ -13,7 +13,6 @@
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
 
-
 #include "SDL\include\SDL_timer.h"
 #include "SDL\include\SDL_render.h"
 #include "SDL\include\SDL_joystick.h"
@@ -51,16 +50,6 @@ ModulePlayer::ModulePlayer()
 	intermediate_return.PushBack({ 230,95,24,28 });
 	intermediate_return.PushBack({ 187,95,27,29 });
 	intermediate_return.speed = 0.10f;
-
-	//Walk
-	walk.PushBack({ 74,12,27,27 });
-	walk.PushBack({ 114,13,27,27 });
-	walk.PushBack({ 153,11,27,29 });
-	walk.PushBack({ 194,8,27,32 });
-	walk.PushBack({ 234,9,28,30 });
-	walk.PushBack({ 274,12,28,28 });
-	walk.PushBack({ 313,15,30,25 });
-	walk.speed = 0.20f;
 
 	//Spin
 	spin.PushBack({ 22,95,33,29 });
@@ -134,8 +123,6 @@ bool ModulePlayer::Start()
 	position.y = (App->render->camera.y) / SCREEN_SIZE+100;
 
 	state = SPAWN_PLAYER;
-	App->ui->num_life_koyori = 3;
-	power_up = 0;
 
 	k_power_down = App->audio->LoadEffect("assets/audio/koyori_lvl_down.wav");
 
@@ -169,6 +156,15 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+
+	//Create bool variables
+	bool pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT;
+	bool pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT;
+	bool pressed_S = App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT;
+	bool pressed_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT;
+
+	bool shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+
 	float speed = 2.5;
 
 	//Power Up Limits
@@ -187,16 +183,16 @@ update_status ModulePlayer::Update()
 
 	//Inputs
 	if (input) {
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_A) {
 			position.x -= speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_W) {
 			position.y -= speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_D) {
 			position.x += speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->gamepad, SDL_CONTROLLER_AXIS_LEFTY) == 1) {
+		if (pressed_S) {
 			position.y += speed;
 		}
 
@@ -204,7 +200,7 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+		if (shot_space) {
 			aux1++;
 			switch (aux1) {
 			case 0:
@@ -292,6 +288,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 void ModulePlayer::CheckState()
 {
+	//Create Input Bools
+	bool press_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN;
+	bool press_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN;
+	bool press_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN;
+
 	switch (state)
 	{
 	case SPAWN_PLAYER:
@@ -303,18 +304,13 @@ void ModulePlayer::CheckState()
 		if (current_time > 1500) {
 			state = IDLE;
 		}
-		
+		App->ui->num_life_koyori = 3;
+		power_up = 0;
 		break;
 
 	case IDLE:
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN) {
+		if (press_W || press_A) {
 			state = GO_BACKWARD;
-			LOG("cambio para atras");
-		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
-			state = WALK;
-			
-			LOG("camina");
 		}
 
 		break;
@@ -330,12 +326,10 @@ void ModulePlayer::CheckState()
 		if (current_animation->Finished()) {
 			intermediate.Reset();
 			state = BACKWARD;
-			LOG("combio ara esta atras");
 		}
 		break;
 
 	case BACKWARD:
-		
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
 			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE) {
 				state = BACK_IDLE;
@@ -349,7 +343,6 @@ void ModulePlayer::CheckState()
 		break;
 
 	case BACK_IDLE:
-
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
 			state = BACK_IDLE;
 		}
@@ -358,37 +351,10 @@ void ModulePlayer::CheckState()
 		}
 		if (current_animation->Finished()) {
 			intermediate.Reset();
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT-4) {
-				state = WALK;
-			}
-			else {
-				state = IDLE;
-			}
+			state = IDLE;
 		}
 		break;
 
-	case WALK:
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A]) {
-			state = IDLE;
-		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP) {
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
-				state = GO_BACKWARD;
-			}
-			else {
-				state = IDLE;
-			}
-		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
-			current_animation = &walk;
-		}
-		else { current_animation = &idle; }
-		if (App->render->camera.x > 26000) {
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
-				current_animation = &idle;
-			}
-		}
-		break;
 	case SPIN:
 		if (spin.Finished()) {
 			spin.Reset();
@@ -396,11 +362,13 @@ void ModulePlayer::CheckState()
 			state = IDLE;
 		}
 		break;
+
 	case DEATH:
 		if (position.y > SCREEN_HEIGHT+80) {
 			state = POST_DEATH;
 		}
 		break;
+
 	case POST_DEATH:
 		if (App->ui->num_life_koyori > 0) {
 			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
@@ -408,6 +376,7 @@ void ModulePlayer::CheckState()
 			time = true;
 			state = SPAWN_PLAYER;
 		}
+		break;
 	}
 }
 
@@ -469,11 +438,6 @@ void ModulePlayer::PerformActions()
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
-		break;
-
-	case WALK:
-		if (walk.Finished())
-			walk.Reset();
 		break;
 
 	case SPIN:
