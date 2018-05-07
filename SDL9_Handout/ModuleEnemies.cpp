@@ -198,7 +198,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						App->player->power_up--;
 						timer = true;
 					}
-					App->audio->PlaySoundEffects(App->player->k_power_down, 3);
+					App->audio->PlaySoundEffects(App->player->k_power_down);
 					App->player->spin_pos = true;
 					App->player->state = SPIN;
 				}
@@ -217,7 +217,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						App->player2->power_up--;
 						timer_2 = true;
 					}
-					App->audio->PlaySoundEffects(s_power_down, 4);
+					App->audio->PlaySoundEffects(s_power_down);
 					App->player2->spin_pos = true;
 					App->player2->state = SPIN_2;
 				}
@@ -226,21 +226,19 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
 				
 				num_ovni++;
-				if (num_ovni <4) {
+
 					App->audio->PlaySoundEffects(fx_death);
 					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
-					delete enemies[i];
-					enemies[i] = nullptr;
-				}
+					
+					
+
 				if (num_ovni >=4) {
-					App->audio->PlaySoundEffects(fx_death);
-					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 					AddEnemy(ENEMY_TYPES::COIN, enemies[i]->position.x, enemies[i]->position.y);
-					delete enemies[i];
-					enemies[i] = nullptr;
 					ninja_life = 0;
 					num_ovni = 0;
 				}
+				delete enemies[i];
+				enemies[i] = nullptr;
 				App->ui->score_koyori += 200;
 			
 			}

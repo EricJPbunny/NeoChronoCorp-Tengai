@@ -296,24 +296,24 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if(collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			if (particle_type == PARTICLE_SHOT) {
-				p->fx = 1;
-				App->audio->PlaySoundEffects(shoot_audio, p->fx);
+				
+				App->audio->PlaySoundEffects(shoot_audio);
 			}
 			if (particle_type == PARTICLE_SHOT_2) {
-				p->fx = 2;
-				App->audio->PlaySoundEffects(shoot_sho, p->fx);
+				
+				App->audio->PlaySoundEffects(shoot_sho);
 			}
 			if (particle_type == PARTICLE_POWER_UP_KOYORI) {
-				p->fx = 5;
-				App->audio->PlaySoundEffects(power_up_koyori_fx, p->fx);
+				
+				App->audio->PlaySoundEffects(power_up_koyori_fx);
 			}
 			if (particle_type == PARTICLE_POWER_UP_SHO) {
-				p->fx = 6;
-				App->audio->PlaySoundEffects(power_up_sho_fx, p->fx);
+				
+				App->audio->PlaySoundEffects(power_up_sho_fx);
 			}
 			if (particle_type == PARTICLE_COIN) {
-				p->fx = 7;
-				App->audio->PlaySoundEffects(coin_fx, p->fx);
+				
+				App->audio->PlaySoundEffects(coin_fx);
 			}
 			active[i] = p;
 			break;

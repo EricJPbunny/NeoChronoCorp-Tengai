@@ -194,7 +194,7 @@ bool ModuleSceneForest::Start()
 	App->ui->score_koyori = 0;
 	App->ui->score_sho= 0;
 
-	App->audio->PlaySoundEffects(select_koyori, 1);
+	App->audio->PlaySoundEffects(select_koyori);
 
 	coll_up =App->collision->AddCollider({ 0, 0, 99000, 20 }, COLLIDER_WALL);
 	coll_down =App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
@@ -575,9 +575,9 @@ update_status ModuleSceneForest::Update()
 	SDL_SetTextureAlphaMod(end, alpha_end);
 
 	//Background Movement
-	App->player2->position.x += speed / SCREEN_SIZE/3;
-	App->player->position.x += speed/SCREEN_SIZE/3;
-	App->render->camera.x += speed/3;
+	App->player2->position.x += speed / SCREEN_SIZE;
+	App->player->position.x += speed/SCREEN_SIZE;
+	App->render->camera.x += speed;
 
 	//Music 
 	if (App->render->camera.x > 15000 && App->render->camera.x < 15100 ) {
@@ -588,14 +588,14 @@ update_status ModuleSceneForest::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		if (!App->player->IsEnabled()) {
-			App->audio->PlaySoundEffects(select_koyori,1);
+			App->audio->PlaySoundEffects(select_koyori);
 			App->player->Enable();
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 		if (!App->player2->IsEnabled()) {
-			App->audio->PlaySoundEffects(select_sho,2);
+			App->audio->PlaySoundEffects(select_sho);
 			App->player2->Enable();
 		}
 	}
@@ -629,8 +629,8 @@ update_status ModuleSceneForest::Update()
 	//End Game
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) {
 		App->render->camera.x = 49000;
-		App->player->position.x = App->render->camera.x / 3;
-		App->player2->position.x = App->render->camera.x / 3;
+		App->player->position.x = App->render->camera.x;
+		App->player2->position.x = App->render->camera.x;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) 
 	{
@@ -643,6 +643,10 @@ update_status ModuleSceneForest::Update()
 		}
 		else god_mode = false;
 	}
+	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) {
+		App->audio->PlaySoundEffects(App->enemies->fx_death);
+	}
+	
 	
 	return UPDATE_CONTINUE;
 }
