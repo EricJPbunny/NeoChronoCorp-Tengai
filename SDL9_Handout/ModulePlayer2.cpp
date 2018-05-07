@@ -113,7 +113,7 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	death.y = 56;
 	death.w = 27;
 	death.h = 26;
-
+	
 }
 
 ModulePlayerTwo::~ModulePlayerTwo()
