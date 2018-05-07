@@ -4,7 +4,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
-#include "ModuleSceneForest.h"
+#include "ModuleSceneAir.h"
 #include "ModuleSceneScore.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
@@ -129,7 +129,7 @@ update_status ModuleUI::Update()
 
 	if (game_over_koyori && game_over_sho) {
 		//Time countdown
-		App->scene_forest->speed = 0;
+		App->scene_air->speed = 0;
 		if (aux) {
 			time_on_entry = SDL_GetTicks();
 			aux = false;
@@ -149,7 +149,7 @@ update_status ModuleUI::Update()
 		App->fonts->BlitText(180, 115, font_time, time_text);
 		App->render->Blit(black, 0, 0, &screen, 0.00f);
 		if (time == 0) {
-			App->fade->FadeToBlack(App->scene_forest, App->scene_score);
+			App->fade->FadeToBlack(App->scene_air, App->scene_score);
 		}
 	}
 

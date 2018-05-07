@@ -97,7 +97,7 @@
     <ClInclude Include="ModulePlayer2.h" />
     <ClInclude Include="ModulePowerup.h" />
     <ClInclude Include="ModuleRender.h" />
-    <ClInclude Include="ModuleSceneForest.h" />
+    <ClInclude Include="ModuleSceneAir.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleSceneScore.h" />
     <ClInclude Include="ModuleSceneStart.h" />
@@ -131,7 +131,7 @@
     <ClCompile Include="ModulePlayer2.cpp" />
     <ClCompile Include="ModulePowerup.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
-    <ClCompile Include="ModuleSceneForest.cpp" />
+    <ClCompile Include="ModuleSceneAir.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleSceneScore.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />

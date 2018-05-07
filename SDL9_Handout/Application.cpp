@@ -5,7 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneScore.h"
-#include "ModuleSceneForest.h"
+#include "ModuleSceneAir.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneStart.h"
 #include "ModuleUI.h"
@@ -31,7 +31,7 @@ Application::Application()
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_start = new ModuleSceneStart();
-	modules[i++] = scene_forest = new ModuleSceneForest();
+	modules[i++] = scene_air = new ModuleSceneAir();
 	modules[i++] = scene_score = new ModuleScore();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = pu = new ModulePowerup();
@@ -59,7 +59,7 @@ bool Application::Init()
 	App->ui->Disable();
 	scene_score->Disable();
 	scene_start->Disable();
-	scene_forest->Disable();
+	scene_air->Disable();
 	player->Disable();
 	player2->Disable();
 	collision->Disable();

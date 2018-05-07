@@ -8,7 +8,7 @@
 #include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleUI.h"
-#include "ModuleSceneForest.h"
+#include "ModuleSceneAir.h"
 #include "Enemy.h"
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
@@ -169,7 +169,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
-	float speed = App->scene_forest->speed / SCREEN_SIZE;
+	float speed = App->scene_air->speed / SCREEN_SIZE;
 
 	if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX&&c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
 	{

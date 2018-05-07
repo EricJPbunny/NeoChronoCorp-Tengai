@@ -6,7 +6,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer2.h"
 #include "ModulePartner2.h"
-#include "ModuleSceneForest.h"
+#include "ModuleSceneAir.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
@@ -219,16 +219,16 @@ update_status ModulePlayerTwo::Update()
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
 	//Update Collider Position
 
-	if (coll->CheckCollision(App->scene_forest->coll_left->rect)) {
+	if (coll->CheckCollision(App->scene_air->coll_left->rect)) {
 		position.x = App->render->camera.x / SCREEN_SIZE;
 	}
-	if (coll->CheckCollision(App->scene_forest->coll_right->rect)) {
+	if (coll->CheckCollision(App->scene_air->coll_right->rect)) {
 		position.x = (SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE) - 33;
 	}
-	if (coll->CheckCollision(App->scene_forest->coll_up->rect)) {
+	if (coll->CheckCollision(App->scene_air->coll_up->rect)) {
 		position.y = 52;
 	}
-	if (coll->CheckCollision(App->scene_forest->coll_down->rect)) {
+	if (coll->CheckCollision(App->scene_air->coll_down->rect)) {
 		position.y = SCREEN_HEIGHT-4;
 	}
 
@@ -261,7 +261,7 @@ update_status ModulePlayerTwo::Update()
 		else {
 			coll->SetPos(position.x, position.y - 32);
 
-			if (!App->scene_forest->god_mode)
+			if (!App->scene_air->god_mode)
 			hitbox->SetPos(position.x + 8, position.y - 20);
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
@@ -273,8 +273,7 @@ update_status ModulePlayerTwo::Update()
 		position.y += 3;
 	}
 
-	//Temple
-	App->render->Blit(App->scene_forest->graphics, 202, 0, &App->scene_forest->Templesgate2, 0.75f);
+	
 
 
 	

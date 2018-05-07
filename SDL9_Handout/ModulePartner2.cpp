@@ -6,7 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleSceneForest.h"
+#include "ModuleSceneAir.h"
 #include "ModulePlayer2.h"
 #include "ModulePartner2.h"
 #include "ModuleUI.h"
@@ -129,7 +129,7 @@ update_status ModulePartner2::Update()
 		position.y = App->player2->position.y - 20;
 	}
 	else if (charged_shoot) {
-		position.x += App->scene_forest->speed / SCREEN_SIZE;
+		position.x += App->scene_air->speed / SCREEN_SIZE;
 	}
 
 	//Draw Partner

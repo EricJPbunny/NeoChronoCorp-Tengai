@@ -7,11 +7,11 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 struct SDL_Texture;
 
-class ModuleSceneForest : public Module
+class ModuleSceneAir : public Module
 {
 public:
-	ModuleSceneForest();
-	~ModuleSceneForest();
+	ModuleSceneAir();
+	~ModuleSceneAir();
 
 	bool Start();
 	update_status Update();
@@ -35,7 +35,7 @@ public:
 	SDL_Texture* mid = nullptr;
 	SDL_Texture* mid1 = nullptr;
 	SDL_Texture* end = nullptr;
-	SDL_Rect groundandtrees, Templesgate, Templesgate2, fisrttrees, backtrees, rockground, trees, ground, groundgrass, grasstrees2, grasstrees4, grasstree, onlygrass, Temple, Temple2, lonelytree, toptree, toptrees, backfinal, sky, mountain, bambu, bambuback, lateral;
+	SDL_Rect MountainBg,SkyOne,SkyTwo,SkyThree,SkyFour;
 	SDL_Rect fader, fademid;
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;

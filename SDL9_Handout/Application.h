@@ -12,7 +12,7 @@ class ModuleRender;
 class ModuleParticles;
 class ModuleAudio;
 class ModuleScore;
-class ModuleSceneForest;
+class ModuleSceneAir;
 class ModuleSceneStart;
 class ModuleSceneIntro;
 class ModuleUI;
@@ -38,7 +38,7 @@ public:
 	ModuleTextures* textures;
 	ModuleAudio* audio;
 	ModuleScore* scene_score;
-	ModuleSceneForest* scene_forest;
+	ModuleSceneAir* scene_air;
 	ModuleSceneStart* scene_start;
 	ModuleSceneIntro* scene_intro;
 	ModuleCollision* collision;
