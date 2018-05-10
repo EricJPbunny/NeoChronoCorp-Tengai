@@ -13,6 +13,7 @@ private:
 	Animation fly;
 	Animation back;
 	Path movement;
+
 public:
 
 	Enemy_GreenOvni(int x, int y);

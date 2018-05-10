@@ -10,14 +10,13 @@
 #include "ModuleUI.h"
 #include "ModuleSceneAir.h"
 #include "Enemy.h"
-#include "Enemy_GreenOvni.h"
-#include "Enemy_RedOvni.h"
-#include "Enemy_Ninja.h"
+#include "Enemy_Archer.h"
+#include "Enemy_Bird.h"
+#include "Enemy_Knife.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
 #include "time.h"
 #include "stdlib.h"
-
 
 #include "SDL\include\SDL_timer.h"
 
@@ -162,6 +161,15 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::COIN:
 				enemies[i] = new Enemy_Coin(info.x, info.y);
+				break;
+			case ENEMY_TYPES::ARCHER:
+				enemies[i] = new Enemy_Archer(info.x, info.y);
+				break;
+			case ENEMY_TYPES::BIRD:
+				enemies[i] = new Enemy_Bird(info.x, info.y);
+				break;
+			case ENEMY_TYPES::KNIFE:
+				enemies[i] = new Enemy_Knife(info.x, info.y);
 				break;
 		}
 	}
