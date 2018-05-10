@@ -113,6 +113,13 @@ bool ModuleSceneAir::Start()
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
 
 	App->audio->PlayMusic(mus);
+	//Enemies
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 370, 20);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 400, 112);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 450, 44);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 54);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 600, 144);
 
 	return ret;
 }
