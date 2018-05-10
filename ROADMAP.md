@@ -7,10 +7,10 @@ ROADMAP // TENGAI // NEOCHRONO
 -0.5.7// Fix code
 
 -----------------------------------------------------------
--0.6// Print Background & Set velocities
+-0.6// Print Background & Set velocities // Implement non boss enemies & Players and non bosses bullets 
 -0.6.5//Implement hitbox & colliders (Background)
 
--0.7// Implement characters animations//states machine & power ups// (Junis & partner) and (Sho) // Implement non boss enemies & Players and non bosses bullets 
+-0.7// Implement characters animations//states machine & power ups// (Junis & partner) and (Sho) 
 -0.7.5//Implement hitbox & colliders (Player & non boss enemies)
 
 -0.8// Implement audio & Implement bosses (1) and mid-bosses (2) & bosses bullets & damage balancing
