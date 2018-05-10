@@ -13,6 +13,7 @@
 #include "Enemy_Archer.h"
 #include "Enemy_Bird.h"
 #include "Enemy_Knife.h"
+#include "Enemy_Knife2.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
 #include "time.h"
@@ -171,6 +172,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::KNIFE:
 				enemies[i] = new Enemy_Knife(info.x, info.y);
 				break;
+			case ENEMY_TYPES::KNIFE2:
+				enemies[i] = new Enemy_Knife2(info.x, info.y);
+				break;
+			
 		}
 	}
 }
