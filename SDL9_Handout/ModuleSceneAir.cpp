@@ -121,6 +121,20 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 54);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 600, 144);
 
+
+	// Ovnis
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 300, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 320, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 340, 90);
+	
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1500, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1520, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1540, 90);
+	
+
 	return ret;
 }
 
