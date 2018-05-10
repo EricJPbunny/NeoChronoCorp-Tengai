@@ -42,6 +42,8 @@ public:
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
 	int speed = 3;
 	int aux_time = 0;
+	int increaser = 0, increaser_2 = 0;
+	bool flagship_1 = true;
 	float bg_speed_default = 0.10f;
 
 	bool god_mode = false;

@@ -174,7 +174,35 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, 0 + (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
 	}
 	
-	App->render->Blit(graphics1, 300, 80, &exterior_ship, bg_speed_default);
+
+	if (App->render->camera.x > 300&& App->render->camera.x<=800) {
+
+		if (increaser > 90) 
+		{
+			App->render->Blit(graphics1, (App->render->camera.x/ SCREEN_SIZE)+ 270, 100 - increaser, &exterior_ship, 1);
+		}
+		else 
+		{
+			App->render->Blit(graphics1, 462, 100 - increaser, &exterior_ship, 1);
+			increaser++;
+		}
+	}
+	else if (App->render->camera.x > 800) {
+
+		if (increaser > 10) {
+			App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 180 + increaser, 100 - increaser, &exterior_ship, 1);
+			increaser--;
+		}
+		else {
+			if (increaser_2 > -140) {
+				App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 190 + increaser_2, 90, &exterior_ship, 1);
+				increaser_2--;
+			}
+			else {
+				App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 190 + increaser_2, 90, &exterior_ship, 1);
+			}
+		}
+	}
 
 
 
