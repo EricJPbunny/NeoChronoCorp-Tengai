@@ -34,14 +34,17 @@ Enemy_Archer::Enemy_Archer(int x, int y):Enemy(x,y)
 	sheathe.speed = 0.2f;
 
 	up.PushBack({ 10,203,44,48 });
-	up.speed = 0.1f;
+	up.speed = 0.2f;
 
-	movement.PushBack({ 0.0f, 0.0f }, 900, &idle);
-	movement.PushBack({ 0.0f, 0.0f }, 1000, &sheathe);
-	movement.PushBack({ 0.0f, 0.0f }, 1000, &up);
+	//Movement
+	movement.PushBack({ -2.0f, 0.0f }, 38, &idle);
+	movement.PushBack({ 0.0f, 0.0f }, 65, &sheathe);
+	movement.PushBack({ 0.0f, -1.0f }, 600, &up);
 	
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
+	animation = &idle;
+	
 	originalposition.y = y;
 	originalposition.x = x;
 }
