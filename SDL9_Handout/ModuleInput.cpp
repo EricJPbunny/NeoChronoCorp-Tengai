@@ -7,6 +7,10 @@ ModuleInput::ModuleInput() : Module()
 {
 	for(uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+
+	controller_A_button = KEY_IDLE;
+	controller_X_button = KEY_IDLE;
+	controller_START_button = KEY_IDLE;
 }
 
 // Destructor
@@ -22,26 +26,20 @@ bool ModuleInput::Init()
 
 	SDL_Init(0);
 
-	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER)<0) {
-		LOG("SDL_GAMECONTROLLER could not initialize! SDL_Error: %s\n", SDL_GetError());
-		ret = false;
-	}
-
-	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
-	if (SDL_NumJoysticks() < 1) {
-		LOG("Warning! There is no joystick connected!");
-	}
-	else {
-		gamepad = SDL_GameControllerOpen(0);
-		if (gamepad == NULL) {
-			LOG("Warning! Unable to open GameController. SDL_Error: %s\n", SDL_GetError());
-		}
+	SDL_JoystickEventState(SDL_ENABLE);
 
+	if (SDL_NumJoysticks() > 0) {
+		controller = SDL_GameControllerOpen(0);
+		if (controller) {
+			LOG("Controller loaded correctly");
+		}
+		else LOG("Could not open gamecontroller: %s", SDL_GetError());
 	}
 
 	return ret;
@@ -58,37 +56,87 @@ update_status ModuleInput::PreUpdate()
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
 
-	for(int i = 0; i < MAX_KEYS; ++i)
+	while (SDL_PollEvent(&events)) {
+		if (events.type == SDL_QUIT)
+			return update_status::UPDATE_STOP;
+		else if (events.type == SDL_CONTROLLERDEVICEADDED) {
+			if (!controller) {
+				controller = SDL_GameControllerOpen(0);
+				if (controller) {
+					LOG("Controller loaded correctly");
+				}
+				else LOG("Could not open gamecontroller: %s", SDL_GetError());
+			}
+		}
+		else if (events.type == SDL_CONTROLLERDEVICEREMOVED) {
+			if (events.cdevice.which == 0) {
+				SDL_GameControllerClose(controller);
+				controller = nullptr;
+				LOG("Controller removed!\n");
+			}
+		}
+	}
+	Uint8 button_state_A = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
+	Uint8 button_state_Y = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
+	Uint8 button_state_START = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_START);
+
+	if (button_state_A) {
+		if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
+		else controller_A_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
+		else controller_A_button = KEY_IDLE;
+	}
+	if (button_state_Y) {
+		if (controller_X_button == KEY_IDLE) controller_X_button = KEY_DOWN;
+		else controller_X_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_X_button == KEY_REPEAT || controller_X_button == KEY_DOWN) controller_X_button = KEY_UP;
+		else controller_X_button = KEY_IDLE;
+	}
+	if (button_state_START) {
+		if (controller_START_button == KEY_IDLE) controller_START_button = KEY_DOWN;
+		else controller_START_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_START_button == KEY_REPEAT || controller_START_button == KEY_DOWN) controller_START_button = KEY_UP;
+		else controller_START_button = KEY_IDLE;
+	}
+
+	for (int i = 0; i < MAX_KEYS; ++i)
 	{
-		if(keys[i] == 1)
+		if (keys[i] == 1)
 		{
-			if(keyboard[i] == KEY_IDLE)
+			if (keyboard[i] == KEY_IDLE)
 				keyboard[i] = KEY_DOWN;
 			else
 				keyboard[i] = KEY_REPEAT;
 		}
 		else
 		{
-			if(keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
 				keyboard[i] = KEY_UP;
 			else
 				keyboard[i] = KEY_IDLE;
 		}
 	}
 
-	if(keyboard[SDL_SCANCODE_ESCAPE] || events.type==SDL_QUIT)
+	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
 
 	return update_status::UPDATE_CONTINUE;
 }
 
+
 // Called before quitting
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
-	SDL_GameControllerClose(gamepad);
-	gamepad = NULL;
-	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+	SDL_GameControllerClose(controller);
+	controller = nullptr;
+
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

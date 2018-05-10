@@ -29,6 +29,7 @@ class ModuleInput : public Module
 {
 public:
 	
+	SDL_GameController* controller;
 	ModuleInput();
 	~ModuleInput();
 
@@ -39,7 +40,9 @@ public:
 public:
 	KEY_STATE keyboard[MAX_KEYS];
 	BUTTON_STATE button[MAX_BUTTONS];
-	SDL_GameController* gamepad;
+	KEY_STATE controller_A_button;
+	KEY_STATE controller_X_button;
+	KEY_STATE controller_START_button;
 };
 
 #endif // __ModuleInput_H__
