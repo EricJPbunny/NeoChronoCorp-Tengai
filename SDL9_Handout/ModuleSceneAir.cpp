@@ -31,6 +31,7 @@ bool ModuleSceneAir::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/sky_Background.png");
+	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
 	//bacground starting rects
 
 	MountainBg.x = 0;
@@ -88,6 +89,12 @@ bool ModuleSceneAir::Start()
 	BigSky.y = 455;
 	BigSky.h = 391;
 	BigSky.w = 160;
+
+
+	exterior_ship.x = 0;
+	exterior_ship.y = 0;
+	exterior_ship.h = 222;
+	exterior_ship.w = 271;
 
 	//startup
 	App->player->Enable();
@@ -159,6 +166,10 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, 0 + (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
 		App->render->Blit(graphics, 0 + (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
 	}
+	
+	App->render->Blit(graphics1, 300, 80, &exterior_ship, bg_speed_default);
+
+
 
 	//Enable Players
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
