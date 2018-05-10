@@ -127,7 +127,7 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 300, 30);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 320, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 340, 90);
-	
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 360, 120);
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1500, 30);
