@@ -7,22 +7,23 @@
 
 Enemy_RedOvni::Enemy_RedOvni(int x, int y) :Enemy(x, y)
 {
-	fly.PushBack({ 16,60,30,30 });
-	fly.PushBack({ 62,60,30,30 });
-	fly.PushBack({ 110,60,30,30 });
-	fly.PushBack({ 155,60,30,30 });
+	fly.PushBack({ 196,16,40,30 });
+	fly.PushBack({ 242,16,40,30 });
+	fly.PushBack({ 290,16,40,30 });
+	fly.PushBack({ 335,16,40,30 });
+	
 
-	back.PushBack({ 14,16,30,30 });
-	back.PushBack({ 61,16,30,30 });
-	back.PushBack({ 107,16,30,30 });
-	back.PushBack({ 152,16,30,30 });
+	back.PushBack({ 196,16,40,30 });
+	back.PushBack({ 242,16,40,30 });
+	back.PushBack({ 290,16,40,30 });
+	back.PushBack({ 335,16,40,30 });
 
 	fly.speed = App->enemies->speed;
 
 	movement.PushBack({ -0.1f, 0.0f }, 90,&fly);
 	movement.PushBack({ 3.7f, 0.0f }, 1000, &back);
 	animation = &fly;
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_REDOVNI, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 40, 30 }, COLLIDER_TYPE::COLLIDER_REDOVNI, (Module*)App->enemies);
 
 	originalposition.y = y;
 	originalposition.x = x;

@@ -126,6 +126,8 @@ bool ModulePlayer::Start()
 
 	k_power_down = App->audio->LoadEffect("assets/audio/koyori_lvl_down.wav");
 
+	App->ui->num_life_koyori = 3;
+
 	App->partner->Enable();
 	time = true;
 	destroyed = false;
@@ -285,9 +287,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 void ModulePlayer::CheckState()
 {
 	//Create Input Bools
-	bool press_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN;
+	bool pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT;
+	bool pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT;
+
 	bool press_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN;
-	bool press_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN;
+	bool press_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN;
+
+	bool release_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP;
+	bool release_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP;
+
+	bool released_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE;
+	bool released_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE;
 
 	switch (state)
 	{
@@ -300,7 +310,6 @@ void ModulePlayer::CheckState()
 		if (current_time > 1500) {
 			state = IDLE;
 		}
-		App->ui->num_life_koyori = 3;
 		power_up = 0;
 		break;
 
@@ -313,10 +322,10 @@ void ModulePlayer::CheckState()
 
 	case GO_BACKWARD:
 		
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
+		if (release_W) {
 			state = BACK_IDLE;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) {
+		if (release_A) {
 			state = BACK_IDLE;
 		}
 		if (current_animation->Finished()) {
@@ -326,23 +335,18 @@ void ModulePlayer::CheckState()
 		break;
 
 	case BACKWARD:
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP) {
-			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE) {
-				state = BACK_IDLE;
-			}
-		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) {
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE) {
+		if (release_W || release_A) {
+			if (released_W || released_A) {
 				state = BACK_IDLE;
 			}
 		}
 		break;
 
 	case BACK_IDLE:
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_W) {
 			state = BACK_IDLE;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_A) {
 			state = BACK_IDLE;
 		}
 		if (current_animation->Finished()) {
