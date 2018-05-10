@@ -10,6 +10,7 @@ private:
 
 	iPoint originalposition;
 	Animation idle;
+	Animation shot;
 	Path movement;
 
 public:
