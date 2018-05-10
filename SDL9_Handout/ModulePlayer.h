@@ -46,7 +46,6 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* player_death = nullptr;
 	Animation* current_animation = nullptr;
-	Animation walk;
 	Animation idle;
 	Animation forward;
 	Animation backward;

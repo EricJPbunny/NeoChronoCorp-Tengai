@@ -46,19 +46,6 @@ ModulePlayerTwo::ModulePlayerTwo() {
 	intermediate_return.PushBack({ 213,9,24,27 });
 	intermediate_return.speed = 0.10f;
 
-	//Walk
-	walk.PushBack({ 244,11,27,24 });
-	walk.PushBack({ 222,55,30,27 });
-	walk.PushBack({ 311,10,32,25 });
-	walk.PushBack({ 8,56,30,25 });
-	walk.PushBack({ 46,57,27,24 });
-	walk.PushBack({ 79,55,28,26 });
-	walk.PushBack({ 112,57,32,25 });
-	walk.PushBack({ 149,57,31,25 });
-	walk.PushBack({ 187,58,27,24 });
-	walk.speed = 0.20f;
-
-
 	//Spin
 	spin.PushBack({ 415,10,19,28 });
 	spin.PushBack({ 445,10,16,28 });
@@ -123,22 +110,24 @@ ModulePlayerTwo::~ModulePlayerTwo()
 bool ModulePlayerTwo::Start()
 {
 	LOG("Loading player textures");
-	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/Sho_Spritesheet.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
-	App->partner2->Enable();
-	input = true;
-	state = SPAWN_PLAYER_2;
-	App->ui->num_life_sho = 3;
-	power_up = 0;
-
-	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32}, COLLIDER_PLAYER);
+	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
 	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX_2);
 
-	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
+	position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
-	return ret;
+
+	state = SPAWN_PLAYER_2;
+
+	App->partner2->Enable();
+
+	App->ui->num_life_sho = 3;
+
+	time = true;
+	destroyed = false;
+	return true;
 }
 
 bool ModulePlayerTwo::CleanUp()
@@ -156,9 +145,7 @@ bool ModulePlayerTwo::CleanUp()
 
 	App->partner2->Disable();
 
-	time = true;
 	App->ui->game_over_sho = true;
-	check_death = true;
 
 	return true;
 }
@@ -168,6 +155,14 @@ update_status ModulePlayerTwo::Update()
 {
 
 	float speed = 2.5;
+
+	//Create bool variables
+	bool pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
+	bool pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
+	bool pressed_down = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT;
+	bool pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT;
+
+	bool shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
 
 	//Power Up Limits
 	if (power_up < 0) {
@@ -184,21 +179,20 @@ update_status ModulePlayerTwo::Update()
 	PerformActions();
 
 	if (input) {
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_left) {
 			position.x -= speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_up) {
 			position.y -= speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_right) {
 			position.x += speed;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_down) {
 			position.y += speed;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
-
+		if (shot_ctrl) {
 			aux1++;
 			switch (aux1) {
 			case 0:
@@ -217,6 +211,7 @@ update_status ModulePlayerTwo::Update()
 	}
 	//Fade
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
+
 	//Update Collider Position
 
 	if (coll->CheckCollision(App->scene_air->coll_left->rect)) {
@@ -273,11 +268,6 @@ update_status ModulePlayerTwo::Update()
 		position.y += 3;
 	}
 
-	
-
-
-	
-
 	return UPDATE_CONTINUE;
 }
 
@@ -288,6 +278,18 @@ void ModulePlayerTwo::OnCollision(Collider* c1, Collider* c2)
 
 void ModulePlayerTwo::CheckState()
 {
+	bool pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
+	bool pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
+
+	bool press_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN;
+	bool press_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN;
+
+	bool release_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_UP;
+	bool release_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_UP;
+
+	bool released_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE;
+	bool released_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE;
+
 	switch (state)
 	{
 	case SPAWN_PLAYER_2:
@@ -299,24 +301,22 @@ void ModulePlayerTwo::CheckState()
 		if (current_time > 1500) {
 			state = IDLE_2;
 		}
+		power_up = 0;
 		break;
 
 	case IDLE_2:
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN) {
+		if (press_left || press_up) {
 			state = GO_BACKWARD_2;
-		}
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && position.y == SCREEN_HEIGHT-4) {
-			state = WALK_2;
 		}
 
 		break;
 
 	case GO_BACKWARD_2:
 
-		if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_UP) {
+		if (release_up) {
 			state = BACK_IDLE_2;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_UP) {
+		if (release_left) {
 			state = BACK_IDLE_2;
 		}
 		if (current_animation->Finished()) {
@@ -326,60 +326,26 @@ void ModulePlayerTwo::CheckState()
 		break;
 
 	case BACKWARD_2:
-
-		if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_UP) {
-			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE) {
-				state = BACK_IDLE_2;
-			}
-		}
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_UP) {
-			if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE) {
+		if (release_up || release_left) {
+			if (released_left || released_up) {
 				state = BACK_IDLE_2;
 			}
 		}
 		break;
 
 	case BACK_IDLE_2:
-
-		if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_up) {
 			state = BACK_IDLE_2;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
+		if (pressed_left) {
 			state = BACK_IDLE_2;
 		}
 		if (current_animation->Finished()) {
 			intermediate.Reset();
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT-4) {
-				state = WALK_2;
-			}
-			else {
-				state = IDLE_2;
-			}
+			state = IDLE_2;
 		}
 		break;
 
-	case WALK_2:
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_UP) {
-			if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) {
-				state = GO_BACKWARD_2;
-			}
-			else {
-				state = IDLE_2;
-			}
-
-		}
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
-			current_animation = &walk;
-		}
-		else { current_animation = &idle; }
-		if (App->render->camera.x > 26000) {
-			if (walk.Finished())
-				walk.Reset();
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && position.y == SCREEN_HEIGHT - 4) {
-				current_animation = &idle;
-			}
-		}
-		break;
 	case SPIN_2:
 		if (spin.Finished()) {
 			spin.Reset();
@@ -387,11 +353,13 @@ void ModulePlayerTwo::CheckState()
 			state = IDLE_2;
 		}
 		break;
+
 	case DEATH_2:
 		if (position.y > SCREEN_HEIGHT + 80) {
 			state = POST_DEATH_2;
 		}
 		break;
+
 	case POST_DEATH_2:
 		if (App->ui->num_life_sho > 0) {
 			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
@@ -399,6 +367,7 @@ void ModulePlayerTwo::CheckState()
 			time = true;
 			state = SPAWN_PLAYER_2;
 		}
+		break;
 	}
 }
 
@@ -457,11 +426,6 @@ void ModulePlayerTwo::PerformActions()
 		if (intermediate_return.Finished())
 			intermediate_return.Reset();
 		current_animation = &intermediate_return;
-		break;
-
-	case WALK_2:
-		if (walk.Finished())
-			walk.Reset();
 		break;
 
 	case SPIN_2:

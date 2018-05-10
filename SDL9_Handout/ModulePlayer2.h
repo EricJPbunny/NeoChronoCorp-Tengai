@@ -45,7 +45,6 @@ public:
 	Collider* coll = nullptr;
 	Collider* hitbox = nullptr;
 	Animation* current_animation = nullptr;
-	Animation walk;
 	Animation idle;
 	Animation forward;
 	Animation backward;
