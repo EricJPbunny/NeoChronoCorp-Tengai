@@ -139,16 +139,16 @@ update_status ModuleSceneAir::Update()
 {
 	//paint (pero el .net no)
 
-	App->render->Blit(graphics, 0, 120, &MountainBg, 0.20f);
-	App->render->Blit(graphics, 0, 0, &SkyOne, 0.30f);
-	App->render->Blit(graphics, 0, 45, &SkyTwo, 0.25f);
-	App->render->Blit(graphics, 0, 70, &SkyThree, 0.20f);
-	App->render->Blit(graphics, 0, 97, &SkyFour, 0.15f);
-	App->render->Blit(graphics, 0, 176, &FloorOne, 0.20f);
-	App->render->Blit(graphics, 0, 182, &FloorTwo, 0.30f);
-	App->render->Blit(graphics, 0, 190, &FloorThree, 0.40f);
-	App->render->Blit(graphics, 0, 200, &FloorFour, 0.50f);
-	App->render->Blit(graphics, 0, 208, &FloorFive, 0.60f);
+	App->render->Blit(graphics, 0, 120, &MountainBg, bg_speed_default*3);
+	App->render->Blit(graphics, 0, 0, &SkyOne, bg_speed_default*6);
+	App->render->Blit(graphics, 0, 45, &SkyTwo, bg_speed_default*5);
+	App->render->Blit(graphics, 0, 70, &SkyThree, bg_speed_default*4);
+	App->render->Blit(graphics, 0, 97, &SkyFour, bg_speed_default*3);
+	App->render->Blit(graphics, 0, 176, &FloorOne, bg_speed_default*4);
+	App->render->Blit(graphics, 0, 182, &FloorTwo, bg_speed_default*5);
+	App->render->Blit(graphics, 0, 190, &FloorThree, bg_speed_default*6);
+	App->render->Blit(graphics, 0, 200, &FloorFour, bg_speed_default*7);
+	App->render->Blit(graphics, 0, 208, &FloorFive, bg_speed_default*8);
 
 	//Enable Players
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
@@ -168,6 +168,10 @@ update_status ModuleSceneAir::Update()
 	App->player2->position.x += speed / SCREEN_SIZE;
 	App->player->position.x += speed / SCREEN_SIZE;
 	App->render->camera.x += speed;
+	//debuger
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) {
+		LOG("Breakpoint");
+	}
 
 	//Update Collision
 	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, 0);

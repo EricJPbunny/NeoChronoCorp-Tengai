@@ -40,8 +40,9 @@ public:
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
-	float speed = 10.5;
+	int speed = 3;
 	int aux_time = 0;
+	float bg_speed_default = 0.10f;
 
 	bool god_mode = false;
 };
