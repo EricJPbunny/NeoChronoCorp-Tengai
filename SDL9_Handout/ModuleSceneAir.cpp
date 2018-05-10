@@ -84,6 +84,11 @@ bool ModuleSceneAir::Start()
 	FloorFive.w = 959;
 
 
+	BigSky.x = 0;
+	BigSky.y = 455;
+	BigSky.h = 391;
+	BigSky.w = 160;
+
 	//startup
 	App->player->Enable();
 	App->ui->Enable();
@@ -139,16 +144,21 @@ update_status ModuleSceneAir::Update()
 {
 	//paint (pero el .net no)
 
-	App->render->Blit(graphics, 0, 120, &MountainBg, bg_speed_default*3);
-	App->render->Blit(graphics, 0, 0, &SkyOne, bg_speed_default*6);
-	App->render->Blit(graphics, 0, 45, &SkyTwo, bg_speed_default*5);
-	App->render->Blit(graphics, 0, 70, &SkyThree, bg_speed_default*4);
-	App->render->Blit(graphics, 0, 97, &SkyFour, bg_speed_default*3);
-	App->render->Blit(graphics, 0, 176, &FloorOne, bg_speed_default*4);
-	App->render->Blit(graphics, 0, 182, &FloorTwo, bg_speed_default*5);
-	App->render->Blit(graphics, 0, 190, &FloorThree, bg_speed_default*6);
-	App->render->Blit(graphics, 0, 200, &FloorFour, bg_speed_default*7);
-	App->render->Blit(graphics, 0, 208, &FloorFive, bg_speed_default*8);
+
+	for (int i = 0; i < 5; ++i) 
+	{
+		App->render->Blit(graphics, 0 + (MountainBg.w * i) , 120, &MountainBg, bg_speed_default * 3);
+		App->render->Blit(graphics, 0 + (SkyOne.w * i), 0, &SkyOne, bg_speed_default * 6);
+		App->render->Blit(graphics, 0 + (SkyTwo.w * i), 45, &SkyTwo, bg_speed_default * 5);
+		App->render->Blit(graphics, 0 + (SkyThree.w * i), 70, &SkyThree, bg_speed_default * 4);
+		App->render->Blit(graphics, 0 + (SkyFour.w * i), 97, &SkyFour, bg_speed_default * 3);
+		App->render->Blit(graphics, 0 + (FloorOne.w * i), 176, &FloorOne, bg_speed_default * 4);
+		App->render->Blit(graphics, 0 + (FloorTwo.w * i), 182, &FloorTwo, bg_speed_default * 5);
+		App->render->Blit(graphics, 0 + (FloorThree.w * i), 190, &FloorThree, bg_speed_default * 6);
+		App->render->Blit(graphics, 0 + (FloorFour.w * i), 200, &FloorFour, bg_speed_default * 7);
+		App->render->Blit(graphics, 0 + (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
+		App->render->Blit(graphics, 0 + (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
+	}
 
 	//Enable Players
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
