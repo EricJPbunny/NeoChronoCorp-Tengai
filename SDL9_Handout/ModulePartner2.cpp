@@ -135,6 +135,7 @@ update_status ModulePartner2::Update()
 	//Draw Partner
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	SDL_Rect r1 = current_animation_2->GetCurrentFrame();
+	SDL_Rect r2 = current_animation_3->GetCurrentFrame();
 	if (exist) {
 		if (movement) {
 			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
@@ -168,6 +169,23 @@ update_status ModulePartner2::Update()
 			}
 		}
 		App->render->Blit(graphics, position.x + 5, position.y + 5 - r1.h, &r1);
+	}
+	if (exist_3) {
+		if (movement) {
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+				if (shot_delay_3)
+				{
+					shot_entry_3 = SDL_GetTicks();
+					shot_delay_3 = false;
+				}
+				shot_current_3 = SDL_GetTicks() - shot_entry;
+				if (shot_current_3 > 300) {
+					App->particles->AddParticle(App->particles->mirror_shoot, position.x , position.y -8, COLLIDER_PLAYER_2_SHOT);
+					shot_delay_3 = true;
+				}
+			}
+		}
+		App->render->Blit(graphics, position.x , position.y + 20 - r2.h, &r2);
 	}
 
 	return UPDATE_CONTINUE;
@@ -311,8 +329,74 @@ void ModulePartner2::CheckState()
 			state_2 = SPAWN_2;
 		}
 		break;
-
 	}
+
+		//Mirror 3
+		switch (state_3) {
+		case NOT_EXISTING_2:
+			time_mirror_3 = true;
+			if (App->player2->power_up == 3) {
+				state_3 = SPAWN_2;
+			}
+			break;
+
+		case SPAWN_2:
+			if (spawn3.Finished()) {
+				spawn3.Reset();
+				state_3 = LEVEL_ONE_2;
+			}
+			break;
+
+		case LEVEL_ONE_2:
+			if (App->player2->power_up <= 2) {
+				state_3 = NOT_EXISTING_2;
+			}
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT) {
+				if (time_shoot_3) {
+					time_on_entry_3 = SDL_GetTicks();
+					time_shoot_3 = false;
+				}
+				current_time_3 = SDL_GetTicks() - time_on_entry_3;
+				if (current_time_3 > 300) {
+					time_shoot_3 = true;
+					state_3 = LEVEL_ONE_CHARGE_2;
+				}
+			}
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP) {
+				time_shoot_3 = true;
+			}
+			break;
+
+		case LEVEL_ONE_CHARGE_2:
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP) {
+				spawn3.Reset();
+				spawn_reverse3.Reset();
+				state_3 = SHOT_2;
+			}
+			break;
+
+		case SHOT_2:
+			if (App->player2->power_up <= 2) {
+				state_3 = NOT_EXISTING_2;
+			}
+			if (time_mirror_3) {
+				time_on_entry_3 = SDL_GetTicks();
+				time_mirror_3 = false;
+			}
+			current_time_3 = SDL_GetTicks() - time_on_entry_3;
+			if (current_time_3 > 4000) {
+				state_3 = DESPAWN;
+			}
+			break;
+
+		case DESPAWN:
+			if (spawn_reverse3.Finished()) {
+				spawn_reverse3.Reset();
+				time_mirror_3 = true;
+				state_3 = SPAWN_2;
+			}
+			break;
+		}
 }
 void ModulePartner2::PerformActions()
 {
@@ -438,5 +522,63 @@ void ModulePartner2::PerformActions()
 		break;
 	}
 
+	//Mirror 3
+	switch (state_3) {
+	case NOT_EXISTING_2:
+		current_animation_3 = &iddle2;
+		exist_3 = false;
+		break;
 
+	case SPAWN_2:
+		current_animation_3 = &spawn2;
+		exist_3 = true;
+		break;
+
+	case LEVEL_ONE_2:
+		current_animation_3 = &iddle2;
+		exist_3 = true;
+		break;
+
+	case LEVEL_ONE_CHARGE_2:
+		if (!spawn_reverse2.Finished()) {
+			current_animation_3 = &spawn_reverse2;
+		}
+		if (spawn_reverse2.Finished() && !spawn2.Finished()) {
+			current_animation_3 = &spawn2;
+		}
+		if (spawn_reverse2.Finished() && spawn2.Finished()) {
+			current_animation_3 = &charging2;
+		}
+		break;
+
+	case DESPAWN:
+		current_animation_3 = &spawn_reverse2;
+		break;
+
+	case SHOT_2:
+		current_animation_3 = &iddle2;
+		if (shot_delay_3)
+		{
+			shot_entry_3 = SDL_GetTicks();
+			shot_delay_3 = false;
+		}
+		shot_current_3 = SDL_GetTicks() - shot_entry_3;
+		if (shot_current_3 > 200) {
+			switch (num_bullet_3) {
+			case 1:
+				App->particles->AddParticle(App->particles->c_mirror_green, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				break;
+			case 2:
+				App->particles->AddParticle(App->particles->c_mirror_blue, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				break;
+			case 3:
+				App->particles->AddParticle(App->particles->c_mirror_cyan, position.x + 5, position.y - 8, COLLIDER_PLAYER_2_SHOT);
+				num_bullet_3 = 0;
+				break;
+			}
+			num_bullet_3++;
+			shot_delay_3 = true;
+		}
+		break;
+	}
 }
