@@ -137,7 +137,7 @@ update_status ModulePartner2::Update()
 	SDL_Rect r1 = current_animation_2->GetCurrentFrame();
 	if (exist) {
 		if (movement) {
-			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 				if (shot_delay)
 				{
 					shot_entry = SDL_GetTicks();
@@ -154,7 +154,7 @@ update_status ModulePartner2::Update()
 	}
 	if (exist_2) {
 		if (movement) {
-			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 				if (shot_delay_2)
 				{
 					shot_entry_2 = SDL_GetTicks();
@@ -196,7 +196,7 @@ void ModulePartner2::CheckState()
 		if (App->player2->power_up == 0) {
 			state = NOT_EXISTING_2;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_REPEAT) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT) {
 			if (time_shoot) {
 				time_on_entry = SDL_GetTicks();
 				time_shoot = false;
@@ -207,13 +207,13 @@ void ModulePartner2::CheckState()
 				state = LEVEL_ONE_CHARGE_2;
 			}
 		}
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP) {
 			time_shoot = true;
 		}
 		break;
 
 	case LEVEL_ONE_CHARGE_2:
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP) {
 			spawn.Reset();
 			spawn_reverse.Reset();
 			charged_shoot = true;
@@ -266,7 +266,7 @@ void ModulePartner2::CheckState()
 		if (App->player2->power_up <= 1) {
 			state_2 = NOT_EXISTING_2;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_REPEAT) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT) {
 			if (time_shoot_2) {
 				time_on_entry_2 = SDL_GetTicks();
 				time_shoot_2 = false;
@@ -277,13 +277,13 @@ void ModulePartner2::CheckState()
 				state_2 = LEVEL_ONE_CHARGE_2;
 			}
 		}
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP) {
 			time_shoot_2 = true;
 		}
 		break;
 
 	case LEVEL_ONE_CHARGE_2:
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_UP) {
+		if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP) {
 			spawn2.Reset();
 			spawn_reverse2.Reset();
 			state_2 = SHOT_2;
