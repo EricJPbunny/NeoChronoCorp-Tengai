@@ -5,7 +5,7 @@
 #include "ModuleUI.h"
 
 
-Enemy_Coin::Enemy_Coin(int x, int y) :Enemy(x, y)
+Enemy_Coin::Enemy_Coin(int x, int y, int type) :Enemy(x, y, type)
 {
 	up.PushBack({ 20,415,16,16 });
 	up.PushBack({ 40,415,16,16 });

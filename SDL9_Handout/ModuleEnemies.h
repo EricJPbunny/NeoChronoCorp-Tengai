@@ -26,7 +26,6 @@ enum ENEMY_TYPES
 	KNIFE,
 	POWERUP,
 	COIN,
-	KNIFE2,
 };
 
 class Enemy;

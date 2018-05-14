@@ -5,7 +5,7 @@
 #include "ModuleCollision.h"
 
 
-Enemy_Knife::Enemy_Knife(int x, int y):Enemy(x,y)
+Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 {
 	idle.PushBack({ 6,50,32,30 });
 	idle.PushBack({ 50,49,32,30 });

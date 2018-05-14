@@ -5,7 +5,7 @@
 #include "ModuleCollision.h"
 
 
-Enemy_GreenOvni::Enemy_GreenOvni(int x, int y):Enemy(x,y)
+Enemy_GreenOvni::Enemy_GreenOvni(int x, int y, int type) :Enemy(x, y, type)
 {
 	fly.PushBack({ 14,16,30,30 });
 	fly.PushBack({ 61,16,30,30 });

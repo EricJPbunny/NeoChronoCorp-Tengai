@@ -5,7 +5,7 @@
 #include "ModuleCollision.h"
 
 
-Enemy_Bird::Enemy_Bird(int x, int y):Enemy(x,y)
+Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 {
 	idle.PushBack({ 11,90,40,37 });
 	idle.PushBack({ 55,88,40,37 });

@@ -16,7 +16,7 @@ private:
 	Path movement;
 public:
 
-	Enemy_Coin(int x, int y);
+	Enemy_Coin(int x, int y, int type);
 
 	void Move();
 };

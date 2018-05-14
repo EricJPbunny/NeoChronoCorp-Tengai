@@ -14,7 +14,7 @@ private:
 	Path movement;
 
 public:
-	Enemy_Knife(int x, int y);
+	Enemy_Knife(int x, int y, int type);
 
 	void Move();
 };

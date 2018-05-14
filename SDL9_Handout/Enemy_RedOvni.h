@@ -15,7 +15,7 @@ private:
 	Path movement;
 public:
 
-	Enemy_RedOvni(int x, int y);
+	Enemy_RedOvni(int x, int y, int type);
 
 	void Move();
 };
