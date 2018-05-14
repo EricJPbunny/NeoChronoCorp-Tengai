@@ -59,6 +59,21 @@ ModuleParticles::ModuleParticles()
 	shoot2.life = 1400;
 	shoot2.speed.x = 12;
 
+	shoot_sho_big.anim.PushBack({});
+	shoot_sho_big.anim.loop = true;
+	shoot_sho_big.life = 1400;
+	shoot_sho_big.speed.x = 12;
+
+	shoot_sho_big_1.anim.PushBack({});
+	shoot_sho_big_1.anim.loop = true;
+	shoot_sho_big_1.life = 1400;
+	shoot_sho_big_1.speed.x = 12;
+
+	shoot_sho_big_2.anim.PushBack({});
+	shoot_sho_big_2.anim.loop = true;
+	shoot_sho_big_2.life = 1400;
+	shoot_sho_big_2.speed.x = 12;
+
 	//Enemies Explosion
 
 	explosion.anim.PushBack({ 24, 206, 56, 65 });

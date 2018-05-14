@@ -77,6 +77,7 @@ public:
 	Mix_Chunk* coin_fx = nullptr;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, spark;
 	Particle shoot, shoot1, shoot2;
+	Particle shoot_sho_big, shoot_sho_big_1, shoot_sho_big_2;
 	Particle mirror_shoot;
 	Particle c_mirror_green, c_mirror_blue, c_mirror_cyan;
 	Particle cat_shoot, egg_shoot, basaro_shot;

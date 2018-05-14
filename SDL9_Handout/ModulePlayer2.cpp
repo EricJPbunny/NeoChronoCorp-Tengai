@@ -168,8 +168,8 @@ update_status ModulePlayerTwo::Update()
 	if (power_up < 0) {
 		power_up = 0;
 	}
-	if (power_up > 2) {
-		power_up = 2;
+	if (power_up > 4) {
+		power_up = 4;
 	}
 
 	//check state
@@ -198,23 +198,52 @@ update_status ModulePlayerTwo::Update()
 			aux1++;
 			switch (aux1) {
 			case 0:
-				App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				if (power_up == 3) {
+					App->particles->AddParticle(App->particles->shoot, position.x, position.y - 30, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot, position.x, position.y - 50, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
+				else if (power_up == 4) {
+					App->particles->AddParticle(App->particles->shoot, position.x, position.y - 5, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot, position.x + 5, position.y -10, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot, position.x + 5, position.y - 15, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
+				else {
+					App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
 				break;
 			case 1:
-				App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				if (power_up == 3) {
+					App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 30, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 50, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
+				else if (power_up == 4) {
+					App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 5, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot1, position.x+5, position.y -10, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot1, position.x+5, position.y - 15, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
+				else {
+					App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
 				break;
 			case 2:
-				App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
-				break;
-			case 3:
-				App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
-				break;
-			case 4:
-				App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				if (power_up == 3) {
+					App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 30, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 50, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
+				else if (power_up == 4) {
+					App->particles->AddParticle(App->particles->shoot2, position.x, position.y -5, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot2, position.x + 5, position.y -10, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot2, position.x + 5, position.y - 15, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+					App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
+				else {
+					App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				}
 				aux1 = 0;
 				break;
 			}
-
 		}
 	}
 	//Fade

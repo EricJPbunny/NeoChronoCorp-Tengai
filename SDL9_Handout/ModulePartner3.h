@@ -13,6 +13,10 @@ enum partner_state_3 {
 	NOT_EXISTING,
 	LEVEL_ONE,
 	LEVEL_ONE_CHARGE,
+	LEVEL_TWO,
+	LEVEL_TWO_CHARGE,
+	LEVEL_THREE,
+	LEVEL_THREE_CHARGE,
 	LEVEL_FOUR,
 	LEVEL_FOUR_CHARGE,
 	SPAWN,
@@ -42,6 +46,15 @@ public:
 	Animation charged;
 	fPoint position;
 	partner_state_3 state = NOT_EXISTING;
+
+	bool time_shoot = true, exist = false;
+
+	bool shot_delay = true;
+	int shot_current = 0;
+	int shot_entry = 0;
+
+	int time_on_entry = 0;
+	int current_time = 0;
 };
 
 #endif
