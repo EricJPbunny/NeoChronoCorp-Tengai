@@ -118,11 +118,23 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 370, 20,1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 400, 112, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 450, 44, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 54, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 64, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 600, 144, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 650, 0,2);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 790, 164, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 810, 34, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1000, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1050, 0, 2);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 42);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 87);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 132);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 177);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 42);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 87);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 132);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 177);
+
 
 	
 

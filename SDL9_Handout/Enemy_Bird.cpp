@@ -21,7 +21,10 @@ Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 	shot.speed = 0.2f;
 	
 	movement.PushBack({ 0.0f, 0.0f }, 200, &idle);
+	movement.PushBack({ 1.0f, 0.0f }, 100, &shot);
 	movement.PushBack({ 0.0f, -1.0f }, 300, &shot);
+
+	
 
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -31,6 +34,7 @@ Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 
 void Enemy_Bird::Move()
 {
+	
 	if (App->ui->enemies_movement) {
 		position = originalposition + movement.GetCurrentSpeed(&animation);
 	}

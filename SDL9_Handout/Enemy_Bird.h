@@ -12,6 +12,8 @@ private:
 	Animation idle;
 	Animation shot;
 	Path movement;
+	
+	
 
 public:
 	Enemy_Bird(int x, int y, int type);
