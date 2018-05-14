@@ -97,6 +97,8 @@ update_status ModulePartner3::Update()
 	//Set position
 	/*position.x = App->player3->position.x - 20;
 	position.y = App->player3->position.y - 20;*/
+
+	return update_status::UPDATE_CONTINUE;
 }
 
 

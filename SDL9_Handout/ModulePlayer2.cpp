@@ -154,15 +154,15 @@ bool ModulePlayerTwo::CleanUp()
 update_status ModulePlayerTwo::Update()
 {
 
-	float speed = 2.5;
-
 	//Create bool variables
-	bool pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
-	bool pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
-	bool pressed_down = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT;
-	bool pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT;
+	bool pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
+	bool pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEADZONE;
+	bool pressed_S = App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEADZONE;
+	bool pressed_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
-	bool shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+	bool shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+
+	float speed = 2.5;
 
 	//Power Up Limits
 	if (power_up < 0) {
@@ -178,31 +178,39 @@ update_status ModulePlayerTwo::Update()
 	//state actions
 	PerformActions();
 
+	//Inputs
 	if (input) {
-		if (pressed_left) {
+		if (pressed_A) {
 			position.x -= speed;
 		}
-		if (pressed_up) {
+		if (pressed_W) {
 			position.y -= speed;
 		}
-		if (pressed_right) {
+		if (pressed_D) {
 			position.x += speed;
 		}
-		if (pressed_down) {
+		if (pressed_S) {
 			position.y += speed;
 		}
 
-		if (shot_ctrl) {
+
+		if (shot_space || App->input->controller_A_button == KEY_STATE::KEY_DOWN) {
 			aux1++;
 			switch (aux1) {
 			case 0:
-				App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				App->particles->AddParticle(App->particles->bullet, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 				break;
 			case 1:
-				App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				App->particles->AddParticle(App->particles->bullet2, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 				break;
 			case 2:
-				App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
+				App->particles->AddParticle(App->particles->bullet3, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				break;
+			case 3:
+				App->particles->AddParticle(App->particles->bullet4, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
+				break;
+			case 4:
+				App->particles->AddParticle(App->particles->bullet5, position.x, position.y - 20, COLLIDER_PLAYER_SHOT, PARTICLE_SHOT);
 				aux1 = 0;
 				break;
 			}
@@ -278,17 +286,17 @@ void ModulePlayerTwo::OnCollision(Collider* c1, Collider* c2)
 
 void ModulePlayerTwo::CheckState()
 {
-	bool pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
-	bool pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
+	bool pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT;
+	bool pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT;
 
-	bool press_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN;
-	bool press_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN;
+	bool press_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN;
+	bool press_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN;
 
-	bool release_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_UP;
-	bool release_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_UP;
+	bool release_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP;
+	bool release_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP;
 
-	bool released_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE;
-	bool released_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE;
+	bool released_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE;
+	bool released_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE;
 
 	switch (state)
 	{
@@ -305,7 +313,7 @@ void ModulePlayerTwo::CheckState()
 		break;
 
 	case IDLE_2:
-		if (press_left || press_up) {
+		if (press_W || press_A) {
 			state = GO_BACKWARD_2;
 		}
 
@@ -313,10 +321,10 @@ void ModulePlayerTwo::CheckState()
 
 	case GO_BACKWARD_2:
 
-		if (release_up) {
+		if (release_W) {
 			state = BACK_IDLE_2;
 		}
-		if (release_left) {
+		if (release_A) {
 			state = BACK_IDLE_2;
 		}
 		if (current_animation->Finished()) {
@@ -326,18 +334,18 @@ void ModulePlayerTwo::CheckState()
 		break;
 
 	case BACKWARD_2:
-		if (release_up || release_left) {
-			if (released_left || released_up) {
+		if (release_W || release_A) {
+			if (released_W || released_A) {
 				state = BACK_IDLE_2;
 			}
 		}
 		break;
 
 	case BACK_IDLE_2:
-		if (pressed_up) {
+		if (pressed_W) {
 			state = BACK_IDLE_2;
 		}
-		if (pressed_left) {
+		if (pressed_A) {
 			state = BACK_IDLE_2;
 		}
 		if (current_animation->Finished()) {
@@ -361,7 +369,7 @@ void ModulePlayerTwo::CheckState()
 		break;
 
 	case POST_DEATH_2:
-		if (App->ui->num_life_sho > 0) {
+		if (App->ui->num_life_koyori > 0) {
 			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
 			position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 			time = true;

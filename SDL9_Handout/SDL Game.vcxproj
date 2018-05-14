@@ -99,6 +99,7 @@
     <ClInclude Include="ModulePartner3.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModulePlayer2.h" />
+    <ClInclude Include="ModulePlayer3.h" />
     <ClInclude Include="ModulePowerup.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleSceneAir.h" />
@@ -137,6 +138,7 @@
     <ClCompile Include="ModulePartner3.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModulePlayer2.cpp" />
+    <ClCompile Include="ModulePlayer3.cpp" />
     <ClCompile Include="ModulePowerup.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneAir.cpp" />
