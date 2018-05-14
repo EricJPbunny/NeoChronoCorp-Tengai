@@ -30,6 +30,7 @@ class ModuleInput : public Module
 public:
 	
 	SDL_GameController* controller;
+	SDL_GameController* controller2;
 	ModuleInput();
 	~ModuleInput();
 
