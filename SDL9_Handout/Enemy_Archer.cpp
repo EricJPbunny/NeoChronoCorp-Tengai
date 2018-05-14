@@ -37,9 +37,9 @@ Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 	up.speed = 0.2f;
 
 	//Movement
-	movement.PushBack({ -2.0f, 0.0f }, 38, &idle);
-	movement.PushBack({ 0.0f, 0.0f }, 65, &sheathe);
-	movement.PushBack({ 0.0f, -1.0f }, 600, &up);
+	movement.PushBack({ -2.0f, 0.0f }, 50, &idle);
+	movement.PushBack({ 1.0f, 0.0f }, 39, &sheathe);
+	movement.PushBack({ 1.0f, -1.0f }, 600, &up);
 	
 	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
