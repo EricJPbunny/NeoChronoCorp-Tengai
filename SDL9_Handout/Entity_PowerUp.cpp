@@ -5,7 +5,7 @@
 #include "ModuleCollision.h"
 
 
-EntityPowerUp::EntityPowerUp(int x, int y) :Enemy(x, y)
+EntityPowerUp::EntityPowerUp(int x, int y, int type) :Enemy(x, y, type)
 {
 	iddle.PushBack({ 215,127,31,22 });
 	iddle.PushBack({ 246,127,31,22 });
@@ -27,8 +27,6 @@ EntityPowerUp::EntityPowerUp(int x, int y) :Enemy(x, y)
 
 	iddle.PushBack({ 215,190,31,21 });
 	iddle.speed = App->enemies->speed;
-
-
 
 	movement.PushBack({ -0.1f, 0.0f }, 80, &iddle);
 	movement.PushBack({ 1.0f, 0.0f }, 160, &iddle);

@@ -5,7 +5,7 @@
 #include "ModuleCollision.h"
 
 
-Enemy_Archer::Enemy_Archer(int x, int y):Enemy(x,y)
+Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 {
 	idle.PushBack({ 10,203,44,48 });
 	idle.PushBack({ 61,203,44,48 });

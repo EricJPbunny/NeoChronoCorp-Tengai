@@ -7,7 +7,7 @@
 #include "ModulePlayer.h"
 
 
-Enemy_Ninja::Enemy_Ninja(int x, int y) :Enemy(x, y)
+Enemy_Ninja::Enemy_Ninja(int x, int y, int type) :Enemy(x, y, type)
 {
 	fly.PushBack({ 18,113,30,42 });
 

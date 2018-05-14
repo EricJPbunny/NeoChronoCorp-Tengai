@@ -14,7 +14,7 @@ private:
 	Path movement;
 public:
 
-	EntityPowerUp(int x, int y);
+	EntityPowerUp(int x, int y, int type);
 
 	void Move();
 };

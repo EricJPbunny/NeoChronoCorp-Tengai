@@ -16,7 +16,7 @@ private:
 
 public:
 
-	Enemy_GreenOvni(int x, int y);
+	Enemy_GreenOvni(int x, int y, int type);
 
 	void Move();
 };

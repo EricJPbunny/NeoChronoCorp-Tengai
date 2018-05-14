@@ -18,7 +18,7 @@ public:
 	float speed = 0.2f;
 
 public:
-	Enemy(int x, int y);
+	Enemy(int x, int y, int type);
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;

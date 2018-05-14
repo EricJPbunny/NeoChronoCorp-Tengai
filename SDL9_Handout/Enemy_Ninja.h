@@ -22,7 +22,7 @@ private:
 	int shootTimer = 0;
 public:
 
-	Enemy_Ninja(int x, int y);
+	Enemy_Ninja(int x, int y, int type);
 
 	void Move();
 };

@@ -5,7 +5,7 @@
 #include "ModuleUI.h"
 
 
-Enemy_RedOvni::Enemy_RedOvni(int x, int y) :Enemy(x, y)
+Enemy_RedOvni::Enemy_RedOvni(int x, int y, int type) :Enemy(x, y, type)
 {
 	fly.PushBack({ 196,16,40,30 });
 	fly.PushBack({ 242,16,40,30 });

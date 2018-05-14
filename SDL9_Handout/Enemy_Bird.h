@@ -14,7 +14,7 @@ private:
 	Path movement;
 
 public:
-	Enemy_Bird(int x, int y);
+	Enemy_Bird(int x, int y, int type);
 
 	void Move();
 };
