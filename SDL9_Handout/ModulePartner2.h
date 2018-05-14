@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
-#include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
 struct SDL_Texture;
