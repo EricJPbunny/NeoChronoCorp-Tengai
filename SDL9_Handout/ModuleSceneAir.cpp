@@ -115,14 +115,14 @@ bool ModuleSceneAir::Start()
 	App->audio->PlayMusic(mus);
 	//Enemies
 
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 370, 20);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 400, 112);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 450, 44);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 54);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 600, 144);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 650, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 790, 164);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 810, 34);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 370, 20,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 400, 112, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 450, 44, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 54, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 600, 144, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 650, 0,2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 790, 164, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 810, 34, 1);
 
 	
 

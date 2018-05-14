@@ -117,7 +117,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, int path_type)
 {
 	bool ret = false;
 
@@ -128,6 +128,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
+			queue[i].path_type = path_type;
 			ret = true;
 			break;
 		}
@@ -147,29 +148,29 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch(info.type)
 		{
 			case ENEMY_TYPES::GREENOVNI:
-				enemies[i] = new Enemy_GreenOvni(info.x, info.y, info.type);
+				enemies[i] = new Enemy_GreenOvni(info.x, info.y, info.path_type);
 				break;
 
 			case ENEMY_TYPES::REDOVNI:
-				enemies[i] = new Enemy_RedOvni(info.x, info.y ,info.type);
+				enemies[i] = new Enemy_RedOvni(info.x, info.y ,info.path_type);
 				break;
 			case ENEMY_TYPES::NINJA:
-				enemies[i] = new Enemy_Ninja(info.x, info.y, info.type);
+				enemies[i] = new Enemy_Ninja(info.x, info.y, info.path_type);
 				break;
 			case ENEMY_TYPES::POWERUP:
-				enemies[i] = new EntityPowerUp(info.x, info.y, info.type);
+				enemies[i] = new EntityPowerUp(info.x, info.y, info.path_type);
 				break;
 			case ENEMY_TYPES::COIN:
-				enemies[i] = new Enemy_Coin(info.x, info.y, info.type);
+				enemies[i] = new Enemy_Coin(info.x, info.y, info.path_type);
 				break;
 			case ENEMY_TYPES::ARCHER:
-				enemies[i] = new Enemy_Archer(info.x, info.y, info.type);
+				enemies[i] = new Enemy_Archer(info.x, info.y, info.path_type);
 				break;
 			case ENEMY_TYPES::BIRD:
-				enemies[i] = new Enemy_Bird(info.x, info.y, info.type);
+				enemies[i] = new Enemy_Bird(info.x, info.y, info.path_type);
 				break;
 			case ENEMY_TYPES::KNIFE:
-				enemies[i] = new Enemy_Knife(info.x, info.y, info.type);
+				enemies[i] = new Enemy_Knife(info.x, info.y, info.path_type);
 				break;
 			
 		}

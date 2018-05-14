@@ -21,7 +21,9 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 0.5f, 0.0f }, 140, &idle);
 	movement.PushBack({ 0.0f, 0.0f }, 150, &idle);
 	
+	diagonal.PushBack({ -0.6f, 0.5f }, 940, &idle);
 
+	this->type = type;
 
 	collider = App->collision->AddCollider({ 0, 0, 10, 10 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -31,7 +33,18 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 
 void Enemy_Knife::Move()
 {
-	if (App->ui->enemies_movement) {
+	if (type == 1) {
+		if (App->ui->enemies_movement) {
+			position = originalposition + movement.GetCurrentSpeed(&animation);
+		}
+	}
+	if (type == 2) {
+		if (App->ui->enemies_movement) {
+			position = originalposition + diagonal.GetCurrentSpeed(&animation);
+		}
+	}
+	else {
 		position = originalposition + movement.GetCurrentSpeed(&animation);
 	}
+
 }

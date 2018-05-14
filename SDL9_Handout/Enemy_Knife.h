@@ -11,7 +11,9 @@ private:
 	iPoint originalposition;
 	Animation idle;
 
+	Path diagonal;
 	Path movement;
+	int type;
 
 public:
 	Enemy_Knife(int x, int y, int type);
