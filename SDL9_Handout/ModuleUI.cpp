@@ -98,30 +98,30 @@ update_status ModuleUI::Update()
 
 	//Player1
 	if (!game_over_koyori) {
-		App->render->Blit(graphics, 10, 6, &player1, 0.00);
+		App->render->Blit(graphics, 10, 6, &player1, 0.00f, 0.00f);
 		App->fonts->BlitText(18, 5, font_score, player1_score);
 
 		//Life Koyori
 		for (int i = 1; i <= num_life_koyori - 1; i++) {
-			App->render->Blit(graphics, 76 + life_koyori.w*i, 1, &life_koyori, 0.00f);
+			App->render->Blit(graphics, 76 + life_koyori.w*i, 1, &life_koyori, 0.00f,0.00f);
 		}
 	}
 	else {
-		App->render->Blit(graphics, 35, 10, &r, 0.00f);
+		App->render->Blit(graphics, 35, 10, &r, 0.00f, 0.00f);
 	}
 
 	//Player2
 	if (!game_over_sho && App->player2->IsEnabled()) {
-		App->render->Blit(graphics, 170, 5, &player2, 0.00);
+		App->render->Blit(graphics, 170, 5, &player2, 0.00f, 0.00f);
 		App->fonts->BlitText(180, 5, font_score, player2_score);
 
 		//Life Sho
 		for (int i = 1; i <= num_life_sho - 1; i++) {
-			App->render->Blit(graphics, 236 + life_sho.w*i, 1, &life_sho, 0.00f);
+			App->render->Blit(graphics, 236 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
 		}
 	}
 	else {
-		App->render->Blit(graphics, 210, 10, &r, 0.00f);
+		App->render->Blit(graphics, 210, 10, &r, 0.00f, 0.00f);
 	}
 	
 	//Game over
@@ -144,10 +144,10 @@ update_status ModuleUI::Update()
 		enemies_movement = false;
 		//Draw
 		alpha = 100;
-		App->render->Blit(black, 0, 0, &screen, 0.00f);
-		App->render->Blit(graphics, 100, 90, &game_over, 0.00f);
+		App->render->Blit(black, 0, 0, &screen, 0.00f, 0.00f);
+		App->render->Blit(graphics, 100, 90, &game_over, 0.00f, 0.00f);
 		App->fonts->BlitText(180, 115, font_time, time_text);
-		App->render->Blit(black, 0, 0, &screen, 0.00f);
+		App->render->Blit(black, 0, 0, &screen, 0.00f, 0.00f);
 		if (time == 0) {
 			App->fade->FadeToBlack(App->scene_air, App->scene_score);
 		}

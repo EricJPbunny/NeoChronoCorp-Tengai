@@ -237,6 +237,7 @@ update_status ModuleSceneAir::Update()
 			}
 			else {
 				App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 190 + increaser_2, 90, &exterior_ship, 1);
+				speedy = -3;
 			}
 		}
 	}
@@ -261,14 +262,22 @@ update_status ModuleSceneAir::Update()
 	App->player2->position.x += speed / SCREEN_SIZE;
 	App->player->position.x += speed / SCREEN_SIZE;
 	App->render->camera.x += speed;
+	framerateset++;
+	if (framerateset >= 4) {
+		App->render->camera.y += speedy;
+		App->player->position.y += speedy / SCREEN_SIZE;
+		coll_down->SetPos(0, (App->render->camera.y / SCREEN_SIZE) + SCREEN_HEIGHT - 4);
+		coll_up->SetPos(0, App->render->camera.y / SCREEN_SIZE);
+		framerateset = 0;
+	}
 	//debuger
 	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) {
 		LOG("Breakpoint");
 	}
 
 	//Update Collision
-	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, 0);
-	coll_right->SetPos((SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE), 0);
+	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, App->render->camera.y / SCREEN_SIZE);
+	coll_right->SetPos((SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE),  App->render->camera.y / SCREEN_SIZE);
 	//Debug Mode
 	//Kill Koyori
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
