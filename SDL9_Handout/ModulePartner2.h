@@ -36,13 +36,14 @@ public:
 	Animation* current_animation = nullptr;
 	Animation* current_animation_2 = nullptr;
 	Animation* current_animation_3 = nullptr;
-	Animation spawn, spawn2, spawn3;
-	Animation spawn_reverse, spawn_reverse2, spawn_reverse3;
-	Animation iddle, iddle2, iddle3;
-	Animation charging, charging2, charging3;
+	Animation* current_animation_4 = nullptr;
+	Animation spawn, spawn2, spawn3, spawn4;
+	Animation spawn_reverse, spawn_reverse2, spawn_reverse3, spawn_reverse4;
+	Animation iddle, iddle2;
+	Animation charging, charging2;
 	fPoint position;
-	partner_state_2 state = NOT_EXISTING_2, state_2 = NOT_EXISTING_2, state_3 = NOT_EXISTING_2;
-	bool exist = false, exist_2 = false, exist_3 = false, movement = true, time_mirror = true, time_shoot = true, time_mirror_2 = true, time_shoot_2 = true, time_mirror_3 = true, time_shoot_3 = true;
+	partner_state_2 state = NOT_EXISTING_2, state_2 = NOT_EXISTING_2, state_3 = NOT_EXISTING_2, state_4 =NOT_EXISTING_2;
+	bool exist = false, exist_2 = false, exist_3 = false, exist_4 = false, movement = true, time_mirror = true, time_shoot = true, time_mirror_2 = true, time_shoot_2 = true, time_mirror_3 = true, time_shoot_3 = true, time_mirror_4 = true, time_shoot_4 = true;
 	bool charged_shoot = false;
 
 	int time_on_entry = 0;
@@ -51,6 +52,8 @@ public:
 	int current_time_2 = 0;
 	int time_on_entry_3 = 0;
 	int current_time_3 = 0;
+	int time_on_entry_4 = 0;
+	int current_time_4 = 0;
 
 	bool shot_delay = true;
 	int shot_current = 0;
@@ -64,9 +67,14 @@ public:
 	int shot_current_3 = 0;
 	int shot_entry_3 = 0;
 
+	bool shot_delay_4= true;
+	int shot_current_4 = 0;
+	int shot_entry_4 = 0;
+
 	int num_bullet = 1;
 	int num_bullet_2 = 1;
 	int num_bullet_3 = 1;
+	int num_bullet_4 = 1;
 
 };
 
