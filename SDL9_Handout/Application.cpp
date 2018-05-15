@@ -15,6 +15,7 @@
 #include "ModulePlayer3.h"
 #include "ModulePartner.h"
 #include "ModulePartner2.h"
+#include "ModulePartner3.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
@@ -36,6 +37,7 @@ Application::Application()
 	modules[i++] = scene_score = new ModuleScore();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = pu = new ModulePowerup();
+	modules[i++] = partner3 = new ModulePartner3();
 	modules[i++] = partner2 = new ModulePartner2();
 	modules[i++] = partner = new ModulePartner();
 	modules[i++] = particles = new ModuleParticles();
@@ -65,6 +67,7 @@ bool Application::Init()
 	player->Disable();
 	player2->Disable();
 	player3->Disable();
+	partner3->Disable();
 	collision->Disable();
 	enemies->Disable();
 	// ----------------------------

@@ -4,23 +4,23 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
-//#include "ModulePlayer3.h"
+#include "ModulePlayer3.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
 struct SDL_Texture;
 
 enum partner_state_3 {
-	NOT_EXISTING,
-	LEVEL_ONE,
-	LEVEL_ONE_CHARGE,
-	LEVEL_TWO,
-	LEVEL_TWO_CHARGE,
-	LEVEL_THREE,
-	LEVEL_THREE_CHARGE,
-	LEVEL_FOUR,
-	LEVEL_FOUR_CHARGE,
-	SPAWN,
-	FIRE,
+	NOT_EXISTING_3,
+	LEVEL_ONE_3,
+	LEVEL_ONE_CHARGE_3,
+	LEVEL_TWO_3,
+	LEVEL_TWO_CHARGE_3,
+	LEVEL_THREE_3,
+	LEVEL_THREE_CHARGE_3,
+	LEVEL_FOUR_3,
+	LEVEL_FOUR_CHARGE_3,
+	SPAWN_3,
+	FIRE_3,
 };
 
 class ModulePartner3 : public Module
@@ -45,7 +45,7 @@ public:
 	Animation spawn_reverse;
 	Animation pre_shot, shot;
 	fPoint position;
-	partner_state_3 state = NOT_EXISTING;
+	partner_state_3 state = NOT_EXISTING_3;
 
 	bool time_shoot = true, exist = false;
 

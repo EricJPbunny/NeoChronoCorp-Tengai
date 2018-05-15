@@ -9,7 +9,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneAir.h"
 #include "ModulePlayer3.h"
-#include "ModulePartner.h"
+#include "ModulePartner3.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
 
@@ -28,38 +28,38 @@ ModulePlayer3::ModulePlayer3()
 	position.y = 300;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 68, 53, 32, 28 });
-	idle.PushBack({ 108, 54, 32, 27 });
-	idle.PushBack({ 148, 54, 32, 27 });
+	idle.PushBack({ 10, 7, 28, 26 });
+	idle.PushBack({ 52, 8, 28, 26 });
+	idle.PushBack({ 95, 9, 28, 26 });
 	idle.speed = 0.20f;
 
 	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 192, 53, 27, 29 });
-	backward.PushBack({ 232, 54, 28, 28 });
-	backward.PushBack({ 272, 54, 27, 28 });
+	backward.PushBack({ 131,44, 16, 28 });
+	backward.PushBack({ 154,44, 16, 28 });
+	backward.PushBack({ 175,44, 16, 28 });
 	backward.speed = 0.15f;
 
 	//Intermediate
-	intermediate.PushBack({ 187,95,27,29 });
-	intermediate.PushBack({ 230,95,24,28 });
-	intermediate.PushBack({ 270,95,26,29 });
+	intermediate.PushBack({ 6,43,26,29 });
+	intermediate.PushBack({ 40,43,26,29 });
+	intermediate.PushBack({ 74,41,26,29 });
 	intermediate.speed = 0.10f;
 
 	//Intermediate return
-	intermediate_return.PushBack({ 270,95,26,29 });
-	intermediate_return.PushBack({ 230,95,24,28 });
-	intermediate_return.PushBack({ 187,95,27,29 });
+	intermediate_return.PushBack({ 74,41,26,29 });
+	intermediate_return.PushBack({ 40,43,26,29 });
+	intermediate_return.PushBack({ 6,43,26,29 });
 	intermediate_return.speed = 0.10f;
 
 	//Spin
-	spin.PushBack({ 22,95,33,29 });
-	spin.PushBack({ 62,95,26,29 });
-	spin.PushBack({ 102,95,30,29 });
-	spin.PushBack({ 142,95,28,29 });
-	spin.PushBack({ 22,95,33,29 });
-	spin.PushBack({ 62,95,26,29 });
-	spin.PushBack({ 102,95,30,29 });
-	spin.PushBack({ 142,95,28,29 });
+	spin.PushBack({ 5,116,26,30 });
+	spin.PushBack({ 38,116,26,30 });
+	spin.PushBack({ 74,118,26,30 });
+	spin.PushBack({ 107,116,26,30 });
+	spin.PushBack({ 5,116,26,30 });
+	spin.PushBack({ 38,116,26,30 });
+	spin.PushBack({ 74,118,26,30 });
+	spin.PushBack({ 107,116,26,30 });
 	spin.speed = 0.15f;
 
 	//Spin Circle
@@ -100,10 +100,10 @@ ModulePlayer3::ModulePlayer3()
 	death_circle.speed = 0.8f;
 
 	//Death Player
-	death.x = 308;
-	death.y = 54;
-	death.w = 30;
-	death.h = 25;
+	death.x = 7;
+	death.y = 81;
+	death.w = 24;
+	death.h = 26;
 }
 
 ModulePlayer3::~ModulePlayer3()
@@ -113,7 +113,7 @@ ModulePlayer3::~ModulePlayer3()
 bool ModulePlayer3::Start()
 {
 	LOG("Loading player textures");
-	graphics = App->textures->Load("assets/sprite/miko.png"); // arcade version
+	graphics = App->textures->Load("assets/sprite/Junis_Spritessheet.png"); // arcade version
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
@@ -124,11 +124,8 @@ bool ModulePlayer3::Start()
 
 	state = SPAWN_PLAYER_3;
 
-	k_power_down = App->audio->LoadEffect("assets/audio/koyori_lvl_down.wav");
+	App->ui->num_life_junis = 3;
 
-	App->ui->num_life_koyori = 3;
-
-	App->partner->Enable();
 	time = true;
 	destroyed = false;
 	return true;
@@ -147,11 +144,8 @@ bool ModulePlayer3::CleanUp()
 	if (hitbox != nullptr)
 		hitbox->to_delete = true;
 
-	App->ui->game_over_koyori = true;
+	App->ui->game_over_junis = true;
 
-	App->audio->UnloadFx(k_power_down);
-
-	App->partner->Disable();
 	return true;
 }
 
@@ -172,8 +166,8 @@ update_status ModulePlayer3::Update()
 	if (power_up < 0) {
 		power_up = 0;
 	}
-	if (power_up > 2) {
-		power_up = 2;
+	if (power_up > 4) {
+		power_up = 4;
 	}
 
 	//check state
@@ -200,13 +194,10 @@ update_status ModulePlayer3::Update()
 			aux1++;
 			switch (aux1) {
 			case 0:
-				App->particles->AddParticle(App->particles->shoot, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
 				break;
 			case 1:
-				App->particles->AddParticle(App->particles->shoot1, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
 				break;
 			case 2:
-				App->particles->AddParticle(App->particles->shoot2, position.x, position.y - 20, COLLIDER_PLAYER_2_SHOT, PARTICLE_SHOT_2);
 				aux1 = 0;
 				break;
 			}
@@ -362,7 +353,7 @@ void ModulePlayer3::CheckState()
 		break;
 
 	case POST_DEATH_3:
-		if (App->ui->num_life_sho > 0) {
+		if (App->ui->num_life_junis > 0) {
 			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
 			position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 			time = true;
@@ -376,7 +367,7 @@ void ModulePlayer3::PerformActions()
 {
 	switch (state) {
 	case SPAWN_PLAYER_3:
-		App->ui->game_over_koyori = false;
+		App->ui->game_over_junis = false;
 		check_spawn = true;
 		current_animation = &idle;
 		blink_time = SDL_GetTicks() - blink_on_entry;
@@ -452,11 +443,11 @@ void ModulePlayer3::PerformActions()
 		break;
 
 	case POST_DEATH_3:
-		if (App->ui->num_life_koyori == 0) {
-			if (App->ui->score_koyori > 1000) {
-				App->ui->score_koyori -= 1000;
+		if (App->ui->num_life_junis == 0) {
+			if (App->ui->score_junis > 1000) {
+				App->ui->score_junis -= 1000;
 			}
-			App->player->Disable();
+			App->player3->Disable();
 		}
 		else {
 			check_death = false;

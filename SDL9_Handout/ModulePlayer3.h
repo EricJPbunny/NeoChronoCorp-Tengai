@@ -16,7 +16,6 @@ enum player_state_3 {
 	BACKWARD_3,
 	GO_BACKWARD_3,
 	BACK_IDLE_3,
-	WALK_3,
 	SPIN_3,
 	DEATH_3,
 	POST_DEATH_3,

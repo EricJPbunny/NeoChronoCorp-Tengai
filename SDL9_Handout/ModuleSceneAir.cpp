@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
+#include "ModulePlayer3.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL\include\SDL_render.h"
 #include "ModuleInput.h"
@@ -104,7 +105,7 @@ bool ModuleSceneAir::Start()
 
 
 	//startup
-	App->player->Enable();
+	App->player2->Enable();
 	App->ui->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
@@ -201,12 +202,11 @@ bool ModuleSceneAir::CleanUp()
 
 	App->collision->Disable();
 
-	if (App->player2->IsEnabled()) {
-		App->player2->Disable();
+	if (App->player3->IsEnabled()) {
+		App->player3->Disable();
 	}
 
 	App->ui->Disable();
-	App->player->Disable();
 	App->enemies->Disable();
 
 	App->textures->Unload(graphics);
@@ -218,7 +218,6 @@ bool ModuleSceneAir::CleanUp()
 update_status ModuleSceneAir::Update()
 {
 	//paint (pero el .net no)
-
 
 	for (int i = 0; i < 5; ++i) 
 	{
@@ -234,10 +233,6 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
 		App->render->Blit(graphics, (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
 	}
-	
-
-
-
 
 	//Y axis movement flags
 
@@ -287,21 +282,21 @@ update_status ModuleSceneAir::Update()
 
 	//Enable Players
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
-		if (!App->player->IsEnabled()) {
-			App->audio->PlaySoundEffects(select_koyori);
-			App->player->Enable();
-		}
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
 		if (!App->player2->IsEnabled()) {
 			App->audio->PlaySoundEffects(select_sho);
 			App->player2->Enable();
 		}
 	}
+
+	if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+		if (!App->player3->IsEnabled()) {
+			App->audio->PlaySoundEffects(select_sho);
+			App->player3->Enable();
+		}
+	}
 	//Background Movement
 	App->player2->position.x += speed / SCREEN_SIZE;
-	App->player->position.x += speed / SCREEN_SIZE;
+	App->player3->position.x += speed / SCREEN_SIZE;
 	App->render->camera.x += speed;
 	framerateset++;
 	if (framerateset >= 2) {

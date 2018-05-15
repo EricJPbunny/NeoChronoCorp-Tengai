@@ -134,23 +134,23 @@ void ModulePartner3::CheckState()
 	switch (state)
 	{
 
-	case NOT_EXISTING:
+	case NOT_EXISTING_3:
 		if (App->player3->power_up == 1) 
 		{
 			exist = true;
-			state = SPAWN;
+			state = SPAWN_3;
 		}
 		break;
 
-	case LEVEL_ONE:
+	case LEVEL_ONE_3:
 		if (App->player3->power_up == 0) 
 		{
 			exist = false;
-			state = NOT_EXISTING;
+			state = NOT_EXISTING_3;
 		}
 		if (App->player3->power_up == 2) 
 		{
-			state = LEVEL_TWO;
+			state = LEVEL_TWO_3;
 		}
 		//make it charge
 		/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT) {
@@ -169,22 +169,22 @@ void ModulePartner3::CheckState()
 		}*/
 		break;
 
-	case LEVEL_ONE_CHARGE:
+	case LEVEL_ONE_CHARGE_3:
 		//make it shot fire while pressing a key
 		/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP) {
 			state = FIRE;
 		}*/
 		break;
 
-	case LEVEL_TWO:
+	case LEVEL_TWO_3:
 		if (App->player3->power_up <= 1)
 		{
-			state = LEVEL_ONE;
+			state = LEVEL_ONE_3;
 		}
 
 		if (App->player3->power_up == 3)
 		{
-			state = LEVEL_THREE;
+			state = LEVEL_THREE_3;
 		}
 
 		//make it charge
@@ -204,22 +204,22 @@ void ModulePartner3::CheckState()
 		}*/
 		break;
 
-	case LEVEL_TWO_CHARGE:
+	case LEVEL_TWO_CHARGE_3:
 		//make it shot fire while pressing a key
 		/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP) {
 		state = FIRE;
 		}*/
 		break;
 
-	case LEVEL_THREE:
+	case LEVEL_THREE_3:
 		if (App->player3->power_up <= 2)
 		{
-			state = LEVEL_TWO;
+			state = LEVEL_TWO_3;
 		}
 
 		if (App->player3->power_up == 4)
 		{
-			state = LEVEL_FOUR;
+			state = LEVEL_FOUR_3;
 		}
 
 		//make it charge
@@ -239,17 +239,17 @@ void ModulePartner3::CheckState()
 		}*/
 		break;
 
-	case LEVEL_THREE_CHARGE:
+	case LEVEL_THREE_CHARGE_3:
 		//make it shot fire while pressing a key
 		/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP) {
 		state = FIRE;
 		}*/
 		break;
 
-	case LEVEL_FOUR:
+	case LEVEL_FOUR_3:
 		if (App->player3->power_up <= 3)
 		{
-			state = LEVEL_THREE;
+			state = LEVEL_THREE_3;
 		}
 
 		//make it charge
@@ -269,17 +269,17 @@ void ModulePartner3::CheckState()
 		}*/
 		break;
 
-	case LEVEL_FOUR_CHARGE:
+	case LEVEL_FOUR_CHARGE_3:
 		//make it shot fire while pressing a key
 		/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP) {
 		state = FIRE;
 		}*/
 		break;
 
-	case SPAWN:
+	case SPAWN_3:
 		break;
 
-	case FIRE:
+	case FIRE_3:
 		break;
 
 	}

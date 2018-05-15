@@ -234,7 +234,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Kill Green Ovni
-			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)) {
 
 				num_ovni++;
 
