@@ -248,6 +248,9 @@ update_status ModuleSceneAir::Update()
 	//   SHIP & SHIP FLAGS
 	if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN) {
 		ship_flag1 = true;
+		ship_flag2 = false;
+		ship_flag3 = false;
+		animspeed = 0;
 	}
 	if (ship_flag1) 
 	{
