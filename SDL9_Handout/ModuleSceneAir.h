@@ -40,7 +40,8 @@ public:
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
-	int speed = 3;
+	int speed = 3, speedy=0;
+	int framerateset = 0;
 	int aux_time = 0;
 	int increaser = 0, increaser_2 = 0;
 	bool flagship_1 = true;

@@ -42,8 +42,8 @@ public:
 	Animation spawn;
 	Animation iddle;
 	Animation charging;
-	Animation decharging;
-	Animation charged;
+	Animation spawn_reverse;
+	Animation pre_shot, shot;
 	fPoint position;
 	partner_state_3 state = NOT_EXISTING;
 
