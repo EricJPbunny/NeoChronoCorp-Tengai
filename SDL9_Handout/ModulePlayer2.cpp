@@ -249,21 +249,6 @@ update_status ModulePlayerTwo::Update()
 	//Fade
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
 
-	//Update Collider Position
-
-	if (coll->CheckCollision(App->scene_air->coll_left->rect)) {
-		position.x = App->render->camera.x / SCREEN_SIZE;
-	}
-	if (coll->CheckCollision(App->scene_air->coll_right->rect)) {
-		position.x = (SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE) - 33;
-	}
-	if (coll->CheckCollision(App->scene_air->coll_up->rect)) {
-		position.y = 52;
-	}
-	if (coll->CheckCollision(App->scene_air->coll_down->rect)) {
-		position.y = SCREEN_HEIGHT-4;
-	}
-
 	//Check Death
 	if (App->ui->num_life_sho == 0) {
 		state = DEATH_2;
@@ -288,23 +273,36 @@ update_status ModulePlayerTwo::Update()
 	if (!check_death) {
 		if (check_spawn) {
 			position.x++;
-			coll->SetPos(App->render->camera.x, App->render->camera.y - 100);
+			coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
 		}
 		else {
 			coll->SetPos(position.x, position.y - 32);
 
 			if (!App->scene_air->god_mode)
-			hitbox->SetPos(position.x + 8, position.y - 20);
+				hitbox->SetPos(position.x + 8, position.y - 20);
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	}
-	if (check_death) {
+	else {
 		App->render->Blit(graphics, position.x, position.y - 32, &death);
 		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+
 		position.x -= 1;
 		position.y += 3;
 	}
 
+	if (coll->CheckCollision(App->scene_air->coll_left->rect)) {
+		position.x = (App->render->camera.x / SCREEN_SIZE);
+	}
+	if (coll->CheckCollision(App->scene_air->coll_right->rect)) {
+		position.x = (SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE) - 33;
+	}
+	if (coll->CheckCollision(App->scene_air->coll_up->rect)) {
+		position.y = 52;
+	}
+	if (coll->CheckCollision(App->scene_air->coll_down->rect)) {
+		position.y = SCREEN_HEIGHT - 4;
+	}
 	return UPDATE_CONTINUE;
 }
 
