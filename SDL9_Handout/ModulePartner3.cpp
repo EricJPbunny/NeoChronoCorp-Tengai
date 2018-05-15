@@ -19,34 +19,54 @@ ModulePartner3::ModulePartner3()
 	graphics = nullptr;
 	current_animation = nullptr;
 
-	/*spawn.PushBack
-	spawn.PushBack
-	spawn.PushBack
-	spawn.PushBack
-	spawn.speed
+	spawn.PushBack({ 14,212,5,3 });
+	spawn.PushBack({ 45,210,12,6 });
+	spawn.PushBack({ 80,210,19,8 });
+	spawn.PushBack({ 126,209,23,10 });
+	spawn.speed = 0.30f;
 
-	iddle.PushBack
-	iddle.PushBack
-	iddle.PushBack
-	iddle.PushBack
-	iddle.speed
+	spawn_reverse.PushBack({ 126,209,23,10 });
+	spawn_reverse.PushBack({ 80,210,19,8 });
+	spawn_reverse.PushBack({ 45,210,12,6 });
+	spawn_reverse.PushBack({ 14,212,5,3 });
+	spawn_reverse.speed = 0.30f;
 
-	charging.PushBack
-	charging.PushBack
-	charging.PushBack
-	charging.speed
 
-	decharging.PushBack
-	decharging.PushBack
-	decharging.PushBack
-	decharging.PushBack
-	decharging.speed
 
-	charged.PushBack
-	charged.PushBack
-	charged.PushBack
-	charged.PushBack
-	charged.speed */
+	iddle.PushBack({ 411,206,31,13 });
+	iddle.PushBack({ 372,203,30,14 });
+	iddle.PushBack({ 455,205,30,13 });
+	iddle.PushBack({ 337,203,27,14 });
+	iddle.speed = 0.15f;
+
+	
+
+	charging.PushBack({ 282,199,28,21 });
+	charging.PushBack({ 247,198,24,21 });
+	charging.PushBack({ 208,197,27,21 });
+	charging.PushBack({ 168,200,27,21 });
+	charging.speed = 0.10f;
+
+
+	pre_shot.PushBack({ 9,4,48,42 });
+	pre_shot.PushBack({ 74,4,53,46 });
+	pre_shot.PushBack({ 147,5,58,52 });
+	pre_shot.PushBack({ 222,7,58,53 });
+	pre_shot.PushBack({ 289,6,64,57 });
+	pre_shot.PushBack({ 377,8,64,58 });
+	pre_shot.speed = 0.15f;
+
+
+	shot.PushBack({ 10,72,76,37 });
+	shot.PushBack({ 94,74,76,38 });
+	shot.PushBack({ 192,76,79,38 });
+	shot.PushBack({ 287,82,79,37 });
+	shot.PushBack({ 389,79,79,38 });
+	shot.PushBack({ 13,135,79,37 });
+	shot.PushBack({ 107,136,76,37 });
+	shot.PushBack({ 198,137,76,38 });
+	shot.speed = 0.15f;
+
 
 }
 
