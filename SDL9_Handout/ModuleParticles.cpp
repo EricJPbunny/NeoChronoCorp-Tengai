@@ -47,32 +47,32 @@ ModuleParticles::ModuleParticles()
 	shoot.anim.PushBack({ 26,107,26,2 });
 	shoot.anim.loop = true;
 	shoot.life = 1400;
-	shoot.speed.x = 12;
+	shoot.speed.x = 8;
 
 	shoot1.anim.PushBack({ 26,111,26,2 });
 	shoot1.anim.loop = true;
 	shoot1.life = 1400;
-	shoot1.speed.x = 12;
+	shoot1.speed.x = 8;
 
 	shoot2.anim.PushBack({ 26,115,26,2 });
 	shoot2.anim.loop = true;
 	shoot2.life = 1400;
-	shoot2.speed.x = 12;
+	shoot2.speed.x = 8;
 
-	shoot_sho_big.anim.PushBack({});
+	shoot_sho_big.anim.PushBack({ 55,114,32,3 });
 	shoot_sho_big.anim.loop = true;
 	shoot_sho_big.life = 1400;
-	shoot_sho_big.speed.x = 12;
+	shoot_sho_big.speed.x = 8;
 
-	shoot_sho_big_1.anim.PushBack({});
+	shoot_sho_big_1.anim.PushBack({ 55,119,32,3 });
 	shoot_sho_big_1.anim.loop = true;
 	shoot_sho_big_1.life = 1400;
-	shoot_sho_big_1.speed.x = 12;
+	shoot_sho_big_1.speed.x = 8;
 
-	shoot_sho_big_2.anim.PushBack({});
+	shoot_sho_big_2.anim.PushBack({ 55,124,32,3 });
 	shoot_sho_big_2.anim.loop = true;
 	shoot_sho_big_2.life = 1400;
-	shoot_sho_big_2.speed.x = 12;
+	shoot_sho_big_2.speed.x = 8;
 
 	//Enemies Explosion
 
