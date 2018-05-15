@@ -32,6 +32,7 @@ bool ModuleSceneAir::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/sprite/sky_Background.png");
 	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
+	graphics2 = App->textures->Load("assets/sprite/destroyed_ship.png");
 	//bacground starting rects
 
 	MountainBg.x = 0;
@@ -95,6 +96,12 @@ bool ModuleSceneAir::Start()
 	exterior_ship.y = 0;
 	exterior_ship.h = 222;
 	exterior_ship.w = 271;
+
+	destroyed_ship.x = 1;
+	destroyed_ship.y = 1;
+	destroyed_ship.h = 439;
+	destroyed_ship.w = 629;
+
 
 	//startup
 	App->player->Enable();
@@ -198,48 +205,62 @@ update_status ModuleSceneAir::Update()
 
 	for (int i = 0; i < 5; ++i) 
 	{
-		App->render->Blit(graphics, 0 + (MountainBg.w * i) , 120, &MountainBg, bg_speed_default * 3);
-		App->render->Blit(graphics, 0 + (SkyOne.w * i), 0, &SkyOne, bg_speed_default * 6);
-		App->render->Blit(graphics, 0 + (SkyTwo.w * i), 45, &SkyTwo, bg_speed_default * 5);
-		App->render->Blit(graphics, 0 + (SkyThree.w * i), 70, &SkyThree, bg_speed_default * 4);
-		App->render->Blit(graphics, 0 + (SkyFour.w * i), 97, &SkyFour, bg_speed_default * 3);
-		App->render->Blit(graphics, 0 + (FloorOne.w * i), 176, &FloorOne, bg_speed_default * 4);
-		App->render->Blit(graphics, 0 + (FloorTwo.w * i), 182, &FloorTwo, bg_speed_default * 5);
-		App->render->Blit(graphics, 0 + (FloorThree.w * i), 190, &FloorThree, bg_speed_default * 6);
-		App->render->Blit(graphics, 0 + (FloorFour.w * i), 200, &FloorFour, bg_speed_default * 7);
-		App->render->Blit(graphics, 0 + (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
-		App->render->Blit(graphics, 0 + (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
+		App->render->Blit(graphics, (MountainBg.w * i) , 120, &MountainBg, bg_speed_default * 3);
+		App->render->Blit(graphics, (SkyOne.w * i), 0, &SkyOne, bg_speed_default * 6);
+		App->render->Blit(graphics, (SkyTwo.w * i), 45, &SkyTwo, bg_speed_default * 5);
+		App->render->Blit(graphics, (SkyThree.w * i), 70, &SkyThree, bg_speed_default * 4);
+		App->render->Blit(graphics, (SkyFour.w * i), 97, &SkyFour, bg_speed_default * 3);
+		App->render->Blit(graphics, (FloorOne.w * i), 176, &FloorOne, bg_speed_default * 4);
+		App->render->Blit(graphics, (FloorTwo.w * i), 182, &FloorTwo, bg_speed_default * 5);
+		App->render->Blit(graphics, (FloorThree.w * i), 190, &FloorThree, bg_speed_default * 6);
+		App->render->Blit(graphics, (FloorFour.w * i), 200, &FloorFour, bg_speed_default * 7);
+		App->render->Blit(graphics, (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
+		App->render->Blit(graphics, (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
 	}
 	
 
-	if (App->render->camera.x > 300&& App->render->camera.x<=800) {
 
-		if (increaser > 90) 
+
+
+	//Y axis movement flags
+
+	if (App->render->camera.x > 800) {
+		speedy = -3;
+	}
+
+	//   SHIP & SHIP FLAGS
+	if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN) {
+		ship_flag1 = true;
+	}
+	if (ship_flag1) 
+	{
+		App->render->Blit(graphics1, 270,0,&exterior_ship, 0.00f, 0.00f);
+		ship_flag2 = true;
+	}
+	if (ship_flag2)
+	{
+		ship_flag1 = false;
+		if (animspeed <= 90) 
 		{
-			App->render->Blit(graphics1, (App->render->camera.x/ SCREEN_SIZE)+ 270, 100 - increaser, &exterior_ship, 1);
+			App->render->Blit(graphics1, 270 - animspeed, 0+ animspeed, &exterior_ship, 0.00f, 0.00f);
+			animspeed++;
 		}
 		else 
 		{
-			App->render->Blit(graphics1, 462, 100 - increaser, &exterior_ship, 1);
-			increaser++;
-		}
-	}
-	else if (App->render->camera.x > 800) {
-
-		if (increaser > 10) {
-			App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 180 + increaser, 100 - increaser, &exterior_ship, 1);
-			increaser--;
-		}
-		else {
-			if (increaser_2 > -140) {
-				App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 190 + increaser_2, 90, &exterior_ship, 1);
-				increaser_2--;
+			if (animspeed < 220) {
+				App->render->Blit(graphics1, 270 - animspeed, 90, &exterior_ship, 0.00f, 0.00f);
+				animspeed++;
 			}
 			else {
-				App->render->Blit(graphics1, (App->render->camera.x / SCREEN_SIZE) + 190 + increaser_2, 90, &exterior_ship, 1);
-				speedy = -3;
+				App->render->Blit(graphics1, 270  - 220, 90, &exterior_ship,0.00f,0.00f);
+				ship_flag3 = true;
 			}
 		}
+	}
+	if (ship_flag3) 
+	{
+		ship_flag2 = false;
+		App->render->Blit(graphics2, 270 - 232, 59, &destroyed_ship, 0.00f, 0.00f);
 	}
 
 
@@ -263,7 +284,7 @@ update_status ModuleSceneAir::Update()
 	App->player->position.x += speed / SCREEN_SIZE;
 	App->render->camera.x += speed;
 	framerateset++;
-	if (framerateset >= 4) {
+	if (framerateset >= 2) {
 		App->render->camera.y += speedy;
 		App->player->position.y += speedy / SCREEN_SIZE;
 		coll_down->SetPos(0, (App->render->camera.y / SCREEN_SIZE) + SCREEN_HEIGHT - 4);
