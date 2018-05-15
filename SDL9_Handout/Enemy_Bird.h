@@ -10,15 +10,20 @@ private:
 
 	iPoint originalposition;
 	Animation idle;
+
 	Animation shot;
 	Animation shot2;
 	Animation shot3;
 	Animation shot4;
 	Animation shot5;
 	Animation shot6;
+
 	Animation main;
+
+	Path birddown;
+
 	Path birdup;
-	Path movement;
+
 	
 	int type;
 

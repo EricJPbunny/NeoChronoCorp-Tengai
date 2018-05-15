@@ -29,12 +29,6 @@ Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 	main.speed = 0.2f;
 
 	
-	movement.PushBack({ 0.0f, 0.0f }, 200, &idle);
-	movement.PushBack({ 1.0f, 0.0f }, 18, &shot);
-	movement.PushBack({ 1.0f, 0.0f }, 50, &main);
-	movement.PushBack({ 0.5f, -1.0f }, 300, &idle);
-
-
 	birdup.PushBack({ 0.0f, 0.0f }, 200, &idle);
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot);
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot2);
@@ -43,7 +37,18 @@ Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot5);
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot6);
 	birdup.PushBack({ 1.0f, 0.0f }, 50, &main);
-	birdup.PushBack({ 0.2f, 1.0f }, 200, &idle);
+	birdup.PushBack({ 0.2f, 1.0f }, 300, &idle);
+
+
+	birddown.PushBack({ 0.0f, 0.0f }, 200, &idle);
+	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot);
+	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot2);
+	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot3);
+	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot4);
+	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot5);
+	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot6);
+	birddown.PushBack({ 1.0f, 0.0f }, 50, &main);
+	birddown.PushBack({ 0.2f, -1.0f }, 200, &idle);
 	
 	this->type = type;
 
@@ -57,16 +62,14 @@ void Enemy_Bird::Move()
 {
 	if (type == 1) {
 		if (App->ui->enemies_movement) {
-			position = originalposition + movement.GetCurrentSpeed(&animation);
+			position = originalposition + birdup.GetCurrentSpeed(&animation);
 		}
 	}
 	if (type == 2) {
 		if (App->ui->enemies_movement) {
-			position = originalposition + birdup.GetCurrentSpeed(&animation);
+			position = originalposition + birddown.GetCurrentSpeed(&animation);
 		}
 	}
-	else {
-		position = originalposition + movement.GetCurrentSpeed(&animation);
-	}
+	
 
 }

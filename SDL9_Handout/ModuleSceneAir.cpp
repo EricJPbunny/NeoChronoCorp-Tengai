@@ -122,48 +122,65 @@ bool ModuleSceneAir::Start()
 	App->audio->PlayMusic(mus);
 	//Enemies
 
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 370, 20,1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 400, 112, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 450, 44, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 530, 64, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 600, 144, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 650, 0,2);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 790, 164, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 810, 34, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1000, 0, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1050, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 480, 20,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 510, 112, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 540, 44, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 640, 64, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 690, 144, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 730, 0,2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 800, 164, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 820, 34, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 850, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 890, 0, 2);
 
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 42,1);
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 87,1);
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 132,1);
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1100, 177,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 920, 42,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 920, 87,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 920, 132,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 920, 177,1);
 
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 42,2);
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 87,2);
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 132,2);
-	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1200, 177,2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1020, 42,2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1020, 87,2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1020, 132,2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1020, 177,2);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1150, 20, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1200, 44, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1270, 64, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1310, 144, 1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1400, 66, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1480, 156, 1);
+	
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 42, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 87, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 132, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 177, 1);
+
 
 	//Archers
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1300, 70);
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1350, 120);
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1400, 170);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1390, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1460, 110);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1530, 160);
 	
 
 
 	// Ovnis
 
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 300, 30);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 320, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 340, 90);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 360, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 420, 30);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 440, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 460, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 480, 120);
 
-
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1500, 30);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1520, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 1540, 90);
 	
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 700, 180);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 720, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 740, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 760, 90);
 
 	return ret;
 }
