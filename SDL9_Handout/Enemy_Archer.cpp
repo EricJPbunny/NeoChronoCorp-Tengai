@@ -16,7 +16,7 @@ Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 	idle.PushBack({ 343,203,44,48 });
 	idle.PushBack({ 27,260,44,48 });
 	idle.PushBack({ 93,260,44,48 });
-	idle.speed = 0.2f;
+	idle.speed = 0.01f;
 
 	sheathe.PushBack({ 150,258,44,48 });
 	sheathe.PushBack({ 207,257,44,48 });
@@ -37,7 +37,7 @@ Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 	up.speed = 0.2f;
 
 	//Movement
-	movement.PushBack({ -2.0f, 0.0f }, 50, &idle);
+	movement.PushBack({ -1.3f, 0.0f }, 40, &idle);
 	movement.PushBack({ 1.0f, 0.0f }, 39, &sheathe);
 	movement.PushBack({ 1.0f, -1.0f }, 600, &up);
 	

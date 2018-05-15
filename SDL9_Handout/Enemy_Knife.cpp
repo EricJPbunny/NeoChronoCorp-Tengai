@@ -17,11 +17,11 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 	idle.PushBack({ 325,49,32,30 });
 	idle.speed = 0.2f;
 	
-	movement.PushBack({ 0.0f, 0.0f }, 150, &idle);
-	movement.PushBack({ 0.5f, 0.0f }, 140, &idle);
-	movement.PushBack({ 0.0f, 0.0f }, 1050, &idle);
+	movement.PushBack({ -0.2f, 0.0f }, 150, &idle);
+	movement.PushBack({ 0.0f, 0.0f }, 140, &idle);
+	movement.PushBack({ -0.8f, 0.0f }, 1050, &idle);
 	
-	diagonal.PushBack({ -0.6f, 0.5f }, 940, &idle);
+	diagonal.PushBack({ -0.8f, 0.7f }, 940, &idle);
 
 	this->type = type;
 

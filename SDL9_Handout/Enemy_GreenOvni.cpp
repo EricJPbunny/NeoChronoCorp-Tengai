@@ -19,7 +19,7 @@ Enemy_GreenOvni::Enemy_GreenOvni(int x, int y, int type) :Enemy(x, y, type)
 	back.PushBack({ 152,16,30,30 });
 	
 
-	movement.PushBack({ -0.8f, 0.0f }, 90, &fly);
+	movement.PushBack({ -0.4f, 0.0f }, 90, &fly);
 	
 
 	animation = &fly;
