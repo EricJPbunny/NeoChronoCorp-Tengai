@@ -124,6 +124,8 @@ bool ModulePlayer3::Start()
 
 	state = SPAWN_PLAYER_3;
 
+	App->partner3->Enable();
+
 	App->ui->num_life_junis = 3;
 
 	time = true;
@@ -145,6 +147,7 @@ bool ModulePlayer3::CleanUp()
 		hitbox->to_delete = true;
 
 	App->ui->game_over_junis = true;
+	App->partner3->Disable();
 
 	return true;
 }

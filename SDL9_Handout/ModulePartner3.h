@@ -14,13 +14,11 @@ enum partner_state_3 {
 	LEVEL_ONE_3,
 	LEVEL_ONE_CHARGE_3,
 	LEVEL_TWO_3,
-	LEVEL_TWO_CHARGE_3,
 	LEVEL_THREE_3,
-	LEVEL_THREE_CHARGE_3,
 	LEVEL_FOUR_3,
-	LEVEL_FOUR_CHARGE_3,
 	SPAWN_3,
 	FIRE_3,
+	DESPAWN_3,
 };
 
 class ModulePartner3 : public Module
@@ -47,7 +45,7 @@ public:
 	fPoint position;
 	partner_state_3 state = NOT_EXISTING_3;
 
-	bool time_shoot = true, exist = false;
+	bool time_shoot = true, movement = true, time_socrates = true, exist = false;
 
 	bool shot_delay = true;
 	int shot_current = 0;
@@ -55,6 +53,8 @@ public:
 
 	int time_on_entry = 0;
 	int current_time = 0;
+	bool charged_shoot = false;
+
 };
 
 #endif
