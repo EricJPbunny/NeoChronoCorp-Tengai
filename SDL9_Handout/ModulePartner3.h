@@ -34,6 +34,7 @@ private:
 
 public:
 	SDL_Texture* graphics = nullptr;
+	
 	Animation* current_animation = nullptr;
 	Animation spawn;
 	Animation iddle;
@@ -52,6 +53,7 @@ public:
 	int time_on_entry = 0;
 	int current_time = 0;
 	bool charged_shoot = false;
+
 
 };
 

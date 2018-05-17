@@ -87,6 +87,7 @@ public:
 	Particle coin_100, coin_200, coin_500, coin_1000, coin_2000, coin_4000;
 	Particle shuriken;
 	Particle kunai, kunai1, kunai2;
+	Particle shuriken_socrates_1, shuriken_socrates_2, shuriken_socrates_3;
 
 	bool timer = false;
 	int current_time = 1200, time_on_entry = 0;

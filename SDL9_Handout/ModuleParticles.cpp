@@ -234,6 +234,21 @@ ModuleParticles::ModuleParticles()
 	kunai2.anim.loop = true;
 	kunai2.life = 2000;
 
+	//socrates shurikens
+	shuriken_socrates_1.anim.PushBack({132,97,8,8});
+	shuriken_socrates_1.speed.x = 8;
+	shuriken_socrates_1.anim.loop = true;
+	shuriken_socrates_1.life = 2000;
+
+	shuriken_socrates_2.anim.PushBack({ 141,94,13,13 });
+	shuriken_socrates_2.speed.x = 8;
+	shuriken_socrates_2.anim.loop = true;
+	shuriken_socrates_2.life = 2000;
+
+	shuriken_socrates_3.anim.PushBack({ 155,90,21,21 });
+	shuriken_socrates_3.speed.x = 8;
+	shuriken_socrates_3.anim.loop = true;
+	shuriken_socrates_3.life = 2000;
 }
 
 ModuleParticles::~ModuleParticles()

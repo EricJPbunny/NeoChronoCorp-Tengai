@@ -117,6 +117,7 @@ bool ModulePartner3::CleanUp()
 
 update_status ModulePartner3::Update()
 {
+	bool shot_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
 	CheckState();
 
 	PerformActions();
@@ -130,9 +131,77 @@ update_status ModulePartner3::Update()
 
 	//Draw partner
 	SDL_Rect r = current_animation->GetCurrentFrame();
-
-	if (exist) {
-		App->render->Blit(graphics, position.x + 10, position.y - 13 - r.h, &r);
+	//shuriken shot with 1st power up
+	if (App->player3->power_up==1) {
+		if (movement) {
+			if (shot_space_3) {
+				if (shot_delay)
+				{
+					shot_entry = SDL_GetTicks();
+					shot_delay = false;
+				}
+				shot_current = SDL_GetTicks() - shot_entry;
+				if (shot_current > 300) {
+					App->particles->AddParticle(App->particles->shuriken_socrates_1, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					shot_delay = true;
+				}
+			}
+		}
+		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
+	}
+	//shuriken shot with 2nd power up
+	if (App->player3->power_up == 2) {
+		if (movement) {
+			if (shot_space_3) {
+				if (shot_delay)
+				{
+					shot_entry = SDL_GetTicks();
+					shot_delay = false;
+				}
+				shot_current = SDL_GetTicks() - shot_entry;
+				if (shot_current > 300) {
+					App->particles->AddParticle(App->particles->shuriken_socrates_2, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					shot_delay = true;
+				}
+			}
+		}
+		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
+	}
+	//shuriken shot with 3rd power up
+	if (App->player3->power_up == 3) {
+		if (movement) {
+			if (shot_space_3) {
+				if (shot_delay)
+				{
+					shot_entry = SDL_GetTicks();
+					shot_delay = false;
+				}
+				shot_current = SDL_GetTicks() - shot_entry;
+				if (shot_current > 300) {
+					App->particles->AddParticle(App->particles->shuriken_socrates_3, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					shot_delay = true;
+				}
+			}
+		}
+		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
+	}
+	//shuriken shot with 4th power up
+	if (App->player3->power_up == 4) {
+		if (movement) {
+			if (shot_space_3) {
+				if (shot_delay)
+				{
+					shot_entry = SDL_GetTicks();
+					shot_delay = false;
+				}
+				shot_current = SDL_GetTicks() - shot_entry;
+				if (shot_current > 300) {
+					App->particles->AddParticle(App->particles->shuriken_socrates_3, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					shot_delay = true;
+				}
+			}
+		}
+		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
 	}
 
 	//Set Position
