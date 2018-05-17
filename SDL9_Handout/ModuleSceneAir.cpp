@@ -236,7 +236,7 @@ update_status ModuleSceneAir::Update()
 
 	//Y axis movement flags
 
-	if (App->render->camera.x > 800) {
+	if (App->render->camera.x > 2500) {
 		speedy = -3;
 	}
 
