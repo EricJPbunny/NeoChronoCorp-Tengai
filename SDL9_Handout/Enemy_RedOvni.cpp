@@ -20,7 +20,7 @@ Enemy_RedOvni::Enemy_RedOvni(int x, int y, int type) :Enemy(x, y, type)
 
 	fly.speed = App->enemies->speed;
 
-	movement.PushBack({ -0.4f, 0.0f }, 90,&fly);
+	movement.PushBack({ -0.7f, 0.0f }, 90,&fly);
 	
 	animation = &fly;
 	collider = App->collision->AddCollider({ 0, 0, 40, 30 }, COLLIDER_TYPE::COLLIDER_REDOVNI, (Module*)App->enemies);

@@ -29,7 +29,7 @@ Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 	main.speed = 0.2f;
 
 	
-	birdup.PushBack({ 0.0f, 0.0f }, 200, &idle);
+	birdup.PushBack({ -0.4f, 0.0f }, 150, &idle);
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot);
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot2);
 	birdup.PushBack({ 1.0f, 0.0f }, 3, &shot3);
@@ -40,7 +40,7 @@ Enemy_Bird::Enemy_Bird(int x, int y, int type) :Enemy(x, y, type)
 	birdup.PushBack({ 0.2f, 1.0f }, 300, &idle);
 
 
-	birddown.PushBack({ 0.0f, 0.0f }, 200, &idle);
+	birddown.PushBack({ -0.4f, 0.0f }, 150, &idle);
 	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot);
 	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot2);
 	birddown.PushBack({ 1.0f, 0.0f }, 3, &shot3);
