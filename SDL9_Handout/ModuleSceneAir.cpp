@@ -103,6 +103,26 @@ bool ModuleSceneAir::Start()
 	destroyed_ship.h = 439;
 	destroyed_ship.w = 629;
 
+	BigSkyTwo.x = 582;
+	BigSkyTwo.y = 910;
+	BigSkyTwo.h = 114;
+	BigSkyTwo.w = 320;
+
+	BigSkyThree.x = 582;
+	BigSkyThree.y = 686;
+	BigSkyThree.h = 180;
+	BigSkyThree.w = 319;
+
+	BigSkyParalaxOne.x = 582;
+	BigSkyParalaxOne.y = 882;
+	BigSkyParalaxOne.h = 28;
+	BigSkyParalaxOne.w = 320;
+
+	BigSkyParalaxTwo.x = 582;
+	BigSkyParalaxTwo.y = 866;
+	BigSkyParalaxTwo.h = 16;
+	BigSkyParalaxTwo.w = 320;
+
 
 	//startup
 	App->player2->Enable();
@@ -231,13 +251,23 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (FloorThree.w * i), 190, &FloorThree, bg_speed_default * 6);
 		App->render->Blit(graphics, (FloorFour.w * i), 200, &FloorFour, bg_speed_default * 7);
 		App->render->Blit(graphics, (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
-		App->render->Blit(graphics, (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
 	}
+	for (int i = 0; i < 20; ++i) {
+		App->render->Blit(graphics, (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
+		App->render->Blit(graphics, (BigSkyTwo.w * i), -505, &BigSkyTwo, bg_speed_default * 3);
+		App->render->Blit(graphics, (BigSkyParalaxOne.w * i), -533, &BigSkyParalaxOne, bg_speed_default * 4);
+		App->render->Blit(graphics, (BigSkyParalaxTwo.w * i), -549, &BigSkyParalaxTwo, bg_speed_default * 5);
+		App->render->Blit(graphics, (BigSkyThree.w * i), -729, &BigSkyThree, bg_speed_default * 3);
+	}
+
 
 	//Y axis movement flags
 
 	if (App->render->camera.x > 2500) {
 		speedy = -3;
+	}
+	if (App->render->camera.y < -2187) {
+		speedy = 0;
 	}
 
 	//   SHIP & SHIP FLAGS

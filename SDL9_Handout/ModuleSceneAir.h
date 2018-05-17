@@ -35,7 +35,7 @@ public:
 	SDL_Texture* mid = nullptr;
 	SDL_Texture* mid1 = nullptr;
 	SDL_Texture* end = nullptr;
-	SDL_Rect MountainBg, SkyOne, SkyTwo, SkyThree, SkyFour, FloorOne, FloorTwo, FloorThree, FloorFour, FloorFive, BigSky, BigSkyTwo, BigSkyThree, exterior_ship;
+	SDL_Rect MountainBg, SkyOne, SkyTwo, SkyThree, SkyFour, FloorOne, FloorTwo, FloorThree, FloorFour, FloorFive, BigSky, BigSkyTwo, BigSkyThree, exterior_ship,BigSkyParalaxOne, BigSkyParalaxTwo;
 	SDL_Rect destroyed_ship;
 	SDL_Rect fader, fademid;
 	float posx = 7000, posy = -480, grassy = 185;
