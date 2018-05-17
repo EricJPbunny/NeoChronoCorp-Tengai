@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
+#include "ModulePlayer3.h"
 #include "ModuleAudio.h"
 #include "ModuleUI.h"
 #include "ModuleSceneAir.h"
@@ -234,7 +235,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Kill Green Ovni
-			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
 
 				num_ovni++;
 
@@ -256,16 +257,19 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				{
 					App->ui->score_sho += 200;
 				}
+				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)
+				{
+					App->ui->score_junis += 200;
+				}
 
 			}
 
 			//Coin
 			if ((c2->type == COLLIDER_TYPE::COLLIDER_HITBOX || c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2) && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
 				srand(time(NULL));
-
+				typeofcoin = rand() % 5 + 1;
 				if (c2 == App->player->hitbox) {
 
-					typeofcoin = rand() % 5 + 1;
 					switch (typeofcoin) {
 					case 0:
 						App->particles->coin_100.speed.x = speed;
@@ -324,7 +328,6 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				if (c2 == App->player2->hitbox) {
 
-					typeofcoin = rand() % 5 + 1;
 					switch (typeofcoin) {
 					case 0:
 						App->particles->coin_100.speed.x = speed;
@@ -380,7 +383,68 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						App->ui->score_sho += 4000;
 						delete enemies[i];
 						enemies[i] = nullptr;
+						break;
+					}
+				}
 
+				if (c2 == App->player3->hitbox) {
+
+					switch (typeofcoin) {
+					case 0:
+						App->particles->coin_100.speed.x = speed;
+						App->particles->coin_100.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_100, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_junis += 100;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 1:
+						App->particles->coin_200.speed.x = speed;
+						App->particles->coin_200.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_200, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_junis += 200;
+						break;
+						delete enemies[i];
+						enemies[i] = nullptr;
+
+					case 2:
+						App->particles->coin_500.speed.x = speed;
+						App->particles->coin_500.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_500, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_junis += 500;
+						break;
+						delete enemies[i];
+						enemies[i] = nullptr;
+					case 3:
+						App->particles->coin_1000.speed.x = speed;
+						App->particles->coin_1000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_1000, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_junis += 1000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 4:
+						App->particles->coin_2000.speed.x = speed;
+						App->particles->coin_2000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_2000, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_junis += 2000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
+					case 5:
+						App->particles->coin_4000.speed.x = speed;
+						App->particles->coin_4000.speed.y = -2;
+						App->particles->AddParticle(App->particles->coin_4000, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
+
+						App->ui->score_junis += 4000;
+						delete enemies[i];
+						enemies[i] = nullptr;
+						break;
 					}
 				}
 
@@ -436,7 +500,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Kill ninja
-			if (c1->type == COLLIDER_TYPE::COLLIDER_NINJA && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_NINJA && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
 				ninja_life++;
 				if (ninja_life == 1) {
 					App->particles->AddParticle(App->particles->spark, enemies[i]->position.x, enemies[i]->position.y);
@@ -453,6 +517,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					{
 						App->ui->score_sho += 200;
 					}
+					if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)
+					{
+						App->ui->score_junis += 200;
+					}
 					delete enemies[i];
 					enemies[i] = nullptr;
 					ninja_life = 0;
@@ -460,7 +528,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Enemy Drop Power Up
-			if (c1->type == COLLIDER_TYPE::COLLIDER_REDOVNI && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_REDOVNI && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
 				App->audio->PlaySoundEffects(fx_death);
 				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 				AddEnemy(ENEMY_TYPES::POWERUP, enemies[i]->position.x, enemies[i]->position.y);
@@ -471,6 +539,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)
 				{
 					App->ui->score_sho += 200;
+				}
+				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)
+				{
+					App->ui->score_junis += 200;
 				}
 				delete enemies[i];
 				enemies[i] = nullptr;

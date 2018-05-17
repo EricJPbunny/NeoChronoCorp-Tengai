@@ -197,10 +197,13 @@ update_status ModulePlayer3::Update()
 			aux1++;
 			switch (aux1) {
 			case 0:
+				App->particles->AddParticle(App->particles->kunai, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
 				break;
 			case 1:
+				App->particles->AddParticle(App->particles->kunai1, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
 				break;
 			case 2:
+				App->particles->AddParticle(App->particles->kunai2, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
 				aux1 = 0;
 				break;
 			}
@@ -267,7 +270,7 @@ update_status ModulePlayer3::Update()
 
 void ModulePlayer3::OnCollision(Collider* c1, Collider* c2)
 {
-	
+
 }
 
 void ModulePlayer3::CheckState()

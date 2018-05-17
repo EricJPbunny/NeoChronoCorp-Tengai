@@ -20,12 +20,14 @@ enum PARTICLE_TYPE
 	PARTICLE_NONE,
 	PARTICLE_SHOT,
 	PARTICLE_SHOT_2,
+	PARTICLE_SHOT_3,
 	PARTICLE_COIN,
 	PLAYER_ENEMY,
 	PLAYER_REDOVNI,
 	PLAYER_NINJA,
 	PARTICLE_POWER_UP_KOYORI,
 	PARTICLE_POWER_UP_SHO,
+	PARTICLE_POWER_UP_JUNIS,
 	PARTICLE_POWER_DOWN,
 	PARTICLE_SHURIKEN,
 
@@ -84,6 +86,7 @@ public:
 	Particle power_up, power_down;
 	Particle coin_100, coin_200, coin_500, coin_1000, coin_2000, coin_4000;
 	Particle shuriken;
+	Particle kunai, kunai1, kunai2;
 
 	bool timer = false;
 	int current_time = 1200, time_on_entry = 0;

@@ -95,7 +95,7 @@ update_status ModuleUI::Update()
 	//Draw UI Score
 	sprintf_s(player1_score, 10, "%1d", score_koyori);
 	sprintf_s(player2_score, 10, "%1d", score_sho);
-	sprintf_s(player3_score, 10, "&1d", score_junis);
+	sprintf_s(player3_score, 10, "%1d", score_junis);
 
 	sprintf_s(time_text, 2, "%1d", time);
 	

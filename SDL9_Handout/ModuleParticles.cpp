@@ -217,6 +217,21 @@ ModuleParticles::ModuleParticles()
 	shuriken.anim.loop = true;
 	shuriken.life = 1400;
 
+	//Junis Bullets
+	kunai.anim.PushBack({ 88,95,31,9 });
+	kunai.speed.x = 8;
+	kunai.anim.loop = true;
+	kunai.life = 2000;
+
+	kunai1.anim.PushBack({ 88,107,31,9 });
+	kunai1.speed.x = 8;
+	kunai1.anim.loop = true;
+	kunai1.life = 2000;
+
+	kunai2.anim.PushBack({ 88,118,31,9 });
+	kunai2.speed.x = 8;
+	kunai2.anim.loop = true;
+	kunai2.life = 2000;
 
 }
 
@@ -311,23 +326,24 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if(collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			if (particle_type == PARTICLE_SHOT) {
-				
 				App->audio->PlaySoundEffects(shoot_audio);
 			}
 			if (particle_type == PARTICLE_SHOT_2) {
-				
 				App->audio->PlaySoundEffects(shoot_sho);
 			}
+			if (particle_type == PARTICLE_SHOT_3) {
+				//App->audio->PlaySoundEffects(shoot_junis);
+			}
 			if (particle_type == PARTICLE_POWER_UP_KOYORI) {
-				
 				App->audio->PlaySoundEffects(power_up_koyori_fx);
 			}
 			if (particle_type == PARTICLE_POWER_UP_SHO) {
-				
 				App->audio->PlaySoundEffects(power_up_sho_fx);
 			}
+			if (particle_type == PARTICLE_POWER_UP_JUNIS) {
+				//App->audio->PlaySoundEffects(power_up_junis_fx);
+			}
 			if (particle_type == PARTICLE_COIN) {
-				
 				App->audio->PlaySoundEffects(coin_fx);
 			}
 			active[i] = p;
