@@ -268,185 +268,111 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX  && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
 				srand(time(NULL));
 				typeofcoin = rand() % 6;
-				if (c2 == App->player->hitbox) {
 
-					switch (typeofcoin) {
-					case 0:
-						App->particles->coin_100.speed.x = speed;
-						App->particles->coin_100.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_100, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
+				switch (typeofcoin) {
+				case 0:
+					coin_type = App->particles->coin_100;
+					if (c2 == App->player->hitbox) {
 						App->ui->score_koyori += 100;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 1:
-						App->particles->coin_200.speed.x = speed;
-						App->particles->coin_200.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_200, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-						App->ui->score_koyori += 200;
-
-						break;
-						delete enemies[i];
-						enemies[i] = nullptr;
-
-					case 2:
-						App->particles->coin_500.speed.x = speed;
-						App->particles->coin_500.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_500, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-						App->ui->score_koyori += 500;
-
-						break;
-						delete enemies[i];
-						enemies[i] = nullptr;
-					case 3:
-						App->particles->coin_1000.speed.x = speed;
-						App->particles->coin_1000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_1000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-						App->ui->score_koyori += 1000;
-
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 4:
-						App->particles->coin_2000.speed.x = speed;
-						App->particles->coin_2000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_2000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-						App->ui->score_koyori += 2000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 5:
-						App->particles->coin_4000.speed.x = speed;
-						App->particles->coin_4000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_4000, App->player->position.x, App->player->position.y, COLLIDER_NONE, PARTICLE_COIN);
-						App->ui->score_koyori += 4000;
-
-						delete enemies[i];
-						enemies[i] = nullptr;
-
+						pos = App->player->position;
 					}
-				}
-				if (c2 == App->player2->hitbox) {
-
-					switch (typeofcoin) {
-					case 0:
-						App->particles->coin_100.speed.x = speed;
-						App->particles->coin_100.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_100, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
+					if (c2 == App->player2->hitbox) {
 						App->ui->score_sho += 100;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 1:
-						App->particles->coin_200.speed.x = speed;
-						App->particles->coin_200.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_200, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_sho += 200;
-						break;
-						delete enemies[i];
-						enemies[i] = nullptr;
-
-					case 2:
-						App->particles->coin_500.speed.x = speed;
-						App->particles->coin_500.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_500, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_sho += 500;
-						break;
-						delete enemies[i];
-						enemies[i] = nullptr;
-					case 3:
-						App->particles->coin_1000.speed.x = speed;
-						App->particles->coin_1000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_1000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_sho += 1000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 4:
-						App->particles->coin_2000.speed.x = speed;
-						App->particles->coin_2000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_2000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_sho += 2000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 5:
-						App->particles->coin_4000.speed.x = speed;
-						App->particles->coin_4000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_4000, App->player2->position.x, App->player2->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_sho += 4000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
+						pos = App->player2->position;
 					}
-				}
-
-				if (c2 == App->player3->hitbox) {
-
-					switch (typeofcoin) {
-					case 0:
-						App->particles->coin_100.speed.x = speed;
-						App->particles->coin_100.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_100, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
+					if (c2 == App->player3->hitbox) {
 						App->ui->score_junis += 100;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 1:
-						App->particles->coin_200.speed.x = speed;
-						App->particles->coin_200.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_200, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_junis += 200;
-						break;
-						delete enemies[i];
-						enemies[i] = nullptr;
-
-					case 2:
-						App->particles->coin_500.speed.x = speed;
-						App->particles->coin_500.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_500, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_junis += 500;
-						break;
-						delete enemies[i];
-						enemies[i] = nullptr;
-					case 3:
-						App->particles->coin_1000.speed.x = speed;
-						App->particles->coin_1000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_1000, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_junis += 1000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 4:
-						App->particles->coin_2000.speed.x = speed;
-						App->particles->coin_2000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_2000, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_junis += 2000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
-					case 5:
-						App->particles->coin_4000.speed.x = speed;
-						App->particles->coin_4000.speed.y = -2;
-						App->particles->AddParticle(App->particles->coin_4000, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_COIN);
-
-						App->ui->score_junis += 4000;
-						delete enemies[i];
-						enemies[i] = nullptr;
-						break;
+						pos = App->player3->position;
 					}
+					break;
+
+				case 1:
+					coin_type = App->particles->coin_200;
+					if (c2 == App->player->hitbox) {
+						App->ui->score_koyori += 200;
+						pos = App->player->position;
+					}
+					if (c2 == App->player2->hitbox) {
+						App->ui->score_sho += 200;
+						pos = App->player2->position;
+					}
+					if (c2 == App->player3->hitbox) {
+						App->ui->score_junis += 200;
+						pos = App->player3->position;
+					}
+					break;
+
+				case 2:
+					coin_type = App->particles->coin_500;
+					if (c2 == App->player->hitbox) {
+						App->ui->score_koyori += 500;
+						pos = App->player->position;
+					}
+					if (c2 == App->player2->hitbox) {
+						App->ui->score_sho += 500;
+						pos = App->player2->position;
+					}
+					if (c2 == App->player3->hitbox) {
+						App->ui->score_junis += 500;
+						pos = App->player3->position;
+					}
+					break;
+
+				case 3:
+					coin_type = App->particles->coin_1000;
+					if (c2 == App->player->hitbox) {
+						App->ui->score_koyori += 1000;
+						pos = App->player->position;
+					}
+					if (c2 == App->player2->hitbox) {
+						App->ui->score_sho += 1000;
+						pos = App->player2->position;
+					}
+					if (c2 == App->player3->hitbox) {
+						App->ui->score_junis += 1000;
+						pos = App->player3->position;
+					}
+					break;
+
+				case 4:
+					coin_type = App->particles->coin_2000;
+					if (c2 == App->player->hitbox) {
+						App->ui->score_koyori += 2000;
+						pos = App->player->position;
+					}
+					if (c2 == App->player2->hitbox) {
+						App->ui->score_sho += 2000;
+						pos = App->player2->position;
+					}
+					if (c2 == App->player3->hitbox) {
+						App->ui->score_junis += 2000;
+						pos = App->player3->position;
+					}
+					break;
+
+				case 5:
+					coin_type = App->particles->coin_4000;
+					if (c2 == App->player->hitbox) {
+						App->ui->score_koyori += 4000;
+						pos = App->player->position;
+					}
+					if (c2 == App->player2->hitbox) {
+						App->ui->score_sho += 4000;
+						pos = App->player2->position;
+					}
+					if (c2 == App->player3->hitbox) {
+						App->ui->score_junis += 4000;
+						pos = App->player3->position;
+					}
+					break;
+
 				}
+
+				coin_type.speed.x = speed;
+				coin_type.speed.y = -2;
+				App->particles->AddParticle(coin_type, pos.x, pos.y, COLLIDER_NONE, PARTICLE_COIN);
+				delete enemies[i];
+				enemies[i] = nullptr;
 
 			}
 

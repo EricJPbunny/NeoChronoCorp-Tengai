@@ -5,6 +5,7 @@
 #include "Enemy_GreenOvni.h"
 #include "Enemy_RedOvni.h"
 #include "Enemy_Ninja.h"
+#include "ModuleParticles.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
 #define MAX_ENEMIES 100
@@ -74,6 +75,7 @@ private:
 	SDL_Texture* sprites;
 	SDL_Texture* puSprites;
 	Particle coin_type;
+	fPoint pos;
 
 	int ninja_life = 0;
 	int num_ovni = 0;
