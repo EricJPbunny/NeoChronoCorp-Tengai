@@ -73,6 +73,7 @@ private:
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;
 	SDL_Texture* puSprites;
+	Particle coin_type;
 
 	int ninja_life = 0;
 	int num_ovni = 0;

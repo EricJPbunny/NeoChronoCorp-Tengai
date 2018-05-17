@@ -114,7 +114,7 @@ bool ModulePlayerTwo::Start()
 	player_death = App->textures->Load("assets/sprite/Death_Player.png");
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
-	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX_2);
+	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX);
 
 	position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
 	position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
