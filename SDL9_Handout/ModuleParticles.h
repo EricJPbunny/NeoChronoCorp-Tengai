@@ -93,6 +93,10 @@ public:
 
 	bool timer_2 = false;
 	int current_time_2 = 1200, time_on_entry_2 = 0;
+
+	bool timer_3 = false;
+	int current_time_3 = 1200, time_on_entry_3 = 0;
+
 };
 
 #endif // __MODULEPARTICLES_H__

@@ -308,9 +308,6 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_HITBOX: //cyan
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 232, alpha);
 			break;
-		case COLLIDER_HITBOX_2: //purple
-			App->render->DrawQuad(colliders[i]->rect, 143, 0, 255, alpha);
-			break;
 		case COLLIDER_TRIGGER: //dark pink
 			App->render->DrawQuad(colliders[i]->rect, 255, 105, 180, alpha);
 		}

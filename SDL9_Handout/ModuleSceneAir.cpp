@@ -329,10 +329,16 @@ update_status ModuleSceneAir::Update()
 	{
 		if (!god_mode)
 		{
-			App->player->hitbox->SetPos(-100, -100);
-			if (App->player2->IsEnabled())
-			App->player2->hitbox->SetPos(-100, -100);
-			god_mode = true;
+			if (App->player->IsEnabled()) {
+				App->player->hitbox->SetPos(-100, -100);
+			}
+			if (App->player2->IsEnabled()) {
+				App->player2->hitbox->SetPos(-100, -100);
+			}
+			if (App->player3->IsEnabled()) {
+				App->player3->hitbox->SetPos(-100, -100);
+			}
+				god_mode = true;
 		}
 		else god_mode = false;
 	}

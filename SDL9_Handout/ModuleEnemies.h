@@ -76,6 +76,7 @@ private:
 	SDL_Texture* puSprites;
 	Particle coin_type;
 	fPoint pos;
+	PARTICLE_TYPE particle_type = PARTICLE_NONE;
 
 	int ninja_life = 0;
 	int num_ovni = 0;

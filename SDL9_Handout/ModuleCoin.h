@@ -9,7 +9,6 @@
 
 enum pu_type
 {
-
 	coin,
 	ult
 };

@@ -7,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
+#include "ModulePlayer3.h"
 #include "ModuleAudio.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
@@ -363,37 +364,52 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			//Enemy Shot collide Player
 			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
 			{
-				if (timer) {
-					time_on_entry = SDL_GetTicks();
-					timer = false;
+				if (c2 == App->player->hitbox) {
+					if (timer) {
+						time_on_entry = SDL_GetTicks();
+						timer = false;
+					}
+					current_time = SDL_GetTicks() - time_on_entry;
+					if (current_time > 1000) {
+						App->player->explosion = true;
+						App->audio->PlaySoundEffects(App->enemies->fx_death);
+						App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y);
+						App->audio->PlaySoundEffects(koyori_death);
+						App->ui->num_life_koyori--;
+						timer = true;
+					}
+					App->player->state = DEATH;
 				}
-				current_time = SDL_GetTicks() - time_on_entry;
-				if (current_time > 1000) {
-					App->player->explosion = true;
-					App->audio->PlaySoundEffects(App->enemies->fx_death);
-					App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y);
-					App->audio->PlaySoundEffects(koyori_death);
-					App->ui->num_life_koyori--;
-					timer = true;
+				if (c2 == App->player2->hitbox) {
+					if (timer_2) {
+						time_on_entry_2 = SDL_GetTicks();
+						timer_2 = false;
+					}
+					current_time_2 = SDL_GetTicks() - time_on_entry_2;
+					if (current_time_2 > 1000) {
+						App->player2->explosion = true;
+						App->audio->PlaySoundEffects(App->enemies->fx_death);
+						App->audio->PlaySoundEffects(sho_death);
+						App->ui->num_life_sho--;
+						timer_2 = true;
+					}
+					App->player2->state = DEATH_2;
 				}
-				App->player->state = DEATH;
-			}
-
-			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX_2 && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
-			{
-				if (timer_2) {
-					time_on_entry_2 = SDL_GetTicks();
-					timer_2 = false;
+				if (c2 == App->player3->hitbox) {
+					if (timer_3) {
+						time_on_entry_3 = SDL_GetTicks();
+						timer_3 = false;
+					}
+					current_time_3 = SDL_GetTicks() - time_on_entry_3;
+					if (current_time_3 > 1000) {
+						App->player3->explosion = true;
+						App->audio->PlaySoundEffects(App->enemies->fx_death);
+						//App->audio->PlaySoundEffects(junis_death);
+						App->ui->num_life_junis--;
+						timer_3 = true;
+					}
+					App->player2->state = DEATH_2;
 				}
-				current_time_2 = SDL_GetTicks() - time_on_entry_2;
-				if (current_time_2 > 1000) {
-					App->player2->explosion = true;
-					App->audio->PlaySoundEffects(App->enemies->fx_death);
-					App->audio->PlaySoundEffects(sho_death);
-					App->ui->num_life_sho--;
-					timer_2 = true;
-				}
-				App->player2->state = DEATH_2;
 			}
 			//AddParticle(explosion, active[i]->position.x, active[i]->position.y);
 			delete active[i];
