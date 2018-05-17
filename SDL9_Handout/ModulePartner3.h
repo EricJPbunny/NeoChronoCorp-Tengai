@@ -11,13 +11,11 @@ struct SDL_Texture;
 
 enum partner_state_3 {
 	NOT_EXISTING_3,
-	LEVEL_ONE_3,
-	LEVEL_ONE_CHARGE_3,
-	LEVEL_TWO_3,
-	LEVEL_THREE_3,
-	LEVEL_FOUR_3,
 	SPAWN_3,
+	IDLE_SOCRATES,
+	CHARGING,
 	FIRE_3,
+	DECHARGING,
 	DESPAWN_3,
 };
 
@@ -39,7 +37,7 @@ public:
 	Animation* current_animation = nullptr;
 	Animation spawn;
 	Animation iddle;
-	Animation charging;
+	Animation charging, decharging;
 	Animation spawn_reverse;
 	Animation pre_shot, shot;
 	fPoint position;

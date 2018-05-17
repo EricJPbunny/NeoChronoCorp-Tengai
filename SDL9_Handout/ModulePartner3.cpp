@@ -67,6 +67,17 @@ ModulePartner3::ModulePartner3()
 	shot.speed = 0.15f;
 
 
+	decharging.PushBack({8,296,74,42});
+	decharging.PushBack({92,300,68,39});
+	decharging.PushBack({169,302,63,36});
+	decharging.PushBack({243,303,59,33});
+	decharging.PushBack({311,304,54,31});
+	decharging.PushBack({372,305,50,28});
+	decharging.PushBack({429,305,45,25});
+	decharging.PushBack({14,346,40,23});
+	decharging.speed = 0.15;
+
+
 }
 
 ModulePartner3::~ModulePartner3()
@@ -163,18 +174,14 @@ void ModulePartner3::CheckState()
 	case SPAWN_3:
 		if (spawn.Finished()) {
 			spawn.Reset();
-			state = LEVEL_ONE_3;
+			state = IDLE_SOCRATES;
 		}
 		break;
 
-	case LEVEL_ONE_3:
+	case IDLE_SOCRATES:
 		if (App->player3->power_up == 0) 
 		{
 			state = NOT_EXISTING_3;
-		}
-		if (App->player3->power_up == 2) 
-		{
-			state = LEVEL_TWO_3;
 		}
 
 		//make it charge
@@ -186,7 +193,7 @@ void ModulePartner3::CheckState()
 			current_time = SDL_GetTicks() - time_on_entry;
 			if (current_time > 300) {
 				time_shoot = true;
-				state = LEVEL_ONE_CHARGE_3;
+				state = CHARGING;
 			}
 		}
 		if (release_space_3) {
@@ -194,94 +201,13 @@ void ModulePartner3::CheckState()
 		}
 		break;
 
-	case LEVEL_ONE_CHARGE_3:
+	case CHARGING:
 		//make it shot fire while pressing a key
 		if (release_space_3) {
 			spawn.Reset();
 			spawn_reverse.Reset();
 			charged_shoot = true;
 			state = FIRE_3;
-		}
-		break;
-
-	case LEVEL_TWO_3:
-		if (App->player3->power_up <= 1)
-		{
-			state = LEVEL_ONE_3;
-		}
-
-		if (App->player3->power_up == 3)
-		{
-			state = LEVEL_THREE_3;
-		}
-
-		//make it charge
-		if (pressed_space_3) {
-			if (time_shoot) {
-				time_on_entry = SDL_GetTicks();
-				time_shoot = false;
-			}
-			current_time = SDL_GetTicks() - time_on_entry;
-			if (current_time > 300) {
-				time_shoot = true;
-				state = LEVEL_ONE_CHARGE_3;
-			}
-		}
-		if (release_space_3) {
-			time_shoot = true;
-		}
-		break;
-
-
-	case LEVEL_THREE_3:
-		if (App->player3->power_up <= 2)
-		{
-			state = LEVEL_TWO_3;
-		}
-
-		if (App->player3->power_up == 4)
-		{
-			state = LEVEL_FOUR_3;
-		}
-
-		//make it charge
-		if (pressed_space_3) {
-			if (time_shoot) {
-				time_on_entry = SDL_GetTicks();
-				time_shoot = false;
-			}
-			current_time = SDL_GetTicks() - time_on_entry;
-			if (current_time > 300) {
-				time_shoot = true;
-				state = LEVEL_ONE_CHARGE_3;
-			}
-		}
-		if (release_space_3) {
-			time_shoot = true;
-		}
-		break;
-
-
-	case LEVEL_FOUR_3:
-		if (App->player3->power_up <= 3)
-		{
-			state = LEVEL_THREE_3;
-		}
-
-		//make it charge
-		if (pressed_space_3) {
-			if (time_shoot) {
-				time_on_entry = SDL_GetTicks();
-				time_shoot = false;
-			}
-			current_time = SDL_GetTicks() - time_on_entry;
-			if (current_time > 300) {
-				time_shoot = true;
-				state = LEVEL_ONE_CHARGE_3;
-			}
-		}
-		if (release_space_3) {
-			time_shoot = true;
 		}
 		break;
 
@@ -296,11 +222,22 @@ void ModulePartner3::CheckState()
 			time_socrates = false;
 		}
 		current_time = SDL_GetTicks() - time_on_entry;
-		if (current_time > 6500) {
-			state = DESPAWN_3;
+		if (current_time > 4000) {
+			state = DECHARGING;
 		}
 		break;
 
+
+	case DECHARGING:
+		if (App->player3->power_up == 0) {
+			state = NOT_EXISTING_3;
+		}
+		if (decharging.Finished()) {
+			decharging.Reset();
+			state = DESPAWN_3;
+		}
+		charged_shoot = true;
+		break;
 
 	case DESPAWN_3:
 		if (spawn_reverse.Finished()) {
@@ -328,12 +265,12 @@ void ModulePartner3::PerformActions()
 		exist = true;
 		break;
 
-	case LEVEL_ONE_3:
+	case IDLE_SOCRATES:
 		current_animation = &iddle;
 		exist = true;
 		break;
 
-	case LEVEL_ONE_CHARGE_3:
+	case CHARGING:
 		if (!spawn_reverse.Finished()) {
 			current_animation = &spawn_reverse;
 		}
@@ -346,20 +283,6 @@ void ModulePartner3::PerformActions()
 		}
 		break;
 
-	case LEVEL_TWO_3:
-		current_animation = &iddle;
-		exist = true;
-		break;
-
-	case LEVEL_THREE_3:
-		current_animation = &iddle;
-		exist = true;
-		break;
-
-	case LEVEL_FOUR_3:
-		current_animation = &iddle;
-		exist = true;
-		break;
 
 	case FIRE_3:
 		current_animation = &pre_shot;
@@ -368,6 +291,12 @@ void ModulePartner3::PerformActions()
 
 		}
 		break;
+
+
+	case DECHARGING:
+		current_animation = &decharging;
+		break;
+
 
 	case DESPAWN_3:
 		current_animation = &spawn_reverse;
