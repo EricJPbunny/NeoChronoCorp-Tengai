@@ -54,7 +54,8 @@ public:
 	int current_time = 0;
 	bool charged_shoot = false;
 
-
+	int increaser = 0;
+	bool multiple_shot = false;
 };
 
 #endif
