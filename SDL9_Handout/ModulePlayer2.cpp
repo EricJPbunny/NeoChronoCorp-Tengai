@@ -307,10 +307,10 @@ update_status ModulePlayerTwo::Update()
 		position.x = (SCREEN_WIDTH + App->render->camera.x / SCREEN_SIZE) - 33;
 	}
 	if (coll->CheckCollision(App->scene_air->coll_up->rect)) {
-		position.y = 52;
+		position.y = 52 + App->render->camera.y / SCREEN_SIZE;
 	}
 	if (coll->CheckCollision(App->scene_air->coll_down->rect)) {
-		position.y = SCREEN_HEIGHT - 4;
+		position.y = SCREEN_HEIGHT - 4 + App->render->camera.y / SCREEN_SIZE;
 	}
 	return UPDATE_CONTINUE;
 }

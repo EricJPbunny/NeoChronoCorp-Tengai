@@ -301,7 +301,8 @@ update_status ModuleSceneAir::Update()
 	framerateset++;
 	if (framerateset >= 2) {
 		App->render->camera.y += speedy;
-		App->player->position.y += speedy / SCREEN_SIZE;
+		App->player2->position.y += speedy / SCREEN_SIZE;
+		App->player3->position.y += speedy / SCREEN_SIZE;
 		coll_down->SetPos(0, (App->render->camera.y / SCREEN_SIZE) + SCREEN_HEIGHT - 4);
 		coll_up->SetPos(0, App->render->camera.y / SCREEN_SIZE);
 		framerateset = 0;
