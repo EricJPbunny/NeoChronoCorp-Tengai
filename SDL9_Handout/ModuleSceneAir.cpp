@@ -76,17 +76,6 @@ bool ModuleSceneAir::Start()
 	FloorThree.h = 10;
 	FloorThree.w = 959;
 
-	FloorFour.x = 0;
-	FloorFour.y = 305;
-	FloorFour.h = 8;
-	FloorFour.w = 959;
-
-	FloorFive.x = 0;
-	FloorFive.y = 313;
-	FloorFive.h = 16;
-	FloorFive.w = 959;
-
-
 	BigSky.x = 0;
 	BigSky.y = 455;
 	BigSky.h = 391;
@@ -123,8 +112,19 @@ bool ModuleSceneAir::Start()
 	BigSkyParalaxTwo.h = 16;
 	BigSkyParalaxTwo.w = 320;
 
+	FloorFour.x = 0;
+	FloorFour.y = 305;
+	FloorFour.h = 8;
+	FloorFour.w = 959;
+
+	FloorFive.x = 0;
+	FloorFive.y = 313;
+	FloorFive.h = 16;
+	FloorFive.w = 959;
+
 
 	//startup
+
 	App->player2->Enable();
 	App->ui->Enable();
 	App->collision->Enable();
@@ -253,11 +253,11 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
 	}
 	for (int i = 0; i < 20; ++i) {
-		App->render->Blit(graphics, (BigSky.w * i), -391, &BigSky, bg_speed_default * 3);
+		App->render->Blit(graphics, (BigSky.w * i)-35, -391, &BigSky, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyTwo.w * i), -505, &BigSkyTwo, bg_speed_default * 3);
-		App->render->Blit(graphics, (BigSkyParalaxOne.w * i), -533, &BigSkyParalaxOne, bg_speed_default * 4);
-		App->render->Blit(graphics, (BigSkyParalaxTwo.w * i), -549, &BigSkyParalaxTwo, bg_speed_default * 5);
-		App->render->Blit(graphics, (BigSkyThree.w * i), -729, &BigSkyThree, bg_speed_default * 3);
+		App->render->Blit(graphics, (BigSkyParalaxOne.w * i), -533, &BigSkyParalaxOne, bg_speed_default * 3);
+		App->render->Blit(graphics, (BigSkyParalaxTwo.w * i), -549, &BigSkyParalaxTwo, bg_speed_default * 2);
+		App->render->Blit(graphics, (BigSkyThree.w * i), -729, &BigSkyThree, 0);
 	}
 
 
