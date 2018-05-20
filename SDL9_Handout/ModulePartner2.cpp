@@ -691,19 +691,16 @@ void ModulePartner2::PerformActions()
 	switch (state_4) {
 	case NOT_EXISTING_2:
 		current_animation_4 = &iddle;
-		LOG("I DONT EXIST!!!!");
 		exist_4 = false;
 		break;
 
 	case SPAWN_2:
 		current_animation_4 = &spawn4;
-		LOG("SPAWNING :_) LIFE IS PAIN");
 		exist_4 = true;
 		break;
 
 	case LEVEL_ONE_2:
 		current_animation_4 = &iddle;
-		LOG("JIR AI AMB!!!!");
 		exist_4 = true;
 		break;
 
@@ -721,12 +718,10 @@ void ModulePartner2::PerformActions()
 
 	case DESPAWN:
 		current_animation_4 = &spawn_reverse4;
-		LOG("GOOSBYE!!!!");
 		break;
 
 	case SHOT_2:
 		current_animation_4 = &iddle;
-		LOG("PIUM, PIUM?");
 		if (shot_delay_4)
 		{
 			shot_entry_4 = SDL_GetTicks();
