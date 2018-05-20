@@ -21,7 +21,7 @@ private:
 	Animation main;
 
 	Path birddown;
-
+	Path birdmov;
 	Path birdup;
 
 	

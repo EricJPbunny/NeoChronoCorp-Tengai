@@ -15,6 +15,7 @@
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
 #include "ModuleUI.h"
+#include "ModuleRender.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -181,6 +182,22 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 87, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 132, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1970, 177, 1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1370, (App->render->camera.y / SCREEN_SIZE) - 70, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1370, (App->render->camera.y / SCREEN_SIZE) - 30, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1370, (App->render->camera.y / SCREEN_SIZE) + 10, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1370, (App->render->camera.y / SCREEN_SIZE) + 50, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1720, (App->render->camera.y / SCREEN_SIZE) -200, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1740, (App->render->camera.y / SCREEN_SIZE) - 300, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1810, (App->render->camera.y / SCREEN_SIZE) - 180, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1830, (App->render->camera.y / SCREEN_SIZE) - 180, 3);
+
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1890, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1910, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
 
 
 	//Archers

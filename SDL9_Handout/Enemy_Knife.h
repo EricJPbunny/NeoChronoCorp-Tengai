@@ -12,6 +12,7 @@ private:
 	Animation idle;
 
 	Path diagonal;
+	Path diagonalup;
 	Path movement;
 	int type;
 
