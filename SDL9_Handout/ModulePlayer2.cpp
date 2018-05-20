@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer2.h"
 #include "ModulePartner2.h"
+#include "ModuleUlti2.h"
 #include "ModuleSceneAir.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleUI.h"
@@ -161,6 +162,7 @@ update_status ModulePlayerTwo::Update()
 	bool pressed_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 	bool shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+	bool ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN;
 
 	float speed = 2.5;
 
@@ -193,6 +195,12 @@ update_status ModulePlayerTwo::Update()
 			position.y += speed;
 		}
 
+		if (ulti_button) {
+			if (!App->ulti2->IsEnabled()) {
+				App->ulti2->timer = true;
+				App->ulti2->Enable();
+			}
+		}
 
 		if (shot_space || App->input->controller_A_button == KEY_STATE::KEY_DOWN) {
 		

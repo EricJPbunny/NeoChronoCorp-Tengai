@@ -45,7 +45,7 @@ public:
 	int framerateset = 0;
 	int aux_time = 0;
 	int increaser = 0, increaser_2 = 0;
-	bool ship_flag1=0, ship_flag2=0,ship_flag3 =0;
+	bool ship_flag1=0, ship_flag2=0,ship_flag3 =0,ship_flag4=0;
 	bool flagship_1 = true;
 	float bg_speed_default = 0.10f;
 

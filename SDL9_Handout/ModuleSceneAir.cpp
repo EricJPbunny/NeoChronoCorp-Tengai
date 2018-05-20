@@ -314,7 +314,8 @@ update_status ModuleSceneAir::Update()
 				animspeed++;
 			}
 			else {
-				App->render->Blit(graphics1, 270  - 220, 90, &exterior_ship,0.00f,0.00f);
+				App->render->Blit(graphics1, 50, 90, &exterior_ship,0.00f,0.00f);
+				animspeed = 0;
 				ship_flag3 = true;
 			}
 		}
@@ -322,9 +323,25 @@ update_status ModuleSceneAir::Update()
 	if (ship_flag3) 
 	{
 		ship_flag2 = false;
-		App->render->Blit(graphics2, 270 - 232, 59, &destroyed_ship, 0.00f, 0.00f);
+		App->render->Blit(graphics2, 270 - 232-animspeed, 59, &destroyed_ship, 0.00f, 0.00f);
+		animspeed++;
+		if (animspeed > 190) 
+		{
+			ship_flag4 = true;
+			ship_flag3 = false;
+			animspeed = 0;
+		}
 	}
-
+	if (ship_flag4) 
+	{
+		if (animspeed < 200) {
+			App->render->Blit(graphics2, -152 , 59 - animspeed, &destroyed_ship, 0.00f, 0.00f);
+			animspeed++;
+		}
+		else {
+			App->render->Blit(graphics2, -152, -141, &destroyed_ship, 0.00f, 0.00f);
+		}
+	}
 
 
 	//Enable Players
