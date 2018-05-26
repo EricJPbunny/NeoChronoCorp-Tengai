@@ -143,19 +143,36 @@ update_status ModulePartner3::Update()
 				shot_current = SDL_GetTicks() - shot_entry;
 				if (shot_current > 300) {
 					multiple_shot = true;
+					LOG("Este si peaso weabo");
 					App->particles->AddParticle(App->particles->shuriken_socrates_1, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_2, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					shot_delay = true;
 				}
 			}
-			if (multiple_shot) {
+			if (multiple_shot) 
+			{
 				increaser++;
 				if (increaser > 10) {
+					LOG("Entro el primero weh");
 					App->particles->AddParticle(App->particles->shuriken_socrates_1, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_2, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					multiple_shot = false;
+					multiple_shot_2 = true;
 					increaser = 0;
 				}
+				
+			}
+			if (multiple_shot_2)
+			{
+				increaser++;
+				if (increaser > 10) {
+					LOG("Entro entro entro MRajoy");
+					App->particles->AddParticle(App->particles->shuriken_socrates_1, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_2, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					multiple_shot_2 = false;
+					increaser = 0;
+				}
+
 			}
 		}
 		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
@@ -172,21 +189,36 @@ update_status ModulePartner3::Update()
 				shot_current = SDL_GetTicks() - shot_entry;
 				if (shot_current > 300) {
 					multiple_shot = true;
-					App->particles->AddParticle(App->particles->shuriken_socrates_3, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_3, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_4, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					shot_delay = true;
 				}
 			}
-			if (multiple_shot) {
+			if (multiple_shot) 
+			{
 				increaser++;
-				if (increaser > 10) {
+				if (increaser > 15) 
+				{
 					App->particles->AddParticle(App->particles->shuriken_socrates_3, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_4, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					multiple_shot = false;
+					multiple_shot_2 = true;
 					increaser = 0;
 				}
+				
 			}
-			
+			if (multiple_shot_2)
+			{
+				increaser++;
+				if (increaser > 10) {
+					LOG("Entro entro entro MRajoy");
+					App->particles->AddParticle(App->particles->shuriken_socrates_3, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_4, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					multiple_shot_2 = false;
+					increaser = 0;
+				}
+
+			}
 		}
 		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
 	}
@@ -202,7 +234,7 @@ update_status ModulePartner3::Update()
 				shot_current = SDL_GetTicks() - shot_entry;
 				if (shot_current > 300) {
 					multiple_shot = true;
-					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					shot_delay = true;
 				}
@@ -213,10 +245,22 @@ update_status ModulePartner3::Update()
 					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					multiple_shot = false;
+					multiple_shot_2 = true;
 					increaser = 0;
 				}
 			}
-		
+			if (multiple_shot_2)
+			{
+				increaser++;
+				if (increaser > 10) {
+					LOG("Entro entro entro MRajoy");
+					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					multiple_shot_2 = false;
+					increaser = 0;
+				}
+
+			}
 		}
 		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);
 	}
@@ -232,7 +276,8 @@ update_status ModulePartner3::Update()
 				shot_current = SDL_GetTicks() - shot_entry;
 				if (shot_current > 300) {
 					multiple_shot = true;
-					App->particles->AddParticle(App->particles->shuriken_socrates_4, position.x + 10, position.y - 26, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					shot_delay = true;
 				}
 			}
@@ -242,8 +287,21 @@ update_status ModulePartner3::Update()
 					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					multiple_shot = false;
+					multiple_shot_2 = true;
 					increaser = 0;
 				}
+			}
+			if (multiple_shot_2)
+			{
+				increaser++;
+				if (increaser > 10) {
+					LOG("Entro entro entro MRajoy");
+					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					multiple_shot_2 = false;
+					increaser = 0;
+				}
+
 			}
 		}
 		App->render->Blit(graphics, position.x + 5, position.y - 17 - r.h, &r);

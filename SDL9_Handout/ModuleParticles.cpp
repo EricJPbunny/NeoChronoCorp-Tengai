@@ -236,14 +236,14 @@ ModuleParticles::ModuleParticles()
 
 	//socrates shurikens
 	shuriken_socrates_1.anim.PushBack({132,97,8,8});
-	shuriken_socrates_1.speed.x = 8;
-	shuriken_socrates_1.speed.y = -5;
+	shuriken_socrates_1.speed.x = 3;
+	shuriken_socrates_1.speed.y = -1;
 	shuriken_socrates_1.anim.loop = true;
 	shuriken_socrates_1.life = 3000;
 
 	shuriken_socrates_2.anim.PushBack({ 132,97,8,8 });
-	shuriken_socrates_2.speed.x = 8;
-	shuriken_socrates_2.speed.y = 5;
+	shuriken_socrates_2.speed.x = 3;
+	shuriken_socrates_2.speed.y = 1;
 	shuriken_socrates_2.anim.loop = true;
 	shuriken_socrates_2.life = 3000;
 
