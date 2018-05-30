@@ -34,6 +34,9 @@ public:
 
 	int random = 0;
 	int aux = 0;
+
+	SDL_Rect ulti_collider;
+	Collider* coll;
 };
 
 #endif // __MODULEULTI2_H__
