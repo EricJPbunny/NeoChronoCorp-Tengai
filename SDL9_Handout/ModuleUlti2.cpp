@@ -79,9 +79,9 @@ update_status ModuleUlti2::Update()
 		break;
 	}
 	if (current_interval > 400) {
-		App->particles->AddParticle(sword_idle, (App->render->camera.x  / SCREEN_SIZE) + 10, (App->render->camera.y / SCREEN_SIZE) + 30 + aux, COLLIDER_PLAYER_2_SHOT);
-		App->particles->AddParticle(sword_idle, (App->render->camera.x / SCREEN_SIZE) + 15, (App->render->camera.y / SCREEN_SIZE) + 100 + aux, COLLIDER_PLAYER_2_SHOT);
-		App->particles->AddParticle(sword_idle, (App->render->camera.x / SCREEN_SIZE) + 10, (App->render->camera.y / SCREEN_SIZE) + 190 + aux, COLLIDER_PLAYER_2_SHOT);
+		App->particles->AddParticle(sword_idle, (App->render->camera.x  / SCREEN_SIZE) + 10, (App->render->camera.y / SCREEN_SIZE) + 30 + aux, COLLIDER_ULTI2);
+		App->particles->AddParticle(sword_idle, (App->render->camera.x / SCREEN_SIZE) + 15, (App->render->camera.y / SCREEN_SIZE) + 100 + aux, COLLIDER_ULTI2);
+		App->particles->AddParticle(sword_idle, (App->render->camera.x / SCREEN_SIZE) + 10, (App->render->camera.y / SCREEN_SIZE) + 190 + aux, COLLIDER_ULTI2);
 		interval = true;
 		random++;
 	}
