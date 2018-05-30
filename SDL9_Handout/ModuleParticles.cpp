@@ -465,8 +465,10 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 				}
 			}
 			//AddParticle(explosion, active[i]->position.x, active[i]->position.y);
-			delete active[i];
-			active[i] = nullptr;
+			if (active[i]->collider->type != COLLIDER_ULTI_2) {
+				delete active[i];
+				active[i] = nullptr;
+			}
 			break;
 		}
 	}

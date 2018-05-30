@@ -27,6 +27,13 @@ public:
 	bool timer = false;
 	int current_time = 0;
 	int time_on_entry = 0;
+
+	bool interval = false;
+	int current_interval = 0;
+	int interval_on_entry = 0;
+
+	int random = 0;
+	int aux = 0;
 };
 
 #endif // __MODULEULTI2_H__

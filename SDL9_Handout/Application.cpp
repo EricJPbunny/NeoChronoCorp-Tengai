@@ -71,6 +71,7 @@ bool Application::Init()
 	player->Disable();
 	player2->Disable();
 	ulti2->Disable();
+	ulti3->Disable();
 	player3->Disable();
 	partner3->Disable();
 	collision->Disable();
