@@ -14,6 +14,7 @@ private:
 	Path diagonal;
 	Path diagonalup;
 	Path movement;
+	Path updown;
 	int type;
 
 public:

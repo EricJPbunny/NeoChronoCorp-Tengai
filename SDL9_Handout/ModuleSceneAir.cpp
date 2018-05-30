@@ -190,14 +190,20 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 1370, (App->render->camera.y / SCREEN_SIZE) + 50, 3);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1720, (App->render->camera.y / SCREEN_SIZE) -200, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1740, (App->render->camera.y / SCREEN_SIZE) - 300, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1810, (App->render->camera.y / SCREEN_SIZE) - 180, 3);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1830, (App->render->camera.y / SCREEN_SIZE) - 180, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1840, (App->render->camera.y / SCREEN_SIZE) - 180, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1870, (App->render->camera.y / SCREEN_SIZE) - 300, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1910, (App->render->camera.y / SCREEN_SIZE) - 300, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1950, (App->render->camera.y / SCREEN_SIZE) - 300, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1990, (App->render->camera.y / SCREEN_SIZE) - 300, 4);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2050, (App->render->camera.y / SCREEN_SIZE) - 300, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2080, (App->render->camera.y / SCREEN_SIZE) - 300, 2);
 
 
 
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1890, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1910, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
 
 
 	//Archers
@@ -205,7 +211,8 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1070, 110);
 	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1110, 160);
 	
-
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2100, (App->render->camera.y / SCREEN_SIZE) - 400);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2180, (App->render->camera.y / SCREEN_SIZE) - 450);
 
 	// Ovnis
 

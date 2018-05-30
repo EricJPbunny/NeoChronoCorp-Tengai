@@ -21,8 +21,12 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 0.0f, 0.0f }, 140, &idle);
 	movement.PushBack({ -1.2f, 0.0f }, 1050, &idle);
 
-	diagonal.PushBack({ -0.8f, 0.7f }, 940, &idle);
+	diagonal.PushBack({ -0.8f, -0.7f }, 940, &idle);
+
 	diagonalup.PushBack({ -0.8f, -0.7f }, 940, &idle);
+
+	updown.PushBack({ -0.8f, -0.7f }, 60, &idle);
+	updown.PushBack({ -0.8f, 0.7f }, 60, &idle);
 
 	this->type = type;
 
@@ -47,6 +51,11 @@ void Enemy_Knife::Move()
 	if (type == 3) {
 		if (App->ui->enemies_movement) {
 			position = originalposition + diagonalup.GetCurrentSpeed(&animation);
+		}
+	}
+	if (type == 4) {
+		if (App->ui->enemies_movement) {
+			position = originalposition + updown.GetCurrentSpeed(&animation);
 		}
 	}
 	else {
