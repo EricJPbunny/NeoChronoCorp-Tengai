@@ -137,6 +137,9 @@
     <ClInclude Include="ModuleUlti2.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleUlti3.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -245,6 +248,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUlti2.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUlti3.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

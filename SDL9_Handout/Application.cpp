@@ -17,6 +17,7 @@
 #include "ModulePartner2.h"
 #include "ModulePartner3.h"
 #include "ModuleUlti2.h"
+#include "ModuleUlti3.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
@@ -46,6 +47,7 @@ Application::Application()
 	modules[i++] = player3 = new ModulePlayer3();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = ulti2 = new ModuleUlti2();
+	modules[i++] = ulti3 = new ModuleUlti3();
 	modules[i++] = ui = new ModuleUI();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();
