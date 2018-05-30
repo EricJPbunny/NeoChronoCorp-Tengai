@@ -230,7 +230,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Kill Green Ovni
-			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2)) {
 
 				num_ovni++;
 
@@ -248,7 +248,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				{
 					App->ui->score_koyori += 200;
 				}
-				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)
+				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2)
 				{
 					App->ui->score_sho += 200;
 				}
@@ -420,7 +420,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Kill ninja
-			if (c1->type == COLLIDER_TYPE::COLLIDER_NINJA && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_NINJA && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
 				ninja_life++;
 				if (ninja_life == 1) {
 					App->particles->AddParticle(App->particles->spark, enemies[i]->position.x, enemies[i]->position.y);
@@ -433,7 +433,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					{
 						App->ui->score_koyori += 200;
 					}
-					if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)
+					if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2)
 					{
 						App->ui->score_sho += 200;
 					}
@@ -448,7 +448,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			//Enemy Drop Power Up
-			if (c1->type == COLLIDER_TYPE::COLLIDER_REDOVNI && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
+			if (c1->type == COLLIDER_TYPE::COLLIDER_REDOVNI && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT)) {
 				App->audio->PlaySoundEffects(fx_death);
 				App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 				AddEnemy(ENEMY_TYPES::POWERUP, enemies[i]->position.x, enemies[i]->position.y);
@@ -456,7 +456,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				{
 					App->ui->score_koyori += 200;
 				}
-				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT)
+				if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2)
 				{
 					App->ui->score_sho += 200;
 				}

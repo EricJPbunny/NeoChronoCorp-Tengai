@@ -308,15 +308,12 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_ENEMY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-
 		case COLLIDER_NINJA: // green/bue
 			App->render->DrawQuad(colliders[i]->rect, 0, 204, 153, alpha);
 			break;
-
 		case COLLIDER_REDOVNI: // dark purple
 			App->render->DrawQuad(colliders[i]->rect, 51, 0, 51, alpha);
 			break;
-
 		case COLLIDER_PLAYER_SHOT: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
@@ -332,14 +329,15 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_COIN: //black
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
 			break;
-
 		case COLLIDER_HITBOX: //cyan
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 232, alpha);
 			break;
 		case COLLIDER_TRIGGER: //dark pink
 			App->render->DrawQuad(colliders[i]->rect, 255, 105, 180, alpha);
+			break;
 		case COLLIDER_ULTI2://grey
 			App->render->DrawQuad(colliders[i]->rect, 204, 204, 204, alpha);
+			break;
 		}
 	}
 }
