@@ -37,7 +37,7 @@ public:
 	SDL_Texture* mid1 = nullptr;
 	SDL_Texture* end = nullptr;
 	SDL_Rect MountainBg, SkyOne, SkyTwo, SkyThree, SkyFour, FloorOne, FloorTwo, FloorThree, FloorFour, FloorFive, BigSky, BigSkyTwo, BigSkyThree, exterior_ship,BigSkyParalaxOne, BigSkyParalaxTwo;
-	SDL_Rect destroyed_ship, inside_2;
+	SDL_Rect destroyed_ship, inside_2, grid;
 	SDL_Rect fader, fademid;
 	Animation inside;
 	Animation* current_animation_2 = nullptr;
@@ -47,8 +47,8 @@ public:
 	int speed = 3, speedy = 0, animspeed = 0;;
 	int framerateset = 0;
 	int aux_time = 0;
-	int increaser = 0, increaser_2 = 0;
-	bool ship_flag1=0, ship_flag2=0,ship_flag3 =0,ship_flag4=0;
+	int increaser = 0, increaser_2 = 0, increaser_3 = 0;
+	bool ship_flag1 = 0, ship_flag2 = 0, ship_flag3 = 0, ship_flag4 = 0, ship_flag5 = 0;
 	bool flagship_1 = true;
 	float bg_speed_default = 0.10f;
 	float speed_screw = 0;
