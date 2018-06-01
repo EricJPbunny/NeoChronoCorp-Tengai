@@ -107,6 +107,7 @@
     <ClInclude Include="ModuleSceneAir.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleSceneScore.h" />
+    <ClInclude Include="ModuleSceneSelect.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="ModuleSceneAir.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleSceneScore.cpp" />
+    <ClCompile Include="ModuleSceneSelect.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />

@@ -8,6 +8,7 @@
 #include "ModuleSceneAir.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneStart.h"
+#include "ModuleSceneSelect.h"
 #include "ModuleUI.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
@@ -35,6 +36,7 @@ Application::Application()
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_start = new ModuleSceneStart();
+	modules[i++] = scene_select = new ModuleSceneSelect();
 	modules[i++] = scene_air = new ModuleSceneAir();
 	modules[i++] = scene_score = new ModuleScore();
 	modules[i++] = enemies = new ModuleEnemies();
@@ -67,6 +69,7 @@ bool Application::Init()
 	App->ui->Disable();
 	scene_score->Disable();
 	scene_start->Disable();
+	scene_select->Disable();
 	scene_air->Disable();
 	player->Disable();
 	player2->Disable();
