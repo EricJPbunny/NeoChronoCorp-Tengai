@@ -33,7 +33,7 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 
 	this->type = type;
 
-	collider = App->collision->AddCollider({ 0, 0, 10, 10 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 40, 20 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	originalposition.y = y;
 	originalposition.x = x;

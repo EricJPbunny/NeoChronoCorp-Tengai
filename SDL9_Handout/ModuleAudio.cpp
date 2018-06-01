@@ -39,6 +39,7 @@ bool ModuleAudio::Init()
 			LOG("Audio module can't open %s", Mix_GetError());
 			ret = false;
 		}
+		Mix_AllocateChannels(32);
 	}
 	return ret;
 }
