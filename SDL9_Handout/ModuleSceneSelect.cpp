@@ -14,10 +14,15 @@
 ModuleSceneSelect::ModuleSceneSelect()
 {
 	//Select Screen
-	background.x = 0;
-	background.y = 0;
-	background.w = 320;
-	background.h = 224;
+	background_1p.x = 0;
+	background_1p.y = 0;
+	background_1p.w = 320;
+	background_1p.h = 224;
+
+	background_2p.x = 455;
+	background_2p.y = 0;
+	background_2p.w = 320;
+	background_2p.h = 224;
 
 	sho_face.x = 0;
 	sho_face.y = 224;
@@ -33,6 +38,18 @@ ModuleSceneSelect::ModuleSceneSelect()
 	sho_player.y = 354;
 	sho_player.w = 153;
 	sho_player.h = 123;
+
+	sho_sprite.PushBack({332,40,31,27});
+	sho_sprite.PushBack({ 369,40,31,27 });
+	sho_sprite.PushBack({ 406,41,31,27 });
+	sho_sprite.loop = true;
+	sho_sprite.speed = 0.30f;
+
+	junis_sprite.PushBack({ 331,7,28,27 });
+	junis_sprite.PushBack({ 373,8,28,27 });
+	junis_sprite.PushBack({ 416,9,28,27 });
+	junis_sprite.loop = true;
+	junis_sprite.speed = 0.30f;
 
 	junis_player.x = 161;
 	junis_player.y = 354;
@@ -90,8 +107,37 @@ bool ModuleSceneSelect::CleanUp()
 // Update: draw background
 update_status ModuleSceneSelect::Update()
 {
+	//Get Current Animations
+	junis_anim = junis_sprite.GetCurrentFrame();
+	sho_anim = sho_sprite.GetCurrentFrame();
+
 	//Print screen
-	App->render->Blit(graphics, 0, 0, &background);
+	if (one_player) {
+		App->render->Blit(graphics, 0, 0, &background_1p);
+		if (sho_p1) {
+			App->render->Blit(graphics, 18, 158, &ui_1p);
+			App->render->Blit(graphics, 16, 16, &sho_face);
+			App->render->Blit(graphics, 42, 121, &sho_name);
+			App->render->Blit(graphics, 146, 20, &sho_player);
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) {
+				sho_p1 = false;
+			}
+		}
+		else {
+			App->render->Blit(graphics, 65, 158, &ui_1p);
+			App->render->Blit(graphics, 18, 16, &junis_face);
+			App->render->Blit(graphics, 33, 122, &junis_name);
+			App->render->Blit(graphics, 160, 34, &junis_player);
+			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
+				sho_p1 = true;
+			}
+		}
+		App->render->Blit(graphics, 25, 172, &sho_anim);
+		App->render->Blit(graphics, 75, 172, &junis_anim);
+	}
+	else {
+		App->render->Blit(graphics, 65, 158, &ui_2p);
+	}
 
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN|| App->input->controller_START_button == KEY_STATE::KEY_DOWN) {

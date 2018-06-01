@@ -21,7 +21,13 @@ public:
 public:
 	SDL_Texture* graphics = nullptr;
 
-	SDL_Rect background, sho_face, sho_player, sho_name, junis_face, junis_player, junis_name, ui_1p, ui_2p, time;
+	SDL_Rect background_1p, background_2p, sho_face, sho_player, sho_name, junis_face, junis_player, junis_name, ui_1p, ui_2p, time;
+	Animation sho_sprite, junis_sprite;
+	SDL_Rect junis_anim;
+	SDL_Rect sho_anim;
+
+	bool one_player = true;
+	bool sho_p1 = true;
 
 };
 
