@@ -29,6 +29,15 @@ public:
 	bool one_player = true;
 	bool sho_p1 = true;
 
+	bool timer = true;
+	int current_time, time_on_entry;
+
+	char time_text[2];
+
+	int time_num = 9;
+
+	int font_time = 0;
+
 };
 
 #endif // __MODULESCENESELECT_H__
