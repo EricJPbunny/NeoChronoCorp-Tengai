@@ -257,6 +257,11 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2150, (App->render->camera.y / SCREEN_SIZE) - 450, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2450, (App->render->camera.y / SCREEN_SIZE) - 450, 1);
 
+
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3530, (App->render->camera.y / SCREEN_SIZE) + 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3670, (App->render->camera.y / SCREEN_SIZE) + 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3730, (App->render->camera.y / SCREEN_SIZE) + 400, 1);
+
 	// Ovnis
 
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 320, 30);

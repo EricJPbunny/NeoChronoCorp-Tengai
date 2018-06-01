@@ -43,7 +43,7 @@ Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 
 
 	
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 40, 50 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	animation = &idle;
 	
