@@ -75,6 +75,14 @@ public:
 	bool spin_pos = false;
 	bool death_pos = false;
 	bool explosion = false;
+
+	bool pressed_W;
+	bool pressed_A;
+	bool pressed_S;
+	bool pressed_D;
+
+	bool shot_space;
+	bool ulti_button;
 };
 
 

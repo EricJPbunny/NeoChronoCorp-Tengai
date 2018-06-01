@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer2.h"
 #include "ModulePartner2.h"
+#include "ModuleSceneSelect.h"
 #include "ModuleUlti2.h"
 #include "ModuleSceneAir.h"
 #include "ModuleFadeToBlack.h"
@@ -154,15 +155,24 @@ bool ModulePlayerTwo::CleanUp()
 // Update: draw background
 update_status ModulePlayerTwo::Update()
 {
+	if (App->scene_select->sho_p1) {
+		//Create bool variables
+		pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
+		pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEADZONE;
+		pressed_S = App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEADZONE;
+		pressed_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
-	//Create bool variables
-	bool pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
-	bool pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEADZONE;
-	bool pressed_S = App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEADZONE;
-	bool pressed_D = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
+		shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN;
+	}
+	else {
+		pressed_W = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
+		pressed_A = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEADZONE;
+		pressed_S = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEADZONE;
+		pressed_D = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
-	bool shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
-	bool ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN;
+		shot_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+	}
 
 	float speed = 2.5;
 

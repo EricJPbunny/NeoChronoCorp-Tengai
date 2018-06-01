@@ -10,6 +10,7 @@
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
 #include "ModulePlayer3.h"
+#include "ModuleSceneSelect.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"
@@ -104,31 +105,57 @@ update_status ModuleUI::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	//Player1: Sho
-	if (!game_over_sho) {
-		App->render->Blit(graphics, 10, 6, &player1, 0.00f, 0.00f);
-		App->fonts->BlitText(18, 5, font_score, player2_score);
-
-		//Life Koyori
-		for (int i = 1; i <= num_life_sho - 1; i++) {
-			App->render->Blit(graphics, 76 + life_sho.w*i, 1, &life_sho, 0.00f,0.00f);
+	if (!game_over_sho && App->player2->IsEnabled()) {
+		if (App->scene_select->sho_p1) {
+			App->render->Blit(graphics, 10, 6, &player1, 0.00f, 0.00f);
+			App->fonts->BlitText(18, 5, font_score, player2_score);
+			//Life Sho
+			for (int i = 1; i <= num_life_sho - 1; i++) {
+				App->render->Blit(graphics, 76 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
+			}
+		}
+		else {
+			App->render->Blit(graphics, 170, 5, &player2, 0.00f, 0.00f);
+			App->fonts->BlitText(180, 5, font_score, player2_score);
+			for (int i = 1; i <= num_life_sho - 1; i++) {
+				App->render->Blit(graphics, 236 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
+			}
 		}
 	}
 	else {
-		App->render->Blit(graphics, 35, 10, &r, 0.00f, 0.00f);
+		if (App->scene_select->sho_p1) {
+			App->render->Blit(graphics, 35, 10, &r, 0.00f, 0.00f);
+		}
+		else {
+			App->render->Blit(graphics, 210, 10, &r, 0.00f, 0.00f);
+		}
 	}
 
 	//Player2: Junis
 	if (!game_over_junis && App->player3->IsEnabled()) {
-		App->render->Blit(graphics, 170, 5, &player2, 0.00f, 0.00f);
-		App->fonts->BlitText(180, 5, font_score, player3_score);
-
-		//Life Sho
-		for (int i = 1; i <= num_life_junis - 1; i++) {
-			App->render->Blit(graphics, 236 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
+		if (!App->scene_select->sho_p1) {
+			App->render->Blit(graphics, 10, 6, &player1, 0.00f, 0.00f);
+			App->fonts->BlitText(18, 5, font_score, player3_score);
+			for (int i = 1; i <= num_life_junis - 1; i++) {
+				App->render->Blit(graphics, 76 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
+			}
+		}
+		else {
+			App->render->Blit(graphics, 170, 5, &player2, 0.00f, 0.00f);
+			App->fonts->BlitText(180, 5, font_score, player3_score);
+			//Life Junis
+			for (int i = 1; i <= num_life_junis - 1; i++) {
+				App->render->Blit(graphics, 236 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
+			}
 		}
 	}
 	else {
-		App->render->Blit(graphics, 210, 10, &r, 0.00f, 0.00f);
+		if (!App->scene_select->sho_p1) {
+			App->render->Blit(graphics, 35, 10, &r, 0.00f, 0.00f);
+		}
+		else {
+			App->render->Blit(graphics, 210, 10, &r, 0.00f, 0.00f);
+		}
 	}
 
 	//

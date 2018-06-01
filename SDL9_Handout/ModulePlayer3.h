@@ -76,6 +76,12 @@ public:
 	bool death_pos = false;
 	bool explosion = false;
 	
+	bool pressed_up;
+	bool pressed_left;
+	bool pressed_down;
+	bool pressed_right;
+
+	bool shot_ctrl;
 	
 
 };

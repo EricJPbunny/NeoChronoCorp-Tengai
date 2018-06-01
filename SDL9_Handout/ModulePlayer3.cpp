@@ -10,6 +10,7 @@
 #include "ModuleSceneAir.h"
 #include "ModulePlayer3.h"
 #include "ModulePartner3.h"
+#include "ModuleSceneSelect.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
 
@@ -156,14 +157,23 @@ bool ModulePlayer3::CleanUp()
 update_status ModulePlayer3::Update()
 {
 	float speed = 2.5;
-
 	//Create bool variables
-	bool pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
-	bool pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
-	bool pressed_down = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT;
-	bool pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT;
+	if (!App->scene_select->sho_p1) {
+		pressed_up = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
+		pressed_left = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEADZONE;
+		pressed_down = App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEADZONE;
+		pressed_right = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
-	bool shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+		shot_ctrl = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+	}
+	else {
+		pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
+		pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
+		pressed_down = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT;
+		pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT;
+
+		shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+	}
 
 	//Power Up Limits
 	if (power_up < 0) {

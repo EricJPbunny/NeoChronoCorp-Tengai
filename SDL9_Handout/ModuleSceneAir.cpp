@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModuleSceneSelect.h"
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
 #include "ModulePlayer3.h"
@@ -125,8 +126,12 @@ bool ModuleSceneAir::Start()
 
 
 	//startup
-
-	App->player2->Enable();
+	if (App->scene_select->sho_p1) {
+		App->player2->Enable();
+	}
+	else {
+		App->player3->Enable();
+	}
 	App->ui->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
