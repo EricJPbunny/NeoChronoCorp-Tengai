@@ -25,6 +25,8 @@ private:
 	Animation sheathe12;
 	Animation up;
 	Path movement;
+	Path movementback;
+	int type;
 
 public:
 	Enemy_Archer(int x, int y, int type);

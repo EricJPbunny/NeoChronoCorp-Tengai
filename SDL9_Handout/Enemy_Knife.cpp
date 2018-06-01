@@ -21,9 +21,12 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 0.0f, 0.0f }, 140, &idle);
 	movement.PushBack({ -1.2f, 0.0f }, 1050, &idle);
 
-	diagonal.PushBack({ -0.8f, -0.7f }, 940, &idle);
+    diagonal.PushBack({ -0.8f, 0.7f }, 860, &idle);
+	diagonal.PushBack({ -0.8f, -0.7f }, 60, &idle);
+	
 
-	diagonalup.PushBack({ -0.8f, -0.7f }, 940, &idle);
+	diagonalup.PushBack({ -0.8f, -0.7f }, 860, &idle);
+	diagonalup.PushBack({ -0.8f, 0.7f }, 60, &idle);
 
 	updown.PushBack({ -0.8f, -0.7f }, 60, &idle);
 	updown.PushBack({ -0.8f, 0.7f }, 60, &idle);
@@ -58,8 +61,4 @@ void Enemy_Knife::Move()
 			position = originalposition + updown.GetCurrentSpeed(&animation);
 		}
 	}
-	else {
-		position = originalposition + movement.GetCurrentSpeed(&animation);
-	}
-
 }
