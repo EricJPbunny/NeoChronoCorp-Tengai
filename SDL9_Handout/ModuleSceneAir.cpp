@@ -36,6 +36,7 @@ bool ModuleSceneAir::Start()
 	graphics = App->textures->Load("assets/sprite/sky_Background.png");
 	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
 	graphics2 = App->textures->Load("assets/sprite/destroyed_ship.png");
+	graphics3 = App->textures->Load("assets/sprite/inside_ship_SS.png");
 	//bacground starting rects
 
 	MountainBg.x = 0;
@@ -92,7 +93,7 @@ bool ModuleSceneAir::Start()
 	destroyed_ship.x = 1;
 	destroyed_ship.y = 1;
 	destroyed_ship.h = 439;
-	destroyed_ship.w = 629;
+	destroyed_ship.w = 1643;
 
 	BigSkyTwo.x = 582;
 	BigSkyTwo.y = 910;
@@ -123,6 +124,13 @@ bool ModuleSceneAir::Start()
 	FloorFive.y = 313;
 	FloorFive.h = 16;
 	FloorFive.w = 959;
+
+	//Animation
+	inside.PushBack({178,236,57,224});
+	inside.PushBack({1,1,305,224});
+	inside.PushBack({317,1,304,224});
+	inside.PushBack({635,1,304,224});
+	inside.speed = 0.30f;
 
 
 	//startup
@@ -346,12 +354,13 @@ update_status ModuleSceneAir::Update()
 	}
 	if (ship_flag4) 
 	{
-		if (animspeed < 200) {
+		if (animspeed < 274) {
 			App->render->Blit(graphics2, -152 , 59 - animspeed, &destroyed_ship, 0.00f, 0.00f);
 			animspeed++;
 		}
 		else {
-			App->render->Blit(graphics2, -152, -141, &destroyed_ship, 0.00f, 0.00f);
+			App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.20f, 0.00f);
+			
 		}
 	}
 
