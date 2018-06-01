@@ -22,7 +22,7 @@
 
 ModuleSceneAir::ModuleSceneAir()
 {
-	
+	current_animation_2 = NULL;
 }
 
 ModuleSceneAir::~ModuleSceneAir()
@@ -125,8 +125,12 @@ bool ModuleSceneAir::Start()
 	FloorFive.h = 16;
 	FloorFive.w = 959;
 
+	inside_2.x = 178;
+	inside_2.y = 236;
+	inside_2.h = 224;
+	inside_2.w = 57;
+
 	//Animation
-	inside.PushBack({178,236,57,224});
 	inside.PushBack({1,1,305,224});
 	inside.PushBack({317,1,304,224});
 	inside.PushBack({635,1,304,224});
@@ -293,6 +297,8 @@ bool ModuleSceneAir::CleanUp()
 	App->enemies->Disable();
 
 	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
+	App->textures->Unload(graphics3);
 
 	return true;
 }
@@ -385,7 +391,12 @@ update_status ModuleSceneAir::Update()
 			animspeed++;
 		}
 		else {
-			App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.20f, 0.00f);
+			speed_screw = 0.5f;
+			current_animation_2 = &inside;
+			SDL_Rect r = current_animation_2->GetCurrentFrame();
+			App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw)+20, App->render->camera.y / SCREEN_SIZE, &r);
+			App->render->Blit(graphics3, 0,0 ,&inside_2 , 0.05f, 0.00f);
+			App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.35f, 0.00f);
 			
 		}
 	}

@@ -37,9 +37,10 @@ public:
 	SDL_Texture* mid1 = nullptr;
 	SDL_Texture* end = nullptr;
 	SDL_Rect MountainBg, SkyOne, SkyTwo, SkyThree, SkyFour, FloorOne, FloorTwo, FloorThree, FloorFour, FloorFive, BigSky, BigSkyTwo, BigSkyThree, exterior_ship,BigSkyParalaxOne, BigSkyParalaxTwo;
-	SDL_Rect destroyed_ship;
+	SDL_Rect destroyed_ship, inside_2;
 	SDL_Rect fader, fademid;
 	Animation inside;
+	Animation* current_animation_2 = nullptr;
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
@@ -50,6 +51,7 @@ public:
 	bool ship_flag1=0, ship_flag2=0,ship_flag3 =0,ship_flag4=0;
 	bool flagship_1 = true;
 	float bg_speed_default = 0.10f;
+	float speed_screw = 0;
 
 
 	bool god_mode = false;
