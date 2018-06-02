@@ -142,6 +142,20 @@ bool ModuleSceneAir::Start()
 	inside.PushBack({635,1,304,224});
 	inside.speed = 0.30f;
 
+	piston.PushBack({ 273,325,98,119 });
+	piston.PushBack({ 389,325,98,119 });
+	piston.PushBack({ 510,325,98,119 });
+	piston.PushBack({ 630,325,98,119 });
+	piston.PushBack({ 748,323,98,119 });
+	piston.speed = 0.35f;
+
+	screw.PushBack({273,236,48,73});
+	screw.PushBack({338,236,48,73});
+	screw.PushBack({402,236,48,73});
+	screw.PushBack({470,237,48,73});
+	screw.PushBack({539,237,48,73});
+	screw.speed = 0.30f;
+
 
 	//startup
 	if (App->scene_select->sho_p1) {
@@ -401,10 +415,11 @@ update_status ModuleSceneAir::Update()
 			App->render->Blit(graphics2, -152 , 59 - animspeed, &destroyed_ship, 0.00f, 0.00f);
 			animspeed++;
 			ship_flag5 = true;
+			
 		}
 		else {
 			if (ship_flag5) {
-				if (increaser_3<2300) {
+				if (increaser_3 < 2300) {
 					speed_screw = 0.5f;
 					current_animation_2 = &inside;
 					SDL_Rect r = current_animation_2->GetCurrentFrame();
@@ -412,8 +427,19 @@ update_status ModuleSceneAir::Update()
 					App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
 					increaser_3++;
 				}
-				App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.35f, 0.00f);
-				App->render->Blit(graphics3, 858, 0, &grid, 0.35f, 0.00f);
+				if (aux < 350) {
+					App->render->Blit(graphics2, -152, -215, &destroyed_ship, speed_inside, 0.00f);
+					aux++;
+					speed_inside += 0.001;
+					
+					
+				}
+				else {
+					App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.35f, 0.00f);
+					App->render->Blit(graphics3, 858, 0, &grid, 0.35f, 0.00f);
+					
+				}
+				
 			}
 		}
 	}
