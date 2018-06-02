@@ -137,6 +137,46 @@ ModuleSceneAir::ModuleSceneAir()
 	peak3.h = 16;
 	peak3.w = 237;
 
+	big_cloud.x = 1;
+	big_cloud.y = 397;
+	big_cloud.h = 29;
+	big_cloud.w = 188;
+
+	cloud.x = 1;
+	cloud.y = 403;
+	cloud.h = 16;
+	cloud.w = 38;
+
+	cloud2.x = 49;
+	cloud2.y = 401;
+	cloud2.h = 20;
+	cloud2.w = 58;
+
+	cloud3.x = 118;
+	cloud3.y = 403;
+	cloud3.h = 15;
+	cloud3.w = 42;
+
+	cloud4.x = 170;
+	cloud4.y = 400;
+	cloud4.h = 29;
+	cloud4.w = 53;
+
+	fog.x = 252;
+	fog.y = 431;
+	fog.h = 15;
+	fog.w = 128;
+
+	fog2.x = 113;
+	fog2.y = 434;
+	fog2.h = 12;
+	fog2.w = 128;
+
+	group_cloud.x = 280;
+	group_cloud.y = 340;
+	group_cloud.h = 50;
+	group_cloud.w = 302;
+
 	//Animation
 	inside.PushBack({ 2,1,304,224 });
 	inside.PushBack({ 317,1,304,224 });
@@ -373,9 +413,15 @@ update_status ModuleSceneAir::Update()
 	for (int i = 0; i < 20; ++i) {
 		App->render->Blit(graphics, (BigSky.w * i)-35, -391, &BigSky, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyTwo.w * i), -505, &BigSkyTwo, bg_speed_default * 3);
-		App->render->Blit(graphics, (BigSkyParalaxOne.w * i), -533, &BigSkyParalaxOne, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyParalaxTwo.w * i), -549, &BigSkyParalaxTwo, bg_speed_default * 2);
+		App->render->Blit(graphics, (BigSkyParalaxOne.w * i), -533, &BigSkyParalaxOne, bg_speed_default * 3);
+		App->render->Blit(graphics, (big_cloud.w * i), -520, &big_cloud, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyThree.w * i), -729, &BigSkyThree, 0);
+		App->render->Blit(graphics, (fog2.w * i), -561, &fog2, bg_speed_default * 2);
+		App->render->Blit(graphics, (fog.w * i), -543, &fog, bg_speed_default * 3);
+		App->render->Blit(graphics, (group_cloud.w * i), -600, &group_cloud, bg_speed_default * 5);
+
+
 	}
 
 
