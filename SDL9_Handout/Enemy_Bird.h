@@ -24,6 +24,10 @@ private:
 	Path birdmov;
 	Path birdup;
 
+	int current_time, time_on_entry;
+	bool timer = true;
+	bool shooting = true;
+	
 	
 	int type;
 

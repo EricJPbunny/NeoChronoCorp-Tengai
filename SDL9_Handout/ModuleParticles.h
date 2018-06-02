@@ -89,6 +89,8 @@ public:
 	Particle kunai, kunai1, kunai2;
 	Particle shuriken_socrates_1, shuriken_socrates_2, shuriken_socrates_3, shuriken_socrates_4, shuriken_socrates_5, shuriken_socrates_6;
 	Particle fire;
+	Particle enemie_shoot, archer_shoot, bird_shoot;
+	
 
 	bool timer = false;
 	int current_time = 1200, time_on_entry = 0;

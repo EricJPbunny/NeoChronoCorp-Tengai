@@ -16,6 +16,11 @@ private:
 	Path movement;
 	Path updown;
 	int type;
+	int current_time, time_on_entry;
+	bool timer=true;
+	bool shooting = true;
+	Path particle_mov;
+
 
 public:
 	Enemy_Knife(int x, int y, int type);

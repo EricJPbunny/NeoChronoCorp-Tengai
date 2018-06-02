@@ -3,6 +3,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleUI.h"
 #include "ModuleCollision.h"
+#include "SDL\include\SDL_timer.h"
 
 
 Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
@@ -31,7 +32,10 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 	updown.PushBack({ -0.8f, -0.7f }, 60, &idle);
 	updown.PushBack({ -0.8f, 0.7f }, 60, &idle);
 
+
+
 	this->type = type;
+	
 
 	collider = App->collision->AddCollider({ 0, 0, 40, 20 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -41,6 +45,18 @@ Enemy_Knife::Enemy_Knife(int x, int y, int type) :Enemy(x, y, type)
 
 void Enemy_Knife::Move()
 {
+	if (timer) {
+		time_on_entry = SDL_GetTicks();
+		timer = false;
+	}
+	current_time = SDL_GetTicks() - time_on_entry;
+	if (current_time > 1000 && shooting) {
+		App->particles->AddParticle(App->particles->enemie_shoot, position.x, position.y+6);
+		timer = true;
+		shooting = false;
+	}
+
+
 	if (type == 1) {
 		if (App->ui->enemies_movement) {
 			position = originalposition + movement.GetCurrentSpeed(&animation);

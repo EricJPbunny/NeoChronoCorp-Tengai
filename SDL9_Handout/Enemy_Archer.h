@@ -27,6 +27,9 @@ private:
 	Path movement;
 	Path movementback;
 	int type;
+	int current_time, time_on_entry;
+	bool timer = true;
+	bool shooting = true;
 
 public:
 	Enemy_Archer(int x, int y, int type);

@@ -287,6 +287,41 @@ ModuleParticles::ModuleParticles()
 	fire.anim.loop = true;
 	fire.life = 100;
 
+	//Kinfe bullets
+	enemie_shoot.anim.PushBack({26,440,6,6});
+	enemie_shoot.anim.PushBack({ 43,440,6,6 });
+	enemie_shoot.anim.PushBack({ 58,440,6,6 });
+	enemie_shoot.anim.PushBack({ 73,440,6,6 });
+	enemie_shoot.anim.PushBack({ 89,440,6,6 });
+	enemie_shoot.anim.PushBack({ 106,440,6,6 });
+	enemie_shoot.anim.loop = true;
+	enemie_shoot.life = 1400;
+	enemie_shoot.speed.x = -6;
+
+	//Archer bullets
+
+	archer_shoot.anim.PushBack({ 20,461,8,8 });
+	archer_shoot.anim.PushBack({ 38,461,8,8 });
+	archer_shoot.anim.PushBack({ 56,461,8,8 });
+    archer_shoot.anim.PushBack({ 75,461,8,8 });
+	archer_shoot.anim.PushBack({ 94,461,8,8 });
+	archer_shoot.anim.PushBack({ 114,461,8,8 });
+	archer_shoot.anim.loop = true;
+	archer_shoot.life = 1400;
+	archer_shoot.speed.x = -2;
+
+	//Bird bullets
+	bird_shoot.anim.PushBack({ 7,438,10,10 });
+	bird_shoot.anim.PushBack({ 24,438,10,10 });
+	bird_shoot.anim.PushBack({ 41,438,10,10 });
+	bird_shoot.anim.PushBack({ 56,438,10,10 });
+	bird_shoot.anim.PushBack({ 71,438,10,10 });
+	bird_shoot.anim.PushBack({ 87,438,10,10 });
+	bird_shoot.anim.PushBack({ 104,438,10,10 });
+	bird_shoot.anim.loop = true;
+	bird_shoot.life = 1400;
+	bird_shoot.speed.x = -4;
+
 }
 
 ModuleParticles::~ModuleParticles()

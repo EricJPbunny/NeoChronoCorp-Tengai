@@ -3,6 +3,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleUI.h"
 #include "ModuleCollision.h"
+#include "SDL\include\SDL_timer.h"
 
 
 Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
@@ -53,6 +54,19 @@ Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 
 void Enemy_Archer::Move()
 {
+	if (timer) {
+		time_on_entry = SDL_GetTicks();
+		timer = false;
+	}
+	current_time = SDL_GetTicks() - time_on_entry;
+	if (current_time > 800 && shooting) {
+		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15);
+		App->particles->AddParticle(App->particles->archer_shoot, position.x - 15, position.y + 15);
+		timer = true;
+		shooting = false;
+	}
+
+
 	if (App->ui->enemies_movement) {
 		position = originalposition + movement.GetCurrentSpeed(&animation);
 	}
