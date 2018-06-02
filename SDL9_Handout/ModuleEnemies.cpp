@@ -15,6 +15,10 @@
 #include "Enemy_Bird.h"
 #include "Enemy_Knife.h"
 #include "Enemy_Turret.h"
+#include "Enemy_Buda.h"
+#include "Enemy_Palace.h"
+#include "Enemy_Elf.h"
+#include "Enemy_Hemisphere.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
 #include "time.h"
@@ -154,7 +158,6 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::GREENOVNI:
 				enemies[i] = new Enemy_GreenOvni(info.x, info.y, info.path_type);
 				break;
-
 			case ENEMY_TYPES::REDOVNI:
 				enemies[i] = new Enemy_RedOvni(info.x, info.y ,info.path_type);
 				break;
@@ -181,6 +184,18 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::TURRET:
 				enemies[i] = new Enemy_Turret(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::PALACE:
+				enemies[i] = new Enemy_Palace(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::BUDA:
+				enemies[i] = new Enemy_Buda(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::ELF:
+				enemies[i] = new Enemy_Elf(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::HEMISPHERE:
+				enemies[i] = new Enemy_Hemisphere(info.x, info.y, info.path_type);
 				break;
 			
 		}

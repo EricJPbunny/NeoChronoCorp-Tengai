@@ -11,7 +11,6 @@
 
 #define MAX_ENEMIES 100
 
-
 enum ENEMY_TYPES
 {
 	NO_TYPE,
@@ -25,6 +24,10 @@ enum ENEMY_TYPES
 	COIN,
 	BOSSHEAD,
 	TURRET,
+	PALACE,
+	BUDA,
+	ELF,
+	HEMISPHERE,
 };
 
 class Enemy;

@@ -14,7 +14,7 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>SDL9 Handout</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,8 +79,10 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Archer.h" />
     <ClInclude Include="Enemy_Bird.h" />
+    <ClInclude Include="Enemy_Buda.h" />
     <ClInclude Include="Enemy_Coin.h" />
     <ClInclude Include="Enemy_GreenOvni.h" />
+    <ClInclude Include="Enemy_Hemisphere.h" />
     <ClInclude Include="Enemy_Knife.h" />
     <ClInclude Include="Enemy_Ninja.h" />
     <ClInclude Include="Enemy_RedOvni.h" />
@@ -124,8 +126,10 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Archer.cpp" />
     <ClCompile Include="Enemy_Bird.cpp" />
+    <ClCompile Include="Enemy_Buda.cpp" />
     <ClCompile Include="Enemy_Coin.cpp" />
     <ClCompile Include="Enemy_GreenOvni.cpp" />
+    <ClCompile Include="Enemy_Hemisphere.cpp" />
     <ClCompile Include="Enemy_Knife.cpp" />
     <ClCompile Include="Enemy_Ninja.cpp" />
     <ClCompile Include="Enemy_RedOvni.cpp" />
