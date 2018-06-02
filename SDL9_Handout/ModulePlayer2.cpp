@@ -347,17 +347,28 @@ void ModulePlayerTwo::OnCollision(Collider* c1, Collider* c2)
 
 void ModulePlayerTwo::CheckState()
 {
-	bool pressed_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT;
-	bool pressed_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT;
 
-	bool press_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN;
-	bool press_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN;
+	if (App->scene_select->sho_p1) {
+		//Create bool variables
+		press_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN;
+		press_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN;
 
-	bool release_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP;
-	bool release_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP;
+		release_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP;
+		release_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP;
 
-	bool released_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE;
-	bool released_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE;
+		released_W = App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE;
+		released_A = App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE;
+	}
+	else {
+		press_A = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN;
+		press_W = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN;
+
+		release_A = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_UP;
+		release_W = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_UP;
+
+		released_W = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE;
+		released_A = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE;
+	}
 
 	switch (state)
 	{

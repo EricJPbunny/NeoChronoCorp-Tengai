@@ -22,7 +22,7 @@ ModuleUlti3::ModuleUlti3()
 	petal_1.anim.PushBack({ 421,340,22,26 });
 	petal_1.life = 3000;
 	petal_1.anim.speed = 0.20f;
-	petal_1.speed = { 0,0 };
+	petal_1.speed = { 2, -2 };
 }
 
 ModuleUlti3::~ModuleUlti3()
@@ -60,6 +60,7 @@ update_status ModuleUlti3::Update()
 		current_interval = SDL_GetTicks() - interval_on_entry;
 		if (current_interval > 500) {
 			App->particles->AddParticle(petal_1, (App->render->camera.x / SCREEN_SIZE) + 10, (App->render->camera.y / SCREEN_SIZE) + 190);
+			interval = true;
 		}
 	}
 	

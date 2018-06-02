@@ -81,6 +81,15 @@ public:
 	bool pressed_down;
 	bool pressed_right;
 
+	bool press_left;
+	bool press_up;
+
+	bool release_left;
+	bool release_up;
+
+	bool released_up;
+	bool released_left;
+
 	bool shot_ctrl;
 	bool ulti_button;
 	

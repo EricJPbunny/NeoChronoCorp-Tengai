@@ -65,6 +65,7 @@ private:
 	int bulletsize=0;
 
 	Mix_Chunk* s_power_down = nullptr;
+	Mix_Chunk* j_power_down = nullptr;
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;

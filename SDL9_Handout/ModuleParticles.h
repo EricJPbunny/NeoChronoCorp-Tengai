@@ -74,6 +74,7 @@ public:
 	Mix_Chunk* shoot_sho = nullptr;
 	Mix_Chunk* power_up_koyori_fx = nullptr;
 	Mix_Chunk* power_up_sho_fx = nullptr;
+	Mix_Chunk* power_up_junis_fx = nullptr;
 	Mix_Chunk* koyori_death = nullptr;
 	Mix_Chunk* sho_death = nullptr;
 	Mix_Chunk* coin_fx = nullptr;
