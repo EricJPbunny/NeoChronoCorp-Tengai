@@ -48,13 +48,13 @@ public:
 	int speed = 3, speedy = 0, animspeed = 0;;
 	int framerateset = 0;
 	int aux_time = 0;
-	int increaser = 0, increaser_2 = 0, increaser_3 = 0;
+	int increaser = 0, increaser_2 = 0;
 	bool ship_flag1 = 0, ship_flag2 = 0, ship_flag3 = 0, ship_flag4 = 0, ship_flag5 = 0;
 	bool flagship_1 = true;
 	float bg_speed_default = 0.10f;
 	float speed_screw = 0;
 	int aux = 0;
-	float speed_inside = 0;
+
 
 
 	bool god_mode = false;

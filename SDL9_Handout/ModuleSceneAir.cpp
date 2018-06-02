@@ -120,7 +120,7 @@ ModuleSceneAir::ModuleSceneAir()
 	grid.x = 3;
 	grid.y = 236;
 	grid.h = 224;
-	grid.w = 163;
+	grid.w = 153;
 
 	peak.x = 0;
 	peak.y = 376;
@@ -418,7 +418,7 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (big_cloud.w * i), -520, &big_cloud, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyThree.w * i), -729, &BigSkyThree, 0);
 		App->render->Blit(graphics, (fog2.w * i), -561, &fog2, bg_speed_default * 2);
-		App->render->Blit(graphics, (fog.w * i), -543, &fog, bg_speed_default * 3);
+		App->render->Blit(graphics, (fog.w * i)+3, -543, &fog, bg_speed_default * 3);
 		App->render->Blit(graphics, (group_cloud.w * i), -600, &group_cloud, bg_speed_default * 5);
 
 
@@ -435,7 +435,7 @@ update_status ModuleSceneAir::Update()
 	}
 
 	//   SHIP & SHIP FLAGS
-	if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN) {
+	if (App->render->camera.x>9400 && App->render->camera.x<9700) {
 		ship_flag1 = true;
 		ship_flag2 = false;
 		ship_flag3 = false;
@@ -489,27 +489,20 @@ update_status ModuleSceneAir::Update()
 		}
 		else {
 			if (ship_flag5) {
-				if (increaser_3 < 2300) {
-					speed_screw = 0.5f;
-					current_animation_2 = &inside;
-					SDL_Rect r = current_animation_2->GetCurrentFrame();
-					App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw) + 57, App->render->camera.y / SCREEN_SIZE, &r);
-					App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
-					increaser_3++;
-				}
-				if (aux < 100) {
-					App->render->Blit(graphics2, -152, -215, &destroyed_ship, speed_inside, 0.00f);
-					aux++;
-					speed_inside += 0.001;
-					
-					
-				}
-				else {
-					App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.10f, 0.00f);
-					App->render->Blit(graphics3, 858, 0, &grid, 0.10f, 0.00f);
-					
-				}
-				
+					if (animspeed < 2000) {
+						LOG("No mames");
+						if (App->render->camera.x<14000) {
+							speed_screw = 0.5f;
+							current_animation_2 = &inside;
+							SDL_Rect r = current_animation_2->GetCurrentFrame();
+							App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw) + 57, App->render->camera.y / SCREEN_SIZE, &r);
+							App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
+							aux++;
+						}
+						App->render->Blit(graphics2, -152 - animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
+						App->render->Blit(graphics3, 859-animspeed, 0, &grid, 0.00f, 0.00f);
+						animspeed++;
+					}
 			}
 		}
 	}
@@ -529,6 +522,13 @@ update_status ModuleSceneAir::Update()
 			App->player3->Enable();
 		}
 	}
+
+	//teleport
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {
+		App->render->camera.x = 8000;
+		App->render->camera.y = -2000;
+	}
+
 	//Background Movement
 	App->player2->position.x += speed / SCREEN_SIZE;
 	App->player3->position.x += speed / SCREEN_SIZE;
