@@ -8,7 +8,7 @@ class Enemy_ShipHead :
 	public Enemy
 {
 public:
-	Enemy_ShipHead(int x, int y);
+	Enemy_ShipHead(int x, int y,int type);
 	~Enemy_ShipHead();
 
 	Collider* collider;
@@ -22,7 +22,7 @@ private:
 	SDL_Rect bosscollider_1;
 	SDL_Rect bosscollider_2;
 
-	iPoint background_position;
+	iPoint head_position;
 	Animation spawn;
 	Animation idle;
 	Animation shoot;

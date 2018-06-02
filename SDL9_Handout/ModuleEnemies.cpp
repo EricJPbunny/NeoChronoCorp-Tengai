@@ -175,6 +175,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::KNIFE:
 				enemies[i] = new Enemy_Knife(info.x, info.y, info.path_type);
 				break;
+			case ENEMY_TYPES::BOSSHEAD:
+				enemies[i] = new Enemy_ShipHead(info.x, info.y, info.path_type);
+				break;
 			
 		}
 	}
