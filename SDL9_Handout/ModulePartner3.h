@@ -57,6 +57,7 @@ public:
 	int increaser = 0;
 	bool multiple_shot = false;
 	bool multiple_shot_2 = false;
+	
 };
 
 #endif
