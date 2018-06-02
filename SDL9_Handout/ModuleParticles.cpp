@@ -285,19 +285,67 @@ ModuleParticles::ModuleParticles()
 
 	//socrates fire
 	fire.anim.PushBack({18,399,10,16});
-	/*fire.anim.PushBack({33,396,16,20});
-	fire.anim.PushBack({54,395,19,25});
-	fire.anim.PushBack({79,386,26,36});
-	fire.anim.PushBack({108,382,36,46});
-	fire.anim.PushBack({146,384,40,45});
-	fire.anim.PushBack({195,385,39,44});
-	fire.anim.PushBack({244,389,42,33});
-	fire.anim.PushBack({294,393,39,24});
-	fire.anim.PushBack({340,394,41,20});*/
-	fire.speed.x = 8;
+	
+	
+	
+	fire.speed.x = 3;
 	fire.anim.speed = 0.10f;
 	fire.anim.loop = true;
 	fire.life = 100;
+
+	fire2.anim.PushBack({ 33,396,16,20 });
+	fire2.speed.x = 3;
+	fire2.anim.speed = 0.10f;
+	fire2.anim.loop = true;
+	fire2.life = 100;
+
+	fire3.anim.PushBack({ 54,395,19,25 });
+	fire3.speed.x = 3;
+	fire3.anim.speed = 0.10f;
+	fire3.anim.loop = true;
+	fire3.life = 100;
+
+	fire4.anim.PushBack({ 79,386,26,36 });
+	fire4.speed.x = 3;
+	fire4.anim.speed = 0.10f;
+	fire4.anim.loop = true;
+	fire4.life = 100;
+
+	fire5.anim.PushBack({ 108,382,36,46 });
+	fire5.speed.x = 3;
+	fire5.anim.speed = 0.10f;
+	fire5.anim.loop = true;
+	fire5.life = 100;
+
+	fire6.anim.PushBack({ 146,384,40,45 });
+	fire6.speed.x = 3;
+	fire6.anim.speed = 0.10f;
+	fire6.anim.loop = true;
+	fire6.life = 100;
+
+	fire7.anim.PushBack({ 195,385,39,44 });
+	fire7.speed.x = 3;
+	fire7.anim.speed = 0.10f;
+	fire7.anim.loop = true;
+	fire7.life = 100;
+
+	fire8.anim.PushBack({ 244,389,42,33 });
+	fire8.speed.x = 3;
+	fire8.anim.speed = 0.10f;
+	fire8.anim.loop = true;
+	fire8.life = 100;
+
+	fire9.anim.PushBack({ 294,393,39,24 });
+	fire9.speed.x = 3;
+	fire9.anim.speed = 0.10f;
+	fire9.anim.loop = true;
+	fire9.life = 100;
+
+	fire10.anim.PushBack({ 340,394,41,20 });
+	fire10.speed.x = 3;
+	fire10.anim.speed = 0.10f;
+	fire10.anim.loop = true;
+	fire10.life = 100;
 
 	//Kinfe bullets
 	enemie_shoot.anim.PushBack({26,440,6,6});
