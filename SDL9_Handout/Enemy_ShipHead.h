@@ -14,7 +14,7 @@ public:
 	Collider* collider;
 private:
 	bool spawning;
-	void Shoot();
+	void Move();
 	void Draw(SDL_Texture* sprites);
 	SDL_Texture* boss_sprite;
 	int fire_rate, shot_cd;

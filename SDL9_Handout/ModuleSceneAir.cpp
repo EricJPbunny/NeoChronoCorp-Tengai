@@ -250,7 +250,7 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 620, 34, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 650, 0, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 690, 0, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::BOSSHEAD, 690, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BOSSHEAD, 200, 0, 2);
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 690, 42,1);
