@@ -25,6 +25,8 @@ enum ENEMY_TYPES
 	COIN,
 	BOSSHEAD,
 	TURRET,
+	PALACE,
+	BUDA,
 };
 
 class Enemy;

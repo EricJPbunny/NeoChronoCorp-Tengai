@@ -25,10 +25,10 @@ Enemy_Turret::Enemy_Turret(int x, int y, int type) :Enemy(x, y,type)
 	idle.PushBack({ 305,73,36,39 });
 	idle.speed = 0.20f;
 
-	animation = &spawn;
+	death.PushBack({ 315,376,81,20 });
+	death.loop = true;
 
-	movement.PushBack({ 1,0 }, 30, &spawn);
-	movement.PushBack({ 1,0 }, 900, &idle);
+	animation = &spawn;
 
 	this->type = type;
 

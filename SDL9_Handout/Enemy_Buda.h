@@ -1,15 +1,15 @@
-#ifndef __ENEMY_TURRET_H__
-#define __ENEMY_TURRET_H__
+#ifndef __ENEMY_BUDA_H__
+#define __ENEMY_BUDA_H__
 
 #include "Enemy.h"
 #include "Path.h"
 
-class Enemy_Turret :
+class Enemy_Buda :
 	public Enemy
 {
 public:
-	Enemy_Turret(int x, int y, int type);
-	~Enemy_Turret();
+	Enemy_Buda(int x, int y, int type);
+	~Enemy_Buda();
 
 	Collider* collider;
 	Path movement;
@@ -21,7 +21,7 @@ private:
 	void Draw(SDL_Texture* sprites);
 	SDL_Texture* boss_sprite;
 
-	Animation spawn, idle, death;
+	Animation spawn, idle;
 };
 
 #endif
