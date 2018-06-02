@@ -14,7 +14,7 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>SDL9 Handout</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,6 +84,7 @@
     <ClInclude Include="Enemy_Knife.h" />
     <ClInclude Include="Enemy_Ninja.h" />
     <ClInclude Include="Enemy_RedOvni.h" />
+    <ClInclude Include="Enemy_ShipHead.h" />
     <ClInclude Include="Entity_PowerUp.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="MemLeaks.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="Enemy_Knife.cpp" />
     <ClCompile Include="Enemy_Ninja.cpp" />
     <ClCompile Include="Enemy_RedOvni.cpp" />
+    <ClCompile Include="Enemy_ShipHead.cpp" />
     <ClCompile Include="Entity_PowerUp.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />

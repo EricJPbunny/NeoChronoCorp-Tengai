@@ -6,6 +6,7 @@
 #include "Enemy_RedOvni.h"
 #include "Enemy_Ninja.h"
 #include "ModuleParticles.h"
+#include "Enemy_ShipHead.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
 #define MAX_ENEMIES 100
@@ -22,6 +23,7 @@ enum ENEMY_TYPES
 	KNIFE,
 	POWERUP,
 	COIN,
+	BOSSHEAD,
 };
 
 class Enemy;
