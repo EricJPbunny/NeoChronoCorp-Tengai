@@ -177,6 +177,21 @@ ModuleSceneAir::ModuleSceneAir()
 	group_cloud.h = 50;
 	group_cloud.w = 302;
 
+	cloud_inter.x = 183;
+	cloud_inter.y = 467;
+	cloud_inter.h = 42;
+	cloud_inter.w = 70;
+
+	cloud_inter2.x = 174;
+	cloud_inter2.y = 519;
+	cloud_inter2.h = 79;
+	cloud_inter2.w = 112;
+
+	cloud_inter3.x = 177;
+	cloud_inter3.y = 609;
+	cloud_inter3.h = 71;
+	cloud_inter3.w = 102;
+
 	//Animation
 	inside.PushBack({ 2,1,304,224 });
 	inside.PushBack({ 317,1,304,224 });
@@ -408,8 +423,8 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (peak2.w * i), 176, &peak2, bg_speed_default * 7);
 		App->render->Blit(graphics, (peak3.w * i), 174, &peak3, bg_speed_default * 6);
 		App->render->Blit(graphics, (peak3.w * i), 166, &peak3, bg_speed_default * 5);
-		
 	}
+
 	for (int i = 0; i < 20; ++i) {
 		App->render->Blit(graphics, (BigSky.w * i)-35, -391, &BigSky, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyTwo.w * i), -505, &BigSkyTwo, bg_speed_default * 3);
@@ -420,11 +435,7 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (fog2.w * i), -561, &fog2, bg_speed_default * 2);
 		App->render->Blit(graphics, (fog.w * i)+3, -543, &fog, bg_speed_default * 3);
 		App->render->Blit(graphics, (group_cloud.w * i), -600, &group_cloud, bg_speed_default * 5);
-
-
 	}
-
-
 	//Y axis movement flags
 
 	if (App->render->camera.x > 2500) {
@@ -497,10 +508,12 @@ update_status ModuleSceneAir::Update()
 							SDL_Rect r = current_animation_2->GetCurrentFrame();
 							App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw) + 57, App->render->camera.y / SCREEN_SIZE, &r);
 							App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
-							aux++;
 						}
-						App->render->Blit(graphics2, -152 - animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
-						App->render->Blit(graphics3, 859-animspeed, 0, &grid, 0.00f, 0.00f);
+						App->render->Blit(graphics2, -0-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
+						App->render->Blit(graphics3, 1011-animspeed, 0, &grid, 0.00f, 0.00f);
+						current_animation_3 = &screw;
+						SDL_Rect r_2 = current_animation_3->GetCurrentFrame();
+						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE ) + 587-animspeed, (App->render->camera.y / SCREEN_SIZE)+150, &r_2);
 						animspeed++;
 					}
 			}
