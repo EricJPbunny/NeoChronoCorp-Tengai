@@ -497,7 +497,11 @@ update_status ModuleSceneAir::Update()
 			App->render->Blit(graphics2, -152 , 59 - animspeed, &destroyed_ship, 0.00f, 0.00f);
 			animspeed++;
 			ship_flag5 = true;
-			
+			current_animation = &piston;
+			SDL_Rect r_3 = current_animation->GetCurrentFrame();
+			App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) +87 , (App->render->camera.y / SCREEN_SIZE) +316-animspeed, &r_3);
+			App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) -30, (App->render->camera.y / SCREEN_SIZE) + 316 - animspeed, &r_3);
+			App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 198, (App->render->camera.y / SCREEN_SIZE) + 316 - animspeed, &r_3);
 		}
 		else {
 			if (ship_flag5) {
@@ -510,11 +514,19 @@ update_status ModuleSceneAir::Update()
 							App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw) + 57, App->render->camera.y / SCREEN_SIZE, &r);
 							App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
 						}
-						App->render->Blit(graphics2, -0-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
+						App->render->Blit(graphics2, +115-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
 						App->render->Blit(graphics3, 1011-animspeed, 0, &grid, 0.00f, 0.00f);
+						//screw
 						current_animation_3 = &screw;
 						SDL_Rect r_2 = current_animation_3->GetCurrentFrame();
-						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE ) + 587-animspeed, (App->render->camera.y / SCREEN_SIZE)+150, &r_2);
+						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE ) + 702-animspeed, (App->render->camera.y / SCREEN_SIZE)+150, &r_2);
+						//piston
+						current_animation = &piston;
+						SDL_Rect r_3 = current_animation->GetCurrentFrame();
+						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 345-animspeed, (App->render->camera.y / SCREEN_SIZE) + 42, &r_3);
+						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 464-animspeed, (App->render->camera.y / SCREEN_SIZE) + 42 , &r_3);
+						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 578-animspeed, (App->render->camera.y / SCREEN_SIZE) + 42, &r_3);
+						
 						animspeed++;
 					}
 			}

@@ -40,6 +40,7 @@ public:
 	SDL_Rect destroyed_ship, inside_2, grid, peak, peak2, peak3, big_cloud, cloud, cloud2, cloud3, cloud4, fog, fog2, group_cloud, cloud_inter, cloud_inter2, cloud_inter3;
 	SDL_Rect fader, fademid;
 	Animation inside, piston, screw;
+	Animation* current_animation = nullptr;
 	Animation* current_animation_2 = nullptr; 
 	Animation* current_animation_3 = nullptr;
 	float posx = 7000, posy = -480, grassy = 185;
