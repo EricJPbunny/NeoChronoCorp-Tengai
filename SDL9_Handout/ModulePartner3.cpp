@@ -278,6 +278,8 @@ update_status ModulePartner3::Update()
 					multiple_shot = true;
 					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_7, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_8, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					shot_delay = true;
 				}
 			}
@@ -286,6 +288,8 @@ update_status ModulePartner3::Update()
 				if (increaser > 10) {
 					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_7, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_8, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					multiple_shot = false;
 					multiple_shot_2 = true;
 					increaser = 0;
@@ -298,6 +302,8 @@ update_status ModulePartner3::Update()
 					LOG("Entro entro entro MRajoy");
 					App->particles->AddParticle(App->particles->shuriken_socrates_5, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					App->particles->AddParticle(App->particles->shuriken_socrates_6, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_7, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
+					App->particles->AddParticle(App->particles->shuriken_socrates_8, position.x + 23, position.y - 30, COLLIDER_PLAYER_3_SHOT);
 					multiple_shot_2 = false;
 					increaser = 0;
 				}

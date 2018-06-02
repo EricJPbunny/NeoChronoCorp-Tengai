@@ -505,9 +505,9 @@ update_status ModuleSceneAir::Update()
 		}
 		else {
 			if (ship_flag5) {
-					if (animspeed < 2000) {
+					if (animspeed < 2500) {
 						LOG("No mames");
-						if (App->render->camera.x<14000) {
+						if (App->render->camera.x<15000) {
 							speed_screw = 0.5f;
 							current_animation_2 = &inside;
 							SDL_Rect r = current_animation_2->GetCurrentFrame();
@@ -515,18 +515,20 @@ update_status ModuleSceneAir::Update()
 							App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
 						}
 						App->render->Blit(graphics2, +115-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
-						App->render->Blit(graphics3, 1011-animspeed, 0, &grid, 0.00f, 0.00f);
+						App->render->Blit(graphics3, 1126-animspeed, 0, &grid, 0.00f, 0.00f);
+
 						//screw
 						current_animation_3 = &screw;
 						SDL_Rect r_2 = current_animation_3->GetCurrentFrame();
 						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE ) + 702-animspeed, (App->render->camera.y / SCREEN_SIZE)+150, &r_2);
+						
 						//piston
 						current_animation = &piston;
 						SDL_Rect r_3 = current_animation->GetCurrentFrame();
 						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 345-animspeed, (App->render->camera.y / SCREEN_SIZE) + 42, &r_3);
 						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 464-animspeed, (App->render->camera.y / SCREEN_SIZE) + 42 , &r_3);
 						App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE) + 578-animspeed, (App->render->camera.y / SCREEN_SIZE) + 42, &r_3);
-						
+
 						animspeed++;
 					}
 			}

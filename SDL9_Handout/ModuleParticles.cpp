@@ -271,6 +271,18 @@ ModuleParticles::ModuleParticles()
 	shuriken_socrates_6.anim.loop = true;
 	shuriken_socrates_6.life = 3000;
 
+	shuriken_socrates_7.anim.PushBack({ 155,90,21,21 });
+	shuriken_socrates_7.speed.x = -8;
+	shuriken_socrates_7.speed.y = -5;
+	shuriken_socrates_7.anim.loop = true;
+	shuriken_socrates_7.life = 3000;
+
+	shuriken_socrates_8.anim.PushBack({ 155,90,21,21 });
+	shuriken_socrates_8.speed.x = -8;
+	shuriken_socrates_8.speed.y = 5;
+	shuriken_socrates_8.anim.loop = true;
+	shuriken_socrates_8.life = 3000;
+
 	//socrates fire
 	fire.anim.PushBack({18,399,10,16});
 	/*fire.anim.PushBack({33,396,16,20});

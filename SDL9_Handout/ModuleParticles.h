@@ -88,7 +88,7 @@ public:
 	Particle coin_100, coin_200, coin_500, coin_1000, coin_2000, coin_4000;
 	Particle shuriken;
 	Particle kunai, kunai1, kunai2;
-	Particle shuriken_socrates_1, shuriken_socrates_2, shuriken_socrates_3, shuriken_socrates_4, shuriken_socrates_5, shuriken_socrates_6;
+	Particle shuriken_socrates_1, shuriken_socrates_2, shuriken_socrates_3, shuriken_socrates_4, shuriken_socrates_5, shuriken_socrates_6, shuriken_socrates_7, shuriken_socrates_8;
 	Particle fire;
 	Particle enemie_shoot, archer_shoot, bird_shoot;
 	
