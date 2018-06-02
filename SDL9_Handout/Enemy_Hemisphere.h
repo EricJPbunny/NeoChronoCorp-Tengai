@@ -22,6 +22,7 @@ private:
 	SDL_Texture* boss_sprite;
 
 	Animation idle;
+	
 };
 
 #endif
