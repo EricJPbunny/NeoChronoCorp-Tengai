@@ -100,6 +100,30 @@ ModulePlayer3::ModulePlayer3()
 	death_circle.PushBack({});
 	death_circle.PushBack({ 2,292, 130, 130 });
 	death_circle.speed = 0.8f;
+	
+	//Ultimate Attack
+	ulti.PushBack({ 43,119,20,27 });
+	ulti.PushBack({ 163,317,21,32 });
+	ulti.PushBack({ 272,9,20,63 });
+	ulti.PushBack({ 299,5,32,69 });
+	ulti.PushBack({ 335,2,37,79 });
+	ulti.PushBack({ 378,1,32,85 });
+	ulti.PushBack({ 420,2,44,92 });
+	ulti.PushBack({ 468,2,34,99 });
+	ulti.PushBack({ 19,383,37,117 });
+	ulti.PushBack({ 74,385,52,116 });
+	ulti.PushBack({ 146,384,56,119});
+	ulti.PushBack({ 380,387,43,117 });
+	ulti.PushBack({ 231,385,55,117 });
+	ulti.PushBack({ 303,386,40,117 });
+	ulti.PushBack({ 19,383,37,117 });
+	ulti.PushBack({ 74,385,52,116 });
+	ulti.PushBack({ 146,384,56,119 });
+	ulti.PushBack({ 380,387,43,117 });
+	ulti.PushBack({ 231,385,55,117 });
+	ulti.PushBack({ 303,386,40,117 });
+	ulti.speed = 0.05f;
+
 
 	//Death Player
 	death.x = 7;
@@ -190,6 +214,7 @@ update_status ModulePlayer3::Update()
 		if (!App->ulti3->IsEnabled()) {
 			App->ulti3->timer = true;
 			App->ulti3->Enable();
+			ulti_on = true;
 		}
 	}
 	//check state
@@ -335,7 +360,9 @@ void ModulePlayer3::CheckState()
 		if (press_left || press_up) {
 			state = GO_BACKWARD_3;
 		}
-
+		if (App->ulti3->IsEnabled()) {
+			state = ULTI_3;
+		}
 		break;
 
 	case GO_BACKWARD_3:
@@ -350,6 +377,9 @@ void ModulePlayer3::CheckState()
 			intermediate.Reset();
 			state = BACKWARD_3;
 		}
+		if (App->ulti3->IsEnabled()) {
+			state = ULTI_3;
+		}
 		break;
 
 	case BACKWARD_3:
@@ -357,6 +387,9 @@ void ModulePlayer3::CheckState()
 			if (released_left || released_up) {
 				state = BACK_IDLE_3;
 			}
+		}
+		if (App->ulti3->IsEnabled()) {
+			state = ULTI_3;
 		}
 		break;
 
@@ -371,6 +404,9 @@ void ModulePlayer3::CheckState()
 			intermediate.Reset();
 			state = IDLE_3;
 		}
+		if (App->ulti3->IsEnabled()) {
+			state = ULTI_3;
+		}
 		break;
 
 	case SPIN_3:
@@ -378,6 +414,9 @@ void ModulePlayer3::CheckState()
 			spin.Reset();
 			spin_circle.Reset();
 			state = IDLE_3;
+		}
+		if (App->ulti3->IsEnabled()) {
+			state = ULTI_3;
 		}
 		break;
 
@@ -393,6 +432,12 @@ void ModulePlayer3::CheckState()
 			position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 			time = true;
 			state = SPAWN_PLAYER_3;
+		}
+		break;
+
+	case ULTI_3:
+		if (!App->ulti3->IsEnabled() && ulti_on == false) {
+			state = IDLE_3;
 		}
 		break;
 	}
@@ -487,6 +532,10 @@ void ModulePlayer3::PerformActions()
 		else {
 			check_death = false;
 		}
+		break;
+
+	case ULTI_3:
+		current_animation = &ulti;
 		break;
 	}	
 }

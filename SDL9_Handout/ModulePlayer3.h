@@ -19,6 +19,7 @@ enum player_state_3 {
 	SPIN_3,
 	DEATH_3,
 	POST_DEATH_3,
+	ULTI_3,
 };
 class ModulePlayer3 : public Module
 {
@@ -53,6 +54,7 @@ public:
 	Animation spin_circle;
 	Animation death_circle;
 	Animation intermediate_return;
+	Animation ulti;
 	SDL_Rect death;
 	fPoint position;
 	fPoint aux_spin;
@@ -92,6 +94,8 @@ public:
 
 	bool shot_ctrl;
 	bool ulti_button;
+
+	bool ulti_on = false;
 	
 
 };
