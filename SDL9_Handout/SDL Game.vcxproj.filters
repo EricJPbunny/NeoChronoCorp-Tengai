@@ -143,9 +143,6 @@
     <ClInclude Include="ModuleSceneSelect.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleBosses.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -260,9 +257,6 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneSelect.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleBosses.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

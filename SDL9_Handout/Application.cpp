@@ -24,7 +24,6 @@
 #include "ModuleEnemies.h"
 #include "ModulePowerup.h"
 #include "ModuleFonts.h"
-#include "ModuleBosses.h"
 
 Application::Application()
 {
@@ -41,7 +40,6 @@ Application::Application()
 	modules[i++] = scene_air = new ModuleSceneAir();
 	modules[i++] = scene_score = new ModuleScore();
 	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = bosses = new ModuleBosses();
 	modules[i++] = pu = new ModulePowerup();
 	modules[i++] = partner3 = new ModulePartner3();
 	modules[i++] = partner2 = new ModulePartner2();
