@@ -9,7 +9,9 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 #include "SDL\include\SDL_render.h"
+#include <string>
 
 
 ModuleSceneStart::ModuleSceneStart()
@@ -80,6 +82,12 @@ ModuleSceneStart::ModuleSceneStart()
 	cloud7.w = 502;
 	cloud7.h = 4;
 
+	//Credit
+	credit.x = 0;
+	credit.y = 421;
+	credit.w = 40;
+	credit.h = 7;
+
 }
 
 ModuleSceneStart::~ModuleSceneStart()
@@ -92,7 +100,9 @@ bool ModuleSceneStart::Start()
 	App->render->camera.x = 0;
 	graphics = App->textures->Load("assets/sprite/start_screen.png");
 	start_screen = App->textures->Load("assets/sprite/start.png");
+	font_credit = App->fonts->Load("fonts/score_fonts.png", "0123456789", 1);
 	intro = App->audio->LoadEffect("assets/audio/Intro.wav");
+	add_credit = App->audio->LoadEffect("assets/audio/insert_coin.wav");
 
 	return true;
 }
@@ -103,6 +113,7 @@ bool ModuleSceneStart::CleanUp()
 	LOG("Unloading Start Screen");
 	App->textures->Unload(graphics);
 	App->textures->Unload(start_screen);
+	App->fonts->UnLoad(font_credit);
 	App->audio->UnloadFx(intro);
 	return true;
 }
@@ -110,6 +121,8 @@ bool ModuleSceneStart::CleanUp()
 // Update: draw background
 update_status ModuleSceneStart::Update()
 {
+	//Credit
+	sprintf_s(credit_text, 2, "%1d", credit_num);
 
 	App->render->Blit(graphics, 0, 0, &background, 0.00f);
 
@@ -121,7 +134,6 @@ update_status ModuleSceneStart::Update()
 	posx15 = posx14;
 
 	App->render->Blit(graphics, (int)posx14, 126, &cloud7);
-
 
 	posx15 += cloud7.w;
 
@@ -228,6 +240,10 @@ update_status ModuleSceneStart::Update()
 
 	App->render->Blit(start_screen, 0, 0, &start);
 
+	App->render->Blit(graphics, 120, 215, &credit);
+	
+	App->fonts->BlitText(152, 214, font_credit, credit_text);
+
 	//Fader
 	SDL_SetTextureAlphaMod(start_screen, alpha_start);
 
@@ -247,8 +263,15 @@ update_status ModuleSceneStart::Update()
 		fade = true;
 	}
 	
+	// Increase credit num
+	if (credit_num < 9) {
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+			App->audio->PlaySoundEffects(add_credit);
+			credit_num++;
+		}
+	}
 	// If pressed, change scene
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN|| App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
 		App->audio->PlaySoundEffects(intro);
 		App->fade->FadeToBlack(App->scene_start, App->scene_select, 1.50f);
 	}

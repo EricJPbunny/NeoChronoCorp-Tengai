@@ -121,8 +121,8 @@ bool ModulePlayer3::Start()
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 32, 32 }, COLLIDER_PLAYER);
 	hitbox = App->collision->AddCollider({ (int)position.x, (int)position.y,16,16 }, COLLIDER_HITBOX);
 
-	position.x = (App->render->camera.x) / SCREEN_SIZE-20;
-	position.y = (App->render->camera.y) / SCREEN_SIZE+100;
+	position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
+	position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 
 	state = SPAWN_PLAYER_3;
 
