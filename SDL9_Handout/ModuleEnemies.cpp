@@ -14,6 +14,7 @@
 #include "Enemy_Archer.h"
 #include "Enemy_Bird.h"
 #include "Enemy_Knife.h"
+#include "Enemy_Turret.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
 #include "time.h"
@@ -177,6 +178,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::BOSSHEAD:
 				enemies[i] = new Enemy_ShipHead(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::TURRET:
+				enemies[i] = new Enemy_Turret(info.x, info.y, info.path_type);
 				break;
 			
 		}

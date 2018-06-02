@@ -24,6 +24,7 @@ enum ENEMY_TYPES
 	POWERUP,
 	COIN,
 	BOSSHEAD,
+	TURRET,
 };
 
 class Enemy;
