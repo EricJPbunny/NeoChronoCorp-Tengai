@@ -142,7 +142,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 {
 	// find room for the new enemy
 	uint i = 0;
-	for(; enemies[i] != nullptr && i < MAX_ENEMIES; ++i);
+	for(;enemies[i] != nullptr && i < MAX_ENEMIES; ++i);
 
 	if(i != MAX_ENEMIES)
 	{

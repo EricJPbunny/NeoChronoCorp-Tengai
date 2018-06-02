@@ -7,8 +7,12 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
+#include "ModuleFonts.h"
+#include "ModuleUI.h"
 #include "ModuleAudio.h"
+#include "SDL\include\SDL_timer.h"
 #include "SDL\include\SDL_render.h"
+#include <string>
 
 
 ModuleSceneSelect::ModuleSceneSelect()
@@ -92,6 +96,7 @@ bool ModuleSceneSelect::Start()
 	LOG("Loading Start Screen");
 	App->render->camera.x = 0;
 	graphics = App->textures->Load("assets/sprite/Select_Screen.png");
+	font_time = App->fonts->Load("fonts/time_fonts.png", "0123456789", 1);
 
 	return true;
 }
@@ -101,12 +106,33 @@ bool ModuleSceneSelect::CleanUp()
 {
 	LOG("Unloading Start Screen");
 	App->textures->Unload(graphics);
+	App->fonts->UnLoad(font_time);
 	return true;
 }
 
 // Update: draw background
 update_status ModuleSceneSelect::Update()
 {
+	//Time
+	sprintf_s(time_text, 2, "%1d", time_num);
+
+	if (timer) {
+		time_on_entry = SDL_GetTicks();
+		timer = false;
+	}
+	current_time = SDL_GetTicks() - time_on_entry;
+	if (current_time > 1000) {
+		time_num--;
+		timer = true;
+	}
+
+	//Player 1 vs Player 2
+	if (one_player) {
+		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			one_player = false;
+		}
+	}
+
 	//Get Current Animations
 	junis_anim = junis_sprite.GetCurrentFrame();
 	sho_anim = sho_sprite.GetCurrentFrame();
@@ -132,15 +158,36 @@ update_status ModuleSceneSelect::Update()
 				sho_p1 = true;
 			}
 		}
-		App->render->Blit(graphics, 25, 172, &sho_anim);
-		App->render->Blit(graphics, 75, 172, &junis_anim);
 	}
 	else {
-		App->render->Blit(graphics, 65, 158, &ui_2p);
+		App->render->Blit(graphics, 0, 0, &background_2p);
+		if (sho_p1) {
+			App->render->Blit(graphics, 18, 158, &ui_1p);
+			App->render->Blit(graphics, 65, 158, &ui_2p);
+			App->render->Blit(graphics, 2, 20, &sho_player);
+			App->render->Blit(graphics, 176, 34, &junis_player);
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) {
+				sho_p1 = false;
+			}
+		}
+		else {
+			App->render->Blit(graphics, 18, 158, &ui_2p);
+			App->render->Blit(graphics, 65, 158, &ui_1p);
+			App->render->Blit(graphics, 16, 34, &junis_player);
+			App->render->Blit(graphics, 162, 20, &sho_player);
+			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
+				sho_p1 = true;
+			}
+		}
 	}
+	App->render->Blit(graphics, 25, 172, &sho_anim);
+	App->render->Blit(graphics, 75, 172, &junis_anim);
+
+	App->render->Blit(graphics, 138, 214, &time);
+	App->fonts->BlitText(154, 210, App->ui->font_time, time_text);
 
 	// If pressed, change scene
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN|| App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN || time_num == 0) {
 		App->fade->FadeToBlack(App->scene_select, App->scene_air, 1.50f);
 	}
 

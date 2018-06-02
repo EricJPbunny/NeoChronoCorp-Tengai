@@ -40,8 +40,10 @@ Enemy_Archer::Enemy_Archer(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ -1.3f, 0.0f }, 40, &idle);
 	movement.PushBack({ 1.0f, 0.0f }, 39, &sheathe);
 	movement.PushBack({ 1.0f, -1.5f }, 600, &up);
+
+
 	
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 40, 50 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	animation = &idle;
 	

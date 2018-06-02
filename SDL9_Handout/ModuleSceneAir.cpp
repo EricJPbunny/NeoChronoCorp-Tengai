@@ -130,12 +130,17 @@ bool ModuleSceneAir::Start()
 	inside_2.h = 224;
 	inside_2.w = 57;
 
+	grid.x = 3;
+	grid.y = 236;
+	grid.h = 224;
+	grid.w = 163;
+
+	
 	//Animation
-	//inside.PushBack({178,236,57,224});
-	inside.PushBack({1,1,305,224});
+	inside.PushBack({2,1,304,224});
 	inside.PushBack({317,1,304,224});
 	inside.PushBack({635,1,304,224});
-	inside.speed = 0.10f;
+	inside.speed = 0.30f;
 
 
 	//startup
@@ -217,20 +222,51 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 1990, (App->render->camera.y / SCREEN_SIZE) - 300, 4);
 
 
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2050, (App->render->camera.y / SCREEN_SIZE) - 300, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2080, (App->render->camera.y / SCREEN_SIZE) - 300, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2050, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2080, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
 
 
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2150, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2180, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
+
+	//App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2150, (App->render->camera.y / SCREEN_SIZE) -300, 3);
+	//App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2180, (App->render->camera.y / SCREEN_SIZE) -300, 3);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2190, (App->render->camera.y / SCREEN_SIZE) -500, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2230, (App->render->camera.y / SCREEN_SIZE) -500, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2300, (App->render->camera.y / SCREEN_SIZE) - 450, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2320, (App->render->camera.y / SCREEN_SIZE) - 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2390, (App->render->camera.y / SCREEN_SIZE) - 500, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2300, (App->render->camera.y / SCREEN_SIZE) - 650, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2320, (App->render->camera.y / SCREEN_SIZE) - 600, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2390, (App->render->camera.y / SCREEN_SIZE) - 300, 3);
+	
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2400, (App->render->camera.y / SCREEN_SIZE) - 650, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2420, (App->render->camera.y / SCREEN_SIZE) - 600, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2430, (App->render->camera.y / SCREEN_SIZE) - 520, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2470, (App->render->camera.y / SCREEN_SIZE) - 500, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2490, (App->render->camera.y / SCREEN_SIZE) - 520, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2490, (App->render->camera.y / SCREEN_SIZE) - 300, 3);
 
 
 
 	//Archers
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1030, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1070, 110);
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1110, 160);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1030, 60, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1070, 110, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 1110, 160, 1);
 	
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2100, (App->render->camera.y / SCREEN_SIZE) - 400);
-	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2180, (App->render->camera.y / SCREEN_SIZE) - 450);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2100, (App->render->camera.y / SCREEN_SIZE) - 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2150, (App->render->camera.y / SCREEN_SIZE) - 450, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 2450, (App->render->camera.y / SCREEN_SIZE) - 450, 1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3530, (App->render->camera.y / SCREEN_SIZE) + 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3670, (App->render->camera.y / SCREEN_SIZE) + 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3730, (App->render->camera.y / SCREEN_SIZE) + 400, 1);
 
 	// Ovnis
 
@@ -364,15 +400,21 @@ update_status ModuleSceneAir::Update()
 		if (animspeed < 274) {
 			App->render->Blit(graphics2, -152 , 59 - animspeed, &destroyed_ship, 0.00f, 0.00f);
 			animspeed++;
+			ship_flag5 = true;
 		}
 		else {
-			speed_screw = 0.02f;
-			current_animation_2 = &inside;
-			SDL_Rect r = current_animation_2->GetCurrentFrame();
-			App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE)+speed_screw+20, App->render->camera.y / SCREEN_SIZE, &r);
-			App->render->Blit(graphics3, 0,0 ,&inside_2 , 0.00f, 0.00f);
-			App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.30f, 0.00f);
-			
+			if (ship_flag5) {
+				if (increaser_3<2300) {
+					speed_screw = 0.5f;
+					current_animation_2 = &inside;
+					SDL_Rect r = current_animation_2->GetCurrentFrame();
+					App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw) + 57, App->render->camera.y / SCREEN_SIZE, &r);
+					App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
+					increaser_3++;
+				}
+				App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.35f, 0.00f);
+				App->render->Blit(graphics3, 858, 0, &grid, 0.35f, 0.00f);
+			}
 		}
 	}
 
