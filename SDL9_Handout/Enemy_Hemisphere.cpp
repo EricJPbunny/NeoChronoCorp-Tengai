@@ -33,10 +33,7 @@ Enemy_Hemisphere::~Enemy_Hemisphere()
 
 void Enemy_Hemisphere::Move()
 {
-	if (spawn.Finished())
-	{
-		animation = &idle;
-	}
+
 }
 
 void Enemy_Hemisphere::Draw(SDL_Texture* sprites)
