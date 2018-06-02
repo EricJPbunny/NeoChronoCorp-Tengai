@@ -102,27 +102,38 @@ ModulePlayer3::ModulePlayer3()
 	death_circle.speed = 0.8f;
 	
 	//Ultimate Attack
-	ulti.PushBack({ 43,119,20,27 });
-	ulti.PushBack({ 163,317,21,32 });
-	ulti.PushBack({ 272,9,20,63 });
-	ulti.PushBack({ 299,5,32,69 });
-	ulti.PushBack({ 335,2,37,79 });
-	ulti.PushBack({ 378,1,32,85 });
-	ulti.PushBack({ 420,2,44,92 });
-	ulti.PushBack({ 468,2,34,99 });
-	ulti.PushBack({ 19,383,37,117 });
-	ulti.PushBack({ 74,385,52,116 });
-	ulti.PushBack({ 146,384,56,119});
-	ulti.PushBack({ 380,387,43,117 });
-	ulti.PushBack({ 231,385,55,117 });
-	ulti.PushBack({ 303,386,40,117 });
-	ulti.PushBack({ 19,383,37,117 });
-	ulti.PushBack({ 74,385,52,116 });
-	ulti.PushBack({ 146,384,56,119 });
-	ulti.PushBack({ 380,387,43,117 });
-	ulti.PushBack({ 231,385,55,117 });
-	ulti.PushBack({ 303,386,40,117 });
-	ulti.speed = 0.05f;
+	ulti.PushBack({ 382,9,45,32 });
+	ulti.PushBack({ 331,8,45,32 });
+	ulti.PushBack({ 259,9,47,63 });
+	ulti.PushBack({ 313,56,47,69 });
+	ulti.PushBack({ 362,53,48,79 });
+	ulti.PushBack({ 413,52,56,85 });
+	ulti.PushBack({ 478,51,67,92 });
+	ulti.PushBack({ 547,51,67,99 });
+	ulti.PushBack({ 0,381,78,119 });
+	ulti.PushBack({ 87,381,78,119 });
+	ulti.PushBack({ 172,384,78,119 });
+	ulti.PushBack({ 415,385,78,119 });
+	ulti.PushBack({ 235,383,78,119 });
+	ulti.PushBack({ 320,384,78,119 });
+	ulti.PushBack({ 0,381,78,119 });
+	ulti.PushBack({ 87,381,78,119 });
+	ulti.PushBack({ 172,384,78,119 });
+	ulti.PushBack({ 415,385,78,119 });
+	ulti.PushBack({ 235,383,78,119 });
+	ulti.PushBack({ 320,384,78,119 });
+	ulti.PushBack({ 0,381,78,119 });
+	ulti.PushBack({ 279,279,50,102 });
+	ulti.PushBack({ 330,286,50,90 });
+	ulti.PushBack({ 386,300,54,76 });
+	ulti.PushBack({ 5,309,37,45 });
+	ulti.PushBack({ 50,324,44,27 });
+	ulti.PushBack({ 139,323,44,27 });
+	ulti.PushBack({ 93,325,44,27 });
+	ulti.PushBack({ 382,9,45,32 });
+	ulti.PushBack({ 201,323,44,27 });
+
+	ulti.speed = 0.20f;
 
 
 	//Death Player
@@ -279,10 +290,16 @@ update_status ModulePlayer3::Update()
 			coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
 		}
 		else {
-			coll->SetPos(position.x, position.y - 32);
+			if (!ulti_on) {
+				coll->SetPos(position.x, position.y - 32);
 
-			if (!App->scene_air->god_mode)
-			hitbox->SetPos(position.x+8, position.y-20);
+				if (!App->scene_air->god_mode)
+					hitbox->SetPos(position.x + 8, position.y - 20);
+			}
+			else {
+				coll->SetPos(-3000, -5000);
+				hitbox->SetPos(-3000, -5000);
+			}
 		}
 		App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	}
@@ -475,6 +492,7 @@ void ModulePlayer3::PerformActions()
 		}
 		death_pos = true;
 		check_spawn = false;
+		input = true;
 		alpha_player = 255;
 		spin.Reset();
 		current_animation = &idle;
@@ -536,6 +554,7 @@ void ModulePlayer3::PerformActions()
 
 	case ULTI_3:
 		current_animation = &ulti;
+		input = false;
 		break;
 	}	
 }

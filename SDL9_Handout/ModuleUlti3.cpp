@@ -107,15 +107,10 @@ bool ModuleUlti3::CleanUp()
 // Update: draw background
 update_status ModuleUlti3::Update()
 {
-	if (timer) {
-		time_on_entry = SDL_GetTicks();
-		timer = false;
-	}
 	if (interval) {
 		interval_on_entry = SDL_GetTicks();
 		interval = false;
 	}
-	current_time = SDL_GetTicks() - time_on_entry;
 	current_interval = SDL_GetTicks() - interval_on_entry;
 	if (current_interval > 50) {
 		switch (num_petal) {
@@ -228,7 +223,8 @@ update_status ModuleUlti3::Update()
 		interval = true;
 	}
 
-	if(current_time > 6000){
+	if(App->player3->ulti.Finished()){
+		App->player3->ulti.Reset();
 		App->player3->ulti_on = false;
 		App->ulti3->Disable();
 	}
