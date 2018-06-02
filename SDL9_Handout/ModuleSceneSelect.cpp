@@ -176,8 +176,7 @@ update_status ModuleSceneSelect::Update()
 			App->render->Blit(graphics, 65, 158, &ui_2p);
 			App->render->Blit(graphics, 2, 20, &sho_player);
 			App->render->Blit(graphics, 176, 34, &junis_player);
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) {
-				
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN) {
 				sho_p1 = false;
 			}
 		}
@@ -186,7 +185,7 @@ update_status ModuleSceneSelect::Update()
 			App->render->Blit(graphics, 65, 158, &ui_1p);
 			App->render->Blit(graphics, 16, 34, &junis_player);
 			App->render->Blit(graphics, 162, 20, &sho_player);
-			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) {
 				sho_p1 = true;
 			}
 		}

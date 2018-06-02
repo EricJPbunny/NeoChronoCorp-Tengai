@@ -23,26 +23,13 @@
 ModuleSceneAir::ModuleSceneAir()
 {
 	current_animation_2 = NULL;
-}
 
-ModuleSceneAir::~ModuleSceneAir()
-{}
-
-// Load assets
-bool ModuleSceneAir::Start()
-{
-	LOG("Loading background assets");
-	bool ret = true;
-	graphics = App->textures->Load("assets/sprite/sky_Background.png");
-	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
-	graphics2 = App->textures->Load("assets/sprite/destroyed_ship.png");
-	graphics3 = App->textures->Load("assets/sprite/inside_ship_SS.png");
 	//bacground starting rects
 
 	MountainBg.x = 0;
 	MountainBg.y = 192;
 	MountainBg.h = 56;
-	MountainBg.w =  959;
+	MountainBg.w = 959;
 
 	SkyOne.x = 0;
 	SkyOne.y = 0;
@@ -145,16 +132,15 @@ bool ModuleSceneAir::Start()
 	peak2.h = 24;
 	peak2.w = 256;
 
-
 	peak3.x = 0;
 	peak3.y = 332;
 	peak3.h = 16;
 	peak3.w = 237;
 
 	//Animation
-	inside.PushBack({2,1,304,224});
-	inside.PushBack({317,1,304,224});
-	inside.PushBack({635,1,304,224});
+	inside.PushBack({ 2,1,304,224 });
+	inside.PushBack({ 317,1,304,224 });
+	inside.PushBack({ 635,1,304,224 });
 	inside.speed = 0.30f;
 
 	piston.PushBack({ 273,325,98,119 });
@@ -164,29 +150,47 @@ bool ModuleSceneAir::Start()
 	piston.PushBack({ 748,323,98,119 });
 	piston.speed = 0.35f;
 
-	screw.PushBack({273,236,48,73});
-	screw.PushBack({338,236,48,73});
-	screw.PushBack({402,236,48,73});
-	screw.PushBack({470,237,48,73});
-	screw.PushBack({539,237,48,73});
+	screw.PushBack({ 273,236,48,73 });
+	screw.PushBack({ 338,236,48,73 });
+	screw.PushBack({ 402,236,48,73 });
+	screw.PushBack({ 470,237,48,73 });
+	screw.PushBack({ 539,237,48,73 });
 	screw.speed = 0.30f;
+}
 
+ModuleSceneAir::~ModuleSceneAir()
+{}
+
+// Load assets
+bool ModuleSceneAir::Start()
+{
+	LOG("Loading background assets");
+	bool ret = true;
+	graphics = App->textures->Load("assets/sprite/sky_Background.png");
+	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
+	graphics2 = App->textures->Load("assets/sprite/destroyed_ship.png");
+	graphics3 = App->textures->Load("assets/sprite/inside_ship_SS.png");
 
 	//startup
-	if (App->scene_select->sho_p1) {
-		App->player2->Enable();
+	//1Player vs 2Player
+	if (App->scene_select->one_player) {
+		if (App->scene_select->sho_p1) {
+			App->player2->Enable();
+		}
+		else {
+			App->player3->Enable();
+		}
 	}
 	else {
+		App->player2->Enable();
 		App->player3->Enable();
 	}
 	App->ui->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
 
-	App->ui->score_koyori = 0;
+	App->ui->score_junis = 0;
 	App->ui->score_sho = 0;
-
-	App->audio->PlaySoundEffects(select_koyori);
 
 	coll_up = App->collision->AddCollider({ 0, 0, 99000, 20 }, COLLIDER_WALL);
 	coll_down = App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
