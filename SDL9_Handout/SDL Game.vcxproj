@@ -82,6 +82,7 @@
     <ClInclude Include="Enemy_Buda.h" />
     <ClInclude Include="Enemy_Coin.h" />
     <ClInclude Include="Enemy_GreenOvni.h" />
+    <ClInclude Include="Enemy_Hemisphere.h" />
     <ClInclude Include="Enemy_Knife.h" />
     <ClInclude Include="Enemy_Ninja.h" />
     <ClInclude Include="Enemy_RedOvni.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="Enemy_Buda.cpp" />
     <ClCompile Include="Enemy_Coin.cpp" />
     <ClCompile Include="Enemy_GreenOvni.cpp" />
+    <ClCompile Include="Enemy_Hemisphere.cpp" />
     <ClCompile Include="Enemy_Knife.cpp" />
     <ClCompile Include="Enemy_Ninja.cpp" />
     <ClCompile Include="Enemy_RedOvni.cpp" />
