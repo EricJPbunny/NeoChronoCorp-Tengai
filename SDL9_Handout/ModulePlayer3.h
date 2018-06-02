@@ -82,6 +82,7 @@ public:
 	bool pressed_right;
 
 	bool shot_ctrl;
+	bool ulti_button;
 	
 
 };

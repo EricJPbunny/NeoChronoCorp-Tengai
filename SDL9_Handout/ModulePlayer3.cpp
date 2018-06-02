@@ -11,6 +11,7 @@
 #include "ModulePlayer3.h"
 #include "ModulePartner3.h"
 #include "ModuleSceneSelect.h"
+#include "ModuleUlti3.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
 
@@ -165,6 +166,7 @@ update_status ModulePlayer3::Update()
 		pressed_right = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 		shot_ctrl = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN;
 	}
 	else {
 		pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
@@ -173,6 +175,7 @@ update_status ModulePlayer3::Update()
 		pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT;
 
 		shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN;
 	}
 
 	//Power Up Limits
@@ -183,6 +186,12 @@ update_status ModulePlayer3::Update()
 		power_up = 4;
 	}
 
+	if (ulti_button) {
+		if (!App->ulti3->IsEnabled()) {
+			App->ulti3->timer = true;
+			App->ulti3->Enable();
+		}
+	}
 	//check state
 	CheckState();
 

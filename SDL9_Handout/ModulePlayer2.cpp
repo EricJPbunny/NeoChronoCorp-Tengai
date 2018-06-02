@@ -172,6 +172,7 @@ update_status ModulePlayerTwo::Update()
 		pressed_D = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 		shot_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN;
 	}
 
 	float speed = 2.5;
@@ -184,6 +185,12 @@ update_status ModulePlayerTwo::Update()
 		power_up = 4;
 	}
 
+	if (ulti_button) {
+		if (!App->ulti2->IsEnabled()) {
+			App->ulti2->timer = true;
+			App->ulti2->Enable();
+		}
+	}
 	//check state
 	CheckState();
 
