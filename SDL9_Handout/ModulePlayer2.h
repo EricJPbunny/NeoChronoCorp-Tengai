@@ -83,6 +83,15 @@ public:
 
 	bool shot_space;
 	bool ulti_button;
+
+	bool press_A;
+	bool press_W;
+
+	bool release_A;
+	bool release_W;
+
+	bool released_W;
+	bool released_A;
 };
 
 

@@ -26,6 +26,10 @@ public:
 	SDL_Rect junis_anim;
 	SDL_Rect sho_anim;
 
+	Mix_Chunk* change_player = nullptr;
+	Mix_Chunk* select_sho = nullptr;
+	Mix_Chunk* select_junis = nullptr;
+
 	bool one_player = true;
 	bool sho_p1 = true;
 

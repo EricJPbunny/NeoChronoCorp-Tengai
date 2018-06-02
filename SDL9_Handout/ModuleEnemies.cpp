@@ -42,6 +42,7 @@ bool ModuleEnemies::Start()
 
 	fx_death = App->audio->LoadEffect("assets/audio/enemy_death.wav");
 	s_power_down = App->audio->LoadEffect("assets/audio/sho_lvl_down.wav");
+	j_power_down = App->audio->LoadEffect("assets/audio/junis_lvl_down.wav");
 
 
 	return true;
@@ -102,6 +103,7 @@ bool ModuleEnemies::CleanUp()
 {
 	LOG("Freeing all enemies");
 
+	App->audio->UnloadFx(j_power_down);
 	App->audio->UnloadFx(s_power_down);
 	App->audio->UnloadFx(fx_death);
 	App->textures->Unload(sprites);
@@ -189,24 +191,24 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			//Player collides w enemies
 			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY) {
-				if (c2 == App->player->hitbox) {
+				if (c2 == App->player3->hitbox) {
 					if (timer) {
 						time_on_entry = SDL_GetTicks();
 						timer = false;
 					}
 					current_time = SDL_GetTicks() - time_on_entry;
 					if (current_time > 600) {
-						if (App->player->power_up > 0) {
+						if (App->player3->power_up > 0) {
 							App->particles->power_down.speed.x = speed;
 							App->particles->power_down.speed.y = -2;
 							App->particles->AddParticle(App->particles->power_down, App->player->position.x, App->player->position.y);
 						}
-						App->player->power_up--;
+						App->player3->power_up--;
 						timer = true;
 					}
-					App->audio->PlaySoundEffects(App->player->k_power_down);
-					App->player->spin_pos = true;
-					App->player->state = SPIN;
+					App->audio->PlaySoundEffects(j_power_down);
+					App->player3->spin_pos = true;
+					App->player3->state = SPIN_3;
 				}
 				if (c2 == App->player2->hitbox) {
 					if (timer_2) {
@@ -405,7 +407,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					if (App->player3->power_up < 4) {
 						App->particles->power_up.speed.x = speed;
 						App->particles->power_up.speed.y = -2;
-						App->particles->AddParticle(App->particles->power_up, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_SHO);
+						App->particles->AddParticle(App->particles->power_up, App->player3->position.x, App->player3->position.y, COLLIDER_NONE, PARTICLE_POWER_UP_JUNIS);
 						App->player3->power_up++;
 					}
 					else {

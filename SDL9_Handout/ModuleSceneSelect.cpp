@@ -98,6 +98,10 @@ bool ModuleSceneSelect::Start()
 	graphics = App->textures->Load("assets/sprite/Select_Screen.png");
 	font_time = App->fonts->Load("fonts/time_fonts.png", "0123456789", 1);
 
+	change_player = App->audio->LoadEffect("assets/audio/select_player.wav");
+	select_sho = App->audio->LoadEffect("assets/audio/select_sho.wav");
+	select_junis = App->audio->LoadEffect("assets/audio/select_junis.wav");
+
 	return true;
 }
 
@@ -105,6 +109,10 @@ bool ModuleSceneSelect::Start()
 bool ModuleSceneSelect::CleanUp()
 {
 	LOG("Unloading Start Screen");
+
+	App->audio->UnloadFx(select_junis);
+	App->audio->UnloadFx(select_sho);
+	App->audio->UnloadFx(change_player);
 	App->textures->Unload(graphics);
 	App->fonts->UnLoad(font_time);
 	return true;
@@ -146,6 +154,7 @@ update_status ModuleSceneSelect::Update()
 			App->render->Blit(graphics, 42, 121, &sho_name);
 			App->render->Blit(graphics, 146, 20, &sho_player);
 			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) {
+				App->audio->PlaySoundEffects(change_player);
 				sho_p1 = false;
 			}
 		}
@@ -155,6 +164,7 @@ update_status ModuleSceneSelect::Update()
 			App->render->Blit(graphics, 33, 122, &junis_name);
 			App->render->Blit(graphics, 160, 34, &junis_player);
 			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
+				App->audio->PlaySoundEffects(change_player);
 				sho_p1 = true;
 			}
 		}
@@ -167,6 +177,7 @@ update_status ModuleSceneSelect::Update()
 			App->render->Blit(graphics, 2, 20, &sho_player);
 			App->render->Blit(graphics, 176, 34, &junis_player);
 			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) {
+				
 				sho_p1 = false;
 			}
 		}
@@ -188,6 +199,12 @@ update_status ModuleSceneSelect::Update()
 
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN || time_num == 0) {
+		if (sho_p1) {
+			App->audio->PlaySoundEffects(select_sho);
+		}
+		else {
+			App->audio->PlaySoundEffects(select_junis);
+		}
 		App->fade->FadeToBlack(App->scene_select, App->scene_air, 1.50f);
 	}
 

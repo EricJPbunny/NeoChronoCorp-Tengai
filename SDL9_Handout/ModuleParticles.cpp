@@ -337,6 +337,7 @@ bool ModuleParticles::Start()
 	shoot_sho = App->audio->LoadEffect("assets/audio/Shot_Sho.wav");
 	power_up_koyori_fx = App->audio->LoadEffect("assets/audio/power_up_koyori.wav");
 	power_up_sho_fx = App->audio->LoadEffect("assets/audio/power_up_sho.wav");
+	power_up_junis_fx = App->audio->LoadEffect("assets/audio/power_up_junis.wav");
 	koyori_death = App->audio->LoadEffect("assets/audio/death_koyori.wav");
 	sho_death = App->audio->LoadEffect("assets/audio/death_sho.wav");
 	coin_fx = App->audio->LoadEffect("assets/audio/catch_coin.wav");
@@ -430,7 +431,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 				App->audio->PlaySoundEffects(power_up_sho_fx);
 			}
 			if (particle_type == PARTICLE_POWER_UP_JUNIS) {
-				//App->audio->PlaySoundEffects(power_up_junis_fx);
+				App->audio->PlaySoundEffects(power_up_junis_fx);
 			}
 			if (particle_type == PARTICLE_COIN) {
 				App->audio->PlaySoundEffects(coin_fx);
