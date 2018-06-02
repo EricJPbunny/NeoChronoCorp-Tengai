@@ -37,7 +37,7 @@ public:
 	SDL_Texture* mid1 = nullptr;
 	SDL_Texture* end = nullptr;
 	SDL_Rect MountainBg, SkyOne, SkyTwo, SkyThree, SkyFour, FloorOne, FloorTwo, FloorThree, FloorFour, FloorFive, BigSky, BigSkyTwo, BigSkyThree, exterior_ship,BigSkyParalaxOne, BigSkyParalaxTwo;
-	SDL_Rect destroyed_ship, inside_2, grid;
+	SDL_Rect destroyed_ship, inside_2, grid, peak, peak2, peak3;
 	SDL_Rect fader, fademid;
 	Animation inside, piston, screw;
 	Animation* current_animation_2 = nullptr; 

@@ -135,7 +135,22 @@ bool ModuleSceneAir::Start()
 	grid.h = 224;
 	grid.w = 163;
 
-	
+	peak.x = 0;
+	peak.y = 376;
+	peak.h = 16;
+	peak.w = 254;
+
+	peak2.x = 0;
+	peak2.y = 350;
+	peak2.h = 24;
+	peak2.w = 256;
+
+
+	peak3.x = 0;
+	peak3.y = 332;
+	peak3.h = 16;
+	peak3.w = 237;
+
 	//Animation
 	inside.PushBack({2,1,304,224});
 	inside.PushBack({317,1,304,224});
@@ -345,6 +360,11 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (FloorThree.w * i), 190, &FloorThree, bg_speed_default * 6);
 		App->render->Blit(graphics, (FloorFour.w * i), 200, &FloorFour, bg_speed_default * 7);
 		App->render->Blit(graphics, (FloorFive.w * i), 208, &FloorFive, bg_speed_default * 8);
+		App->render->Blit(graphics, (peak.w * i), 192, &peak, bg_speed_default * 8);
+		App->render->Blit(graphics, (peak2.w * i), 176, &peak2, bg_speed_default * 7);
+		App->render->Blit(graphics, (peak3.w * i), 174, &peak3, bg_speed_default * 6);
+		App->render->Blit(graphics, (peak3.w * i), 166, &peak3, bg_speed_default * 5);
+		
 	}
 	for (int i = 0; i < 20; ++i) {
 		App->render->Blit(graphics, (BigSky.w * i)-35, -391, &BigSky, bg_speed_default * 3);
@@ -427,7 +447,7 @@ update_status ModuleSceneAir::Update()
 					App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
 					increaser_3++;
 				}
-				if (aux < 350) {
+				if (aux < 100) {
 					App->render->Blit(graphics2, -152, -215, &destroyed_ship, speed_inside, 0.00f);
 					aux++;
 					speed_inside += 0.001;
@@ -435,8 +455,8 @@ update_status ModuleSceneAir::Update()
 					
 				}
 				else {
-					App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.35f, 0.00f);
-					App->render->Blit(graphics3, 858, 0, &grid, 0.35f, 0.00f);
+					App->render->Blit(graphics2, -152, -215, &destroyed_ship, 0.10f, 0.00f);
+					App->render->Blit(graphics3, 858, 0, &grid, 0.10f, 0.00f);
 					
 				}
 				
