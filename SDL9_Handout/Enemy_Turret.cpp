@@ -25,8 +25,10 @@ Enemy_Turret::Enemy_Turret(int x, int y, int type) :Enemy(x, y,type)
 	idle.PushBack({ 305,73,36,39 });
 	idle.speed = 0.20f;
 
-	movement.PushBack({ 0,0 }, 30, &spawn);
-	movement.PushBack({ 0,0 }, 900, &idle);
+	animation = &spawn;
+
+	movement.PushBack({ 1,0 }, 30, &spawn);
+	movement.PushBack({ 1,0 }, 900, &idle);
 
 	this->type = type;
 
@@ -41,7 +43,10 @@ Enemy_Turret::~Enemy_Turret()
 
 void Enemy_Turret::Move()
 {
-
+	if (spawn.Finished())
+	{
+		animation = &idle;
+	}
 }
 
 void Enemy_Turret::Draw(SDL_Texture* sprites)
