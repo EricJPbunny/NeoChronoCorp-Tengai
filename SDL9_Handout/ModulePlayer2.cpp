@@ -173,7 +173,7 @@ update_status ModulePlayerTwo::Update()
 		pressed_D = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 		shot_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
-		ulti_button = App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN || App->input->controller_X_button2 == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN || App->input->controller_X_button2 == KEY_STATE::KEY_DOWN;
 	}
 
 	float speed = 2.5;
