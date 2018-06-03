@@ -19,7 +19,8 @@ private:
 	SDL_Texture* boss_sprite;
 	int current_time, time_on_entry;
 	bool timer = true;
-	int fire_rate= 10, shot_cd =0;
+	int fire_rate= 90, shot_cd =0;
+	int starter = 0;
 	enum shot_types {
 		first_shot,
 		second_shot,
@@ -33,6 +34,7 @@ private:
 	Animation spawn;
 	Animation idle;
 	Animation shoot;
+	Path movement;
 };
 
 #endif#pragma once
