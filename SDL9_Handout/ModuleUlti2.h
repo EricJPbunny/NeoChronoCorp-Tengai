@@ -22,6 +22,7 @@ public:
 public:
 	Particle sword, sword_idle;
 	SDL_Texture* graphics = nullptr;
+	Mix_Chunk* ulti_fx = nullptr;
 	int posy = 20;
 	
 	bool timer = false;

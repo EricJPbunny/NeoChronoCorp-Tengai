@@ -178,6 +178,8 @@ bool ModuleUlti3::Start()
 	LOG("Loading Ulti 3");
 	graphics = App->textures->Load("assets/sprite/Sho_Spritesheet.png");
 	coll = App->collision->AddCollider(ulti_collider, COLLIDER_ULTI3);
+	ulti_fx = App->audio->LoadEffect("assets/audio/junis ulti.wav");
+	App->audio->PlaySoundEffects(ulti_fx);
 	return true;
 }
 
@@ -185,6 +187,7 @@ bool ModuleUlti3::Start()
 bool ModuleUlti3::CleanUp()
 {
 	LOG("Unloading Ulti 3");
+	App->audio->UnloadFx(ulti_fx);
 	if (coll != nullptr)
 		coll->to_delete = true;
 	App->textures->Unload(graphics);

@@ -94,17 +94,6 @@ public:
 	Particle fire, fire2, fire3, fire4, fire5, fire6, fire7, fire8, fire9, fire10;
 	Particle enemie_shoot, archer_shoot, bird_shoot, bird_shoot2;
 	Particle shipHead_shoot;
-	
-
-	bool timer = false;
-	int current_time = 1200, time_on_entry = 0;
-
-	bool timer_2 = false;
-	int current_time_2 = 1200, time_on_entry_2 = 0;
-
-	bool timer_3 = false;
-	int current_time_3 = 1200, time_on_entry_3 = 0;
-
 };
 
 #endif // __MODULEPARTICLES_H__

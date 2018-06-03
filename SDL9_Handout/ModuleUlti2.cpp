@@ -39,6 +39,9 @@ bool ModuleUlti2::Start()
 	LOG("Loading Ulti 2");
 	graphics = App->textures->Load("assets/sprite/Sho_Spritesheet.png");
 	coll = App->collision->AddCollider(ulti_collider, COLLIDER_ULTI2);
+	ulti_fx = App->audio->LoadEffect("assets/audio/sho ulti.wav");
+	App->audio->PlaySoundEffects(ulti_fx);
+	
 	return true;
 }
 
