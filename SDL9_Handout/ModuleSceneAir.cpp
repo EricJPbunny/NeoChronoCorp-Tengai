@@ -284,7 +284,7 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BOSSHEAD, 3500, -650, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::BUDA, 4450, -760, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRET, 4450, -628, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::ELF, 150, 60, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::ELF, 90, 60, 2);
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 690, 42,1);
@@ -413,6 +413,49 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3230, -600, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3210, -650, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3200, -640, 1);
+
+
+	//Final
+	
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4380, -620,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4410, -712,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4440, -644,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4470, -764,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4510, -744,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4550, -600,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4600, -764,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4620, -634,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4650, -700,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4690, -700,1);
+
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4690, -642,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4690, -687,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4690, -732,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4690, -777,1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4770, -642,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4770, -687,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4770, -732,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 4770, -777,1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4910, -620,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4940, -644,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 4970, -664,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 5010, -744,1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 5120, -666,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 5170, -756,1);
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 5970, -642,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 5970, -687,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 5970, -732,1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 5970, -777,1);
 
 	return ret;
 }
