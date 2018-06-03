@@ -194,6 +194,11 @@ ModuleSceneAir::ModuleSceneAir()
 	cloud_inter3.h = 71;
 	cloud_inter3.w = 102;
 
+	lion.x = 25;
+	lion.y = 488;
+	lion.h = 185;
+	lion.w = 144;
+
 	//Animation
 	inside.PushBack({ 2,1,304,224 });
 	inside.PushBack({ 317,1,304,224 });
@@ -213,6 +218,8 @@ ModuleSceneAir::ModuleSceneAir()
 	screw.PushBack({ 470,237,48,73 });
 	screw.PushBack({ 539,237,48,73 });
 	screw.speed = 0.30f;
+
+	
 }
 
 ModuleSceneAir::~ModuleSceneAir()
@@ -227,6 +234,7 @@ bool ModuleSceneAir::Start()
 	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
 	graphics2 = App->textures->Load("assets/sprite/destroyed_ship.png");
 	graphics3 = App->textures->Load("assets/sprite/inside_ship_SS.png");
+
 
 	//startup
 	//1Player vs 2Player
@@ -553,7 +561,9 @@ update_status ModuleSceneAir::Update()
 						}
 						
 						App->render->Blit(graphics2, +115-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
+						App->render->Blit(graphics3, 1126 - animspeed, 20, &lion, speed_lion, 0.00f);
 						App->render->Blit(graphics3, 1126-animspeed, 0, &grid, 0.00f, 0.00f);
+						
 						if (App->render->camera.x > 17500 && App->render->camera.x < 20500) {
 							animspeed = 790;
 						}
