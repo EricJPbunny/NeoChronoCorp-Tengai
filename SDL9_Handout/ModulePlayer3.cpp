@@ -164,7 +164,6 @@ bool ModulePlayer3::Start()
 	App->partner3->Enable();
 
 	App->ui->num_life_junis = 3;
-	App->ui->num_ulti_junis = 2;
 
 	time = true;
 	destroyed = false;
@@ -381,6 +380,7 @@ void ModulePlayer3::CheckState()
 		if (current_time > 1500) {
 			state = IDLE_3;
 		}
+		App->ui->num_ulti_junis = 2;
 		power_up = 0;
 		break;
 

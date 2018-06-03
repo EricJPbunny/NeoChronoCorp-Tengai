@@ -126,7 +126,6 @@ bool ModulePlayerTwo::Start()
 	App->partner2->Enable();
 
 	App->ui->num_life_sho = 3;
-	App->ui->num_ulti_sho = 2;
 
 	time = true;
 	destroyed = false;
@@ -379,6 +378,7 @@ void ModulePlayerTwo::CheckState()
 		if (current_time > 1500) {
 			state = IDLE_2;
 		}
+		App->ui->num_ulti_sho = 2;
 		power_up = 0;
 		break;
 
