@@ -131,6 +131,7 @@ update_status ModulePartner3::Update()
 
 	//Draw partner
 	SDL_Rect r = current_animation->GetCurrentFrame();
+
 	//shuriken shot with 1st power up
 	if (App->player3->power_up==1) {
 		if (movement) {
@@ -466,7 +467,27 @@ void ModulePartner3::PerformActions()
 		current_animation = &pre_shot;
 		if (pre_shot.Finished()) {
 			current_animation = &shot;
+			if (shot_delay)
+			{
+				shot_entry = SDL_GetTicks();
+				shot_delay = false;
+			}
+			shot_current = SDL_GetTicks() - shot_entry;
+			if (shot_current > 200) {
 
+				App->particles->AddParticle(App->particles->fire, position.x + 77, position.y - 55, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire2, position.x + 84, position.y - 55, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire3, position.x + 95, position.y - 55, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire4, position.x + 100, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire5, position.x + 108, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire6, position.x + 113, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire7, position.x + 115, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire8, position.x + 123, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire9, position.x + 129, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				App->particles->AddParticle(App->particles->fire10, position.x + 133, position.y - 65, COLLIDER_PLAYER_3_SHOT);
+				shot_delay = true;
+			}
+			
 		}
 		break;
 

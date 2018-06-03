@@ -83,6 +83,84 @@ ModuleUlti3::ModuleUlti3()
 	petal_6.life = 3000;
 	petal_6.anim.speed = 0.20f;
 	petal_6.speed = { 3, -2 };
+
+	petal_7.anim.PushBack({ 681,433,11,11 });
+	petal_7.anim.PushBack({ 654,432,11,13 });
+	petal_7.anim.PushBack({ 454,468,11,13 });
+	petal_7.anim.PushBack({ 485,369,12,12 });
+	petal_7.anim.PushBack({ 589,409,13,10 });
+	petal_7.anim.PushBack({ 416,468,11,12 });
+	petal_7.anim.PushBack({ 463,451,11,13 });
+	petal_7.anim.PushBack({ 577,467,11,12 });
+	petal_7.anim.PushBack({ 606,469,13,10 });
+	petal_7.life = 3000;
+	petal_7.anim.speed = 0.20f;
+	petal_7.speed = { -3, 2 };
+
+	petal_8.anim.PushBack({ 681,433,11,11 });
+	petal_8.anim.PushBack({ 654,432,11,13 });
+	petal_8.anim.PushBack({ 454,468,11,13 });
+	petal_8.anim.PushBack({ 485,469,12,12 });
+	petal_8.anim.PushBack({ 589,409,13,10 });
+	petal_8.anim.PushBack({ 416,468,11,12 });
+	petal_8.anim.PushBack({ 463,451,11,13 });
+	petal_8.anim.PushBack({ 577,467,11,12 });
+	petal_8.anim.PushBack({ 606,469,13,10 });
+	petal_8.life = 3000;
+	petal_8.anim.speed = 0.20f;
+	petal_8.speed = { -3, 2 };
+
+	petal_9.anim.PushBack({ 681,433,11,11 });
+	petal_9.anim.PushBack({ 654,432,11,13 });
+	petal_9.anim.PushBack({ 454,468,11,13 });
+	petal_9.anim.PushBack({ 485,469,12,12 });
+	petal_9.anim.PushBack({ 589,409,13,10 });
+	petal_9.anim.PushBack({ 416,468,11,12 });
+	petal_9.anim.PushBack({ 463,451,11,13 });
+	petal_9.anim.PushBack({ 577,467,11,12 });
+	petal_9.anim.PushBack({ 606,469,13,10 });
+	petal_9.life = 3000;
+	petal_9.anim.speed = 0.20f;
+	petal_9.speed = { -3, 2 };
+
+	petal_10.anim.PushBack({ 681,433,11,11 });
+	petal_10.anim.PushBack({ 654,432,11,13 });
+	petal_10.anim.PushBack({ 454,468,11,13 });
+	petal_10.anim.PushBack({ 485,469,12,12 });
+	petal_10.anim.PushBack({ 589,409,13,10 });
+	petal_10.anim.PushBack({ 416,468,11,12 });
+	petal_10.anim.PushBack({ 463,451,11,13 });
+	petal_10.anim.PushBack({ 577,467,11,12 });
+	petal_10.anim.PushBack({ 606,469,13,10 });
+	petal_10.life = 3000;
+	petal_10.anim.speed = 0.20f;
+	petal_10.speed = { -3, 2 };
+
+	petal_11.anim.PushBack({ 681,433,11,11 });
+	petal_11.anim.PushBack({ 654,432,11,13 });
+	petal_11.anim.PushBack({ 454,468,11,13 });
+	petal_11.anim.PushBack({ 485,469,12,12 });
+	petal_11.anim.PushBack({ 589,409,13,10 });
+	petal_11.anim.PushBack({ 416,468,11,12 });
+	petal_11.anim.PushBack({ 463,451,11,13 });
+	petal_11.anim.PushBack({ 577,467,11,12 });
+	petal_11.anim.PushBack({ 606,469,13,10 });
+	petal_11.life = 3000;
+	petal_11.anim.speed = 0.20f;
+	petal_11.speed = { -3, 2 };
+
+	petal_12.anim.PushBack({ 681,433,11,11 });
+	petal_12.anim.PushBack({ 654,432,11,13 });
+	petal_12.anim.PushBack({ 454,468,11,13 });
+	petal_12.anim.PushBack({ 485,469,12,12 });
+	petal_12.anim.PushBack({ 589,409,13,10 });
+	petal_12.anim.PushBack({ 416,468,11,12 });
+	petal_12.anim.PushBack({ 463,451,11,13 });
+	petal_12.anim.PushBack({ 577,467,11,12 });
+	petal_12.anim.PushBack({ 606,469,13,10 });
+	petal_12.life = 3000;
+	petal_12.anim.speed = 0.20f;
+	petal_12.speed = { -3, 2 };
 }
 
 ModuleUlti3::~ModuleUlti3()
@@ -116,106 +194,132 @@ update_status ModuleUlti3::Update()
 		switch (num_petal) {
 		case 0:
 			App->particles->AddParticle(petal_1, (App->render->camera.x / SCREEN_SIZE) + 310, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_7, (App->render->camera.x / SCREEN_SIZE) + 20, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 1:
 			App->particles->AddParticle(petal_2, (App->render->camera.x / SCREEN_SIZE) + 150, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_8, (App->render->camera.x / SCREEN_SIZE) + 150, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 2:
 			App->particles->AddParticle(petal_3, (App->render->camera.x / SCREEN_SIZE) , (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_9, (App->render->camera.x / SCREEN_SIZE) + 190, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;;
 			break;
 		case 3:
 			App->particles->AddParticle(petal_4, (App->render->camera.x / SCREEN_SIZE) + 40, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_10, (App->render->camera.x / SCREEN_SIZE) + 60, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 4:
 			App->particles->AddParticle(petal_5, (App->render->camera.x / SCREEN_SIZE) + 290, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_11, (App->render->camera.x / SCREEN_SIZE) + 220, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 5:
 			App->particles->AddParticle(petal_6, (App->render->camera.x / SCREEN_SIZE) + 80, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_12, (App->render->camera.x / SCREEN_SIZE) + 300, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 6:
 			App->particles->AddParticle(petal_1, (App->render->camera.x / SCREEN_SIZE) + 20, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_7, (App->render->camera.x / SCREEN_SIZE) + 30, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 7:
 			App->particles->AddParticle(petal_2, (App->render->camera.x / SCREEN_SIZE) + 160, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_8, (App->render->camera.x / SCREEN_SIZE) + 315, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 8:
 			App->particles->AddParticle(petal_3, (App->render->camera.x / SCREEN_SIZE) + 260, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_9, (App->render->camera.x / SCREEN_SIZE) + 20, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 9:
 			App->particles->AddParticle(petal_4, (App->render->camera.x / SCREEN_SIZE) + 300, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_10, (App->render->camera.x / SCREEN_SIZE) + 240, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 10:
 			App->particles->AddParticle(petal_5, (App->render->camera.x / SCREEN_SIZE) + 70, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_11, (App->render->camera.x / SCREEN_SIZE) + 60, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 11:
 			App->particles->AddParticle(petal_6, (App->render->camera.x / SCREEN_SIZE) + 120, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_12, (App->render->camera.x / SCREEN_SIZE) + 300, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 12:
 			App->particles->AddParticle(petal_1, (App->render->camera.x / SCREEN_SIZE) + 250, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_7, (App->render->camera.x / SCREEN_SIZE) + 140, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 13:
 			App->particles->AddParticle(petal_2, (App->render->camera.x / SCREEN_SIZE) + 120, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_8, (App->render->camera.x / SCREEN_SIZE) + 220, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 14:
 			App->particles->AddParticle(petal_3, (App->render->camera.x / SCREEN_SIZE) + 7, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_9, (App->render->camera.x / SCREEN_SIZE) + 100, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 15:
 			App->particles->AddParticle(petal_4, (App->render->camera.x / SCREEN_SIZE) + 210, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_10, (App->render->camera.x / SCREEN_SIZE) + 190, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 16:
 			App->particles->AddParticle(petal_5, (App->render->camera.x / SCREEN_SIZE) + 190, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_11, (App->render->camera.x / SCREEN_SIZE) + 50, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 17:
 			App->particles->AddParticle(petal_6, (App->render->camera.x / SCREEN_SIZE) + 315, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_12, (App->render->camera.x / SCREEN_SIZE) + 280, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 18:
 			App->particles->AddParticle(petal_1, (App->render->camera.x / SCREEN_SIZE) - 10, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_7, (App->render->camera.x / SCREEN_SIZE) + 210, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 19:
 			App->particles->AddParticle(petal_2, (App->render->camera.x / SCREEN_SIZE) + 30, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_8, (App->render->camera.x / SCREEN_SIZE) + 90, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 20:
 			App->particles->AddParticle(petal_3, (App->render->camera.x / SCREEN_SIZE) + 130, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_9, (App->render->camera.x / SCREEN_SIZE) + 295, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 21:
 			App->particles->AddParticle(petal_4, (App->render->camera.x / SCREEN_SIZE) + 180, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_10, (App->render->camera.x / SCREEN_SIZE) + 130, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 22:
 			App->particles->AddParticle(petal_5, (App->render->camera.x / SCREEN_SIZE) , (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_11, (App->render->camera.x / SCREEN_SIZE) + 30, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 23:
 			App->particles->AddParticle(petal_6, (App->render->camera.x / SCREEN_SIZE) + 210, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_12, (App->render->camera.x / SCREEN_SIZE) + 170, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 24:
 			App->particles->AddParticle(petal_1, (App->render->camera.x / SCREEN_SIZE) + 290, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_7, (App->render->camera.x / SCREEN_SIZE) + 260, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal++;
 			break;
 		case 25:
 			App->particles->AddParticle(petal_2, (App->render->camera.x / SCREEN_SIZE) + 310, (App->render->camera.y / SCREEN_SIZE) + 230);
+			App->particles->AddParticle(petal_8, (App->render->camera.x / SCREEN_SIZE) + 310, (App->render->camera.y / SCREEN_SIZE) - 10);
 			num_petal = 0;
 			break;
 
