@@ -583,8 +583,8 @@ update_status ModuleSceneAir::Update()
 	//Debug Mode
 	//Kill Koyori
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
-		App->ui->num_life_koyori = 0;
-		App->player->state = DEATH;
+		App->ui->num_life_junis = 0;
+		App->player3->state = DEATH_3;
 	}
 	//Kill Sho
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) {

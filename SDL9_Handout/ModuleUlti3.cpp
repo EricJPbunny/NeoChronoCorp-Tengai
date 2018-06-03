@@ -161,6 +161,12 @@ ModuleUlti3::ModuleUlti3()
 	petal_12.life = 3000;
 	petal_12.anim.speed = 0.20f;
 	petal_12.speed = { -3, 2 };
+
+	ulti_collider.x = 0;
+	ulti_collider.y = 0;
+	ulti_collider.w = SCREEN_WIDTH;
+	ulti_collider.h = SCREEN_HEIGHT;
+
 }
 
 ModuleUlti3::~ModuleUlti3()
@@ -171,6 +177,7 @@ bool ModuleUlti3::Start()
 {
 	LOG("Loading Ulti 3");
 	graphics = App->textures->Load("assets/sprite/Sho_Spritesheet.png");
+	coll = App->collision->AddCollider(ulti_collider, COLLIDER_ULTI3);
 	return true;
 }
 
@@ -178,6 +185,8 @@ bool ModuleUlti3::Start()
 bool ModuleUlti3::CleanUp()
 {
 	LOG("Unloading Ulti 3");
+	if (coll != nullptr)
+		coll->to_delete = true;
 	App->textures->Unload(graphics);
 	return true;
 }
@@ -333,6 +342,8 @@ update_status ModuleUlti3::Update()
 		App->ulti3->Disable();
 	}
 	
+	//Set Position Collider
+	coll->SetPos((App->render->camera.x / SCREEN_SIZE), (App->render->camera.y / SCREEN_SIZE));
 
 	return UPDATE_CONTINUE;
 }
