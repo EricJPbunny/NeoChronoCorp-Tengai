@@ -38,11 +38,14 @@ private:
 	bool timer = true;
 	bool shooting = true;
 	bool shooting2 = true;
+	bool shooting3 = true;
 	bool shurikens = true;
 	bool shurikens2 = true;
 	bool shurikens3 = true;
 	bool shurikens4 = true;
-
+	bool shurikens5 = true;
+	bool shurikens6 = true;
+	bool shurikens7 = true;
 	int type;
 };
 
