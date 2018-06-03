@@ -6,13 +6,16 @@ Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 
 
 **Plot:** Long time ago, peace reigned over the Eastern Lands. The Villain kidnapped East Princess and Futsuhime. Kuzuhime knows about all the conspiration, and before being kidnapped, she sends a message to our heroes in order to prevent evil from destroying the world. The only have one night and one day before the beginning of the end. 
 
-[![Video Image](http://img.youtube.com/vi/jCQH_34d5r0/maxresdefault.jpg)](https://www.youtube.com/watch?v=jCQH_34d5r0&t=152s)
 
 ## Link to download
 * **[Game](https://github.com/EricJPbunny/NeoChronoCorp-Tengai/releases)**
 
 ## Installation
 > __Unzip the release folder and execute the Tengai.exe file__
+
+## Video
+
+[![Tengai](http://img.youtube.com/vi/M7enxleAxUI/0.jpg)](https://www.youtube.com/watch?v=M7enxleAxUI "Audi R8")
 
 ## Game Controls
 
