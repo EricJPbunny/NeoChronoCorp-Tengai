@@ -371,7 +371,7 @@ ModuleParticles::ModuleParticles()
 	archer_shoot.speed.x = -2;
 
 	//Bird bullets
-	bird_shoot.anim.PushBack({ 7,438,10,10 });
+	bird_shoot2.anim.PushBack({ 7,438,10,10 });
 	bird_shoot.anim.PushBack({ 24,438,10,10 });
 	bird_shoot.anim.PushBack({ 41,438,10,10 });
 	bird_shoot.anim.PushBack({ 56,438,10,10 });

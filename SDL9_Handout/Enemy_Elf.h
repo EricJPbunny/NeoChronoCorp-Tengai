@@ -22,15 +22,22 @@ private:
 	SDL_Rect bosscollider_1;
 	SDL_Rect bosscollider_2;
 
-	iPoint head_position;
+	iPoint originalposition;
 	Animation previous;
 	Animation spawn;
 	Animation stay;
 	Animation stay2;
 	Animation idle;
 	Animation back, back2, back3,back4;
+	Animation hand,hand2,hand3;
 	Animation shoot;
 	Path movement;
+
+
+	int current_time, time_on_entry;
+	bool timer = true;
+	bool shooting = true;
+
 	int type;
 };
 
