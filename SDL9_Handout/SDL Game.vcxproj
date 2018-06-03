@@ -91,6 +91,7 @@
     <ClInclude Include="Enemy_ShipHead.h" />
     <ClInclude Include="Enemy_Turret.h" />
     <ClInclude Include="Entity_PowerUp.h" />
+    <ClInclude Include="Entity_Ulti.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Enemy_ShipHead.cpp" />
     <ClCompile Include="Enemy_Turret.cpp" />
     <ClCompile Include="Entity_PowerUp.cpp" />
+    <ClCompile Include="Entity_Ulti.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />

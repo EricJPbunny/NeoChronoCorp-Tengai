@@ -423,7 +423,7 @@ bool ModuleSceneAir::CleanUp()
 // Update: draw background
 update_status ModuleSceneAir::Update()
 {
-	if (App->player2->IsEnabled() || App->player2->IsEnabled()) {
+	if (App->player2->IsEnabled() || App->player3->IsEnabled()) {
 		speed = 3;
 
 		//Y axis movement flags
@@ -647,12 +647,15 @@ update_status ModuleSceneAir::Update()
 	//Debug Mode
 	//Kill Koyori
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) {
-		App->ui->num_life_junis = 0;
-		App->player3->state = DEATH_3;
+		if (App->player3->IsEnabled()) {
+			App->ui->num_life_junis = 0;
+		}
 	}
 	//Kill Sho
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) {
-		App->ui->num_life_sho = 0;
+		if (App->player2->IsEnabled()) {
+			App->ui->num_life_sho = 0;
+		}
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) 
@@ -678,7 +681,6 @@ update_status ModuleSceneAir::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_F8]==KEY_STATE::KEY_DOWN || App->render->camera.x>30000) {
 		App->fade->FadeToBlack(App->scene_air, App->scene_score, 0.90f);
-
 	}
 	
 	return UPDATE_CONTINUE;
