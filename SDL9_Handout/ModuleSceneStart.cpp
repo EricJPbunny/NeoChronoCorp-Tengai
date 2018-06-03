@@ -5,6 +5,7 @@
 #include "ModuleSceneAir.h"
 #include "ModuleSceneStart.h"
 #include "ModuleSceneSelect.h"
+#include "ModuleUI.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"

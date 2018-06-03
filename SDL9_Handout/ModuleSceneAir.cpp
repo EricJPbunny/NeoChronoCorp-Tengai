@@ -12,6 +12,7 @@
 #include "ModuleInput.h"
 #include "ModuleSceneAir.h"
 #include "ModuleSceneScore.h"
+#include "ModuleSceneStart.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
@@ -235,11 +236,13 @@ bool ModuleSceneAir::Start()
 		else {
 			App->player3->Enable();
 		}
+		App->scene_start->credit_num--;
 	}
 	else {
 		App->player2->Enable();
 		App->player3->Enable();
 	}
+
 	App->ui->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
