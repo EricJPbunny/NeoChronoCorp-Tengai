@@ -248,6 +248,7 @@ bool ModuleSceneAir::Start()
 
 	App->ui->score_junis = 0;
 	App->ui->score_sho = 0;
+	App->scene_select->time_num = 9;
 
 	coll_up = App->collision->AddCollider({ 0, 0, 99000, 20 }, COLLIDER_WALL);
 	coll_down = App->collision->AddCollider({ 0, SCREEN_HEIGHT - 4, 990000, 16 }, COLLIDER_WALL);
@@ -556,7 +557,7 @@ update_status ModuleSceneAir::Update()
 					App->ui->time = 9;
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
 				if (!App->player3->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_junis);
 					App->player3->Enable();
@@ -566,7 +567,7 @@ update_status ModuleSceneAir::Update()
 			}
 		}
 		else {
-			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
 				if (!App->player2->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_sho);
 					App->player2->Enable();

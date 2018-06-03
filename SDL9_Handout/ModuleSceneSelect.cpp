@@ -212,7 +212,7 @@ update_status ModuleSceneSelect::Update()
 	App->render->Blit(graphics, 75, 172, &junis_anim);
 
 	App->render->Blit(graphics, 138, 214, &time);
-	App->fonts->BlitText(154, 210, App->ui->font_time, time_text);
+	App->fonts->BlitText(154, 210, font_time, time_text);
 
 	App->render->Blit(graphics, 255, 216, &credit, 0.00f, 0.00f);
 	App->fonts->BlitText(290, 214, font_score, credit_text);
