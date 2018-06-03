@@ -124,7 +124,6 @@ Enemy_Elf::~Enemy_Elf()
 void Enemy_Elf::Move()
 {
 
-
 	if (timer) {
 		time_on_entry = SDL_GetTicks();
 		timer = false;
@@ -381,9 +380,9 @@ void Enemy_Elf::Move()
 
 	if (App->ui->enemies_movement) {
 		position = originalposition + movement.GetCurrentSpeed(&animation);
-		collider->SetPos(position.x+40, position.y+20);
 	}
 
+	collider->SetPos(position.x + 40, position.y + 20);
 	
 }
 

@@ -154,7 +154,7 @@ update_status ModuleSceneSelect::Update()
 	}
 
 	if (App->scene_start->credit_num < 9) {
-		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_B_button == KEY_STATE::KEY_DOWN || App->input->controller_B_button2 == KEY_STATE::KEY_DOWN) {
 			App->scene_start->credit_num++;
 		}
 	}

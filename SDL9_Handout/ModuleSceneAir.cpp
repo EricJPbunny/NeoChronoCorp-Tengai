@@ -194,6 +194,11 @@ ModuleSceneAir::ModuleSceneAir()
 	cloud_inter3.h = 71;
 	cloud_inter3.w = 102;
 
+	lion.x = 25;
+	lion.y = 488;
+	lion.h = 185;
+	lion.w = 144;
+
 	//Animation
 	inside.PushBack({ 2,1,304,224 });
 	inside.PushBack({ 317,1,304,224 });
@@ -213,6 +218,8 @@ ModuleSceneAir::ModuleSceneAir()
 	screw.PushBack({ 470,237,48,73 });
 	screw.PushBack({ 539,237,48,73 });
 	screw.speed = 0.30f;
+
+	
 }
 
 ModuleSceneAir::~ModuleSceneAir()
@@ -227,6 +234,7 @@ bool ModuleSceneAir::Start()
 	graphics1= App->textures->Load("assets/sprite/spritesheet_ship.png");
 	graphics2 = App->textures->Load("assets/sprite/destroyed_ship.png");
 	graphics3 = App->textures->Load("assets/sprite/inside_ship_SS.png");
+
 
 	//startup
 	//1Player vs 2Player
@@ -329,9 +337,6 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2150, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2180, (App->render->camera.y / SCREEN_SIZE) - 500, 2);
 
-	//App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2150, (App->render->camera.y / SCREEN_SIZE) -300, 3);
-	//App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2180, (App->render->camera.y / SCREEN_SIZE) -300, 3);
-
 
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2190, (App->render->camera.y / SCREEN_SIZE) -500, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2230, (App->render->camera.y / SCREEN_SIZE) -500, 1);
@@ -381,6 +386,33 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 520, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 540, 120);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 560, 90);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 2900, -700);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 2930, -650);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENOVNI, 2960, -600);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDOVNI, 2930, -550);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 3070, -570, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 3070, -610, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 3070, -650, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::BIRD, 3070, -690, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3030, -700, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3030, -630, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ARCHER, 3030, -560, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3000, -700, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 2980, -560, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3030, -600, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3010, -650, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3000, -640, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3100, -640, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3200, -700, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3280, -560, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3230, -600, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3210, -650, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 3200, -640, 1);
 
 	return ret;
 }
@@ -469,7 +501,6 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (group_cloud.w * i), -600, &group_cloud, bg_speed_default * 5);
 	}
 
-
 	//   SHIP & SHIP FLAGS
 	if (App->render->camera.x>9400 && App->render->camera.x<9700) {
 		ship_flag1 = true;
@@ -553,7 +584,9 @@ update_status ModuleSceneAir::Update()
 						}
 						
 						App->render->Blit(graphics2, +115-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
+						App->render->Blit(graphics3, 1126 - animspeed, 20, &lion, speed_lion, 0.00f);
 						App->render->Blit(graphics3, 1126-animspeed, 0, &grid, 0.00f, 0.00f);
+						
 						if (App->render->camera.x > 17500 && App->render->camera.x < 20500) {
 							animspeed = 790;
 						}
@@ -580,7 +613,7 @@ update_status ModuleSceneAir::Update()
 	//Enable Players
 	if (App->scene_start->credit_num > 0) {
 		if (App->scene_select->sho_p1) {
-			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
 				if (!App->player2->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_sho);
 					App->player2->Enable();
@@ -588,7 +621,7 @@ update_status ModuleSceneAir::Update()
 					App->ui->time = 9;
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN || App->input->controller_START_button2 == KEY_STATE::KEY_DOWN) {
 				if (!App->player3->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_junis);
 					App->player3->Enable();
@@ -598,7 +631,7 @@ update_status ModuleSceneAir::Update()
 			}
 		}
 		else {
-			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN || App->input->controller_START_button2 == KEY_STATE::KEY_DOWN) {
 				if (!App->player2->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_sho);
 					App->player2->Enable();
@@ -606,7 +639,7 @@ update_status ModuleSceneAir::Update()
 					App->ui->time = 9;
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
 				if (!App->player3->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_junis);
 					App->player3->Enable();

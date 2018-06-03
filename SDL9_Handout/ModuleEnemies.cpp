@@ -495,6 +495,12 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
+
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ELF && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
+				
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
 		
 			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER  && c1->type == COLLIDER_TYPE::COLLIDER_ENTITY) {
 				

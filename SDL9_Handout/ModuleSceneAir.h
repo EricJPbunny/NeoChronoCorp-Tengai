@@ -38,7 +38,7 @@ public:
 	SDL_Texture* mid1 = nullptr;
 	SDL_Texture* end = nullptr;
 	SDL_Rect MountainBg, SkyOne, SkyTwo, SkyThree, SkyFour, FloorOne, FloorTwo, FloorThree, FloorFour, FloorFive, BigSky, BigSkyTwo, BigSkyThree, exterior_ship,BigSkyParalaxOne, BigSkyParalaxTwo;
-	SDL_Rect destroyed_ship, inside_2, grid, peak, peak2, peak3, big_cloud, cloud, cloud2, cloud3, cloud4, fog, fog2, group_cloud, cloud_inter, cloud_inter2, cloud_inter3;
+	SDL_Rect destroyed_ship, inside_2, grid, peak, peak2, peak3, big_cloud, cloud, cloud2, cloud3, cloud4, fog, fog2, group_cloud, cloud_inter, cloud_inter2, cloud_inter3, lion;
 	SDL_Rect fader, fademid;
 	Animation inside, piston, screw;
 	Animation* current_animation = nullptr;
@@ -56,6 +56,7 @@ public:
 	float bg_speed_default = 0.10f;
 	float speed_screw = 0;
 	int aux = 0;
+	float speed_lion = 0;
 
 	bool timer = true;
 	int time_on_entry = 0, current_time = 0;

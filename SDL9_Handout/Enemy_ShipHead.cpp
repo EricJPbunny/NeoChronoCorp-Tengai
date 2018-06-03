@@ -53,7 +53,7 @@ void Enemy_ShipHead::Move()
 		animation = &idle;
 	}
 	if (shot_cd == 0) {
-		int  vectoy;
+		
 
 		switch (current_shot) {
 		case shot_types::first_shot:
