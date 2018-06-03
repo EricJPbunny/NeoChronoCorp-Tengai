@@ -382,7 +382,7 @@ void Enemy_Elf::Move()
 		position = originalposition + movement.GetCurrentSpeed(&animation);
 	}
 
-	collider->SetPos(position.x + 40, position.y + 20);
+	collider->SetPos(position.x + 90, position.y + 60);
 	
 }
 

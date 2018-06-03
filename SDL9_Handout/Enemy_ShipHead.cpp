@@ -33,6 +33,8 @@ Enemy_ShipHead::Enemy_ShipHead(int x, int y,int type) :Enemy(x, y,type)
 	animation = &spawn;
 	head_position.x = x;
 	head_position.y = y;
+
+	collider = App->collision->AddCollider({ 0,0,20,30 }, COLLIDER_TYPE::COLLIDER_SHIPHEAD);
 }
 
 
@@ -89,6 +91,7 @@ void Enemy_ShipHead::Move()
 	if (App->ui->enemies_movement) {
 		position = head_position + movement.GetCurrentSpeed(&animation);
 	}
+	collider->SetPos(position.x + 20, position.y + 20);
 }
 
 void Enemy_ShipHead::Draw(SDL_Texture* sprites) {

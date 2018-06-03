@@ -11,7 +11,6 @@ public:
 	Enemy_Elf(int x, int y, int type);
 	~Enemy_Elf();
 
-	Collider* collider;
 private:
 	bool spawning;
 	void Move();

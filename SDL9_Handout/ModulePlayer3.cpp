@@ -202,7 +202,7 @@ update_status ModulePlayer3::Update()
 		pressed_right = App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 		shot_ctrl = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
-		ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN || App->input->controller_X_button == KEY_STATE::KEY_DOWN;
 	}
 	else {
 		pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
@@ -211,7 +211,7 @@ update_status ModulePlayer3::Update()
 		pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 		shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
-		ulti_button = App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN;
+		ulti_button = App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN || App->input->controller_X_button2 == KEY_STATE::KEY_DOWN;
 	}
 
 	//Power Up Limits
@@ -449,7 +449,7 @@ void ModulePlayer3::CheckState()
 		break;
 
 	case DEATH_3:
-		if (position.y > SCREEN_HEIGHT + 80) {
+		if (position.y > (App->render->camera.y) / SCREEN_SIZE + 400) {
 			state = POST_DEATH_3;
 		}
 		break;

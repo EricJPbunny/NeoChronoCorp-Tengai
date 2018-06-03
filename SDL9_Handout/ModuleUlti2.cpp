@@ -111,7 +111,18 @@ update_status ModuleUlti2::Update()
 			App->ulti2->Disable();
 		}
 
-		coll->SetPos((App->render->camera.x / SCREEN_SIZE), (App->render->camera.y / SCREEN_SIZE));
+		if(timer_1){
+			time_on_entry_1 = SDL_GetTicks();
+			timer_1 = false;
+		}
+		current_time_1 = SDL_GetTicks() - time_on_entry_1;
+		if (current_time_1 > 120) {
+			coll->SetPos((App->render->camera.x / SCREEN_SIZE), (App->render->camera.y / SCREEN_SIZE));
+			timer_1 = true;
+		}
+		else {
+			coll->SetPos(-2000, -2000);
+		}
 
 		return UPDATE_CONTINUE;
 }

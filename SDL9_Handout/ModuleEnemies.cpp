@@ -497,9 +497,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ELF && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
-				
-				delete enemies[i];
-				enemies[i] = nullptr;
+				if (life_elf>50) {
+					App->audio->PlaySoundEffects(fx_death);
+					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				LOG("%i", life_elf);
+				life_elf++;
 			}
 		
 			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER  && c1->type == COLLIDER_TYPE::COLLIDER_ENTITY) {
