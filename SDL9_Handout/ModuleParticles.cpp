@@ -408,11 +408,13 @@ bool ModuleParticles::Start()
 
 	shoot_audio = App->audio->LoadEffect("assets/audio/Shot_Koyori.wav");
 	shoot_sho = App->audio->LoadEffect("assets/audio/Shot_Sho.wav");
+	shoot_junis = App->audio->LoadEffect("assets/audio/junis_attack.wav");
 	power_up_koyori_fx = App->audio->LoadEffect("assets/audio/power_up_koyori.wav");
 	power_up_sho_fx = App->audio->LoadEffect("assets/audio/power_up_sho.wav");
 	power_up_junis_fx = App->audio->LoadEffect("assets/audio/power_up_junis.wav");
 	koyori_death = App->audio->LoadEffect("assets/audio/death_koyori.wav");
 	sho_death = App->audio->LoadEffect("assets/audio/death_sho.wav");
+	junis_death = App->audio->LoadEffect("assets/audio/junis_hit.wav");
 	coin_fx = App->audio->LoadEffect("assets/audio/catch_coin.wav");
 
 	return true;
@@ -425,9 +427,11 @@ bool ModuleParticles::CleanUp()
 
 	App->audio->UnloadFx(sho_death);
 	App->audio->UnloadFx(koyori_death);
+	App->audio->UnloadFx(junis_death);
 	App->audio->UnloadFx(power_up_sho_fx);
 	App->audio->UnloadFx(power_up_koyori_fx);
 	App->audio->UnloadFx(shoot_sho);
+	App->audio->UnloadFx(shoot_junis);
 	App->audio->UnloadFx(shoot_audio);
 	App->audio -> UnloadFx(coin_fx);
 
@@ -495,7 +499,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 				App->audio->PlaySoundEffects(shoot_sho);
 			}
 			if (particle_type == PARTICLE_SHOT_3) {
-				//App->audio->PlaySoundEffects(shoot_junis);
+				App->audio->PlaySoundEffects(shoot_junis);
 			}
 			if (particle_type == PARTICLE_POWER_UP_KOYORI) {
 				App->audio->PlaySoundEffects(power_up_koyori_fx);
@@ -527,57 +531,28 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
 			{
 				if (c2 == App->player->hitbox) {
-					if (timer) {
-						time_on_entry = SDL_GetTicks();
-						timer = false;
-					}
-					current_time = SDL_GetTicks() - time_on_entry;
-					if (current_time > 1000) {
-						App->player->explosion = true;
-						App->audio->PlaySoundEffects(App->enemies->fx_death);
-						App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y);
-						App->audio->PlaySoundEffects(koyori_death);
-						App->ui->num_life_koyori--;
-						timer = true;
-					}
+					App->audio->PlaySoundEffects(App->enemies->fx_death);
+					App->particles->AddParticle(App->particles->explosion, active[i]->position.x, active[i]->position.y);
+					App->audio->PlaySoundEffects(koyori_death);
+					App->ui->num_life_koyori--;
 					App->player->state = DEATH;
 				}
 				if (c2 == App->player2->hitbox) {
-					if (timer_2) {
-						time_on_entry_2 = SDL_GetTicks();
-						timer_2 = false;
-					}
-					current_time_2 = SDL_GetTicks() - time_on_entry_2;
-					if (current_time_2 > 1000) {
-						App->player2->explosion = true;
-						App->audio->PlaySoundEffects(App->enemies->fx_death);
-						App->audio->PlaySoundEffects(sho_death);
-						App->ui->num_life_sho--;
-						timer_2 = true;
-					}
+					App->audio->PlaySoundEffects(App->enemies->fx_death);
+					App->audio->PlaySoundEffects(sho_death);
+					App->ui->num_life_sho--;
 					App->player2->state = DEATH_2;
 				}
 				if (c2 == App->player3->hitbox) {
-					if (timer_3) {
-						time_on_entry_3 = SDL_GetTicks();
-						timer_3 = false;
-					}
-					current_time_3 = SDL_GetTicks() - time_on_entry_3;
-					if (current_time_3 > 1000) {
-						App->player3->explosion = true;
-						App->audio->PlaySoundEffects(App->enemies->fx_death);
-						//App->audio->PlaySoundEffects(junis_death);
-						App->ui->num_life_junis--;
-						timer_3 = true;
-					}
-					App->player2->state = DEATH_2;
+					App->audio->PlaySoundEffects(App->enemies->fx_death);
+					App->audio->PlaySoundEffects(junis_death);
+					App->ui->num_life_junis--;
+					App->player3->state = DEATH_3;
 				}
 			}
 			//AddParticle(explosion, active[i]->position.x, active[i]->position.y);
-			if (active[i]->collider->type != COLLIDER_ULTI2) {
-				delete active[i];
-				active[i] = nullptr;
-			}
+			delete active[i];
+			active[i] = nullptr;
 			break;
 		}
 	}

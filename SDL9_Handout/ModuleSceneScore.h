@@ -22,7 +22,7 @@ public:
 	Mix_Music* mus = nullptr;
 	SDL_Texture* graphics = nullptr;
 
-	SDL_Rect score;
+	SDL_Rect score_sho, score_junis;
 	
 };
 

@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleSceneSelect.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL\include\SDL_render.h"
 #include "ModuleInput.h"
@@ -17,10 +18,15 @@
 ModuleScore::ModuleScore()
 {
 	//2nd Level
-	score.x = 0;
-	score.y = 0;
-	score.w = SCREEN_WIDTH;
-	score.h = SCREEN_HEIGHT;
+	score_sho.x = 0;
+	score_sho.y = 0;
+	score_sho.w = SCREEN_WIDTH;
+	score_sho.h = SCREEN_HEIGHT;
+
+	score_junis.x = 320;
+	score_junis.y = 0;
+	score_junis.w = SCREEN_WIDTH;
+	score_junis.h = SCREEN_HEIGHT;
 }
 
 ModuleScore::~ModuleScore()
@@ -34,6 +40,8 @@ bool ModuleScore::Start()
 	graphics = App->textures->Load("assets/sprite/Score.png");
 	font_score = App->fonts->Load("fonts/score_fonts1.png", "0123456789", 1);
 	mus = App->audio->LoadMusic("assets/audio/20_The_king_is_evil_too.ogg");
+
+	App->render->camera = { 0,0 };
 
 	App->audio->PlayMusic(mus);
 	return ret;
@@ -53,15 +61,20 @@ bool ModuleScore::CleanUp()
 update_status ModuleScore::Update()
 {
 	// Draw everything --------------------------------------	
-	
-	App->render->Blit(graphics, 0, 0, &score, 0.00f);
+	if (!App->scene_select->sho_p1) {
+		App->render->Blit(graphics, 0, 0, &score_sho, 0.00f);
 
-	App->fonts->BlitText(217, 67, App->ui->font_score, App->ui->player1_score);
-	App->fonts->BlitText(217, 147, App->ui->font_score, App->ui->player2_score);
-	
+		App->fonts->BlitText(217, 67, App->ui->font_score, App->ui->player3_score);
+		App->fonts->BlitText(217, 147, App->ui->font_score, App->ui->player2_score);
+	}
+	if (App->scene_select->sho_p1) {
+		App->render->Blit(graphics, 0, 0, &score_junis, 0.00f);
+
+		App->fonts->BlitText(217, 67, App->ui->font_score, App->ui->player2_score);
+		App->fonts->BlitText(217, 147, App->ui->font_score, App->ui->player3_score);
+	}
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_score, App->scene_start, 0.60f);
 	}
-
 	return UPDATE_CONTINUE;
 }

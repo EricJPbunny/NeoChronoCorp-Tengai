@@ -442,7 +442,7 @@ void ModulePlayerTwo::CheckState()
 		break;
 
 	case POST_DEATH_2:
-		if (App->ui->num_life_koyori > 0) {
+		if (App->ui->num_life_sho > 0) {
 			position.x = (App->render->camera.x) / SCREEN_SIZE - 20;
 			position.y = (App->render->camera.y) / SCREEN_SIZE + 100;
 			time = true;

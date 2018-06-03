@@ -61,7 +61,7 @@ void Enemy_ShipHead::Move()
 				vectoy = 1;
 			}
 
-			App->particles->shipHead_shoot.speed.y = vectoy;
+			//App->particles->shipHead_shoot.speed.y = vectoy;
 
 			App->particles->AddParticle(App->particles->shipHead_shoot, position.x + 22, position.y + 78, COLLIDER_ENEMY_SHOT);
 			if (last_shot == second_shot) current_shot = first_shot;

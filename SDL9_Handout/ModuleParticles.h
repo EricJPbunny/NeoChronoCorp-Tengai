@@ -39,7 +39,7 @@ struct Particle
 	Animation anim;
 	uint fx = 0;
 	iPoint position;
-	fPoint speed;
+	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool fx_played = false;
@@ -78,6 +78,8 @@ public:
 	Mix_Chunk* koyori_death = nullptr;
 	Mix_Chunk* sho_death = nullptr;
 	Mix_Chunk* coin_fx = nullptr;
+	Mix_Chunk* shoot_junis = nullptr;
+	Mix_Chunk* junis_death = nullptr;
 	Particle bullet, bullet2, bullet3, bullet4, bullet5, explosion, spark;
 	Particle shoot, shoot1, shoot2;
 	Particle shoot_sho_big, shoot_sho_big_1, shoot_sho_big_2;
@@ -90,7 +92,8 @@ public:
 	Particle kunai, kunai1, kunai2;
 	Particle shuriken_socrates_1, shuriken_socrates_2, shuriken_socrates_3, shuriken_socrates_4, shuriken_socrates_5, shuriken_socrates_6, shuriken_socrates_7, shuriken_socrates_8;
 	Particle fire, fire2, fire3, fire4, fire5, fire6, fire7, fire8, fire9, fire10;
-	Particle enemie_shoot, archer_shoot, bird_shoot, bird_shoot2, shipHead_shoot;
+	Particle enemie_shoot, archer_shoot, bird_shoot, bird_shoot2;
+	Particle shipHead_shoot;
 	
 
 	bool timer = false;
