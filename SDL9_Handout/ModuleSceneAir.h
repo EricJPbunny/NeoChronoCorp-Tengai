@@ -47,7 +47,7 @@ public:
 	float posx = 7000, posy = -480, grassy = 185;
 	bool fade = true;
 	float alpha_mid = 0, alpha_mid1 = 255, alpha_graph2 = 255, alpha_graph1 = 0, alpha_end = 0;
-	int speed = 3, speedy = 0, animspeed = 0;;
+	int speed = 3, speedy = 0, animspeed = 0; 
 	int framerateset = 0;
 	int aux_time = 0;
 	int increaser = 0, increaser_2 = 0;
@@ -57,7 +57,8 @@ public:
 	float speed_screw = 0;
 	int aux = 0;
 
-
+	bool timer = true;
+	int time_on_entry = 0, current_time = 0;
 
 	bool god_mode = false;
 };

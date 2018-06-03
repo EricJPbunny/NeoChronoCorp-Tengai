@@ -18,6 +18,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleUI.h"
 #include "ModuleRender.h"
+#include "SDL\include\SDL_timer.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -465,8 +466,15 @@ update_status ModuleSceneAir::Update()
 	}
 	if (ship_flag1) 
 	{
-		App->render->Blit(graphics1, 270,0,&exterior_ship, 0.00f, 0.00f);
-		ship_flag2 = true;
+		if (timer) {
+			time_on_entry = SDL_GetTicks();
+			timer = false;
+		}
+		current_time = SDL_GetTicks() - time_on_entry;
+		App->render->Blit(graphics1, 270, 0, &exterior_ship, 0.00f, 0.00f);
+		if (current_time > 16000) {
+			ship_flag2 = true;
+		}
 	}
 	if (ship_flag2)
 	{
@@ -484,8 +492,14 @@ update_status ModuleSceneAir::Update()
 			}
 			else {
 				App->render->Blit(graphics1, 50, 90, &exterior_ship,0.00f,0.00f);
-				animspeed = 0;
-				ship_flag3 = true;
+				if (timer) {
+					time_on_entry = SDL_GetTicks();
+					timer = false;
+				}
+				current_time = SDL_GetTicks() - time_on_entry;
+				if (current_time > 32000) {
+					ship_flag3 = true;
+				}
 			}
 		}
 	}
@@ -517,15 +531,19 @@ update_status ModuleSceneAir::Update()
 			if (ship_flag5) {
 					if (animspeed < 2500) {
 						LOG("No mames");
-						if (App->render->camera.x<15000) {
+						if (App->render->camera.x<21500) {
 							speed_screw = 0.5f;
 							current_animation_2 = &inside;
 							SDL_Rect r = current_animation_2->GetCurrentFrame();
 							App->render->Blit(graphics3, (App->render->camera.x / SCREEN_SIZE + speed_screw) + 57, App->render->camera.y / SCREEN_SIZE, &r);
 							App->render->Blit(graphics3, 0, 0, &inside_2, 0.00f, 0.00f);
 						}
+						
 						App->render->Blit(graphics2, +115-animspeed , -215, &destroyed_ship, 0.00f, 0.00f);
 						App->render->Blit(graphics3, 1126-animspeed, 0, &grid, 0.00f, 0.00f);
+						if (App->render->camera.x > 17500 && App->render->camera.x < 20500) {
+							animspeed = 790;
+						}
 
 						//screw
 						current_animation_3 = &screw;
