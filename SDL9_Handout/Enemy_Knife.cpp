@@ -51,7 +51,7 @@ void Enemy_Knife::Move()
 	}
 	current_time = SDL_GetTicks() - time_on_entry;
 	if (current_time > 1000 && shooting) {
-		App->particles->AddParticle(App->particles->enemie_shoot, position.x, position.y+6);
+		App->particles->AddParticle(App->particles->enemie_shoot, position.x, position.y+6, COLLIDER_ENEMY_SHOT);
 		timer = true;
 		shooting = false;
 	}
