@@ -497,7 +497,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ELF && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
-				if (life_elf>50) {
+				if (life_elf>50 || enemies[i]->position.x >4550) {
 					App->audio->PlaySoundEffects(fx_death);
 					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 					delete enemies[i];
@@ -505,6 +505,24 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				LOG("%i", life_elf);
 				life_elf++;
+			}
+			if (c1->type == COLLIDER_TYPE::COLLIDER_TURRET && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
+				if (turret_life>50|| enemies[i]->position.x >4550) {
+					App->audio->PlaySoundEffects(fx_death);
+					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				turret_life++;
+			}
+			if (c1->type == COLLIDER_TYPE::COLLIDER_SHIPHEAD && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
+				if (shiphead_life>50 || enemies[i]->position.x >4550) {
+					App->audio->PlaySoundEffects(fx_death);
+					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				shiphead_life++;
 			}
 		
 			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER  && c1->type == COLLIDER_TYPE::COLLIDER_ENTITY) {

@@ -30,7 +30,7 @@ Enemy_Palace::Enemy_Palace(int x, int y, int type) :Enemy(x, y,type)
 
 	animation = &spawn;
 
-	
+	collider = App->collision->AddCollider({ 0, 0, 30, 50 }, COLLIDER_TYPE::COLLIDER_ELF, (Module*)App->enemies);
 
 	this->type = type;
 

@@ -82,7 +82,7 @@ private:
 	fPoint pos;
 	PARTICLE_TYPE particle_type = PARTICLE_NONE;
 
-	int ninja_life = 0;
+	int ninja_life = 0,shiphead_life=0,turret_life=0,palace_life=0;
 	int num_ovni = 0;
 	int life_elf = 0;
 	int typeofcoin;
