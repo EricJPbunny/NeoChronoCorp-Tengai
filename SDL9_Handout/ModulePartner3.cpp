@@ -340,7 +340,7 @@ update_status ModulePartner3::Update()
 void ModulePartner3::CheckState()
 {
 	//Create bool controls
-	if (App->scene_select->sho_p1) {
+	if (!App->scene_select->sho_p1) {
 		pressed_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT;
 		release_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP;
 	}
