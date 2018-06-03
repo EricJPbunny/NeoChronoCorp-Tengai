@@ -26,7 +26,9 @@ private:
 	Animation previous;
 	Animation spawn;
 	Animation stay;
+	Animation stay2;
 	Animation idle;
+	Animation back, back2, back3,back4;
 	Animation shoot;
 	Path movement;
 	int type;
