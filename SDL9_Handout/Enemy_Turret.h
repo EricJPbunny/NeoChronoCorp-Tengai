@@ -20,6 +20,7 @@ private:
 	void Move();
 	void Draw(SDL_Texture* sprites);
 	SDL_Texture* boss_sprite;
+	iPoint head_position;
 
 	Animation spawn, idle, death;
 };

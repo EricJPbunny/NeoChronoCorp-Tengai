@@ -6,6 +6,7 @@
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 #include "Enemy_Buda.h"
+#include "ModuleUI.h"
 
 Enemy_Buda::Enemy_Buda(int x, int y, int type) :Enemy(x, y,type)
 {
@@ -28,10 +29,12 @@ Enemy_Buda::Enemy_Buda(int x, int y, int type) :Enemy(x, y,type)
 
 	animation = &spawn;
 
-	movement.PushBack({ 1,0 }, 30, &spawn);
-	movement.PushBack({ 1,0 }, 900, &idle);
+	movement.PushBack({ 0.0f, 0.0f }, 90, &spawn);
+	movement.PushBack({ 1.0f, 0.0f }, 9999, &idle);
 
 	this->type = type;
+	head_position.x = x;
+	head_position.y = y;
 
 }
 
@@ -47,6 +50,9 @@ void Enemy_Buda::Move()
 	if (spawn.Finished())
 	{
 		animation = &idle;
+	}
+	if (App->ui->enemies_movement) {
+		position = head_position + movement.GetCurrentSpeed(&animation);
 	}
 }
 
