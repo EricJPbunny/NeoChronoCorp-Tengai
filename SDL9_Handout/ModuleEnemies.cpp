@@ -21,6 +21,7 @@
 #include "Enemy_Hemisphere.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
+#include "Entity_Ulti.h"
 #include "time.h"
 #include "stdlib.h"
 
@@ -48,7 +49,7 @@ bool ModuleEnemies::Start()
 	fx_death = App->audio->LoadEffect("assets/audio/enemy_death.wav");
 	s_power_down = App->audio->LoadEffect("assets/audio/sho_lvl_down.wav");
 	j_power_down = App->audio->LoadEffect("assets/audio/junis_lvl_down.wav");
-
+	catch_bomb = App->audio->LoadEffect("assets/audio/catch_bomb.wav");
 
 	return true;
 }
@@ -196,6 +197,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::HEMISPHERE:
 				enemies[i] = new Enemy_Hemisphere(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::ULTI:
+				enemies[i] = new EntityUlti(info.x, info.y, info.path_type);
 				break;
 			
 		}
@@ -491,7 +495,20 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
-
+		
+			if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER  && c1->type == COLLIDER_TYPE::COLLIDER_ENTITY) {
+				
+				if (c2 == App->player2->coll) {
+					App->audio->PlaySoundEffects(catch_bomb);
+					App->ui->num_ulti_sho++;
+				}
+				if (c2 == App->player3->coll) {
+					App->audio->PlaySoundEffects(catch_bomb);
+					App->ui->num_life_junis++;
+				}
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
 			break;
 		}
 		

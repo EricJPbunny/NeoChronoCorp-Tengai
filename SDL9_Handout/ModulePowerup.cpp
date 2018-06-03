@@ -15,6 +15,9 @@ ModulePowerup::ModulePowerup()
 {
 	for (uint i = 0; i < MAX_POWERUP; ++i)
 		powerUp[i] = nullptr;
+
+	for (uint i = 0; i < MAX_ULTI; ++i)
+		powerUlti[i] = nullptr;
 }
 
 ModulePowerup::~ModulePowerup() 
@@ -46,10 +49,22 @@ update_status ModulePowerup::Update()
 		{
 			powerUp[i]->draw(graphics);
 		}
+
+	for (uint i = 0; i < MAX_ULTI; ++i)
+		if (powerUlti[i] != nullptr)
+		{
+			powerUlti[i]->draw(graphics);
+		}
 	return UPDATE_CONTINUE;
 };
 
 void Powerup::draw(SDL_Texture* text) 
+{
+	Animation* current_animation = &anim;
+	App->render->Blit(text, position.x, position.y, &(current_animation->GetCurrentFrame()));
+}
+
+void Ulti::draw(SDL_Texture* text)
 {
 	Animation* current_animation = &anim;
 	App->render->Blit(text, position.x, position.y, &(current_animation->GetCurrentFrame()));
