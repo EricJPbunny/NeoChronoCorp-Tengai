@@ -110,13 +110,12 @@ void Enemy_Elf::Move()
 	}
 	current_time = SDL_GetTicks() - time_on_entry;
 
+	if (current_time > 5000 && shooting) {
 
-	if (current_time > 3000 && shooting) {
-
-		App->particles->AddParticle(App->particles->bird_shoot2, position.x, position.y + 15);
-		App->particles->AddParticle(App->particles->bird_shoot, position.x, position.y + 15);
+		App->particles->AddParticle(App->particles->bird_shoot2, position.x, position.y + 15,COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15, COLLIDER_ENEMY_SHOT);
 		timer = true;
-		shooting = true;
+		shooting = false;
 
 	}
 
