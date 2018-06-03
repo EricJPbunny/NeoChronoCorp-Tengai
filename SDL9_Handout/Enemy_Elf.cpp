@@ -5,7 +5,9 @@
 #include "ModuleTextures.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "Enemy_Elf.h"
+#include "SDL\include\SDL_timer.h"
 
 Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 {
@@ -33,15 +35,14 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	stay2.PushBack({ 1553, 19, 42, 87});
 	stay2.speed = 0.09f;
 
-
-	idle.PushBack({ 13, 23, 91, 74 });
-	idle.PushBack({ 117, 23, 91, 74 });
-	idle.PushBack({ 223, 23, 91, 74 });
-	idle.PushBack({ 324, 23, 91, 74 });
-	idle.PushBack({ 422, 23, 91, 74 });
-	idle.PushBack({ 520, 23, 91, 74 });
-	
-	idle.speed = 0.1f;
+	idle.PushBack({ 1439, 20, 83, 79 });
+	idle.PushBack({ 1228, 20, 83 ,79 });
+	idle.PushBack({ 1328, 20, 83, 79 });
+	idle.PushBack({ 642, 20, 83, 79 });
+	idle.PushBack({ 224, 20, 83, 79 });
+	idle.PushBack({ 423, 20, 83, 79 });
+	idle.PushBack({ 1226, 20, 83, 79 });
+    idle.speed = 0.1f;
 
 	back.PushBack({ 1229, 28, 81, 71 });
 	back.speed = 0.1f;
@@ -52,25 +53,45 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	back3.PushBack({ 1224, 28, 81, 71 });
 	back3.speed = 0.1f;
 	
-	back4.PushBack({ 119, 24, 83, 71 });
+	back4.PushBack({ 119, 25, 83, 69 });
 	back4.speed = 0.1f;
 
-	
 
-	movement.PushBack({ 1.0f, 0.0f  },15, &previous);
-	movement.PushBack({ -0.5f, 0.0f }, 600, &spawn);
-	movement.PushBack({ 1.0f, 0.0f }, 50, &stay);
-	movement.PushBack({ 1.0f, 0.0f }, 50, &stay2);
-	movement.PushBack({ 1.0f, 0.0f }, 250, &idle);
-	movement.PushBack({ 1.0f, 0.0f }, 3, &back);
-	movement.PushBack({ 1.0f, 0.0f }, 3, &back2);
-	movement.PushBack({ 1.0f, 0.0f }, 3, &back3);
-	movement.PushBack({ 1.0f, 0.0f }, 3, &back4);
+	hand.PushBack({ 777, 25, 97, 72 });
+	hand.speed = 0.1f;
+	hand2.PushBack({ 894, 25, 97, 72 });
+	hand2.speed = 0.1f;
+	hand3.PushBack({ 524, 26, 80, 69 });
+	hand3.speed = 0.1f;
 	
 
 	
+
+	movement.PushBack({ 1.0f, 0.0f },15, &previous);
+	movement.PushBack({ 1.0f, 0.0f }, 150, &spawn);
+	movement.PushBack({ 1.0f, 0.0f },10, &stay);
+	movement.PushBack({ 1.0f, 0.0f },10, &stay2);
+	movement.PushBack({ 1.0f, 0.0f }, 20, &idle);
+	movement.PushBack({ 1.5f, 0.0f }, 30, &idle);
+	movement.PushBack({ 1.5f, 0.0f }, 10, &back);
+	movement.PushBack({ 1.5f, 0.0f }, 10, &back2);
+	movement.PushBack({ 1.5f, 0.0f }, 10, &back3);
+	movement.PushBack({ 1.5f, 0.0f }, 10, &back4);
+	movement.PushBack({ 1.0f, 0.0f }, 20, &hand);
+	movement.PushBack({ 1.0f, 0.0f }, 150, &hand2);
+	movement.PushBack({ 1.0f, 0.0f }, 20, &hand);
+	movement.PushBack({ 1.0f, 0.0f }, 10, &hand3);
+	movement.PushBack({ -1.5f, 0.0f }, 20, &hand3);
+	movement.PushBack({ 1.0f, 0.0f }, 20, &idle);
+
+
+
+
 	animation = &previous;
-	this->type = type;
+	
+	originalposition.y = y;
+	originalposition.x = x;
+//	this->type = type;
 }
 
 
@@ -83,7 +104,27 @@ Enemy_Elf::~Enemy_Elf()
 
 void Enemy_Elf::Move()
 {
-	if (previous.Finished())
+	if (timer) {
+		time_on_entry = SDL_GetTicks();
+		timer = false;
+	}
+	current_time = SDL_GetTicks() - time_on_entry;
+
+	if (current_time > 5000 && shooting) {
+
+		App->particles->AddParticle(App->particles->bird_shoot2, position.x, position.y + 15,COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15, COLLIDER_ENEMY_SHOT);
+		timer = true;
+		shooting = false;
+
+	}
+
+	if (App->ui->enemies_movement) {
+		position = originalposition + movement.GetCurrentSpeed(&animation);
+	}
+}
+
+	/*if (previous.Finished())
 	{
 		animation = &spawn;
 	}
@@ -115,8 +156,16 @@ void Enemy_Elf::Move()
 	{
 		animation = &back4;
 	}
+	if (back4.Finished())
+	{
+		animation = &hand;
+	}
+	if (hand.Finished())
+	{
+		animation = &hand2;
+	}
 
-}
+}*/
 
 void Enemy_Elf::Draw(SDL_Texture* sprites) {
 	Enemy::Draw(boss_sprite);

@@ -60,8 +60,8 @@ void Enemy_Archer::Move()
 	}
 	current_time = SDL_GetTicks() - time_on_entry;
 	if (current_time > 800 && shooting) {
-		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15);
-		App->particles->AddParticle(App->particles->archer_shoot, position.x - 15, position.y + 15);
+		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->archer_shoot, position.x - 15, position.y + 15, COLLIDER_ENEMY_SHOT);
 		timer = true;
 		shooting = false;
 	}
