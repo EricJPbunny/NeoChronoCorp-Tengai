@@ -236,7 +236,6 @@ bool ModuleSceneAir::Start()
 		else {
 			App->player3->Enable();
 		}
-		App->scene_start->credit_num--;
 	}
 	else {
 		App->player2->Enable();

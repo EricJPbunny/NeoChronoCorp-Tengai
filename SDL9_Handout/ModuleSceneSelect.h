@@ -21,7 +21,7 @@ public:
 public:
 	SDL_Texture* graphics = nullptr;
 
-	SDL_Rect background_1p, background_2p, sho_face, sho_player, sho_name, junis_face, junis_player, junis_name, ui_1p, ui_2p, time;
+	SDL_Rect background_1p, background_2p, sho_face, sho_player, sho_name, junis_face, junis_player, junis_name, ui_1p, ui_2p, time, credit;
 	Animation sho_sprite, junis_sprite;
 	SDL_Rect junis_anim;
 	SDL_Rect sho_anim;
@@ -36,11 +36,13 @@ public:
 	bool timer = true;
 	int current_time, time_on_entry;
 
-	char time_text[2];
+	char time_text[2], credit_text[2];
 
 	int time_num = 9;
 
-	int font_time = 0;
+	int font_time = 0, font_score = 1;
+
+
 
 };
 
