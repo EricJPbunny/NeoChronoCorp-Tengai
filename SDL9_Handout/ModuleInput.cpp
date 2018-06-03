@@ -55,6 +55,9 @@ update_status ModuleInput::PreUpdate()
 				if (controller) {
 					LOG("Controller loaded correctly");
 				}
+				else if (controller && !controller2) {
+					controller2 = SDL_GameControllerOpen(1);
+				}
 				else LOG("Could not open gamecontroller: %s", SDL_GetError());
 			}
 		}
@@ -62,14 +65,20 @@ update_status ModuleInput::PreUpdate()
 			if (event.cdevice.which == 0) {
 				SDL_GameControllerClose(controller);
 				controller = nullptr;
-				LOG("Controller removed!\n");
+				LOG("Controller 1 removed!\n");
 			}
+			if (event.cdevice.which == 1) {
+					SDL_GameControllerClose(controller2);
+					controller2 = nullptr;
+					LOG("Controller 2 removed!\n");
+			}
+
+			
 		}
 	}
 	Uint8 button_state_A = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
 	Uint8 button_state_Y = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
 	Uint8 button_state_START = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_START);
-
 	if (button_state_A) {
 		if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
 		else controller_A_button = KEY_REPEAT;
@@ -88,6 +97,29 @@ update_status ModuleInput::PreUpdate()
 		if (controller_START_button == KEY_REPEAT || controller_START_button == KEY_DOWN) controller_START_button = KEY_UP;
 		else controller_START_button = KEY_IDLE;
 	}
+	Uint8 button_state_A2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_A);
+	Uint8 button_state_Y2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_Y);
+	Uint8 button_state_START2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_START);
+	if (button_state_A2) {
+		if (controller_A_button2 == KEY_IDLE) controller_A_button2 = KEY_DOWN;
+		else controller_A_button2 = KEY_REPEAT;
+	}
+	else {
+		if (controller_A_button2 == KEY_REPEAT || controller_A_button2 == KEY_DOWN) controller_A_button2 = KEY_UP;
+		else controller_A_button2 = KEY_IDLE;
+	}
+
+
+	if (button_state_START) {
+		if (controller_START_button2 == KEY_IDLE) controller_START_button2 = KEY_DOWN;
+		else controller_START_button2 = KEY_REPEAT;
+	}
+	else {
+		if (controller_START_button2 == KEY_REPEAT || controller_START_button2 == KEY_DOWN) controller_START_button2 = KEY_UP;
+		else controller_START_button2 = KEY_IDLE;
+	}
+
+	
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
