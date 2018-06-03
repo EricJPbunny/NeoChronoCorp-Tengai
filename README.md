@@ -15,7 +15,7 @@ Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 
 
 ## Video
 
-[![Tengai](http://img.youtube.com/vi/M7enxleAxUI/0.jpg)](https://www.youtube.com/watch?v=M7enxleAxUI "Audi R8")
+[![Tengai](http://img.youtube.com/vi/uXNPKrgCkxk/0.jpg)](https://www.youtube.com/watch?v=uXNPKrgCkxk&feature=youtu.be "Tengai")
 
 ## Game Controls
 
