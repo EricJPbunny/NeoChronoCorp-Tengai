@@ -21,6 +21,7 @@
 #include "Enemy_Hemisphere.h"
 #include "Entity_PowerUp.h"
 #include "Enemy_Coin.h"
+#include "Entity_Ulti.h"
 #include "time.h"
 #include "stdlib.h"
 
@@ -196,6 +197,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::HEMISPHERE:
 				enemies[i] = new Enemy_Hemisphere(info.x, info.y, info.path_type);
+				break;
+			case ENEMY_TYPES::ULTI:
+				enemies[i] = new EntityUlti(info.x, info.y, info.path_type);
 				break;
 			
 		}

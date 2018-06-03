@@ -28,6 +28,7 @@ enum ENEMY_TYPES
 	BUDA,
 	ELF,
 	HEMISPHERE,
+	ULTI,
 };
 
 class Enemy;

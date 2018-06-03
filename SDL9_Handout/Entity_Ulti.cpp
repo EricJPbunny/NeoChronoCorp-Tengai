@@ -7,15 +7,18 @@
 
 EntityUlti::EntityUlti(int x, int y, int type) :Enemy(x, y, type)
 {
-	iddle.PushBack({ 65,102,31,21 });
-	iddle.PushBack({ 100,102,31,20 });
-	iddle.PushBack({ 134,102,31,20 });
-	iddle.PushBack({ 168,102,31,20 });
-	iddle.PushBack({ 8,128,31,20 });
-	iddle.PushBack({ 43,130,31,20 });
-	iddle.PushBack({ 78,129,31,20 });
-	iddle.PushBack({ 111,129,31,20 });
-	iddle.PushBack({ 10,153,31,21 });
+	iddle.PushBack({ 325,422,31,22 });
+	iddle.PushBack({ 360,422,31,22 });
+	iddle.PushBack({ 394,422,31,22 });
+	iddle.PushBack({ 428,422,31,22 });
+
+	iddle.PushBack({ 268,448,31,22 });
+	iddle.PushBack({ 303,448,31,22 });
+	iddle.PushBack({ 338,448,31,22 });
+	iddle.PushBack({ 371,448,31,22 });
+	iddle.PushBack({ 405,448,31,22 });
+
+	iddle.PushBack({ 270,473,31,22 });
 	
 	iddle.speed = App->enemies->speed;
 
@@ -23,7 +26,7 @@ EntityUlti::EntityUlti(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 1.0f, 0.0f }, 160, &iddle);
 
 	animation = &iddle;
-	collider = App->collision->AddCollider({ 0, 0, 24, 20 }, COLLIDER_TYPE::COLLIDER_POWER_UP, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 24, 20 }, COLLIDER_TYPE::COLLIDER_ENTITY, (Module*)App->enemies);
 
 	originalposition.y = y;
 	originalposition.x = x;
