@@ -272,7 +272,7 @@ bool ModuleSceneAir::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 620, 34, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 650, 0, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 690, 0, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::BOSSHEAD, 200, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BOSSHEAD, 400, 50, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::ELF, 150, 60, 2);
 
 
@@ -646,6 +646,7 @@ update_status ModuleSceneAir::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) {
 		App->audio->PlaySoundEffects(App->enemies->fx_death);
 	}
+
 	
 	
 	return UPDATE_CONTINUE;

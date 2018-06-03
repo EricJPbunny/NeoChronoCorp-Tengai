@@ -17,7 +17,14 @@ private:
 	void Move();
 	void Draw(SDL_Texture* sprites);
 	SDL_Texture* boss_sprite;
-	int fire_rate, shot_cd;
+	int current_time, time_on_entry;
+	bool timer = true;
+	int fire_rate= 10, shot_cd =0;
+	enum shot_types {
+		first_shot,
+		second_shot,
+	} current_shot = first_shot;
+	shot_types last_shot;
 
 	SDL_Rect bosscollider_1;
 	SDL_Rect bosscollider_2;

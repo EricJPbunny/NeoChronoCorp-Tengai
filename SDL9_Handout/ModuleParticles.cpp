@@ -382,6 +382,19 @@ ModuleParticles::ModuleParticles()
 	bird_shoot.life = 1400;
 	bird_shoot.speed.x = -4;
 
+	//Ship head boss bullets
+	shipHead_shoot.anim.PushBack({ 20,461,8,8 });
+	shipHead_shoot.anim.PushBack({ 38,461,8,8 });
+	shipHead_shoot.anim.PushBack({ 56,461,8,8 });
+	shipHead_shoot.anim.PushBack({ 75,461,8,8 });
+	shipHead_shoot.anim.PushBack({ 94,461,8,8 });
+	shipHead_shoot.anim.PushBack({ 114,461,8,8 });
+	shipHead_shoot.anim.loop = true;
+	shipHead_shoot.life = 1400;
+	shipHead_shoot.speed.x = -1.2f;
+	shipHead_shoot.speed.y = 0;
+	
+
 }
 
 ModuleParticles::~ModuleParticles()
