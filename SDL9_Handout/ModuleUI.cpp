@@ -68,6 +68,10 @@ ModuleUI::ModuleUI()
 	credit.w = 40;
 	credit.h = 7;
 
+	ulti_parchment.PushBack({ 8,19,14,16 });
+	ulti_parchment.PushBack({ 24,19,14,16 });
+	ulti_parchment.speed = 0.10f;
+
 }
 
 ModuleUI::~ModuleUI()
@@ -110,7 +114,9 @@ update_status ModuleUI::Update()
 	
 	//Draw Top UI Interface
 	current_animation = &start;
+	ulti_ui = &ulti_parchment;
 	SDL_Rect r = current_animation->GetCurrentFrame();
+	SDL_Rect ulti = ulti_ui->GetCurrentFrame();
 
 	//Player1: Sho
 	if (!game_over_sho && App->player2->IsEnabled()) {
@@ -121,12 +127,21 @@ update_status ModuleUI::Update()
 			for (int i = 1; i <= num_life_sho - 1; i++) {
 				App->render->Blit(graphics, 76 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
 			}
+			//Ulti Sho
+			for (int i = 0; i <= num_ulti_sho; i++) {
+				App->render->Blit(graphics, 8 + 14*i, 15, &ulti, 0.00f, 0.00f);
+			}
 		}
 		else {
 			App->render->Blit(graphics, 170, 5, &player2, 0.00f, 0.00f);
 			App->fonts->BlitText(180, 5, font_score, player2_score);
+			//Life Sho
 			for (int i = 1; i <= num_life_sho - 1; i++) {
 				App->render->Blit(graphics, 236 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
+			}
+			//Ulti Sho
+			for (int i = 0; i <= num_ulti_sho; i++) {
+				App->render->Blit(graphics, 170 + 14 * i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
 	}
@@ -144,8 +159,13 @@ update_status ModuleUI::Update()
 		if (!App->scene_select->sho_p1) {
 			App->render->Blit(graphics, 10, 6, &player1, 0.00f, 0.00f);
 			App->fonts->BlitText(18, 5, font_score, player3_score);
+			//Life Junis
 			for (int i = 1; i <= num_life_junis - 1; i++) {
 				App->render->Blit(graphics, 76 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
+			}
+			//Ulti Junis
+			for (int i = 0; i <= num_ulti_junis; i++) {
+				App->render->Blit(graphics, 8 + 14 * i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
 		else {
@@ -154,6 +174,10 @@ update_status ModuleUI::Update()
 			//Life Junis
 			for (int i = 1; i <= num_life_junis - 1; i++) {
 				App->render->Blit(graphics, 236 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
+			}
+			//Ulti Junis
+			for (int i = 0; i <= num_ulti_junis; i++) {
+				App->render->Blit(graphics, 170 + 14 * i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
 	}
