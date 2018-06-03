@@ -23,6 +23,7 @@ public:
 	Mix_Music* level_completed = nullptr;
 	Mix_Chunk* select_koyori = nullptr;
 	Mix_Chunk* select_sho = nullptr;
+	Mix_Chunk* select_junis = nullptr;
 	Collider* coll_left = nullptr;
 	Collider* coll_right = nullptr;
 	Collider* coll_up = nullptr;

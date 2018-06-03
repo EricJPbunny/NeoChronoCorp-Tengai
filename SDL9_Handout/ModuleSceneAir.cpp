@@ -255,6 +255,10 @@ bool ModuleSceneAir::Start()
 	coll_left = App->collision->AddCollider({ 0,0,0,SCREEN_HEIGHT }, COLLIDER_WALL);
 	coll_right = App->collision->AddCollider({ SCREEN_WIDTH,0, 0,SCREEN_HEIGHT }, COLLIDER_WALL);
 
+	mus = App->audio->LoadMusic("assets/audio/06_Torn_silence.ogg");
+	select_sho = App->audio->LoadEffect("assets/audio/select_sho.wav");
+	select_junis = App->audio->LoadEffect("assets/audio/select_junis.wav");
+
 	App->audio->PlayMusic(mus);
 	//Enemies
 
@@ -387,6 +391,7 @@ bool ModuleSceneAir::CleanUp()
 
 	App->render->camera.x = 0;
 
+	App->audio->UnloadFx(select_junis);
 	App->audio->UnloadFx(select_sho);
 	App->audio->UnloadFx(select_koyori);
 
@@ -542,19 +547,46 @@ update_status ModuleSceneAir::Update()
 
 
 	//Enable Players
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
-		if (!App->player2->IsEnabled()) {
-			App->audio->PlaySoundEffects(select_sho);
-			App->player2->Enable();
+	if (App->scene_start->credit_num > 0) {
+		if (App->scene_select->sho_p1) {
+			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+				if (!App->player2->IsEnabled()) {
+					App->audio->PlaySoundEffects(select_sho);
+					App->player2->Enable();
+					App->scene_start->credit_num--;
+					App->ui->time = 9;
+				}
+			}
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+				if (!App->player3->IsEnabled()) {
+					App->audio->PlaySoundEffects(select_junis);
+					App->player3->Enable();
+					App->scene_start->credit_num--;
+					App->ui->time = 9;
+				}
+			}
+		}
+		else {
+			if (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN) {
+				if (!App->player2->IsEnabled()) {
+					App->audio->PlaySoundEffects(select_sho);
+					App->player2->Enable();
+					App->scene_start->credit_num--;
+					App->ui->time = 9;
+				}
+			}
+			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+				if (!App->player3->IsEnabled()) {
+					App->audio->PlaySoundEffects(select_junis);
+					App->player3->Enable();
+					App->scene_start->credit_num--;
+					App->ui->time = 9;
+				}
+			}
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
-		if (!App->player3->IsEnabled()) {
-			App->audio->PlaySoundEffects(select_sho);
-			App->player3->Enable();
-		}
-	}
+	
 
 	//teleport
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN) {

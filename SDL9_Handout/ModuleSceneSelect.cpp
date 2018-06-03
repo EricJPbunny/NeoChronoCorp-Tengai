@@ -204,7 +204,7 @@ update_status ModuleSceneSelect::Update()
 		else {
 			App->audio->PlaySoundEffects(select_junis);
 		}
-		App->fade->FadeToBlack(App->scene_select, App->scene_air, 1.50f);
+		App->fade->FadeToBlack(App->scene_select, App->scene_air, 0.90f);
 	}
 
 	return UPDATE_CONTINUE;
