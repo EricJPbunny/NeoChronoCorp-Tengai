@@ -353,7 +353,6 @@ update_status ModuleUlti3::Update()
 	if (current_time_1 > 120) {
 		coll->SetPos((App->render->camera.x / SCREEN_SIZE), (App->render->camera.y / SCREEN_SIZE));
 		timer_1 = true;
-		LOG("%i", current_time_1);
 	}
 	else {
 		coll->SetPos(-2000, -2000);

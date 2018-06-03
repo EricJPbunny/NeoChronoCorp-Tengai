@@ -360,22 +360,6 @@ void Enemy_Elf::Move()
 		shurikens7 = false;
 
 	}
-	if (current_time > 21000 && shooting3) {
-
-		App->particles->AddParticle(App->particles->elf_shoot, position.x, position.y, COLLIDER_ENEMY_SHOT);
-		App->particles->AddParticle(App->particles->elf_shoot2, position.x + 20, position.y, COLLIDER_ENEMY_SHOT);
-
-		App->particles->AddParticle(App->particles->elf_shoot3, position.x, position.y, COLLIDER_ENEMY_SHOT);
-		App->particles->AddParticle(App->particles->elf_shoot4, position.x + 20, position.y, COLLIDER_ENEMY_SHOT);
-
-		App->particles->AddParticle(App->particles->elf_shoot5, position.x, position.y, COLLIDER_ENEMY_SHOT);
-		App->particles->AddParticle(App->particles->elf_shoot6, position.x + 20, position.y, COLLIDER_ENEMY_SHOT);
-
-		App->particles->AddParticle(App->particles->elf_shoot7, position.x, position.y, COLLIDER_ENEMY_SHOT);
-		App->particles->AddParticle(App->particles->elf_shoot8, position.x + 20, position.y, COLLIDER_ENEMY_SHOT);
-		shooting2 = false;
-
-	}
 
 
 	if (App->ui->enemies_movement) {

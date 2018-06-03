@@ -468,6 +468,7 @@ bool ModuleSceneAir::CleanUp()
 	fade = true;
 
 	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 
 	App->audio->UnloadFx(select_junis);
 	App->audio->UnloadFx(select_sho);
@@ -755,7 +756,8 @@ update_status ModuleSceneAir::Update()
 		App->audio->PlaySoundEffects(App->enemies->fx_death);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F8]==KEY_STATE::KEY_DOWN || App->render->camera.x>30000) {
+	if (App->input->keyboard[SDL_SCANCODE_F8]==KEY_STATE::KEY_DOWN || App->render->camera.x>30000 || App->ui->time == 0) {
+		App->ui->time == 9;
 		App->fade->FadeToBlack(App->scene_air, App->scene_score, 0.90f);
 	}
 	
