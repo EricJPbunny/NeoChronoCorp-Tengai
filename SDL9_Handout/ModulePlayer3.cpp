@@ -164,6 +164,7 @@ bool ModulePlayer3::Start()
 	App->partner3->Enable();
 
 	App->ui->num_life_junis = 3;
+	App->ui->num_ulti_junis = 2;
 
 	time = true;
 	destroyed = false;
@@ -221,13 +222,7 @@ update_status ModulePlayer3::Update()
 		power_up = 4;
 	}
 
-	if (ulti_button) {
-		if (!App->ulti3->IsEnabled()) {
-			App->ulti3->timer = true;
-			App->ulti3->Enable();
-			ulti_on = true;
-		}
-	}
+	
 	//check state
 	CheckState();
 
@@ -246,6 +241,15 @@ update_status ModulePlayer3::Update()
 		}
 		if (pressed_down) {
 			position.y += speed;
+		}
+
+		if (ulti_button && App->ui->num_ulti_junis > 0) {
+			if (!App->ulti3->IsEnabled()) {
+				App->ui->num_ulti_junis--;
+				App->ulti3->timer = true;
+				App->ulti3->Enable();
+				ulti_on = true;
+			}
 		}
 
 		if (shot_ctrl) {

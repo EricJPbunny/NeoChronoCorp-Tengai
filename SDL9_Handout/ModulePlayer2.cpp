@@ -126,6 +126,7 @@ bool ModulePlayerTwo::Start()
 	App->partner2->Enable();
 
 	App->ui->num_life_sho = 3;
+	App->ui->num_ulti_sho = 2;
 
 	time = true;
 	destroyed = false;
@@ -185,12 +186,6 @@ update_status ModulePlayerTwo::Update()
 		power_up = 4;
 	}
 
-	if (ulti_button) {
-		if (!App->ulti2->IsEnabled()) {
-			App->ulti2->timer = true;
-			App->ulti2->Enable();
-		}
-	}
 	//check state
 	CheckState();
 
@@ -212,8 +207,9 @@ update_status ModulePlayerTwo::Update()
 			position.y += speed;
 		}
 
-		if (ulti_button) {
+		if (ulti_button && App->ui->num_ulti_sho > 0) {
 			if (!App->ulti2->IsEnabled()) {
+				App->ui->num_ulti_sho--;
 				App->ulti2->timer = true;
 				App->ulti2->Enable();
 			}
