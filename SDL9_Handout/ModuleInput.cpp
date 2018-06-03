@@ -77,7 +77,8 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 	Uint8 button_state_A = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
-	Uint8 button_state_Y = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
+	Uint8 button_state_X = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_X);
+	Uint8 button_state_B = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_B);
 	Uint8 button_state_START = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_START);
 	if (button_state_A) {
 		if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
@@ -87,6 +88,25 @@ update_status ModuleInput::PreUpdate()
 		if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
 		else controller_A_button = KEY_IDLE;
 	}
+
+	if (button_state_X) {
+		if (controller_X_button == KEY_IDLE) controller_X_button = KEY_DOWN;
+		else controller_X_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_X_button == KEY_REPEAT || controller_X_button == KEY_DOWN) controller_X_button = KEY_UP;
+		else controller_X_button = KEY_IDLE;
+	}
+
+	if (button_state_B) {
+		if (controller_B_button == KEY_IDLE) controller_B_button = KEY_DOWN;
+		else controller_B_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_B_button == KEY_REPEAT || controller_B_button == KEY_DOWN) controller_B_button = KEY_UP;
+		else controller_B_button = KEY_IDLE;
+	}
+
 
 
 	if (button_state_START) {
@@ -98,7 +118,8 @@ update_status ModuleInput::PreUpdate()
 		else controller_START_button = KEY_IDLE;
 	}
 	Uint8 button_state_A2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_A);
-	Uint8 button_state_Y2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_Y);
+	Uint8 button_state_X2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_X);
+	Uint8 button_state_B2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_B);
 	Uint8 button_state_START2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_START);
 	if (button_state_A2) {
 		if (controller_A_button2 == KEY_IDLE) controller_A_button2 = KEY_DOWN;
@@ -108,9 +129,25 @@ update_status ModuleInput::PreUpdate()
 		if (controller_A_button2 == KEY_REPEAT || controller_A_button2 == KEY_DOWN) controller_A_button2 = KEY_UP;
 		else controller_A_button2 = KEY_IDLE;
 	}
+	if (button_state_X2) {
+		if (controller_X_button2 == KEY_IDLE) controller_X_button2 = KEY_DOWN;
+		else controller_X_button2 = KEY_REPEAT;
+	}
+	else {
+		if (controller_X_button2 == KEY_REPEAT || controller_X_button2 == KEY_DOWN) controller_X_button2 = KEY_UP;
+		else controller_X_button2 = KEY_IDLE;
+	}
 
+	if (button_state_B2) {
+		if (controller_B_button2 == KEY_IDLE) controller_B_button2 = KEY_DOWN;
+		else controller_B_button2 = KEY_REPEAT;
+	}
+	else {
+		if (controller_B_button2 == KEY_REPEAT || controller_B_button2 == KEY_DOWN) controller_B_button2 = KEY_UP;
+		else controller_B_button2 = KEY_IDLE;
+	}
 
-	if (button_state_START) {
+	if (button_state_START2) {
 		if (controller_START_button2 == KEY_IDLE) controller_START_button2 = KEY_DOWN;
 		else controller_START_button2 = KEY_REPEAT;
 	}

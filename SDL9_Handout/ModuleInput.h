@@ -43,9 +43,11 @@ public:
 	BUTTON_STATE button[MAX_BUTTONS];
 	KEY_STATE controller_A_button;
 	KEY_STATE controller_X_button;
+	KEY_STATE controller_B_button;
 	KEY_STATE controller_START_button;
 	KEY_STATE controller_A_button2;
 	KEY_STATE controller_X_button2;
+	KEY_STATE controller_B_button2;
 	KEY_STATE controller_START_button2;
 };
 
