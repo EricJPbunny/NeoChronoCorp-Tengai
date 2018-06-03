@@ -784,6 +784,11 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if(active[i] != nullptr && active[i]->collider == c1)
 		{
+			if (c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT && (c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
+				delete active[i];
+				active[i] = nullptr;
+				break;
+			}
 			//Enemy Shot collide Player
 			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX && c1->type == COLLIDER_TYPE::COLLIDER_ENEMY_SHOT)
 			{

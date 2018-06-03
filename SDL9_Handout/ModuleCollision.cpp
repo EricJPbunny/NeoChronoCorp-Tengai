@@ -195,8 +195,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_POWER_UP] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_COIN] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_TRIGGER] = false;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ULTI2] = false;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ULTI2] = true;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ULTI3] = true;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ELF] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENTITY] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PALACE] = false;
@@ -518,7 +518,9 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_ULTI2://grey
 			App->render->DrawQuad(colliders[i]->rect, 204, 204, 204, alpha);
 			break;
-
+		case COLLIDER_ULTI3://grey
+			App->render->DrawQuad(colliders[i]->rect, 204, 204, 204, alpha);
+			break;
 		case COLLIDER_ELF://salmon
 			App->render->DrawQuad(colliders[i]->rect, 255, 160, 122, alpha);
 			break;

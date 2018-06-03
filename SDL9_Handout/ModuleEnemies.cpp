@@ -286,7 +286,6 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 
 			}
-
 			//Coin
 			if (c2->type == COLLIDER_TYPE::COLLIDER_HITBOX  && c1->type == COLLIDER_TYPE::COLLIDER_COIN) {
 				srand(time(NULL));
