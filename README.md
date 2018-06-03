@@ -113,67 +113,118 @@ __[RSHIFT]"KEY_REPEAT"__ = Charged shot
 ### 0.1 Version(4/04/2018)
 
 -First map backgrounds
+
 -First map's music
+
 -Scroll
+
 -Map velocity
+
 -Screen Edges
 
 
 ### 0.25 Version(9/4/2018)
 
 -Added playable character
+
 -Added character movement
+
 -Added three more scenes
+
 -Fade between scenes
+
 -Fixed music bug
+
 -Fixed some backgrounds errors
 
 ### 0.3.1 Version(12/4/2018)
 
 -Added shooting bullets
+
 -Fixed animation bugs
+
 -Fixed background bugs
 
 ### 0.3.2 Version(12/4/2018)
 
 -Started fixing camera movement
+
 -Added first fade
+
 -Fixed bullet bug
+
 -Fixed some minor animation bugs
 
 ### 0.3.5 Version(16/4/2018)
 
 -Changed and fixed backgrounds
+
 -Added character bullets
+
 -Added collisions
+
 -Added start scene
+
 -Added borders
 
 
 ### 0.4.2 Version(22/04/2018)
 
 -Added partners
+
 -Added partner shots
+
 -Added score
+
 -Added enemies
+
 -Added power ups
+
 -Added explosions and FX
+
 -Fixed characters movements
 
 
 ### 0.4.3 Version(22/04/2018)
 
 -Added God mode
+
 -Added coins
+
 -Added enemies bullets
+
 -Added Power ups and Power downs
+
 -Fixed characters movements
 
 
 ### 0.5 Version(22/04/2018)
 
---Fixed FX bug
---Added more enemies
+-Fixed FX bug
+
+-Added more enemies
+
+
+### 1.0 Version(3/06/2018)
+
+-Added enemies
+
+-Added Ship
+
+-Added player's Ultis
+
+-Added ShipHead boss
+
+-Added Green Elf
+
+-Added Insert Coin
+
+-Added screen select
+
+-Fixed background bugs
+
+-Fixed audio bugs
+
 
 ## Credits
 * **[GitHub Project Page](https://github.com/EricJPbunny/NeoChronoCorp-Tengai)**
