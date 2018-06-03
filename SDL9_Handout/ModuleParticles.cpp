@@ -395,6 +395,166 @@ ModuleParticles::ModuleParticles()
 	shipHead_shoot.speed.y = 0;
 	
 
+	//Elf shurikens
+
+	elf_shuriken.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken.anim.loop = true;
+	elf_shuriken.life = 3400;
+	elf_shuriken.speed.x = -2.0;
+
+
+	elf_shuriken2.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken2.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken2.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken2.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken2.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken2.anim.loop = true;
+	elf_shuriken2.life = 3400;
+	elf_shuriken2.speed.x = -2.0;
+
+
+
+	elf_shuriken3.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken3.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken3.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken3.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken3.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken3.anim.loop = true;
+	elf_shuriken3.life = 3400;
+	elf_shuriken3.speed.x = 2.0;
+
+
+	elf_shuriken4.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken4.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken4.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken4.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken4.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken4.anim.loop = true;
+	elf_shuriken4.life = 3400;
+	elf_shuriken4.speed.x = 2.0;
+
+
+	elf_shuriken5.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken5.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken5.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken5.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken5.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken5.anim.loop = true;
+	elf_shuriken5.life = 3400;
+	elf_shuriken5.speed.y = 2.0;
+
+
+	elf_shuriken6.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken6.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken6.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken6.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken6.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken6.anim.loop = true;
+	elf_shuriken6.life = 3400;
+	elf_shuriken6.speed.y = 2.0;
+
+	elf_shuriken7.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken7.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken7.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken7.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken7.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken7.anim.loop = true;
+	elf_shuriken7.life = 3400;
+	elf_shuriken7.speed.y = -2.0;
+
+	elf_shuriken8.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken8.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken8.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken8.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken8.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken8.anim.loop = true;
+	elf_shuriken8.life = 3400;
+	elf_shuriken8.speed.y = -2.0;
+
+	elf_shuriken9.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken9.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken9.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken9.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken9.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken9.anim.loop = true;
+	elf_shuriken9.life = 3400;
+	elf_shuriken9.speed.x = -2.0;
+	elf_shuriken9.speed.y = -2.0;
+
+	elf_shuriken10.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken10.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken10.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken10.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken10.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken10.anim.loop = true;
+	elf_shuriken10.life = 3400;
+	elf_shuriken10.speed.x = -2.0;
+	elf_shuriken10.speed.y = -2.0;
+
+	elf_shuriken11.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken11.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken11.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken11.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken11.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken11.anim.loop = true;
+	elf_shuriken11.life = 3400;
+	elf_shuriken11.speed.x = 2.0;
+	elf_shuriken11.speed.y = 2.0;
+
+	elf_shuriken12.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken12.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken12.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken12.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken12.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken12.anim.loop = true;
+	elf_shuriken12.life = 3400;
+	elf_shuriken12.speed.x = 2.0;
+	elf_shuriken12.speed.y = 2.0;
+
+	elf_shuriken13.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken13.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken13.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken13.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken13.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken13.anim.loop = true;
+	elf_shuriken13.life = 3400;
+	elf_shuriken13.speed.x = 2.0;
+	elf_shuriken13.speed.y = -2.0;
+
+	elf_shuriken14.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken14.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken14.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken14.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken14.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken14.anim.loop = true;
+	elf_shuriken14.life = 3400;
+	elf_shuriken14.speed.x = 2.0;
+	elf_shuriken14.speed.y = -2.0;
+
+	elf_shuriken15.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken15.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken15.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken15.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken15.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken15.anim.loop = true;
+	elf_shuriken15.life = 3400;
+	elf_shuriken15.speed.x = -2.0;
+	elf_shuriken15.speed.y = 2.0;
+
+	elf_shuriken16.anim.PushBack({ 136,440,10,11 });
+	elf_shuriken16.anim.PushBack({ 160,440,10,11 });
+	elf_shuriken16.anim.PushBack({ 187,440,10,11 });
+	elf_shuriken16.anim.PushBack({ 215,440,10,11 });
+	elf_shuriken16.anim.PushBack({ 244,440,10,11 });
+	elf_shuriken16.anim.loop = true;
+	elf_shuriken16.life = 3400;
+	elf_shuriken16.speed.x = -2.0;
+	elf_shuriken16.speed.y = 2.0;
+
 }
 
 ModuleParticles::~ModuleParticles()
