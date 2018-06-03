@@ -8,6 +8,7 @@
 #include "ModulePlayer2.h"
 #include "ModulePlayer3.h"
 #include "Enemy_ShipHead.h"
+#include "ModuleUI.h"
 #include "SDL\include\SDL_timer.h"
 
 
@@ -19,6 +20,13 @@ Enemy_ShipHead::Enemy_ShipHead(int x, int y,int type) :Enemy(x, y,type)
 	spawn.PushBack({ 0,141,110,128 });
 	spawn.PushBack({ 339,0,113,127 });
 	spawn.speed = 0.02f;
+
+	idle.PushBack({ 339,0,113,127 });
+	idle.speed = 0.1f;
+
+
+	movement.PushBack({ 0.0f, 0.0f }, 120, &spawn);
+	movement.PushBack({ 1.0f, 0.0f }, 9999, &idle);
 
 
 	boss_sprite = App->textures->Load("assets/sprite/spritesheet_head_boss.png");
@@ -46,24 +54,23 @@ void Enemy_ShipHead::Move()
 	}
 	if (shot_cd == 0) {
 		int  vectoy;
-		float magnitude;
 
 		switch (current_shot) {
 		case shot_types::first_shot:
 			
 			
-			if (App->player2->position.y < 100) 
+			if (App->player2->position.y < -620) 
 			{
 				vectoy = -1;
 			}
-			if (App->player2->position.y > 150)
+			if (App->player2->position.y > -575)
 			{
 				vectoy = 1;
 			}
 
-			//App->particles->shipHead_shoot.speed.y = vectoy;
+			App->particles->shipHead_shoot.speed.y = vectoy;
 
-			App->particles->AddParticle(App->particles->shipHead_shoot, position.x + 22, position.y + 78, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->shipHead_shoot, position.x + 22, position.y + 85, COLLIDER_ENEMY_SHOT);
 			if (last_shot == second_shot) current_shot = first_shot;
 			else current_shot = first_shot;
 
@@ -79,7 +86,9 @@ void Enemy_ShipHead::Move()
 	}
 	else shot_cd--;
 
-	
+	if (App->ui->enemies_movement) {
+		position = head_position + movement.GetCurrentSpeed(&animation);
+	}
 }
 
 void Enemy_ShipHead::Draw(SDL_Texture* sprites) {
