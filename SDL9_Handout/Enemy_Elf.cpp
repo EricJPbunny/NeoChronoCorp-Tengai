@@ -21,8 +21,6 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	previous.PushBack({ 207, 736, 32, 35 });
 	previous.speed = 0.08f;
 
-
-
 	spawn.PushBack({ 18, 305, 104, 89 });
 	spawn.PushBack({ 154, 305, 104, 89 });
 	spawn.PushBack({ 289, 305, 104, 89 });
@@ -64,9 +62,6 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	hand3.PushBack({ 524, 26, 80, 69 });
 	hand3.speed = 0.1f;
 	
-
-	
-
 	movement.PushBack({ 1.0f, 0.0f },15, &previous);
 	movement.PushBack({ 1.0f, 0.0f }, 150, &spawn);
 	movement.PushBack({ 1.0f, 0.0f },10, &stay);
@@ -95,7 +90,7 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	
 	animation = &previous;
     this->type = type;
-		collider = App->collision->AddCollider({ 0, 0, 100, 100 }, COLLIDER_TYPE::COLLIDER_ELF, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 100, 100 }, COLLIDER_TYPE::COLLIDER_ELF, (Module*)App->enemies);
 	originalposition.y = y;
 	originalposition.x = x;
 
@@ -254,6 +249,8 @@ void Enemy_Elf::Move()
 	if (App->ui->enemies_movement) {
 		position = originalposition + movement.GetCurrentSpeed(&animation);
 	}
+
+	collider->SetPos(position.x, position.y);
 }
 
 

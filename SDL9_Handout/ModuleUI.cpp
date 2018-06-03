@@ -128,7 +128,7 @@ update_status ModuleUI::Update()
 				App->render->Blit(graphics, 76 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
 			}
 			//Ulti Sho
-			for (int i = 0; i <= num_ulti_sho; i++) {
+			for (int i = 0; i <= num_ulti_sho - 1; i++) {
 				App->render->Blit(graphics, 8 + 14*i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
@@ -140,7 +140,7 @@ update_status ModuleUI::Update()
 				App->render->Blit(graphics, 236 + life_sho.w*i, 1, &life_sho, 0.00f, 0.00f);
 			}
 			//Ulti Sho
-			for (int i = 0; i <= num_ulti_sho; i++) {
+			for (int i = 0; i <= num_ulti_sho - 1; i++) {
 				App->render->Blit(graphics, 170 + 14 * i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
@@ -164,7 +164,7 @@ update_status ModuleUI::Update()
 				App->render->Blit(graphics, 76 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
 			}
 			//Ulti Junis
-			for (int i = 0; i <= num_ulti_junis; i++) {
+			for (int i = 0; i <= num_ulti_junis - 1; i++) {
 				App->render->Blit(graphics, 8 + 14 * i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
@@ -176,7 +176,7 @@ update_status ModuleUI::Update()
 				App->render->Blit(graphics, 236 + life_junis.w*i, 1, &life_junis, 0.00f, 0.00f);
 			}
 			//Ulti Junis
-			for (int i = 0; i <= num_ulti_junis; i++) {
+			for (int i = 0; i <= num_ulti_junis - 1; i++) {
 				App->render->Blit(graphics, 170 + 14 * i, 15, &ulti, 0.00f, 0.00f);
 			}
 		}
