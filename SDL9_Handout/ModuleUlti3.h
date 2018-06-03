@@ -34,6 +34,10 @@ public:
 	int current_time = 0;
 	int time_on_entry = 0;
 
+	bool timer_1 = false;
+	int current_time_1 = 0;
+	int time_on_entry_1 = 0;
+
 	bool interval = false;
 	int current_interval = 600;
 	int interval_on_entry = 0;

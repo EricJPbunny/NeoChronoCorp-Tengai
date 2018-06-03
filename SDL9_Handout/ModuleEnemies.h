@@ -84,6 +84,7 @@ private:
 
 	int ninja_life = 0;
 	int num_ovni = 0;
+	int life_elf = 0;
 	int typeofcoin;
 };
 

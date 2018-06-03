@@ -433,7 +433,7 @@ void ModulePlayerTwo::CheckState()
 		break;
 
 	case DEATH_2:
-		if (position.y > SCREEN_HEIGHT + 80) {
+		if (position.y > (App->render->camera.y) / SCREEN_SIZE + 400) {
 			state = POST_DEATH_2;
 		}
 		break;

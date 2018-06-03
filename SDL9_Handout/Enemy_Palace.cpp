@@ -30,6 +30,8 @@ Enemy_Palace::Enemy_Palace(int x, int y, int type) :Enemy(x, y,type)
 
 	animation = &spawn;
 
+	
+
 	this->type = type;
 
 }
