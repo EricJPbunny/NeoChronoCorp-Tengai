@@ -21,6 +21,7 @@ private:
 	bool timer = true;
 	int fire_rate= 90, shot_cd =0;
 	int starter = 0;
+	int  vectoy=0;
 	enum shot_types {
 		first_shot,
 		second_shot,
