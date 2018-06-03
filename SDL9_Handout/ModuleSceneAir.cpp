@@ -262,7 +262,7 @@ bool ModuleSceneAir::Start()
 
 	App->audio->PlayMusic(mus);
 	//Enemies
-
+	App->enemies->AddEnemy(ENEMY_TYPES::ULTI, 200, 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 380, 20,1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 410, 112, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::KNIFE, 440, 44, 1);

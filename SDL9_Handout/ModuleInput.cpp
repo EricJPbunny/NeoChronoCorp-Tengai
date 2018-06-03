@@ -26,6 +26,7 @@ bool ModuleInput::Init()
 	SDL_Init(0);
 	SDL_Init(SDL_INIT_GAMECONTROLLER);
 
+
 	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -41,122 +42,73 @@ update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
 
-	SDL_Event events;
-	SDL_PollEvent(&events);
-
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
+	SDL_Event event;
 
-	while (SDL_PollEvent(&events)) {
-		if (events.type == SDL_QUIT)
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_QUIT)
 			return update_status::UPDATE_STOP;
-		else if (events.type == SDL_CONTROLLERDEVICEADDED) {
+		else if (event.type == SDL_CONTROLLERDEVICEADDED) {
 			if (!controller) {
 				controller = SDL_GameControllerOpen(0);
 				if (controller) {
 					LOG("Controller loaded correctly");
 				}
-				else if (controller && !controller2) {
-					controller2 = SDL_GameControllerOpen(1);
-				}
-				else LOG("Could not open controller device");
+				else LOG("Could not open gamecontroller: %s", SDL_GetError());
 			}
 		}
-		else if (events.type == SDL_CONTROLLERDEVICEREMOVED) {
-			if (events.cdevice.which == 0) {
+		else if (event.type == SDL_CONTROLLERDEVICEREMOVED) {
+			if (event.cdevice.which == 0) {
 				SDL_GameControllerClose(controller);
 				controller = nullptr;
-				LOG("Controller 1 removed!\n");
-			if (events.cdevice.which == 1) {
-				SDL_GameControllerClose(controller2);
-				controller2 = nullptr;
-				LOG("Controller 2 removed!\n");
-				}
+				LOG("Controller removed!\n");
 			}
 		}
-		Uint8 button_state_A = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
-		Uint8 button_state_Y = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
-		Uint8 button_state_START = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_START);
-
-		Uint8 button_state_A2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_A);
-		Uint8 button_state_Y2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_Y);
-		Uint8 button_state_START2 = SDL_GameControllerGetButton(controller2, SDL_CONTROLLER_BUTTON_START);
-
-		if (button_state_A) {
-			if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
-			else controller_A_button = KEY_REPEAT;
-		}
-		else {
-			if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
-			else controller_A_button = KEY_IDLE;
-		}
-		if (button_state_Y) {
-			if (controller_X_button == KEY_IDLE) controller_X_button = KEY_DOWN;
-			else controller_X_button = KEY_REPEAT;
-		}
-		else {
-			if (controller_X_button == KEY_REPEAT || controller_X_button == KEY_DOWN) controller_X_button = KEY_UP;
-			else controller_X_button = KEY_IDLE;
-		}
-		if (button_state_START) {
-			if (controller_START_button == KEY_IDLE) controller_START_button = KEY_DOWN;
-			else controller_START_button = KEY_REPEAT;
-		}
-		else {
-			if (controller_START_button == KEY_REPEAT || controller_START_button == KEY_DOWN) controller_START_button = KEY_UP;
-			else controller_START_button = KEY_IDLE;
-		}
-
-		//controller 2
-
-		if (button_state_A2) {
-			if (controller_A_button2 == KEY_IDLE) controller_A_button2 = KEY_DOWN;
-			else controller_A_button2 = KEY_REPEAT;
-		}
-		else {
-			if (controller_A_button2 == KEY_REPEAT || controller_A_button2 == KEY_DOWN) controller_A_button2 = KEY_UP;
-			else controller_A_button2 = KEY_IDLE;
-		}
-		if (button_state_Y2) {
-			if (controller_X_button2 == KEY_IDLE) controller_X_button2 = KEY_DOWN;
-			else controller_X_button2 = KEY_REPEAT;
-		}
-		else {
-			if (controller_X_button2 == KEY_REPEAT || controller_X_button2 == KEY_DOWN) controller_X_button2 = KEY_UP;
-			else controller_X_button2 = KEY_IDLE;
-		}
-		if (button_state_START2) {
-			if (controller_START_button2 == KEY_IDLE) controller_START_button2 = KEY_DOWN;
-			else controller_START_button2 = KEY_REPEAT;
-		}
-		else {
-			if (controller_START_button2 == KEY_REPEAT || controller_START_button2 == KEY_DOWN) controller_START_button2 = KEY_UP;
-			else controller_START_button2 = KEY_IDLE;
-		}
-
-
 	}
-		for (int i = 0; i < MAX_KEYS; ++i)
-		{
-			if (keys[i] == 1)
-			{
-				if (keyboard[i] == KEY_IDLE)
-					keyboard[i] = KEY_DOWN;
-				else
-					keyboard[i] = KEY_REPEAT;
-			}
-			else
-			{
-				if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
-					keyboard[i] = KEY_UP;
-				else
-					keyboard[i] = KEY_IDLE;
-			}
-		}
+	Uint8 button_state_A = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
+	Uint8 button_state_Y = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
+	Uint8 button_state_START = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_START);
 
-		if (keyboard[SDL_SCANCODE_ESCAPE])
-			return update_status::UPDATE_STOP;
-	
+	if (button_state_A) {
+		if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
+		else controller_A_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
+		else controller_A_button = KEY_IDLE;
+	}
+
+
+	if (button_state_START) {
+		if (controller_START_button == KEY_IDLE) controller_START_button = KEY_DOWN;
+		else controller_START_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_START_button == KEY_REPEAT || controller_START_button == KEY_DOWN) controller_START_button = KEY_UP;
+		else controller_START_button = KEY_IDLE;
+	}
+
+	for (int i = 0; i < MAX_KEYS; ++i)
+	{
+		if (keys[i] == 1)
+		{
+			if (keyboard[i] == KEY_IDLE)
+				keyboard[i] = KEY_DOWN;
+			else
+				keyboard[i] = KEY_REPEAT;
+		}
+		else
+		{
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+				keyboard[i] = KEY_UP;
+			else
+				keyboard[i] = KEY_IDLE;
+		}
+	}
+
+	if (keyboard[SDL_SCANCODE_ESCAPE])
+		return update_status::UPDATE_STOP;
 
 	return update_status::UPDATE_CONTINUE;
 }
