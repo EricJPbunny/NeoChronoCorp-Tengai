@@ -205,10 +205,10 @@ update_status ModulePlayer3::Update()
 		ulti_button = App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_STATE::KEY_DOWN;
 	}
 	else {
-		pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT;
-		pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT;
-		pressed_down = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT;
-		pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT;
+		pressed_up = App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEADZONE;
+		pressed_left = App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEADZONE;
+		pressed_down = App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEADZONE;
+		pressed_right = App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller2, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEADZONE;
 
 		shot_ctrl = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
 		ulti_button = App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN;

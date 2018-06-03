@@ -501,7 +501,6 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (group_cloud.w * i), -600, &group_cloud, bg_speed_default * 5);
 	}
 
-
 	//   SHIP & SHIP FLAGS
 	if (App->render->camera.x>9400 && App->render->camera.x<9700) {
 		ship_flag1 = true;
@@ -614,7 +613,7 @@ update_status ModuleSceneAir::Update()
 	//Enable Players
 	if (App->scene_start->credit_num > 0) {
 		if (App->scene_select->sho_p1) {
-			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
 				if (!App->player2->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_sho);
 					App->player2->Enable();
@@ -622,7 +621,7 @@ update_status ModuleSceneAir::Update()
 					App->ui->time = 9;
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN || App->input->controller_START_button2 == KEY_STATE::KEY_DOWN) {
 				if (!App->player3->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_junis);
 					App->player3->Enable();
@@ -632,7 +631,7 @@ update_status ModuleSceneAir::Update()
 			}
 		}
 		else {
-			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN || App->input->controller_START_button2 == KEY_STATE::KEY_DOWN) {
 				if (!App->player2->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_sho);
 					App->player2->Enable();
@@ -640,7 +639,7 @@ update_status ModuleSceneAir::Update()
 					App->ui->time = 9;
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+			if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN) {
 				if (!App->player3->IsEnabled()) {
 					App->audio->PlaySoundEffects(select_junis);
 					App->player3->Enable();
