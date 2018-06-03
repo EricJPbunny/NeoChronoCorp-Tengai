@@ -23,6 +23,9 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_WALL][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_WALL][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_WALL][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_WALL][COLLIDER_ELF] = false;
+	matrix[COLLIDER_WALL][COLLIDER_ENTITY] = true;
+
 
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
@@ -39,6 +42,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_ELF] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENTITY] = true;
 
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
@@ -55,6 +60,9 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY][COLLIDER_TRIGGER] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ULTI2] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ULTI3] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_ELF] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_ENTITY] = false;
+	
 
 	matrix[COLLIDER_REDOVNI][COLLIDER_WALL] = false;
 	matrix[COLLIDER_REDOVNI][COLLIDER_PLAYER] = true;
@@ -71,6 +79,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_REDOVNI][COLLIDER_TRIGGER] = true;
 	matrix[COLLIDER_REDOVNI][COLLIDER_ULTI2] = true;
 	matrix[COLLIDER_REDOVNI][COLLIDER_ULTI3] = true;
+	matrix[COLLIDER_REDOVNI][COLLIDER_ELF] = false;
+	matrix[COLLIDER_REDOVNI][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_NINJA][COLLIDER_WALL] = false;
 	matrix[COLLIDER_NINJA][COLLIDER_PLAYER] = true;
@@ -87,6 +97,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_NINJA][COLLIDER_TRIGGER] = true;
 	matrix[COLLIDER_NINJA][COLLIDER_ULTI2] = true;
 	matrix[COLLIDER_NINJA][COLLIDER_ULTI3] = true;
+	matrix[COLLIDER_NINJA][COLLIDER_ELF] = false;
+	matrix[COLLIDER_NINJA][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER] = false;
@@ -103,6 +115,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ELF] = true;
+	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_PLAYER] = false;
@@ -119,6 +133,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ELF] = true;
+	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_PLAYER] = false;
@@ -135,6 +151,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_ELF] = true;
+	matrix[COLLIDER_PLAYER_3_SHOT][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_HITBOX][COLLIDER_WALL] = false;
 	matrix[COLLIDER_HITBOX][COLLIDER_PLAYER] = false;
@@ -151,6 +169,9 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_HITBOX][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_HITBOX][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_HITBOX][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_HITBOX][COLLIDER_ELF] = true;
+	matrix[COLLIDER_HITBOX][COLLIDER_ENTITY] = false;
+
 
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_WALL] = true;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER] = false;
@@ -167,6 +188,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ELF] = false;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_POWER_UP][COLLIDER_WALL] = true;
 	matrix[COLLIDER_POWER_UP][COLLIDER_PLAYER] = true;
@@ -183,6 +206,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_POWER_UP][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_POWER_UP][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_POWER_UP][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_POWER_UP][COLLIDER_ELF] = false;
+	matrix[COLLIDER_POWER_UP][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_COIN][COLLIDER_WALL] = true;
 	matrix[COLLIDER_COIN][COLLIDER_PLAYER] = true;
@@ -199,6 +224,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_COIN][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_COIN][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_COIN][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_COIN][COLLIDER_ELF] = false;
+	matrix[COLLIDER_COIN][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_TRIGGER][COLLIDER_WALL] = false;
 	matrix[COLLIDER_TRIGGER][COLLIDER_PLAYER] = false;
@@ -215,6 +242,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_TRIGGER][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_TRIGGER][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_TRIGGER][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_TRIGGER][COLLIDER_ELF] = true;
+	matrix[COLLIDER_TRIGGER][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_ULTI2][COLLIDER_WALL] = false;
 	matrix[COLLIDER_ULTI2][COLLIDER_PLAYER] = false;
@@ -231,6 +260,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ULTI2][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_ULTI2][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_ULTI2][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_ULTI2][COLLIDER_ELF] = true;
+	matrix[COLLIDER_ULTI2][COLLIDER_ENTITY] = false;
 
 	matrix[COLLIDER_ULTI3][COLLIDER_WALL] = false;
 	matrix[COLLIDER_ULTI3][COLLIDER_PLAYER] = false;
@@ -247,6 +278,44 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ULTI3][COLLIDER_TRIGGER] = false;
 	matrix[COLLIDER_ULTI3][COLLIDER_ULTI2] = false;
 	matrix[COLLIDER_ULTI3][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_ULTI3][COLLIDER_ELF] = true;
+	matrix[COLLIDER_ULTI3][COLLIDER_ENTITY] = false;
+
+	matrix[COLLIDER_ELF][COLLIDER_WALL] = false;
+	matrix[COLLIDER_ELF][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_ELF][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_ELF][COLLIDER_REDOVNI] = false;
+	matrix[COLLIDER_ELF][COLLIDER_NINJA] = false;
+	matrix[COLLIDER_ELF][COLLIDER_HITBOX] = true;
+	matrix[COLLIDER_ELF][COLLIDER_PLAYER_SHOT] = true;
+	matrix[COLLIDER_ELF][COLLIDER_PLAYER_2_SHOT] = true;
+	matrix[COLLIDER_ELF][COLLIDER_PLAYER_3_SHOT] = true;
+	matrix[COLLIDER_ELF][COLLIDER_ENEMY_SHOT] = false;
+	matrix[COLLIDER_ELF][COLLIDER_POWER_UP] = false;
+	matrix[COLLIDER_ELF][COLLIDER_COIN] = false;
+	matrix[COLLIDER_ELF][COLLIDER_TRIGGER] = true;
+	matrix[COLLIDER_ELF][COLLIDER_ULTI2] = true;
+	matrix[COLLIDER_ELF][COLLIDER_ULTI3] = true;
+	matrix[COLLIDER_ELF][COLLIDER_ELF] = false;
+	matrix[COLLIDER_ELF][COLLIDER_ENTITY] = false;
+
+	matrix[COLLIDER_ENTITY][COLLIDER_WALL] = true;
+	matrix[COLLIDER_ENTITY][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_ENTITY][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_REDOVNI] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_NINJA] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_PLAYER_SHOT] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_HITBOX] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_PLAYER_2_SHOT] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_PLAYER_3_SHOT] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_ENEMY_SHOT] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_POWER_UP] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_COIN] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_TRIGGER] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_ULTI2] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_ULTI3] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_ELF] = false;
+	matrix[COLLIDER_ENTITY][COLLIDER_ENTITY] = false;
 
 }
 
@@ -368,6 +437,14 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_ULTI2://grey
 			App->render->DrawQuad(colliders[i]->rect, 204, 204, 204, alpha);
 			break;
+
+		case COLLIDER_ELF://salmon
+			App->render->DrawQuad(colliders[i]->rect, 255, 160, 122, alpha);
+			break;
+		case COLLIDER_ENTITY://gold
+			App->render->DrawQuad(colliders[i]->rect, 218, 165, 32, alpha);
+			break;
+
 		}
 	}
 }

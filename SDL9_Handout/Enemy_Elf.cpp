@@ -88,17 +88,17 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 1.0f, 0.0f }, 150, &spawn);
 	movement.PushBack({ 1.0f, 0.0f }, 10, &stay);
 	movement.PushBack({ 1.0f, 0.0f }, 10, &stay2);
+	movement.PushBack({ 1.0f, 0.0f }, 50, &idle);
+	movement.PushBack({ 1.0f, 0.0f }, 20, &hand);
+	movement.PushBack({ 1.0f, 0.0f }, 10, &hand3);
+	movement.PushBack({ -1.5f, 0.0f }, 20, &hand3);
 	
-	
-
-
-
-
 	animation = &previous;
-	
+    this->type = type;
+		collider = App->collision->AddCollider({ 0, 0, 100, 100 }, COLLIDER_TYPE::COLLIDER_ELF, (Module*)App->enemies);
 	originalposition.y = y;
 	originalposition.x = x;
-//	this->type = type;
+
 }
 
 
@@ -111,6 +111,8 @@ Enemy_Elf::~Enemy_Elf()
 
 void Enemy_Elf::Move()
 {
+
+
 	if (timer) {
 		time_on_entry = SDL_GetTicks();
 		timer = false;
@@ -238,6 +240,13 @@ void Enemy_Elf::Move()
 		App->particles->AddParticle(App->particles->elf_shuriken16, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
 		shurikens4 = false;
 
+
+	}
+
+	if (current_time > 16200 && shooting2) {
+
+		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15, COLLIDER_ENEMY_SHOT);
+		shooting2 = false;
 
 	}
 

@@ -37,6 +37,7 @@ private:
 	int current_time, time_on_entry;
 	bool timer = true;
 	bool shooting = true;
+	bool shooting2 = true;
 	bool shurikens = true;
 	bool shurikens2 = true;
 	bool shurikens3 = true;
