@@ -83,6 +83,10 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 1.0f, 0.0f }, 10, &hand3);
 	movement.PushBack({ -1.5f, 0.0f }, 20, &hand3);
 	movement.PushBack({ 1.0f, 0.0f }, 20, &idle);
+	movement.PushBack({ 1.0f, 0.0f }, 10, &stay2);
+	movement.PushBack({ 1.0f, 0.0f }, 10, &stay);
+	movement.PushBack({ 1.0f, 0.0f }, 150, &spawn);
+	
 
 
 
@@ -110,62 +114,21 @@ void Enemy_Elf::Move()
 	}
 	current_time = SDL_GetTicks() - time_on_entry;
 
-	if (current_time > 5000 && shooting) {
+	if (current_time > 5800 && shooting) {
 
-		App->particles->AddParticle(App->particles->bird_shoot2, position.x, position.y + 15,COLLIDER_ENEMY_SHOT);
-		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y + 15, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y+15, COLLIDER_ENEMY_SHOT);
 		timer = true;
 		shooting = false;
 
 	}
+
 
 	if (App->ui->enemies_movement) {
 		position = originalposition + movement.GetCurrentSpeed(&animation);
 	}
 }
 
-	/*if (previous.Finished())
-	{
-		animation = &spawn;
-	}
-	if (spawn.Finished())
-	{
-		animation = &stay;
-	}
-	if (stay.Finished())
-	{
-		animation = &stay2;
-	}
-	if (stay2.Finished())
-	{
-		animation = &idle;
-	}
-	if (idle.Finished())
-	{
-		animation = &back;
-	}
-	if (back.Finished())
-	{
-		animation = &back2;
-	}
-	if (back2.Finished())
-	{
-		animation = &back3;
-	}
-	if (back3.Finished())
-	{
-		animation = &back4;
-	}
-	if (back4.Finished())
-	{
-		animation = &hand;
-	}
-	if (hand.Finished())
-	{
-		animation = &hand2;
-	}
 
-}*/
 
 void Enemy_Elf::Draw(SDL_Texture* sprites) {
 	Enemy::Draw(boss_sprite);

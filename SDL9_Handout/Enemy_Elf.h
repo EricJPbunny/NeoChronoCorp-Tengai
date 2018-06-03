@@ -37,6 +37,7 @@ private:
 	int current_time, time_on_entry;
 	bool timer = true;
 	bool shooting = true;
+	bool shurikens = true;
 
 	int type;
 };
