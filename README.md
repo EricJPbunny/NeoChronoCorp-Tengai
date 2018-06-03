@@ -8,6 +8,9 @@ Tengai is horizontal-scrolling shoot'em up game released in Japanese arcades in 
 
 [![Video Image](http://img.youtube.com/vi/jCQH_34d5r0/maxresdefault.jpg)](https://www.youtube.com/watch?v=jCQH_34d5r0&t=152s)
 
+## Link to download
+* **[Game](https://github.com/EricJPbunny/NeoChronoCorp-Tengai/releases)**
+
 ## Installation
 > __Unzip the release folder and execute the Tengai.exe file__
 
