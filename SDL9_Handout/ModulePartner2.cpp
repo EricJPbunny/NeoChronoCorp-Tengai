@@ -9,6 +9,8 @@
 #include "ModuleSceneAir.h"
 #include "ModulePlayer2.h"
 #include "ModulePartner2.h"
+#include "ModuleSceneSelect.h"
+#include "ModuleAudio.h"
 #include "ModuleUI.h"
 
 
@@ -98,12 +100,16 @@ bool ModulePartner2::Start()
 	}
 	position.x = App->player2->position.x;
 	position.y = App->player2->position.y;
+	charged_mirror = App->audio->LoadEffect("assets/audio/charged_mirror.wav");
+	release_mirror = App->audio->LoadEffect("assets/audio/charged_mirror.wav");
 	return true;
 }
 
 bool ModulePartner2::CleanUp()
 {
 	LOG("Unloading player");
+	App->audio->UnloadFx(release_mirror);
+	App->audio->UnloadFx(charged_mirror);
 	App->textures->Unload(graphics);
 	if (graphics != nullptr)
 	{
@@ -117,7 +123,12 @@ bool ModulePartner2::CleanUp()
 update_status ModulePartner2::Update()
 {
 	//Create bool variables
-	bool shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+	if (App->scene_select->sho_p1) {
+		shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+	}
+	else {
+		shot_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+	}
 
 	//check state
 	CheckState();
@@ -227,9 +238,14 @@ update_status ModulePartner2::Update()
 void ModulePartner2::CheckState()
 {
 	//Create bool controls
-	bool pressed_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT;
-	bool release_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP;
-
+	if (App->scene_select->sho_p1) {
+		pressed_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT;
+		release_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP;
+	}
+	else {
+		pressed_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT;
+		release_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP;
+	}
 	//Mirror 1
 	switch (state) {
 	case NOT_EXISTING_2:
@@ -260,6 +276,7 @@ void ModulePartner2::CheckState()
 			if (current_time > 300) {
 				time_shoot = true;
 				state = LEVEL_ONE_CHARGE_2;
+				charged_fx = true;
 			}
 		}
 		if (release_space) {
@@ -522,6 +539,10 @@ void ModulePartner2::PerformActions()
 		break;
 
 	case LEVEL_ONE_CHARGE_2:
+		if (charged_fx) {
+			App->audio->PlaySoundEffects(charged_mirror);
+			charged_fx = false;
+		}
 		if (!spawn_reverse.Finished()) {
 			current_animation = &spawn_reverse;
 		}

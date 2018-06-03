@@ -94,6 +94,7 @@ public:
 	Particle fire, fire2, fire3, fire4, fire5, fire6, fire7, fire8, fire9, fire10;
 	Particle enemie_shoot, archer_shoot, bird_shoot, bird_shoot2;
 	Particle shipHead_shoot;
+	Particle elf_shuriken, elf_shuriken2, elf_shuriken3, elf_shuriken4, elf_shuriken5, elf_shuriken6, elf_shuriken7, elf_shuriken8, elf_shuriken9, elf_shuriken10, elf_shuriken11, elf_shuriken12, elf_shuriken13, elf_shuriken14, elf_shuriken15, elf_shuriken16, elf_shuriken_shiny;
 };
 
 #endif // __MODULEPARTICLES_H__

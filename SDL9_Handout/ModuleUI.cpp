@@ -174,6 +174,7 @@ update_status ModuleUI::Update()
 	if (game_over_sho && game_over_junis) {
 		//Time countdown
 		App->scene_air->speed = 0;
+		App->scene_air->speedy = 0;
 		if (aux) {
 			time_on_entry = SDL_GetTicks();
 			aux = false;

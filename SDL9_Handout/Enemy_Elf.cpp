@@ -86,6 +86,9 @@ Enemy_Elf::Enemy_Elf(int x, int y, int type) :Enemy(x, y, type)
 	movement.PushBack({ 1.0f, 0.0f }, 10, &stay2);
 	movement.PushBack({ 1.0f, 0.0f }, 10, &stay);
 	movement.PushBack({ 1.0f, 0.0f }, 150, &spawn);
+	movement.PushBack({ 1.0f, 0.0f }, 10, &stay);
+	movement.PushBack({ 1.0f, 0.0f }, 10, &stay2);
+	
 	
 
 
@@ -117,8 +120,124 @@ void Enemy_Elf::Move()
 	if (current_time > 5800 && shooting) {
 
 		App->particles->AddParticle(App->particles->archer_shoot, position.x, position.y+15, COLLIDER_ENEMY_SHOT);
-		timer = true;
 		shooting = false;
+
+	}
+	if (current_time > 9000 && shurikens ) {
+	
+			App->particles->AddParticle(App->particles->elf_shuriken, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken2, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken3, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken4, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken5, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken6, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken7, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken8, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken9, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken10, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken11, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken12, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken13, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken14, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+			App->particles->AddParticle(App->particles->elf_shuriken15, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->elf_shuriken16, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+			shurikens = false;
+		
+
+	}
+	if (current_time > 9800 && shurikens2) {
+
+		App->particles->AddParticle(App->particles->elf_shuriken, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken2, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken3, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken4, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken5, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken6, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken7, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken8, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken9, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken10, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken11, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken12, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken13, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken14, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken15, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken16, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		shurikens2 = false;
+
+	}
+	if (current_time > 10600 && shurikens3) {
+
+		App->particles->AddParticle(App->particles->elf_shuriken, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken2, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken3, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken4, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken5, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken6, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken7, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken8, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken9, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken10, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken11, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken12, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken13, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken14, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken15, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken16, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+		shurikens3 = false;
+
+
+	}
+
+	if (current_time > 11400 && shurikens4) {
+
+		App->particles->AddParticle(App->particles->elf_shuriken, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken2, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken3, position.x + 60, position.y + 10, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken4, position.x + 60, position.y - 10, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken5, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken6, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken7, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken8, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken9, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken10, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken11, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken12, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken13, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken14, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+
+		App->particles->AddParticle(App->particles->elf_shuriken15, position.x + 60, position.y, COLLIDER_ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->elf_shuriken16, position.x + 40, position.y, COLLIDER_ENEMY_SHOT);
+		shurikens4 = false;
+
 
 	}
 

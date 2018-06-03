@@ -402,6 +402,10 @@ bool ModuleSceneAir::CleanUp()
 
 	App->collision->Disable();
 
+	if (App->player2->IsEnabled()) {
+		App->player2->Disable();
+	}
+
 	if (App->player3->IsEnabled()) {
 		App->player3->Disable();
 	}
@@ -419,8 +423,19 @@ bool ModuleSceneAir::CleanUp()
 // Update: draw background
 update_status ModuleSceneAir::Update()
 {
-	//paint (pero el .net no)
+	if (App->player2->IsEnabled() || App->player2->IsEnabled()) {
+		speed = 3;
 
+		//Y axis movement flags
+		if (App->render->camera.x > 2500) {
+			speedy = -3;
+		}
+		if (App->render->camera.y < -2187) {
+			speedy = 0;
+		}
+	}
+	
+	//paint (pero el .net no)
 	for (int i = 0; i < 5; ++i) 
 	{
 		App->render->Blit(graphics, (MountainBg.w * i) , 120, &MountainBg, bg_speed_default * 3);
@@ -446,18 +461,14 @@ update_status ModuleSceneAir::Update()
 		App->render->Blit(graphics, (BigSkyParalaxOne.w * i), -533, &BigSkyParalaxOne, bg_speed_default * 3);
 		App->render->Blit(graphics, (big_cloud.w * i), -520, &big_cloud, bg_speed_default * 3);
 		App->render->Blit(graphics, (BigSkyThree.w * i), -729, &BigSkyThree, 0);
+	
+	}
+	for (int i = 0; i < 40; ++i) {
 		App->render->Blit(graphics, (fog2.w * i), -561, &fog2, bg_speed_default * 2);
-		App->render->Blit(graphics, (fog.w * i)+3, -543, &fog, bg_speed_default * 3);
+		App->render->Blit(graphics, (fog.w * i) + 3, -543, &fog, bg_speed_default * 3);
 		App->render->Blit(graphics, (group_cloud.w * i), -600, &group_cloud, bg_speed_default * 5);
 	}
-	//Y axis movement flags
 
-	if (App->render->camera.x > 2500) {
-		speedy = -3;
-	}
-	if (App->render->camera.y < -2187) {
-		speedy = 0;
-	}
 
 	//   SHIP & SHIP FLAGS
 	if (App->render->camera.x>9400 && App->render->camera.x<9700) {
@@ -628,9 +639,7 @@ update_status ModuleSceneAir::Update()
 		framerateset = 0;
 	}
 	//debuger
-	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) {
-		LOG("Breakpoint");
-	}
+	
 
 	//Update Collision
 	coll_left->SetPos(App->render->camera.x / SCREEN_SIZE, App->render->camera.y / SCREEN_SIZE);
@@ -667,7 +676,10 @@ update_status ModuleSceneAir::Update()
 		App->audio->PlaySoundEffects(App->enemies->fx_death);
 	}
 
-	
+	if (App->input->keyboard[SDL_SCANCODE_F8]==KEY_STATE::KEY_DOWN || App->render->camera.x>30000) {
+		App->fade->FadeToBlack(App->scene_air, App->scene_score, 0.90f);
+
+	}
 	
 	return UPDATE_CONTINUE;
 }

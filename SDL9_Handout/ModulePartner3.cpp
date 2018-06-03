@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleSceneSelect.h"
 #include "ModuleSceneAir.h"
 #include "ModulePlayer3.h"
 #include "ModulePartner3.h"
@@ -117,7 +118,12 @@ bool ModulePartner3::CleanUp()
 
 update_status ModulePartner3::Update()
 {
-	bool shot_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+	if (!App->scene_select->sho_p1) {
+		shot_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+	}
+	else {
+		shot_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+	}
 	CheckState();
 
 	PerformActions();
@@ -334,8 +340,14 @@ update_status ModulePartner3::Update()
 void ModulePartner3::CheckState()
 {
 	//Create bool controls
-	bool pressed_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT;
-	bool release_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP;
+	if (App->scene_select->sho_p1) {
+		pressed_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT;
+		release_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP;
+	}
+	else {
+		pressed_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT;
+		release_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP;
+	}
 
 
 	switch (state)

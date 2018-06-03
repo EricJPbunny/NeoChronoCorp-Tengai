@@ -374,6 +374,7 @@ void ModulePlayerTwo::CheckState()
 	switch (state)
 	{
 	case SPAWN_PLAYER_2:
+		App->ui->enemies_movement = true;
 		if (time) {
 			time_on_entry = SDL_GetTicks();
 			time = false;
