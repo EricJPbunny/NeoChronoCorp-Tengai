@@ -57,6 +57,10 @@ public:
 	int increaser = 0;
 	bool multiple_shot = false;
 	bool multiple_shot_2 = false;
+
+	bool shot_space_3;
+	bool pressed_space_3;
+	bool release_space_3;
 	
 };
 

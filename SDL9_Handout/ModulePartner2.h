@@ -41,6 +41,8 @@ public:
 	Animation spawn_reverse, spawn_reverse2, spawn_reverse3, spawn_reverse4;
 	Animation iddle, iddle2;
 	Animation charging, charging2;
+	Mix_Chunk* charged_mirror = nullptr;
+	Mix_Chunk* release_mirror = nullptr;
 	fPoint position;
 	partner_state_2 state = NOT_EXISTING_2, state_2 = NOT_EXISTING_2, state_3 = NOT_EXISTING_2, state_4 =NOT_EXISTING_2;
 	bool exist = false, exist_2 = false, exist_3 = false, exist_4 = false, movement = true, time_mirror = true, time_shoot = true, time_mirror_2 = true, time_shoot_2 = true, time_mirror_3 = true, time_shoot_3 = true, time_mirror_4 = true, time_shoot_4 = true;
@@ -75,6 +77,12 @@ public:
 	int num_bullet_2 = 1;
 	int num_bullet_3 = 1;
 	int num_bullet_4 = 1;
+
+	bool charged_fx = false;
+
+	bool shot_space;
+	bool pressed_space;
+	bool release_space;
 
 };
 
