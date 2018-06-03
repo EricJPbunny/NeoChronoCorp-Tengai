@@ -498,6 +498,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			if (c1->type == COLLIDER_TYPE::COLLIDER_ELF && (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_2_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI2 || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER_3_SHOT || c2->type == COLLIDER_TYPE::COLLIDER_ULTI3)) {
 				if (life_elf>50 || enemies[i]->position.x >4550) {
+					App->enemies->AddEnemy(ENEMY_TYPES::ULTI, enemies[i]->position.x, enemies[i]->position.y);
 					App->audio->PlaySoundEffects(fx_death);
 					App->particles->AddParticle(App->particles->explosion, enemies[i]->position.x, enemies[i]->position.y);
 					delete enemies[i];
