@@ -19,6 +19,7 @@ private:
 	int type;
 	void Move();
 	void Draw(SDL_Texture* sprites);
+	iPoint head_position;
 	SDL_Texture* boss_sprite;
 
 	Animation spawn, idle;

@@ -146,9 +146,6 @@
     <ClInclude Include="Enemy_ShipHead.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_Turret.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy_Buda.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
@@ -159,6 +156,9 @@
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_Hemisphere.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Turret.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -280,9 +280,6 @@
     <ClCompile Include="Enemy_ShipHead.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_Turret.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy_Buda.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
@@ -293,6 +290,9 @@
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_Hemisphere.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Turret.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
   </ItemGroup>

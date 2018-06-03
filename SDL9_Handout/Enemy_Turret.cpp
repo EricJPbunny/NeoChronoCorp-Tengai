@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "Enemy_Turret.h"
 
 Enemy_Turret::Enemy_Turret(int x, int y, int type) :Enemy(x, y,type)
@@ -28,8 +29,12 @@ Enemy_Turret::Enemy_Turret(int x, int y, int type) :Enemy(x, y,type)
 	death.PushBack({ 315,376,81,20 });
 	death.loop = true;
 
-	animation = &spawn;
+	movement.PushBack({ 0.0f, 0.0f }, 160, &spawn);
+	movement.PushBack({ 1.0f, 0.0f }, 9999, &idle);
 
+	animation = &spawn;
+	head_position.x = x;
+	head_position.y = y;
 	this->type = type;
 
 }
@@ -46,6 +51,9 @@ void Enemy_Turret::Move()
 	if (spawn.Finished())
 	{
 		animation = &idle;
+	}
+	if (App->ui->enemies_movement) {
+		position = head_position + movement.GetCurrentSpeed(&animation);
 	}
 }
 
