@@ -7,25 +7,16 @@
 
 EntityUlti::EntityUlti(int x, int y, int type) :Enemy(x, y, type)
 {
-	iddle.PushBack({ 215,127,31,22 });
-	iddle.PushBack({ 246,127,31,22 });
-	iddle.PushBack({ 277,127,31,21 });
-	iddle.PushBack({ 308,127,31,20 });
-	iddle.PushBack({ 339,127,31,20 });
-
-	iddle.PushBack({ 215,149,31,20 });
-	iddle.PushBack({ 246,149,31,20 });
-	iddle.PushBack({ 277,149,31,20 });
-	iddle.PushBack({ 308,149,31,20 });
-	iddle.PushBack({ 339,149,31,20 });
-
-	iddle.PushBack({ 215,169,31,21 });
-	iddle.PushBack({ 246,169,31,21 });
-	iddle.PushBack({ 277,169,31,21 });
-	iddle.PushBack({ 308,169,31,21 });
-	iddle.PushBack({ 339,169,31,20 });
-
-	iddle.PushBack({ 215,190,31,21 });
+	iddle.PushBack({ 65,102,31,21 });
+	iddle.PushBack({ 100,102,31,20 });
+	iddle.PushBack({ 134,102,31,20 });
+	iddle.PushBack({ 168,102,31,20 });
+	iddle.PushBack({ 8,128,31,20 });
+	iddle.PushBack({ 43,130,31,20 });
+	iddle.PushBack({ 78,129,31,20 });
+	iddle.PushBack({ 111,129,31,20 });
+	iddle.PushBack({ 10,153,31,21 });
+	
 	iddle.speed = App->enemies->speed;
 
 	movement.PushBack({ -0.1f, 0.0f }, 80, &iddle);
