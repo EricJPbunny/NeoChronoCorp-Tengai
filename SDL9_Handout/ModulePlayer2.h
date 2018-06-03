@@ -92,6 +92,8 @@ public:
 
 	bool released_W;
 	bool released_A;
+
+	Uint8 key;
 };
 
 

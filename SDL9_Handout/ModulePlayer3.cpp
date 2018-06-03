@@ -250,22 +250,26 @@ update_status ModulePlayer3::Update()
 				ulti_on = true;
 			}
 		}
-
-		if (shot_ctrl) {
-			aux1++;
-			switch (aux1) {
-			case 0:
-				App->particles->AddParticle(App->particles->kunai, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
-				break;
-			case 1:
-				App->particles->AddParticle(App->particles->kunai1, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
-				break;
-			case 2:
-				App->particles->AddParticle(App->particles->kunai2, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
-				aux1 = 0;
-				break;
-			}
-
+		if (!App->scene_select->sho_p1) {
+			key = App->input->controller_A_button == KEY_STATE::KEY_DOWN;
+		}
+		else {
+			key = App->input->controller_A_button2 == KEY_STATE::KEY_DOWN;
+		}
+			if (shot_ctrl || key) {
+				aux1++;
+				switch (aux1) {
+				case 0:
+					App->particles->AddParticle(App->particles->kunai, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
+					break;
+				case 1:
+					App->particles->AddParticle(App->particles->kunai1, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
+					break;
+				case 2:
+					App->particles->AddParticle(App->particles->kunai2, position.x, position.y - 20, COLLIDER_PLAYER_3_SHOT, PARTICLE_SHOT_3);
+					aux1 = 0;
+					break;
+				}
 		}
 	}
 	

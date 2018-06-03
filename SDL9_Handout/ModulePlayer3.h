@@ -97,6 +97,7 @@ public:
 
 	bool ulti_on = false;
 	
+	Uint8 key;
 
 };
 

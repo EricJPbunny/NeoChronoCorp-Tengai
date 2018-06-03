@@ -213,8 +213,13 @@ update_status ModulePlayerTwo::Update()
 				App->ulti2->Enable();
 			}
 		}
-
-		if (shot_space || App->input->controller_A_button == KEY_STATE::KEY_DOWN) {
+		if (App->scene_select->sho_p1) {
+			key = App->input->controller_A_button == KEY_STATE::KEY_DOWN;
+		}
+		else {
+			key = App->input->controller_A_button2 == KEY_STATE::KEY_DOWN;
+		}
+		if (shot_space || key) {
 		
 			switch (aux1) {
 			case 0:

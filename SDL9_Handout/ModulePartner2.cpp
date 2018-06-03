@@ -124,10 +124,10 @@ update_status ModulePartner2::Update()
 {
 	//Create bool variables
 	if (App->scene_select->sho_p1) {
-		shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+		shot_space = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN;
 	}
 	else {
-		shot_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+		shot_space = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN || App->input->controller_A_button2 == KEY_STATE::KEY_DOWN;
 	}
 
 	//check state

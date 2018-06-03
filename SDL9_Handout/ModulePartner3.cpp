@@ -119,10 +119,10 @@ bool ModulePartner3::CleanUp()
 update_status ModulePartner3::Update()
 {
 	if (!App->scene_select->sho_p1) {
-		shot_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN;
+		shot_space_3 = App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN;
 	}
 	else {
-		shot_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN;
+		shot_space_3 = App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN || App->input->controller_A_button2 == KEY_STATE::KEY_DOWN;
 	}
 	CheckState();
 
