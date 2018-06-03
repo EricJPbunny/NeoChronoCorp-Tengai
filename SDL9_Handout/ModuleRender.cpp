@@ -49,7 +49,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-
+	SDL_RenderSetLogicalSize(App->render->renderer, 960, 672);
 	return update_status::UPDATE_CONTINUE;
 }
 
