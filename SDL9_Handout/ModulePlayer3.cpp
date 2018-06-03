@@ -269,6 +269,11 @@ update_status ModulePlayer3::Update()
 	//Fade
 	SDL_SetTextureAlphaMod(graphics, alpha_player);
 
+	//Check Death
+	if (App->ui->num_life_junis == 0) {
+		state = DEATH_3;
+	}
+
 	//Set spin posotion
 	if (spin_pos) {
 		aux_spin.x = position.x + 5;
@@ -306,6 +311,7 @@ update_status ModulePlayer3::Update()
 	else {
 		App->render->Blit(graphics, position.x, position.y - 32, &death);
 		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+		hitbox->SetPos(App->render->camera.x, App->render->camera.y - 32);
 
 		position.x -= 1;
 		position.y += 3;

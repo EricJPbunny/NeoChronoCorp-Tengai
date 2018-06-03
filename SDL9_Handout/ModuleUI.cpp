@@ -11,6 +11,7 @@
 #include "ModulePlayer2.h"
 #include "ModulePlayer3.h"
 #include "ModuleSceneSelect.h"
+#include "ModuleSceneStart.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"
@@ -62,6 +63,11 @@ ModuleUI::ModuleUI()
 	life_junis.w = 13;
 	life_junis.h = 13;
 
+	credit.x = 63;
+	credit.y = 173;
+	credit.w = 40;
+	credit.h = 7;
+
 }
 
 ModuleUI::~ModuleUI()
@@ -97,6 +103,8 @@ update_status ModuleUI::Update()
 	sprintf_s(player1_score, 10, "%1d", score_koyori);
 	sprintf_s(player2_score, 10, "%1d", score_sho);
 	sprintf_s(player3_score, 10, "%1d", score_junis);
+
+	sprintf_s(credit_text, 3, "%1d", App->scene_start->credit_num);
 
 	sprintf_s(time_text, 2, "%1d", time);
 	
@@ -184,10 +192,14 @@ update_status ModuleUI::Update()
 		App->render->Blit(graphics, 100, 90, &game_over, 0.00f, 0.00f);
 		App->fonts->BlitText(180, 115, font_time, time_text);
 		App->render->Blit(black, 0, 0, &screen, 0.00f, 0.00f);
+
 		if (time == 0) {
 			App->fade->FadeToBlack(App->scene_air, App->scene_score);
 		}
 	}
+	
+	App->render->Blit(graphics, 255, 216, &credit, 0.00f, 0.00f);
+	App->fonts->BlitText(290, 214, font_score, credit_text);
 
 	return UPDATE_CONTINUE;
 }

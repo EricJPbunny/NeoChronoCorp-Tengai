@@ -4,6 +4,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneAir.h"
 #include "ModuleSceneSelect.h"
+#include "ModuleSceneStart.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
@@ -85,6 +86,11 @@ ModuleSceneSelect::ModuleSceneSelect()
 	time.w = 29;
 	time.h = 9;
 
+	credit.x = 323;
+	credit.y = 71;
+	credit.w = 40;
+	credit.h = 7;
+
 }
 
 ModuleSceneSelect::~ModuleSceneSelect()
@@ -97,10 +103,13 @@ bool ModuleSceneSelect::Start()
 	App->render->camera.x = 0;
 	graphics = App->textures->Load("assets/sprite/Select_Screen.png");
 	font_time = App->fonts->Load("fonts/time_fonts.png", "0123456789", 1);
+	font_score = App->fonts->Load("fonts/score_fonts.png", "0123456789", 1);
 
 	change_player = App->audio->LoadEffect("assets/audio/select_player.wav");
 	select_sho = App->audio->LoadEffect("assets/audio/select_sho.wav");
 	select_junis = App->audio->LoadEffect("assets/audio/select_junis.wav");
+
+	App->scene_start->credit_num--;
 
 	return true;
 }
@@ -115,6 +124,7 @@ bool ModuleSceneSelect::CleanUp()
 	App->audio->UnloadFx(change_player);
 	App->textures->Unload(graphics);
 	App->fonts->UnLoad(font_time);
+	App->fonts->UnLoad(font_score);
 	return true;
 }
 
@@ -123,6 +133,7 @@ update_status ModuleSceneSelect::Update()
 {
 	//Time
 	sprintf_s(time_text, 2, "%1d", time_num);
+	sprintf_s(credit_text, 3, "%1d", App->scene_start->credit_num);
 
 	if (timer) {
 		time_on_entry = SDL_GetTicks();
@@ -136,8 +147,15 @@ update_status ModuleSceneSelect::Update()
 
 	//Player 1 vs Player 2
 	if (one_player) {
-		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN) {
+		if (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN && App->scene_start->credit_num > 0) {
+			App->scene_start->credit_num--;
 			one_player = false;
+		}
+	}
+
+	if (App->scene_start->credit_num < 9) {
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+			App->scene_start->credit_num++;
 		}
 	}
 
@@ -194,7 +212,10 @@ update_status ModuleSceneSelect::Update()
 	App->render->Blit(graphics, 75, 172, &junis_anim);
 
 	App->render->Blit(graphics, 138, 214, &time);
-	App->fonts->BlitText(154, 210, App->ui->font_time, time_text);
+	App->fonts->BlitText(154, 210, font_time, time_text);
+
+	App->render->Blit(graphics, 255, 216, &credit, 0.00f, 0.00f);
+	App->fonts->BlitText(290, 214, font_score, credit_text);
 
 	// If pressed, change scene
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || App->input->controller_START_button == KEY_STATE::KEY_DOWN || time_num == 0) {
@@ -204,7 +225,7 @@ update_status ModuleSceneSelect::Update()
 		else {
 			App->audio->PlaySoundEffects(select_junis);
 		}
-		App->fade->FadeToBlack(App->scene_select, App->scene_air, 1.50f);
+		App->fade->FadeToBlack(App->scene_select, App->scene_air, 0.90f);
 	}
 
 	return UPDATE_CONTINUE;

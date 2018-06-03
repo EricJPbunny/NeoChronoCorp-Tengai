@@ -25,6 +25,8 @@ public:
 	int posy = 20;
 
 	Particle petal_1, petal_2, petal_3, petal_4, petal_5, petal_6, petal_7, petal_8, petal_9, petal_10, petal_11, petal_12;
+	Collider* coll = nullptr;
+	SDL_Rect ulti_collider;
 	
 	bool timer = false;
 	int current_time = 0;

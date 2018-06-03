@@ -320,6 +320,7 @@ update_status ModulePlayerTwo::Update()
 	else {
 		App->render->Blit(graphics, position.x, position.y - 32, &death);
 		coll->SetPos(App->render->camera.x, App->render->camera.y - 32);
+		hitbox->SetPos(App->render->camera.x, App->render->camera.y - 32);
 
 		position.x -= 1;
 		position.y += 3;

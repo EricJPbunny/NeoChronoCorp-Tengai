@@ -36,7 +36,7 @@ public:
 	int aux = 0;
 
 	SDL_Rect ulti_collider;
-	Collider* coll;
+	Collider* coll = nullptr;
 };
 
 #endif // __MODULEULTI2_H__
