@@ -36,6 +36,7 @@ Enemy_Turret::Enemy_Turret(int x, int y, int type) :Enemy(x, y,type)
 	head_position.x = x;
 	head_position.y = y;
 	this->type = type;
+	collider = App->collision->AddCollider({ 0, 0, 30, 50 }, COLLIDER_TYPE::COLLIDER_TURRET, (Module*)App->enemies);
 
 }
 
